@@ -1,9 +1,9 @@
-export default {
-    command: 'ship',
-    aliases: ['couple'],
-    category: 'group',
-    description: 'Randomly ship two members in the group',
-    usage: '.ship',
+﻿export default {
+    command: 'سهيب',
+    aliases: ['couple', 'ship'],
+    category: 'المجموعة',
+    description: 'عشوائيلي سهيب توو عضوس ين تهي مجموعة',
+    usage: '.سهيب',
     groupOnly: true,
     async handler(sock, message, args, context) {
         const { chatId, channelInfo } = context;
@@ -17,7 +17,7 @@ export default {
             } while (secondUser === firstUser);
             const formatMention = (id) => `@${ id.split('@')[0]}`;
             await sock.sendMessage(chatId, {
-                text: `${formatMention(firstUser)} ❤️ ${formatMention(secondUser)}\nCongratulations 💖🍻`,
+                text: `${formatMention(firstUser)} â¤ï¸ ${formatMention(secondUser)}\nCongratulations ðŸ’–ðŸ»`,
                 mentions: [firstUser, secondUser],
                 ...channelInfo
             });
@@ -25,9 +25,12 @@ export default {
         catch (error) {
             console.error('Error in ship command:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to ship! Make sure this is a group.',
+                text: 'âŒ Failed to ship! Make sure this is a group.',
                 ...channelInfo
             }, { quoted: message });
         }
     }
 };
+
+
+

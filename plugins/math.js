@@ -1,4 +1,4 @@
-const mathGames = {};
+﻿const mathGames = {};
 const modes = {
     noob: [-3, 3, -3, 3, '+-', 15000],
     easy: [-10, 10, -10, 10, '*/+-', 20000],
@@ -11,30 +11,30 @@ const modes = {
 const operators = {
     '+': '+',
     '-': '-',
-    '*': '×',
-    '/': '÷',
+    '*': 'Ã—',
+    '/': 'Ã·',
 };
 export default {
-    command: 'math',
-    aliases: ['maths', 'ganit'],
-    category: 'games',
-    description: 'Solve math problems',
-    usage: '.math',
+    command: 'Ø±ÙŠØ§Ø¶ÙŠØ§Øª',
+    aliases: ['maths', 'ganit', 'math'],
+    category: 'Ø£Ù„Ø¹Ø§Ø¨',
+    description: 'Ø­Ù„ Ø±ÙŠØ§Ø¶ÙŠØ§Øª Ø¨Ø±ÙˆØ¨Ù„ÙŠÙ…Ø³',
+    usage: '.Ø±ÙŠØ§Ø¶ÙŠØ§Øª',
     initialized: false,
     async handler(sock, message, args, _context) {
         const { chatId, config } = _context;
         const prefix = config.prefix;
         if (mathGames[chatId]) {
-            return sock.sendMessage(chatId, { text: '⚠️ Solve the current problem first!' }, { quoted: mathGames[chatId].msg });
+            return sock.sendMessage(chatId, { text: 'âš ï¸ Solve the current problem first!' }, { quoted: mathGames[chatId].msg });
         }
         const mode = args[0]?.toLowerCase();
         if (!mode || !(mode in modes)) {
             return sock.sendMessage(chatId, {
-                text: `🧮 *Available Difficulties:*\n\n${Object.keys(modes).join(' | ')}\n\n_Example: ${prefix}math normal_`
+                text: `ðŸ§® *Available Difficulties:*\n\n${Object.keys(modes).join(' | ')}\n\n_Example: ${prefix}math normal_`
             }, { quoted: message });
         }
         const math = genMath(mode);
-        const text = `▢ HOW MUCH IS IT *${math.str}*=\n\n_Time:_ ${(math.time / 1000).toFixed(2)} seconds`;
+        const text = `â–¢ HOW MUCH IS IT *${math.str}*=\n\n_Time:_ ${(math.time / 1000).toFixed(2)} seconds`;
         const sentMsg = await sock.sendMessage(chatId, { text }, { quoted: message });
         mathGames[chatId] = {
             msg: sentMsg,
@@ -42,7 +42,7 @@ export default {
             attempts: 4,
             timeout: setTimeout(() => {
                 if (mathGames[chatId]) {
-                    sock.sendMessage(chatId, { text: `⏳ *Time is up!*\nThe answer was: *${math.result}*` }, { quoted: mathGames[chatId].msg });
+                    sock.sendMessage(chatId, { text: `â³ *Time is up!*\nThe answer was: *${math.result}*` }, { quoted: mathGames[chatId].msg });
                     delete mathGames[chatId];
                 }
             }, math.time)
@@ -61,23 +61,23 @@ export default {
                     return;
                 const quoted = m.message.extendedTextMessage?.contextInfo?.quotedMessage;
                 const quotedText = quoted?.conversation || quoted?.extendedTextMessage?.text || "";
-                if (!/^▢ HOW MUCH IS IT/i.test(quotedText))
+                if (!/^â–¢ HOW MUCH IS IT/i.test(quotedText))
                     return;
                 const game = mathGames[chat];
-                if (body === game.math.result) {
+                if (body === game.Ø±ÙŠØ§Ø¶ÙŠØ§Øª.result) {
                     clearTimeout(game.timeout);
                     delete mathGames[chat];
-                    await sock.sendMessage(chat, { text: `✅ *Correct answer!*\n\nYou won the game.` }, { quoted: m });
+                    await sock.sendMessage(chat, { text: `âœ… *Correct answer!*\n\nYou won the game.` }, { quoted: m });
                 }
                 else {
                     game.attempts--;
                     if (game.attempts <= 0) {
                         clearTimeout(game.timeout);
                         delete mathGames[chat];
-                        await sock.sendMessage(chat, { text: `❌ *Game Over!*\n\nThe correct answer was: *${game.math.result}*` }, { quoted: m });
+                        await sock.sendMessage(chat, { text: `âŒ *Game Over!*\n\nThe correct answer was: *${game.Ø±ÙŠØ§Ø¶ÙŠØ§Øª.result}*` }, { quoted: m });
                     }
                     else {
-                        await sock.sendMessage(chat, { text: `❎ *Wrong answer!*\n\nYou have ${game.attempts} attempts left.` }, { quoted: m });
+                        await sock.sendMessage(chat, { text: `âŽ *Wrong answer!*\n\nYou have ${game.attempts} attempts left.` }, { quoted: m });
                     }
                 }
             });
@@ -104,3 +104,5 @@ function randomInt(from, to) {
 function pickRandom(list) {
     return list[Math.floor(Math.random() * list.length)];
 }
+
+

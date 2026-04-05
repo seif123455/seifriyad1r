@@ -1,9 +1,9 @@
-export default {
-    command: 'flirt',
-    aliases: ['flirty', 'pickuplines'],
-    category: 'fun',
-    description: 'Get a random flirt message',
-    usage: '.flirt',
+﻿export default {
+    command: 'فليرت',
+    aliases: ['flirty', 'pickuplines', 'flirt'],
+    category: 'تسلية',
+    description: 'جلب ا عشوائي فليرت رسالة',
+    usage: '.فليرت',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
@@ -16,7 +16,10 @@ export default {
         }
         catch (e) {
             console.error('Error in flirt command:', e);
-            await sock.sendMessage(chatId, { text: '❌ Failed to get flirt message. Please try again later!' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ Failed to get flirt message. Please try again later!' }, { quoted: message });
         }
     }
 };
+
+
+

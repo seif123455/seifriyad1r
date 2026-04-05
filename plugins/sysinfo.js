@@ -1,13 +1,13 @@
-import { exec } from 'child_process';
+﻿import { exec } from 'child_process';
 import { promisify } from 'util';
 import os from 'os';
 const execAsync = promisify(exec);
 export default {
-    command: 'sysinfo',
-    aliases: ['system', 'serverstats', 'serverinfo'],
-    category: 'owner',
-    description: 'Show detailed server system information',
-    usage: '.sysinfo',
+    command: 'سيسينفو',
+    aliases: ['system', 'serverstats', 'serverinfo', 'sysinfo'],
+    category: 'المالك',
+    description: 'عرض ديتايليد خادم نظام معلوماترماتيون',
+    usage: '.سيسمعلومات',
     ownerOnly: true,
     async handler(sock, message, args, context) {
         const { chatId, channelInfo } = context;
@@ -53,29 +53,29 @@ export default {
             const arch = os.arch();
             const nodeVer = process.version;
             const hostname = os.hostname();
-            const text = `╔══════════════════════════════╗
-║     🖥️  *SERVER STATS*        ║
-╚══════════════════════════════╝
+            const text = `â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—
+â•‘     ðŸ–¥ï¸  *SERVER STATS*        â•‘
+â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-🏠 *Host:* ${hostname}
-🐧 *OS:* ${platform} (${arch})
-⏱️ *Uptime:* ${uptimeOut}
-🟢 *Node.js:* ${nodeVer}
+ðŸ  *Host:* ${hostname}
+ðŸ§ *OS:* ${platform} (${arch})
+â±ï¸ *Uptime:* ${uptimeOut}
+ðŸŸ¢ *Node.js:* ${nodeVer}
 
-━━━━━━ 🧠 CPU ━━━━━━
-🔧 *Model:* ${cpuModel}
-⚙️ *Cores:* ${cpuCores}
-📊 *Load Avg:* ${loadAvg}
+â”â”â”â”â”â” ðŸ§  CPU â”â”â”â”â”â”
+ðŸ”§ *Model:* ${cpuModel}
+âš™ï¸ *Cores:* ${cpuCores}
+ðŸ“Š *Load Avg:* ${loadAvg}
 
-━━━━━━ 💾 Memory ━━━━━━
-📦 *Total:* ${memTotal}
-🔴 *Used:* ${memUsed}
-🟢 *Free:* ${memFree}
+â”â”â”â”â”â” ðŸ’¾ Memory â”â”â”â”â”â”
+ðŸ“¦ *Total:* ${memTotal}
+ðŸ”´ *Used:* ${memUsed}
+ðŸŸ¢ *Free:* ${memFree}
 
-━━━━━━ 💿 Disk (/) ━━━━━━
-📦 *Total:* ${diskTotal}
-🔴 *Used:* ${diskUsed} (${diskPct})
-🟢 *Free:* ${diskFree}`;
+â”â”â”â”â”â” ðŸ’¿ Disk (/) â”â”â”â”â”â”
+ðŸ“¦ *Total:* ${diskTotal}
+ðŸ”´ *Used:* ${diskUsed} (${diskPct})
+ðŸŸ¢ *Free:* ${diskFree}`;
             await sock.sendMessage(chatId, {
                 text,
                 ...channelInfo
@@ -83,9 +83,13 @@ export default {
         }
         catch (error) {
             await sock.sendMessage(chatId, {
-                text: `❌ Failed to get system info: ${error.message}`,
+                text: `âŒ Failed to get system info: ${error.message}`,
                 ...channelInfo
             }, { quoted: message });
         }
     }
 };
+
+
+
+

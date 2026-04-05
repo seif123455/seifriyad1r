@@ -1,10 +1,10 @@
-import store from '../lib/lightweight_store.js';
+﻿import store from '../lib/lightweight_store.js';
 export default {
-    command: 'delete',
-    aliases: ['del', 'remove'],
-    category: 'admin',
-    description: 'Delete recent messages from group or specific user',
-    usage: '.delete <count> [@user] or reply with .delete',
+    command: 'ديليتي',
+    aliases: ['del', 'remove', 'delete'],
+    category: 'المشرفون',
+    description: '',
+    usage: '.حذف <كوونت> [@مستخدم] ور رد ويته .حذف',
     groupOnly: true,
     adminOnly: true,
     async handler(sock, message, args, context) {
@@ -13,7 +13,7 @@ export default {
         const isBotAdmin = context.isBotAdmin;
         if (!isBotAdmin) {
             await sock.sendMessage(chatId, {
-                text: '❌ *I need to be an admin to delete messages*'
+                text: 'âŒ *I need to be an admin to delete messages*'
             }, { quoted: message });
             return;
         }
@@ -34,11 +34,11 @@ export default {
         }
         else if (countArg === null && !repliedParticipant && !mentioned) {
             await sock.sendMessage(chatId, {
-                text: '❌ *Please specify the number of messages to delete*\n\n' +
+                text: 'âŒ *Please specify the number of messages to delete*\n\n' +
                     '*Usage:*\n' +
-                    '• `.del 5` - Delete last 5 messages from group\n' +
-                    '• `.del 3 @user` - Delete last 3 messages from @user\n' +
-                    '• `.del 2` (reply to message) - Delete last 2 messages from replied user'
+                    'â€¢ `.del 5` - Delete last 5 messages from group\n' +
+                    'â€¢ `.del 3 @user` - Delete last 3 messages from @user\n' +
+                    'â€¢ `.del 2` (reply to message) - Delete last 2 messages from replied user'
             }, { quoted: message });
             return;
         }
@@ -109,8 +109,8 @@ export default {
         }
         if (toDelete.length === 0) {
             const errorMsg = deleteGroupMessages
-                ? '❌ *No recent messages found in the group to delete*'
-                : '❌ *No recent messages found for the target user*';
+                ? 'âŒ *No recent messages found in the group to delete*'
+                : 'âŒ *No recent messages found for the target user*';
             await sock.sendMessage(chatId, { text: errorMsg }, { quoted: message });
             return;
         }
@@ -135,3 +135,7 @@ export default {
         }
     }
 };
+
+
+
+

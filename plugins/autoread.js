@@ -1,4 +1,4 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import { dataFile } from '../lib/paths.js';
 import store from '../lib/lightweight_store.js';
@@ -39,7 +39,7 @@ async function isAutoreadEnabled() {
         const config = await initConfig();
         return config.enabled;
     } catch (error) {
-        console.error('خطأ في التحقق من حالة القراءة التلقائية:', error);
+        console.error('Ø®Ø·Ø£ ÙÙŠ Ø§Ù„ØªØ­Ù‚Ù‚ Ù…Ù† Ø­Ø§Ù„Ø© Ø§Ù„Ù‚Ø±Ø§Ø¡Ø© Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©:', error);
         return false;
     }
 }
@@ -85,7 +85,7 @@ export async function handleAutoread(sock, message) {
     try {
         const ghostMode = await store.getSetting('global', 'stealthMode');
         if (ghostMode && ghostMode.enabled) {
-            console.log('👻 الوضع الخفي نشط - تخطي إشعار القراءة');
+            console.log('ðŸ‘» Ø§Ù„ÙˆØ¶Ø¹ Ø§Ù„Ø®ÙÙŠ Ù†Ø´Ø· - ØªØ®Ø·ÙŠ Ø¥Ø´Ø¹Ø§Ø± Ø§Ù„Ù‚Ø±Ø§Ø¡Ø©');
             return false;
         }
     } catch (err) { }
@@ -107,7 +107,7 @@ export async function handleAutoread(sock, message) {
                 await sock.readMessages([key]);
                 return true;
             } catch (error) {
-                console.error('خطأ في تحديد الرسالة كمقروءة:', error);
+                console.error('Ø®Ø·Ø£ ÙÙŠ ØªØ­Ø¯ÙŠØ¯ Ø§Ù„Ø±Ø³Ø§Ù„Ø© ÙƒÙ…Ù‚Ø±ÙˆØ¡Ø©:', error);
                 return false;
             }
         }
@@ -116,11 +116,11 @@ export async function handleAutoread(sock, message) {
 }
 
 export default {
-    command: 'قراءة',
-    aliases: ['autoread', 'read', 'autoreadmsg', 'تلقائي_قراءة'],
-    category: 'owner',
-    description: 'تفعيل أو تعطيل القراءة التلقائية للرسائل',
-    usage: '!قراءة <on|off>',
+    command: 'Ù‚Ø±Ø§Ø¡Ø©',
+    aliases: ['autoread', 'read', 'autoreadmsg', 'ØªÙ„Ù‚Ø§Ø¦ÙŠ_Ù‚Ø±Ø§Ø¡Ø©'],
+    category: 'Ø§Ù„Ù…Ø§Ù„Ùƒ',
+    description: 'ØªÙØ¹ÙŠÙ„ Ø£Ùˆ ØªØ¹Ø·ÙŠÙ„ Ø§Ù„Ù‚Ø±Ø§Ø¡Ø© Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ© Ù„Ù„Ø±Ø³Ø§Ø¦Ù„',
+    usage: '!Ù‚Ø±Ø§Ø¡Ø© <ÙˆÙ†|ÙˆÙÙ>',
     ownerOnly: true,
     
     async handler(sock, message, args, context) {
@@ -136,16 +136,16 @@ export default {
                 const ghostActive = ghostMode && ghostMode.enabled;
                 
                 await sock.sendMessage(chatId, {
-                    text: `*📖 حالة القراءة التلقائية*\n\n` +
-                        `*الحالة:* ${config.enabled ? '✅ مفعل' : '❌ معطل'}\n` +
-                        `*الوضع الخفي:* ${ghostActive ? '👻 نشط (يتجاوز القراءة التلقائية)' : '❌ غير نشط'}\n` +
-                        `*التخزين:* ${HAS_DB ? 'قاعدة بيانات' : 'ملفات'}\n\n` +
-                        `*الأوامر:*\n` +
-                        `• \`!قراءة on\` - تفعيل القراءة التلقائية\n` +
-                        `• \`!قراءة off\` - تعطيل القراءة التلقائية\n\n` +
-                        `*ماذا يفعل:*\n` +
-                        `عند التفعيل، يقوم البوت بوضع علامة مقروءة على جميع الرسائل تلقائياً.\n\n` +
-                        `*ملاحظة:* الوضع الخفي له أولوية على القراءة التلقائية.`,
+                    text: `*ðŸ“– Ø­Ø§Ù„Ø© Ø§Ù„Ù‚Ø±Ø§Ø¡Ø© Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©*\n\n` +
+                        `*Ø§Ù„Ø­Ø§Ù„Ø©:* ${config.enabled ? 'âœ… Ù…ÙØ¹Ù„' : 'âŒ Ù…Ø¹Ø·Ù„'}\n` +
+                        `*Ø§Ù„ÙˆØ¶Ø¹ Ø§Ù„Ø®ÙÙŠ:* ${ghostActive ? 'ðŸ‘» Ù†Ø´Ø· (ÙŠØªØ¬Ø§ÙˆØ² Ø§Ù„Ù‚Ø±Ø§Ø¡Ø© Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©)' : 'âŒ ØºÙŠØ± Ù†Ø´Ø·'}\n` +
+                        `*Ø§Ù„ØªØ®Ø²ÙŠÙ†:* ${HAS_DB ? 'Ù‚Ø§Ø¹Ø¯Ø© Ø¨ÙŠØ§Ù†Ø§Øª' : 'Ù…Ù„ÙØ§Øª'}\n\n` +
+                        `*Ø§Ù„Ø£ÙˆØ§Ù…Ø±:*\n` +
+                        `â€¢ \`!Ù‚Ø±Ø§Ø¡Ø© on\` - ØªÙØ¹ÙŠÙ„ Ø§Ù„Ù‚Ø±Ø§Ø¡Ø© Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©\n` +
+                        `â€¢ \`!Ù‚Ø±Ø§Ø¡Ø© off\` - ØªØ¹Ø·ÙŠÙ„ Ø§Ù„Ù‚Ø±Ø§Ø¡Ø© Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©\n\n` +
+                        `*Ù…Ø§Ø°Ø§ ÙŠÙØ¹Ù„:*\n` +
+                        `Ø¹Ù†Ø¯ Ø§Ù„ØªÙØ¹ÙŠÙ„ØŒ ÙŠÙ‚ÙˆÙ… Ø§Ù„Ø¨ÙˆØª Ø¨ÙˆØ¶Ø¹ Ø¹Ù„Ø§Ù…Ø© Ù…Ù‚Ø±ÙˆØ¡Ø© Ø¹Ù„Ù‰ Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø±Ø³Ø§Ø¦Ù„ ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹.\n\n` +
+                        `*Ù…Ù„Ø§Ø­Ø¸Ø©:* Ø§Ù„ÙˆØ¶Ø¹ Ø§Ù„Ø®ÙÙŠ Ù„Ù‡ Ø£ÙˆÙ„ÙˆÙŠØ© Ø¹Ù„Ù‰ Ø§Ù„Ù‚Ø±Ø§Ø¡Ø© Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©.`,
                     ...channelInfo
                 }, { quoted: message });
                 return;
@@ -154,7 +154,7 @@ export default {
             if (action === 'on' || action === 'enable') {
                 if (config.enabled) {
                     await sock.sendMessage(chatId, {
-                        text: '⚠️ *القراءة التلقائية مفعلة بالفعل*',
+                        text: 'âš ï¸ *Ø§Ù„Ù‚Ø±Ø§Ø¡Ø© Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ© Ù…ÙØ¹Ù„Ø© Ø¨Ø§Ù„ÙØ¹Ù„*',
                         ...channelInfo
                     }, { quoted: message });
                     return;
@@ -167,14 +167,14 @@ export default {
                 const ghostActive = ghostMode && ghostMode.enabled;
                 
                 await sock.sendMessage(chatId, {
-                    text: `✅ *تم تفعيل القراءة التلقائية!*\n\nسيتم وضع علامة مقروءة على جميع الرسائل تلقائياً.${ghostActive ? '\n\n⚠️ *ملاحظة:* الوضع الخفي نشط حالياً وسيتجاوز هذه الخاصية.' : ''}`,
+                    text: `âœ… *ØªÙ… ØªÙØ¹ÙŠÙ„ Ø§Ù„Ù‚Ø±Ø§Ø¡Ø© Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©!*\n\nØ³ÙŠØªÙ… ÙˆØ¶Ø¹ Ø¹Ù„Ø§Ù…Ø© Ù…Ù‚Ø±ÙˆØ¡Ø© Ø¹Ù„Ù‰ Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø±Ø³Ø§Ø¦Ù„ ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹.${ghostActive ? '\n\nâš ï¸ *Ù…Ù„Ø§Ø­Ø¸Ø©:* Ø§Ù„ÙˆØ¶Ø¹ Ø§Ù„Ø®ÙÙŠ Ù†Ø´Ø· Ø­Ø§Ù„ÙŠØ§Ù‹ ÙˆØ³ÙŠØªØ¬Ø§ÙˆØ² Ù‡Ø°Ù‡ Ø§Ù„Ø®Ø§ØµÙŠØ©.' : ''}`,
                     ...channelInfo
                 }, { quoted: message });
                 
             } else if (action === 'off' || action === 'disable') {
                 if (!config.enabled) {
                     await sock.sendMessage(chatId, {
-                        text: '⚠️ *القراءة التلقائية معطلة بالفعل*',
+                        text: 'âš ï¸ *Ø§Ù„Ù‚Ø±Ø§Ø¡Ø© Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ© Ù…Ø¹Ø·Ù„Ø© Ø¨Ø§Ù„ÙØ¹Ù„*',
                         ...channelInfo
                     }, { quoted: message });
                     return;
@@ -184,21 +184,21 @@ export default {
                 await saveConfig(config);
                 
                 await sock.sendMessage(chatId, {
-                    text: '❌ *تم تعطيل القراءة التلقائية!*\n\nلن يتم وضع علامة مقروءة على الرسائل تلقائياً.',
+                    text: 'âŒ *ØªÙ… ØªØ¹Ø·ÙŠÙ„ Ø§Ù„Ù‚Ø±Ø§Ø¡Ø© Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©!*\n\nÙ„Ù† ÙŠØªÙ… ÙˆØ¶Ø¹ Ø¹Ù„Ø§Ù…Ø© Ù…Ù‚Ø±ÙˆØ¡Ø© Ø¹Ù„Ù‰ Ø§Ù„Ø±Ø³Ø§Ø¦Ù„ ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹.',
                     ...channelInfo
                 }, { quoted: message });
                 
             } else {
                 await sock.sendMessage(chatId, {
-                    text: '❌ *خيار غير صحيح!*\n\nاستخدم: `!قراءة on/off`',
+                    text: 'âŒ *Ø®ÙŠØ§Ø± ØºÙŠØ± ØµØ­ÙŠØ­!*\n\nØ§Ø³ØªØ®Ø¯Ù…: `!Ù‚Ø±Ø§Ø¡Ø© on/off`',
                     ...channelInfo
                 }, { quoted: message });
             }
             
         } catch (error) {
-            console.error('خطأ في أمر القراءة التلقائية:', error);
+            console.error('Ø®Ø·Ø£ ÙÙŠ Ø£Ù…Ø± Ø§Ù„Ù‚Ø±Ø§Ø¡Ø© Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ *خطأ في معالجة الأمر!*',
+                text: 'âŒ *Ø®Ø·Ø£ ÙÙŠ Ù…Ø¹Ø§Ù„Ø¬Ø© Ø§Ù„Ø£Ù…Ø±!*',
                 ...channelInfo
             }, { quoted: message });
         }
@@ -207,3 +207,4 @@ export default {
     isBotMentionedInMessage,
     handleAutoread
 };
+

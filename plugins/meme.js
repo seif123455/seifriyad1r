@@ -1,9 +1,9 @@
-export default {
-    command: 'meme',
-    aliases: ['cheems', 'memes'],
-    category: 'fun',
-    description: 'Get a random cheems meme with buttons for another meme or joke',
-    usage: '.meme',
+﻿export default {
+    command: 'ميمي',
+    aliases: ['cheems', 'memes', 'meme'],
+    category: 'تسلية',
+    description: 'جلب ا عشوائي كهييمس ميمي ويته بوتتونس فور انوتهير ميمي ور جوكي',
+    usage: '.ميمي',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
@@ -14,19 +14,19 @@ export default {
             if (contentType && contentType.includes('image')) {
                 const imageBuffer = Buffer.from(await res.arrayBuffer());
                 const buttons = [
-                    { buttonId: '.meme', buttonText: { displayText: '🎭 Another Meme' }, type: 1 },
-                    { buttonId: '.joke', buttonText: { displayText: '😄 Joke' }, type: 1 }
+                    { buttonId: '.ميمي', buttonText: { displayText: 'ðŸŽ­ Another Meme' }, type: 1 },
+                    { buttonId: '.joke', buttonText: { displayText: 'ðŸ˜„ Joke' }, type: 1 }
                 ];
                 await sock.sendMessage(chatId, {
                     image: imageBuffer,
-                    caption: "🐕 > Here's your cheems meme!",
+                    caption: "ðŸ• > Here's your cheems meme!",
                     buttons,
                     headerType: 1
                 }, { quoted: message });
             }
             else {
                 await sock.sendMessage(chatId, {
-                    text: '❌ The API did not return a valid image.',
+                    text: 'âŒ The API did not return a valid image.',
                     quoted: message
                 });
             }
@@ -34,9 +34,12 @@ export default {
         catch (error) {
             console.error('Meme Command Error:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to fetch meme. Please try again later.',
+                text: 'âŒ Failed to fetch meme. Please try again later.',
                 quoted: message
             });
         }
     }
 };
+
+
+

@@ -1,12 +1,12 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import { downloadContentFromMessage } from '@whiskeysockets/baileys';
 export default {
-    command: 'setgpp',
-    aliases: ['setgpic', 'grouppp', 'setgrouppic'],
-    category: 'admin',
-    description: 'Change group profile picture',
-    usage: '.setgpp (reply to image)',
+    command: 'سيتجبب',
+    aliases: ['setgpic', 'grouppp', 'setgrouppic', 'setgpp'],
+    category: 'المشرفون',
+    description: 'تغيير مجموعة صورة شخصية صورة',
+    usage: '.سيتجبب (رد تو صورة)',
     groupOnly: true,
     adminOnly: true,
     async handler(sock, message, args, context) {
@@ -15,7 +15,7 @@ export default {
         const imageMessage = quoted?.imageMessage || quoted?.stickerMessage;
         if (!imageMessage) {
             await sock.sendMessage(chatId, {
-                text: '❌ *Please reply to an image or sticker*\n\nUsage: Reply to an image with `.setgpp`'
+                text: 'âŒ *Please reply to an image or sticker*\n\nUsage: Reply to an image with `.setgpp`'
             }, { quoted: message });
             return;
         }
@@ -37,14 +37,18 @@ export default {
             }
             catch (e) { }
             await sock.sendMessage(chatId, {
-                text: '✅ *Group profile picture updated successfully!*'
+                text: 'âœ… *Group profile picture updated successfully!*'
             }, { quoted: message });
         }
         catch (error) {
             console.error('Error updating group photo:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ *Failed to update group profile picture*\n\nMake sure the bot is an admin and the image is valid.'
+                text: 'âŒ *Failed to update group profile picture*\n\nMake sure the bot is an admin and the image is valid.'
             }, { quoted: message });
         }
     }
 };
+
+
+
+

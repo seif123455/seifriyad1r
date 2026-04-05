@@ -1,10 +1,10 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 export default {
-    command: 'twitter',
-    aliases: ['xtweet', 'tweetdl', 'twitterdl'],
-    category: 'download',
-    description: 'Download media (video or image) from X/Twitter post',
-    usage: '.twitter <Tweet URL>',
+    command: 'تويتتير',
+    aliases: ['xtweet', 'tweetdl', 'twitterdl', 'twitter'],
+    category: 'التحميل',
+    description: 'تحميل وسائط (فيديو ور صورة) فروم كس/تويتتير بوست',
+    usage: '.تويتتير <توييت رابط>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const url = args?.[0];
@@ -15,15 +15,15 @@ export default {
             const apiUrl = `https://discardapi.dpdns.org/api/dl/twitter?apikey=guru&url=${encodeURIComponent(url)}`;
             const { data } = await axios.get(apiUrl, { timeout: 10000 });
             if (!data?.status || !data.result?.media?.length) {
-                return await sock.sendMessage(chatId, { text: '❌ No media found for this Tweet.' }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: 'âŒ No media found for this Tweet.' }, { quoted: message });
             }
             const tweet = data.result;
             const caption = `
-📝 @${tweet.authorUsername} (${tweet.authorName})
-📅 ${tweet.date}
-❤️ Likes: ${tweet.likes} | 🔁 Retweets: ${tweet.retweets} | 💬 Replies: ${tweet.replies}
+ðŸ“ @${tweet.authorUsername} (${tweet.authorName})
+ðŸ“… ${tweet.date}
+â¤ï¸ Likes: ${tweet.likes} | ðŸ” Retweets: ${tweet.retweets} | ðŸ’¬ Replies: ${tweet.replies}
 
-💬 ${tweet.text}
+ðŸ’¬ ${tweet.text}
       `.trim();
             for (const mediaItem of tweet.media) {
                 if (mediaItem.type === 'video') {
@@ -37,11 +37,15 @@ export default {
         catch (error) {
             console.error('Twitter plugin error:', error);
             if (error.code === 'ECONNABORTED') {
-                await sock.sendMessage(chatId, { text: '❌ Request timed out. The API may be slow or unreachable.' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'âŒ Request timed out. The API may be slow or unreachable.' }, { quoted: message });
             }
             else {
-                await sock.sendMessage(chatId, { text: '❌ Failed to fetch Twitter/X media.' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'âŒ Failed to fetch Twitter/X media.' }, { quoted: message });
             }
         }
     }
 };
+
+
+
+

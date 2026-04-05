@@ -1,10 +1,10 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 export default {
-    command: 'reverse',
-    aliases: ['revt', 'reversetext'],
-    category: 'tools',
-    description: 'Reverse any text',
-    usage: '.reverse <text>',
+    command: 'ريفيرسي',
+    aliases: ['revt', 'reversetext', 'reverse'],
+    category: 'أدوات',
+    description: 'ريفيرسي اني نص',
+    usage: '.ريفيرسي <نص>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const textToReverse = args?.join(' ')?.trim();
@@ -15,7 +15,7 @@ export default {
             const apiUrl = `https://discardapi.dpdns.org/api/tools/reverse?apikey=guru&text=${encodeURIComponent(textToReverse)}`;
             const { data } = await axios.get(apiUrl, { timeout: 10000 });
             if (!data?.status || !data.result) {
-                return await sock.sendMessage(chatId, { text: '❌ Failed to reverse the text.' }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: 'âŒ Failed to reverse the text.' }, { quoted: message });
             }
             const reply = `*Reversed:* ${data.result}`;
             await sock.sendMessage(chatId, { text: reply }, { quoted: message });
@@ -23,11 +23,15 @@ export default {
         catch (error) {
             console.error('Reverse plugin error:', error);
             if (error.code === 'ECONNABORTED') {
-                await sock.sendMessage(chatId, { text: '❌ Request timed out. Please try again.' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'âŒ Request timed out. Please try again.' }, { quoted: message });
             }
             else {
-                await sock.sendMessage(chatId, { text: '❌ Failed to reverse the text.' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'âŒ Failed to reverse the text.' }, { quoted: message });
             }
         }
     }
 };
+
+
+
+

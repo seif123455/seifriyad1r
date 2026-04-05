@@ -1,19 +1,19 @@
-import { downloadMediaMessage } from '@whiskeysockets/baileys';
+﻿import { downloadMediaMessage } from '@whiskeysockets/baileys';
 import webp from 'node-webpmux';
 import crypto from 'crypto';
 export default {
-    command: 'take',
-    aliases: ['steal', 'wm'],
-    category: 'stickers',
-    description: 'Change sticker pack name',
-    usage: '.take <packname> (reply to sticker)',
+    command: 'تاكي',
+    aliases: ['steal', 'wm', 'take'],
+    category: 'ملصقات',
+    description: 'تغيير ملصق باكك نامي',
+    usage: '.تاكي <باككنامي> (رد تو ملصق)',
     async handler(sock, message, args, context) {
         const { chatId, channelInfo } = context;
         try {
             const quotedMessage = message.message?.extendedTextMessage?.contextInfo?.quotedMessage;
             if (!quotedMessage?.stickerMessage) {
                 await sock.sendMessage(chatId, {
-                    text: '❌ Reply to a sticker with .take <packname>',
+                    text: 'âŒ Reply to a sticker with .take <packname>',
                     ...channelInfo
                 }, { quoted: message });
                 return;
@@ -30,7 +30,7 @@ export default {
                 });
                 if (!stickerBuffer) {
                     await sock.sendMessage(chatId, {
-                        text: '❌ Failed to download sticker',
+                        text: 'âŒ Failed to download sticker',
                         ...channelInfo
                     }, { quoted: message });
                     return;
@@ -40,7 +40,7 @@ export default {
                 const json = {
                     'sticker-pack-id': crypto.randomBytes(32).toString('hex'),
                     'sticker-pack-name': packname,
-                    'emojis': ['🤖']
+                    'emojis': ['ðŸ¤–']
                 };
                 const exifAttr = Buffer.from([0x49, 0x49, 0x2A, 0x00, 0x08, 0x00, 0x00, 0x00, 0x01, 0x00, 0x41, 0x57, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x16, 0x00, 0x00, 0x00]);
                 const jsonBuffer = Buffer.from(JSON.stringify(json), 'utf8');
@@ -58,7 +58,7 @@ export default {
             catch (error) {
                 console.error('Sticker processing error:', error);
                 await sock.sendMessage(chatId, {
-                    text: '❌ Error processing sticker',
+                    text: 'âŒ Error processing sticker',
                     ...channelInfo
                 }, { quoted: message });
             }
@@ -66,9 +66,13 @@ export default {
         catch (error) {
             console.error('Error in take command:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Error processing command',
+                text: 'âŒ Error processing command',
                 ...channelInfo
             }, { quoted: message });
         }
     }
 };
+
+
+
+

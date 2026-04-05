@@ -1,12 +1,12 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
@@ -48,29 +48,29 @@ async function getAllCloneSessions() {
     }
 }
 export default {
-    command: 'listrent',
-    aliases: ['listclone', 'botclones'],
-    category: 'owner',
-    description: 'List all currently active sub-bots',
-    usage: '.listrent',
+    command: 'ليسترينت',
+    aliases: ['listclone', 'botclones', 'listrent'],
+    category: 'المالك',
+    description: 'قائمة الل كوررينتلي اكتيفي سوب-بوتس',
+    usage: '.قائمةرينت',
     async handler(sock, message, args, context) {
         const { chatId } = context;
         const activeConns = global.conns || [];
         const storedClones = await getAllCloneSessions();
         if (activeConns.length === 0 && storedClones.length === 0) {
             return await sock.sendMessage(chatId, {
-                text: "*❌ No sub-bots are currently active or stored.*"
+                text: "*âŒ No sub-bots are currently active or stored.*"
             }, { quoted: message });
         }
-        let msg = `*─── [ CLONE BOTS ] ───*\n\n`;
-        msg += `*Storage:* ${HAS_DB ? 'Database 🗄️' : 'File System 📁'}\n\n`;
+        let msg = `*â”€â”€â”€ [ CLONE BOTS ] â”€â”€â”€*\n\n`;
+        msg += `*Storage:* ${HAS_DB ? 'Database ðŸ—„ï¸' : 'File System ðŸ“'}\n\n`;
         if (activeConns.length > 0) {
-            msg += `*🟢 ONLINE CLONES:*\n\n`;
+            msg += `*ðŸŸ¢ ONLINE CLONES:*\n\n`;
             activeConns.forEach((conn, i) => {
                 const user = conn.user;
                 msg += `*${i + 1}.* @${user.id.split(':')[0]}\n`;
-                msg += `   └ Name: ${user.name || 'Sub-Bot'}\n`;
-                msg += `   └ Status: Connected ✅\n\n`;
+                msg += `   â”” Name: ${user.name || 'Sub-Bot'}\n`;
+                msg += `   â”” Status: Connected âœ…\n\n`;
             });
         }
         if (HAS_DB && storedClones.length > 0) {
@@ -81,14 +81,14 @@ export default {
                 });
             });
             if (offlineClones.length > 0) {
-                msg += `*⚪ STORED CLONES (Offline):*\n\n`;
+                msg += `*âšª STORED CLONES (Offline):*\n\n`;
                 offlineClones.forEach((clone, i) => {
                     msg += `*${i + 1}.* ID: ${clone.authId}\n`;
-                    msg += `   └ Number: ${clone.userNumber || 'N/A'}\n`;
-                    msg += `   └ Status: ${clone.status || 'offline'}\n`;
+                    msg += `   â”” Number: ${clone.userNumber || 'N/A'}\n`;
+                    msg += `   â”” Status: ${clone.status || 'offline'}\n`;
                     if (clone.createdAt) {
                         const date = new Date(clone.createdAt);
-                        msg += `   └ Created: ${date.toLocaleString()}\n`;
+                        msg += `   â”” Created: ${date.toLocaleString()}\n`;
                     }
                     msg += `\n`;
                 });
@@ -107,15 +107,19 @@ export default {
 };
 /*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
  *                                                                           *
  *****************************************************************************/
+
+
+
+

@@ -1,10 +1,10 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 export default {
-    command: 'pinstalk',
-    aliases: ['pstalk', 'pinprofile'],
+    command: 'بينستالك',
+    aliases: ['pstalk', 'pinprofile', 'pinstalk'],
     category: 'stalk',
-    description: 'Lookup Pinterest user profile',
-    usage: '.pinstalk <username>',
+    description: 'بحث بينتيريست مستخدم صورة شخصية',
+    usage: '.بينستالك <مستخدمنامي>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         if (!args.length) {
@@ -18,22 +18,22 @@ export default {
                 params: { apikey: 'guru', username }
             });
             if (!data?.result) {
-                return await sock.sendMessage(chatId, { text: '❌ Pinterest user not found.' }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: 'âŒ Pinterest user not found.' }, { quoted: message });
             }
             const result = data.result;
             const profileImage = result.image?.large || result.image?.original || null;
-            const caption = `📌 *Pinterest Profile Info*\n\n` +
-                `👤 Full Name: ${result.full_name || 'N/A'}\n` +
-                `🆔 Username: ${result.username || 'N/A'}\n` +
-                `📝 Bio: ${result.bio || 'N/A'}\n` +
-                `📌 Boards: ${result.stats?.boards || 0}\n` +
-                `👥 Followers: ${result.stats?.followers || 0}\n` +
-                `➡ Following: ${result.stats?.following || 0}\n` +
-                `❤️ Likes: ${result.stats?.likes || 0}\n` +
-                `📌 Pins: ${result.stats?.pins || 0}\n` +
-                `💾 Saves: ${result.stats?.saves || 0}\n` +
-                `🔗 Profile URL: ${result.profile_url || 'N/A'}\n` +
-                `🌐 Website: ${result.website || 'N/A'}`;
+            const caption = `ðŸ“Œ *Pinterest Profile Info*\n\n` +
+                `ðŸ‘¤ Full Name: ${result.full_name || 'N/A'}\n` +
+                `ðŸ†” Username: ${result.username || 'N/A'}\n` +
+                `ðŸ“ Bio: ${result.bio || 'N/A'}\n` +
+                `ðŸ“Œ Boards: ${result.stats?.boards || 0}\n` +
+                `ðŸ‘¥ Followers: ${result.stats?.followers || 0}\n` +
+                `âž¡ Following: ${result.stats?.following || 0}\n` +
+                `â¤ï¸ Likes: ${result.stats?.likes || 0}\n` +
+                `ðŸ“Œ Pins: ${result.stats?.pins || 0}\n` +
+                `ðŸ’¾ Saves: ${result.stats?.saves || 0}\n` +
+                `ðŸ”— Profile URL: ${result.profile_url || 'N/A'}\n` +
+                `ðŸŒ Website: ${result.website || 'N/A'}`;
             if (profileImage) {
                 await sock.sendMessage(chatId, { image: { url: profileImage }, caption }, { quoted: message });
             }
@@ -43,7 +43,11 @@ export default {
         }
         catch (err) {
             console.error('Pinterest plugin error:', err);
-            await sock.sendMessage(chatId, { text: '❌ Failed to fetch Pinterest profile.' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ Failed to fetch Pinterest profile.' }, { quoted: message });
         }
     }
 };
+
+
+
+

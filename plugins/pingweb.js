@@ -1,10 +1,10 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 export default {
-    command: 'pingweb',
-    aliases: ['pweb'],
-    category: 'general',
-    description: 'Check bot response time and ping a website',
-    usage: '.pingweb [website URL]',
+    command: 'بينجويب',
+    aliases: ['pweb', 'pingweb'],
+    category: 'عام',
+    description: 'تحقق بوت زمن الاستجابة اند بينج ا موقع',
+    usage: '.بينجويب [موقع رابط]',
     async handler(sock, message, args, context) {
         const { chatId, channelInfo, rawText } = context;
         const prefix = rawText.match(/^[.!#]/)?.[0] || '.';
@@ -13,12 +13,12 @@ export default {
         const url = parts.slice(1).join(' ').trim();
         const startBot = Date.now();
         const sent = await sock.sendMessage(chatId, {
-            text: '🏓 Pinging...',
+            text: 'ðŸ“ Pinging...',
             ...channelInfo
         }, { quoted: message });
         const endBot = Date.now();
         const botLatency = endBot - startBot;
-        let responseText = `🏓 *Pong!*\n\n📶 *Bot Latency:* ${botLatency}ms`;
+        let responseText = `ðŸ“ *Pong!*\n\nðŸ“¶ *Bot Latency:* ${botLatency}ms`;
         if (url) {
             try {
                 let testUrl = url;
@@ -36,33 +36,33 @@ export default {
                 });
                 const endWeb = Date.now();
                 const webLatency = endWeb - startWeb;
-                responseText += `\n\n🌐 *Website:* ${urlObj.hostname}`;
-                responseText += `\n⚡ *Response Time:* ${webLatency}ms`;
-                responseText += `\n📡 *Status:* ${response.status} ${response.statusText}`;
-                responseText += `\n✅ *Reachable:* Yes`;
+                responseText += `\n\nðŸŒ *Website:* ${urlObj.hostname}`;
+                responseText += `\nâš¡ *Response Time:* ${webLatency}ms`;
+                responseText += `\nðŸ“¡ *Status:* ${response.status} ${response.statusText}`;
+                responseText += `\nâœ… *Reachable:* Yes`;
             }
             catch (error) {
                 if (error.code === 'ENOTFOUND') {
-                    responseText += `\n\n🌐 *Website:* ${url}`;
-                    responseText += `\n❌ *Error:* Domain not found`;
+                    responseText += `\n\nðŸŒ *Website:* ${url}`;
+                    responseText += `\nâŒ *Error:* Domain not found`;
                 }
                 else if (error.code === 'ETIMEDOUT' || error.code === 'ECONNABORTED') {
-                    responseText += `\n\n🌐 *Website:* ${url}`;
-                    responseText += `\n❌ *Error:* Connection timeout`;
+                    responseText += `\n\nðŸŒ *Website:* ${url}`;
+                    responseText += `\nâŒ *Error:* Connection timeout`;
                 }
                 else if (error.message.includes('Invalid URL')) {
-                    responseText += `\n\n❌ *Invalid URL format*`;
-                    responseText += `\n💡 Example: .ping google.com`;
+                    responseText += `\n\nâŒ *Invalid URL format*`;
+                    responseText += `\nðŸ’¡ Example: .ping google.com`;
                 }
                 else {
-                    responseText += `\n\n🌐 *Website:* ${url}`;
-                    responseText += `\n❌ *Error:* ${error.message}`;
+                    responseText += `\n\nðŸŒ *Website:* ${url}`;
+                    responseText += `\nâŒ *Error:* ${error.message}`;
                 }
             }
         }
         else {
-            responseText += `\n\n💡 *Tip:* Use \`.ping <url>\` to test website response time`;
-            responseText += `\n📝 *Example:* .ping google.com`;
+            responseText += `\n\nðŸ’¡ *Tip:* Use \`.ping <url>\` to test website response time`;
+            responseText += `\nðŸ“ *Example:* .ping google.com`;
         }
         await sock.sendMessage(chatId, {
             text: responseText,
@@ -71,3 +71,7 @@ export default {
         });
     }
 };
+
+
+
+

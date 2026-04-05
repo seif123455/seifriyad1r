@@ -1,9 +1,9 @@
-export default {
-    command: 'mute',
-    aliases: ['silence'],
-    category: 'admin',
-    description: 'Mute the group for a specified duration',
-    usage: '.mute [duration in minutes]',
+﻿export default {
+    command: 'كتم',
+    aliases: ['silence', 'mute'],
+    category: 'المشرفون',
+    description: 'كتم تهي مجموعة فور ا سبيكيفييد دوراتيون',
+    usage: '.كتم [دوراتيون ين مينوتيس]',
     groupOnly: true,
     adminOnly: true,
     async handler(sock, message, args, context) {
@@ -46,3 +46,7 @@ export default {
         }
     }
 };
+
+
+
+

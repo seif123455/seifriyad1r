@@ -1,15 +1,15 @@
-export default {
-    command: 'excard',
-    aliases: [],
-    category: 'tools',
-    description: 'Create a rich media card',
-    usage: '.excard Title | Body | ImageURL',
+﻿export default {
+    command: 'يكسكارد',
+    aliases: ['excard'],
+    category: 'أدوات',
+    description: '',
+    usage: '.يكسكارد تيتلي | بودي | صورةرابط',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const input = args.join(' ');
         if (!input.includes('|')) {
             return await sock.sendMessage(chatId, {
-                text: '*Usage:* .excard Title | Body | ImageURL\n\n*Example:* .excard Google | Search anything | https://google.com/logo.png'
+                text: '*Usage:* .excard Title | Body | صورةرابط\n\n*Example:* .excard Google | Search anything | https://google.com/logo.png'
             }, { quoted: message });
         }
         const [title, body, url] = input.split('|').map((t) => t.trim());
@@ -30,3 +30,7 @@ export default {
         }, { quoted: message });
     }
 };
+
+
+
+

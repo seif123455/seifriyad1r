@@ -1,4 +1,4 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 const BASE = 'https://api.alquran.cloud/v1';
 const SURAH_NAMES = {
     1: 'Al-Fatihah', 2: 'Al-Baqarah', 3: 'Ali Imran', 4: 'An-Nisa', 5: 'Al-Maidah',
@@ -26,28 +26,28 @@ const SURAH_NAMES = {
     111: 'Al-Masad', 112: 'Al-Ikhlas', 113: 'Al-Falaq', 114: 'An-Nas'
 };
 export default {
-    command: 'quran',
-    aliases: ['quranverse', 'ayah', 'surah'],
-    category: 'info',
-    description: 'Search Quran verses by surah:ayah or keyword',
-    usage: '.quran 1:1\n.quran 2:255\n.quran mercy',
+    command: 'آية قرآنية',
+    aliases: ['quranverse', 'ayah', 'surah', 'quran'],
+    category: 'معلومات',
+    description: 'بحث قوران فيرسيس بي سوراه:اياه ور كييوورد',
+    usage: '.قوران 1:1\ن.قوران 2:255\ن.قوران ميركي',
     async handler(sock, message, args, context) {
         const { chatId, channelInfo } = context;
         const input = args.join(' ').trim();
         if (!input) {
             return await sock.sendMessage(chatId, {
-                text: `📖 *Quran*\n\n` +
+                text: `ðŸ“– *Quran*\n\n` +
                     `*By Surah:Ayah:*\n` +
-                    `\`.quran 1:1\` — Al-Fatihah, verse 1\n` +
-                    `\`.quran 2:255\` — Ayat Al-Kursi\n` +
-                    `\`.quran 36:1\` — Ya-Sin, verse 1\n\n` +
+                    `\`.quran 1:1\` â€” Al-Fatihah, verse 1\n` +
+                    `\`.quran 2:255\` â€” Ayat Al-Kursi\n` +
+                    `\`.quran 36:1\` â€” Ya-Sin, verse 1\n\n` +
                     `*By keyword:*\n` +
                     `\`.quran mercy\`\n` +
                     `\`.quran patience\`\n` +
                     `\`.quran paradise\`\n\n` +
                     `*Full Surah:*\n` +
-                    `\`.surah 1\` — Al-Fatihah\n` +
-                    `\`.surah 112\` — Al-Ikhlas`,
+                    `\`.surah 1\` â€” Al-Fatihah\n` +
+                    `\`.surah 112\` â€” Al-Ikhlas`,
                 ...channelInfo
             }, { quoted: message });
         }
@@ -63,10 +63,10 @@ export default {
                 const en = enRes.data.data;
                 const surahName = SURAH_NAMES[parseInt(surah, 10)] || ar.surah?.englishName;
                 await sock.sendMessage(chatId, {
-                    text: `📖 *Surah ${surahName} — Ayah ${ayah}*\n\n` +
+                    text: `ðŸ“– *Surah ${surahName} â€” Ayah ${ayah}*\n\n` +
                         `*Arabic:*\n${ar.text}\n\n` +
                         `*Translation (Asad):*\n_${en.text}_\n\n` +
-                        `📍 Surah: ${surah} | Ayah: ${ayah} | Juz: ${ar.juz} | Page: ${ar.page}`,
+                        `ðŸ“ Surah: ${surah} | Ayah: ${ayah} | Juz: ${ar.juz} | Page: ${ar.page}`,
                     ...channelInfo
                 }, { quoted: message });
             }
@@ -79,8 +79,8 @@ export default {
                 const arData = arRes.data.data;
                 const verses = data.ayahs.slice(0, 7).map((a, i) => `*${i + 1}.* ${arData.ayahs[i]?.text || ''}\n_${a.text}_`).join('\n\n');
                 await sock.sendMessage(chatId, {
-                    text: `📖 *Surah ${data.englishName} (${data.name})*\n` +
-                        `_${data.englishNameTranslation}_ — ${data.numberOfAyahs} verses — ${data.revelationType}\n\n` +
+                    text: `ðŸ“– *Surah ${data.englishName} (${data.name})*\n` +
+                        `_${data.englishNameTranslation}_ â€” ${data.numberOfAyahs} verses â€” ${data.revelationType}\n\n` +
                         `${verses}\n\n` +
                         `_Showing first 7 of ${data.numberOfAyahs} verses_\n` +
                         `Use \`.quran ${num}:8\` for more`,
@@ -93,17 +93,17 @@ export default {
                 const matches = res.data.data?.matches || [];
                 if (!matches.length) {
                     return await sock.sendMessage(chatId, {
-                        text: `❌ No verses found for: *${input}*`,
+                        text: `âŒ No verses found for: *${input}*`,
                         ...channelInfo
                     }, { quoted: message });
                 }
                 const top = matches.slice(0, 5);
                 const results = top.map((m) => {
                     const surahName = SURAH_NAMES[m.surah?.number] || m.surah?.englishName;
-                    return `📍 *${surahName} ${m.surah?.number}:${m.numberInSurah}*\n_${m.text}_`;
+                    return `ðŸ“ *${surahName} ${m.surah?.number}:${m.numberInSurah}*\n_${m.text}_`;
                 }).join('\n\n');
                 await sock.sendMessage(chatId, {
-                    text: `📖 *Quran Search: "${input}"*\n` +
+                    text: `ðŸ“– *Quran Search: "${input}"*\n` +
                         `Found ${matches.length} results (showing top 5)\n\n${ 
                         results}`,
                     ...channelInfo
@@ -112,9 +112,12 @@ export default {
         }
         catch (error) {
             await sock.sendMessage(chatId, {
-                text: `❌ Failed: ${error.message}`,
+                text: `âŒ Failed: ${error.message}`,
                 ...channelInfo
             }, { quoted: message });
         }
     }
 };
+
+
+

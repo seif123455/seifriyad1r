@@ -1,8 +1,8 @@
-const MOMO_DATA = {
+﻿const MOMO_DATA = {
     mtn: {
         name: 'MTN Mobile Money (MoMo)',
-        countries: ['Ghana 🇬🇭', 'Uganda 🇺🇬', 'Rwanda 🇷🇼', 'Cameroon 🇨🇲', 'Ivory Coast 🇨🇮',
-            'Zambia 🇿🇲', 'Benin 🇧🇯', 'South Africa 🇿🇦', 'Nigeria 🇳🇬', 'Congo 🇨🇬'],
+        countries: ['Ghana ðŸ‡¬ðŸ‡­', 'Uganda ðŸ‡ºðŸ‡¬', 'Rwanda ðŸ‡·ðŸ‡¼', 'Cameroon ðŸ‡¨ðŸ‡²', 'Ivory Coast ðŸ‡¨ðŸ‡®',
+            'Zambia ðŸ‡¿ðŸ‡²', 'Benin ðŸ‡§ðŸ‡¯', 'South Africa ðŸ‡¿ðŸ‡¦', 'Nigeria ðŸ‡³ðŸ‡¬', 'Congo ðŸ‡¨ðŸ‡¬'],
         ussd: {
             'Ghana': '*170#',
             'Uganda': '*165#',
@@ -36,8 +36,8 @@ const MOMO_DATA = {
     },
     airtel: {
         name: 'Airtel Money',
-        countries: ['Kenya 🇰🇪', 'Tanzania 🇹🇿', 'Uganda 🇺🇬', 'Rwanda 🇷🇼', 'Zambia 🇿🇲',
-            'Malawi 🇲🇼', 'Madagascar 🇲🇬', 'Niger 🇳🇪', 'Congo DR 🇨🇩', 'Seychelles 🇸🇨'],
+        countries: ['Kenya ðŸ‡°ðŸ‡ª', 'Tanzania ðŸ‡¹ðŸ‡¿', 'Uganda ðŸ‡ºðŸ‡¬', 'Rwanda ðŸ‡·ðŸ‡¼', 'Zambia ðŸ‡¿ðŸ‡²',
+            'Malawi ðŸ‡²ðŸ‡¼', 'Madagascar ðŸ‡²ðŸ‡¬', 'Niger ðŸ‡³ðŸ‡ª', 'Congo DR ðŸ‡¨ðŸ‡©', 'Seychelles ðŸ‡¸ðŸ‡¨'],
         ussd: {
             'Kenya': '*334#',
             'Tanzania': '*150*60#',
@@ -69,8 +69,8 @@ const MOMO_DATA = {
     },
     mpesa: {
         name: 'M-Pesa',
-        countries: ['Kenya 🇰🇪', 'Tanzania 🇹🇿', 'Mozambique 🇲🇿', 'DRC 🇨🇩',
-            'Lesotho 🇱🇸', 'Ghana 🇬🇭', 'Egypt 🇪🇬', 'Ethiopia 🇪🇹'],
+        countries: ['Kenya ðŸ‡°ðŸ‡ª', 'Tanzania ðŸ‡¹ðŸ‡¿', 'Mozambique ðŸ‡²ðŸ‡¿', 'DRC ðŸ‡¨ðŸ‡©',
+            'Lesotho ðŸ‡±ðŸ‡¸', 'Ghana ðŸ‡¬ðŸ‡­', 'Egypt ðŸ‡ªðŸ‡¬', 'Ethiopia ðŸ‡ªðŸ‡¹'],
         ussd: {
             'Kenya': '*334# or *737#',
             'Tanzania': '*150*00#',
@@ -101,8 +101,8 @@ const MOMO_DATA = {
     },
     orange: {
         name: 'Orange Money',
-        countries: ['Senegal 🇸🇳', 'Mali 🇲🇱', 'Cameroon 🇨🇲', 'Ivory Coast 🇨🇮',
-            'Burkina Faso 🇧🇫', 'Guinea 🇬🇳', 'Madagascar 🇲🇬', 'Tunisia 🇹🇳'],
+        countries: ['Senegal ðŸ‡¸ðŸ‡³', 'Mali ðŸ‡²ðŸ‡±', 'Cameroon ðŸ‡¨ðŸ‡²', 'Ivory Coast ðŸ‡¨ðŸ‡®',
+            'Burkina Faso ðŸ‡§ðŸ‡«', 'Guinea ðŸ‡¬ðŸ‡³', 'Madagascar ðŸ‡²ðŸ‡¬', 'Tunisia ðŸ‡¹ðŸ‡³'],
         ussd: {
             'Senegal': '#144#',
             'Mali': '#144#',
@@ -122,8 +122,8 @@ const MOMO_DATA = {
     },
     wave: {
         name: 'Wave Mobile Money',
-        countries: ['Senegal 🇸🇳', 'Ivory Coast 🇨🇮', 'Mali 🇲🇱', 'Burkina Faso 🇧🇫',
-            'Guinea 🇬🇳', 'Uganda 🇺🇬', 'Gambia 🇬🇲'],
+        countries: ['Senegal ðŸ‡¸ðŸ‡³', 'Ivory Coast ðŸ‡¨ðŸ‡®', 'Mali ðŸ‡²ðŸ‡±', 'Burkina Faso ðŸ‡§ðŸ‡«',
+            'Guinea ðŸ‡¬ðŸ‡³', 'Uganda ðŸ‡ºðŸ‡¬', 'Gambia ðŸ‡¬ðŸ‡²'],
         ussd: {
             'Senegal': '*999#',
             'Ivory Coast': '*999#',
@@ -142,11 +142,11 @@ const MOMO_DATA = {
     },
 };
 export default {
-    command: 'momo',
-    aliases: ['mobilemoney', 'mpesa', 'airtelmoney', 'mtnmomo', 'wave'],
-    category: 'info',
-    description: 'Mobile Money info for African networks (MTN, Airtel, M-Pesa, Wave, Orange)',
-    usage: '.momo mtn\n.momo mpesa\n.momo airtel',
+    command: 'مومو',
+    aliases: ['mobilemoney', 'mpesa', 'airtelmoney', 'mtnmomo', 'wave', 'momo'],
+    category: 'معلومات',
+    description: 'موبيلي مونيي معلومات فور افريكان نيتووركس (متن, ايرتيل, م-بيسا, وافي, ورانجي)',
+    usage: '.مومو متن\ن.مومو مبيسا\ن.مومو ايرتيل',
     async handler(sock, message, args, context) {
         const { chatId, channelInfo, userMessage } = context;
         // Detect from command used
@@ -160,9 +160,9 @@ export default {
         else if (userMessage.includes('wave'))
             query = 'wave';
         if (!query) {
-            const list = Object.entries(MOMO_DATA).map(([k, v]) => `• \`.momo ${k}\` — ${v.name}`).join('\n');
+            const list = Object.entries(MOMO_DATA).map(([k, v]) => `â€¢ \`.momo ${k}\` â€” ${v.name}`).join('\n');
             return await sock.sendMessage(chatId, {
-                text: `📡 *Mobile Money Info*\n\n` +
+                text: `ðŸ“¡ *Mobile Money Info*\n\n` +
                     `*Available networks:*\n${list}\n\n` +
                     `*Examples:*\n` +
                     `\`.momo mtn\`\n` +
@@ -176,22 +176,25 @@ export default {
             MOMO_DATA[k].name.toLowerCase().includes(query));
         if (!key) {
             return await sock.sendMessage(chatId, {
-                text: `❌ Unknown network: *${query}*\n\nAvailable: ${Object.keys(MOMO_DATA).join(', ')}`,
+                text: `âŒ Unknown network: *${query}*\n\nAvailable: ${Object.keys(MOMO_DATA).join(', ')}`,
                 ...channelInfo
             }, { quoted: message });
         }
         const m = MOMO_DATA[key];
-        const ussdList = Object.entries(m.ussd).map(([c, u]) => `• ${c}: \`${u}\``).join('\n');
-        const helpList = Object.entries(m.helpline).map(([c, h]) => `• ${c}: ${h}`).join('\n');
-        const featureList = m.features.map(f => `✅ ${f}`).join('\n');
+        const ussdList = Object.entries(m.ussd).map(([c, u]) => `â€¢ ${c}: \`${u}\``).join('\n');
+        const helpList = Object.entries(m.helpline).map(([c, h]) => `â€¢ ${c}: ${h}`).join('\n');
+        const featureList = m.features.map(f => `âœ… ${f}`).join('\n');
         await sock.sendMessage(chatId, {
-            text: `📡 *${m.name}*\n\n` +
-                `🌍 *Available in:*\n${m.countries.join(', ')}\n\n` +
-                `📲 *USSD Codes:*\n${ussdList}\n\n` +
-                `⚡ *Features:*\n${featureList}\n\n${ 
-                helpList ? `📞 *Helpline:*\n${helpList}\n\n` : '' 
-                }🌐 *Website:* ${m.website}`,
+            text: `ðŸ“¡ *${m.name}*\n\n` +
+                `ðŸŒ *Available in:*\n${m.countries.join(', ')}\n\n` +
+                `ðŸ“² *USSD Codes:*\n${ussdList}\n\n` +
+                `âš¡ *Features:*\n${featureList}\n\n${ 
+                helpList ? `ðŸ“ž *Helpline:*\n${helpList}\n\n` : '' 
+                }ðŸŒ *Website:* ${m.website}`,
             ...channelInfo
         }, { quoted: message });
     }
 };
+
+
+

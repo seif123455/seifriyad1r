@@ -1,9 +1,9 @@
-export default {
-    command: 'gcset',
-    aliases: ['gsetting', 'groupset', 'gpset'],
-    category: 'admin',
-    description: 'Change group settings (lock/unlock messages or settings)',
-    usage: '.gcset <setting>',
+﻿export default {
+    command: 'جكسيت',
+    aliases: ['gsetting', 'groupset', 'gpset', 'gcset'],
+    category: 'المشرفون',
+    description: 'تغيير مجموعة إعدادات (لوكك/ونلوكك رسالةس ور إعدادات)',
+    usage: '.جكسيت <سيتتينج>',
     groupOnly: true,
     adminOnly: true,
     async handler(sock, message, args, context) {
@@ -12,54 +12,57 @@ export default {
         const isBotAdmin = context.isBotAdmin || false;
         if (!isBotAdmin) {
             return await sock.sendMessage(chatId, {
-                text: `❌ Bot needs to be an admin to change group settings.`,
+                text: `âŒ Bot needs to be an admin to change group settings.`,
                 ...channelInfo
             }, { quoted: message });
         }
         const setting = args[0]?.toLowerCase();
         if (!setting) {
             return await sock.sendMessage(chatId, {
-                text: `╔════════════════╗\n` +
-                    `║⚙️ *GROUP SETTINGS*   ║\n` +
-                    `╚════════════════╝\n\n` +
-                    `📌 *Usage:* \`.gcset <option>\`\n\n` +
-                    `────────────────────\n` +
-                    `*💬 MESSAGE PERMISSIONS*\n` +
-                    `🔒 *lock* — Only admins can send messages\n\n` +
-                    `🔓 *unlock* — Everyone can send messages\n\n` +
-                    `*🛠️ SETTINGS PERMISSIONS*\n` +
-                    `🔒 *lockset* — Only admins can edit group info\n\n` +
-                    `🔓 *unlockset* — Everyone can edit group info\n` +
-                    `────────────────────`,
+                text: `â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—\n` +
+                    `â•‘âš™ï¸ *GROUP SETTINGS*   â•‘\n` +
+                    `â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•\n\n` +
+                    `ðŸ“Œ *Usage:* \`.gcset <option>\`\n\n` +
+                    `â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€\n` +
+                    `*ðŸ’¬ MESSAGE PERMISSIONS*\n` +
+                    `ðŸ”’ *lock* â€” Only admins can send messages\n\n` +
+                    `ðŸ”“ *unlock* â€” Everyone can send messages\n\n` +
+                    `*ðŸ› ï¸ SETTINGS PERMISSIONS*\n` +
+                    `ðŸ”’ *lockset* â€” Only admins can edit group info\n\n` +
+                    `ðŸ”“ *unlockset* â€” Everyone can edit group info\n` +
+                    `â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€`,
                 ...channelInfo
             }, { quoted: message });
         }
         const settingsMap = {
-            lock: { value: 'announcement', label: '🔒 Only admins can send messages' },
-            unlock: { value: 'not_announcement', label: '🔓 Everyone can send messages' },
-            lockset: { value: 'locked', label: '🔒 Only admins can edit group info' },
-            unlockset: { value: 'unlocked', label: '🔓 Everyone can edit group info' },
+            lock: { value: 'announcement', label: 'ðŸ”’ Only admins can send messages' },
+            unlock: { value: 'not_announcement', label: 'ðŸ”“ Everyone can send messages' },
+            lockset: { value: 'locked', label: 'ðŸ”’ Only admins can edit group info' },
+            unlockset: { value: 'unlocked', label: 'ðŸ”“ Everyone can edit group info' },
         };
         const config = settingsMap[setting];
         if (!config) {
             return await sock.sendMessage(chatId, {
-                text: `❌ Unknown setting: *${setting}*\n\nUse \`.groupsettings\` to see options.`,
+                text: `âŒ Unknown setting: *${setting}*\n\nUse \`.groupsettings\` to see options.`,
                 ...channelInfo
             }, { quoted: message });
         }
         try {
             await sock.groupSettingUpdate(chatId, config.value);
             return await sock.sendMessage(chatId, {
-                text: `✅ ${config.label}`,
+                text: `âœ… ${config.label}`,
                 ...channelInfo
             }, { quoted: message });
         }
         catch (e) {
             console.error('[GROUPSETTINGS] Error:', e.message);
             return await sock.sendMessage(chatId, {
-                text: `❌ Failed to update setting: ${e.message}`,
+                text: `âŒ Failed to update setting: ${e.message}`,
                 ...channelInfo
             }, { quoted: message });
         }
     }
 };
+
+
+

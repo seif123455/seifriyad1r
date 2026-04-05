@@ -1,4 +1,4 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 import FormData from 'form-data';
 import { downloadContentFromMessage } from '@whiskeysockets/baileys';
 async function getImageBuffer(message) {
@@ -13,26 +13,26 @@ async function getImageBuffer(message) {
     return Buffer.concat(chunks);
 }
 export default {
-    command: 'removebg',
-    aliases: ['rmbg', 'bgremove'],
-    category: 'tools',
-    description: 'Remove background from an image',
-    usage: '.removebg (reply to image or send image with caption)',
+    command: 'ريموفيبج',
+    aliases: ['rmbg', 'bgremove', 'removebg'],
+    category: 'أدوات',
+    description: 'حذف باككجرووند فروم ان صورة',
+    usage: '.ريموفيبج (رد تو صورة ور إرسال صورة ويته كابتيون)',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
             const imageBuffer = await getImageBuffer(message);
             if (!imageBuffer) {
                 return await sock.sendMessage(chatId, {
-                    text: '📸 *Remove Background*\n\nUsage:\n' +
-                        '• Reply to an image with `.removebg`\n' +
-                        '• Send image with caption `.removebg`'
+                    text: 'ðŸ“¸ *Remove Background*\n\nUsage:\n' +
+                        'â€¢ Reply to an image with `.removebg`\n' +
+                        'â€¢ Send image with caption `.removebg`'
                 }, { quoted: message });
             }
             const apiKey = process.env.REMOVEBG_KEY;
             if (!apiKey) {
                 return await sock.sendMessage(chatId, {
-                    text: '❌ RemoveBG API key not configured.'
+                    text: 'âŒ RemoveBG API key not configured.'
                 }, { quoted: message });
             }
             const form = new FormData();
@@ -48,19 +48,23 @@ export default {
             });
             await sock.sendMessage(chatId, {
                 image: response.data,
-                caption: '✨ *Background removed successfully*\n\n𝗣𝗢𝗪𝗘𝗥𝗘𝗗 𝗕𝗬 𝗠𝗘𝗚𝗔-𝗠𝗗'
+                caption: 'âœ¨ *Background removed successfully*\n\nð—£ð—¢ð—ªð—˜ð—¥ð—˜ð—— ð—•ð—¬ ð— ð—˜ð—šð—”-ð— ð——'
             }, { quoted: message });
         }
         catch (err) {
             console.error('RemoveBG Error:', err?.response?.data || err.message);
-            let msg = '❌ Failed to remove background.';
+            let msg = 'âŒ Failed to remove background.';
             if (err.response?.status === 402)
-                msg = '💳 API quota exceeded.';
+                msg = 'ðŸ’³ API quota exceeded.';
             else if (err.response?.status === 401)
-                msg = '🔑 Invalid API key.';
+                msg = 'ðŸ”‘ Invalid API key.';
             else if (err.code === 'ECONNABORTED')
-                msg = '⏰ Request timeout. Try again.';
+                msg = 'â° Request timeout. Try again.';
             await sock.sendMessage(chatId, { text: msg }, { quoted: message });
         }
     }
 };
+
+
+
+

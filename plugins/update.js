@@ -1,12 +1,12 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  *                                                                           *
- *                     Developed By CRAZY-SEIF                               *
+ *                     Developed By Crazy Seif                               *
  *                                                                           *
- *  📞  WhatsApp : 201144534147                                              *
+ *  ðŸ“ž  WhatsApp : 01144534147                                              *
  *                                                                           *
- *    © 2026 CRAZY-SEIF. All rights reserved.                               *
+ *    Â© 2026 Crazy Seif. All rights reserved.                               *
  *                                                                           *
- *    Description: This file is part of the CRAZY-SEIF Bot Project.          *
+ *    Description: This file is part of the Crazy Seif BOT Project.          *
  *                                                                           *
  *****************************************************************************/
 import config from '../config.js';
@@ -50,17 +50,17 @@ async function updateViaGit() {
 function downloadFile(url, dest, visited = new Set()) {
     return new Promise((resolve, reject) => {
         try {
-            if (visited.has(url) || visited.size > 5) return reject(new Error('تحويلات كثيرة جداً'));
+            if (visited.has(url) || visited.size > 5) return reject(new Error('ØªØ­ÙˆÙŠÙ„Ø§Øª ÙƒØ«ÙŠØ±Ø© Ø¬Ø¯Ø§Ù‹'));
             visited.add(url);
             const useHttps = url.startsWith('https://');
             const http = require('http');
             const client = useHttps ? https : http;
             const req = client.get(url, {
-                headers: { 'User-Agent': 'CRAZY-SEIF-BOT-Updater/1.0', 'Accept': '*/*' }
+                headers: { 'User-Agent': 'Crazy Seif-BOT-Updater/1.0', 'Accept': '*/*' }
             }, (res) => {
                 if ([301, 302, 303, 307, 308].includes(res.statusCode)) {
                     const location = res.headers.location;
-                    if (!location) return reject(new Error(`HTTP ${res.statusCode} بدون موقع`));
+                    if (!location) return reject(new Error(`HTTP ${res.statusCode} Ø¨Ø¯ÙˆÙ† Ù…ÙˆÙ‚Ø¹`));
                     const nextUrl = new URL(location, url).toString();
                     res.resume();
                     return downloadFile(nextUrl, dest, visited).then(resolve).catch(reject);
@@ -100,7 +100,7 @@ async function extractZip(zipPath, outDir) {
         await run(`busybox unzip -o '${zipPath}' -d '${outDir}'`);
         return;
     } catch { }
-    throw new Error("لا توجد أداة فك ضغط (unzip/7z/busybox).");
+    throw new Error("Ù„Ø§ ØªÙˆØ¬Ø¯ Ø£Ø¯Ø§Ø© ÙÙƒ Ø¶ØºØ· (unzip/7z/busybox).");
 }
 
 function copyRecursive(src, dest, ignore = [], relative = '', outList = []) {
@@ -121,7 +121,7 @@ function copyRecursive(src, dest, ignore = [], relative = '', outList = []) {
 
 async function updateViaZip(sock, chatId, message, zipOverride) {
     const zipUrl = (zipOverride || config.updateZipUrl || process.env.UPDATE_ZIP_URL || '').trim();
-    if (!zipUrl) throw new Error('لا يوجد رابط ZIP. قم بتعيين config.updateZipUrl أو UPDATE_ZIP_URL');
+    if (!zipUrl) throw new Error('Ù„Ø§ ÙŠÙˆØ¬Ø¯ Ø±Ø§Ø¨Ø· ZIP. Ù‚Ù… Ø¨ØªØ¹ÙŠÙŠÙ† config.updateZipUrl Ø£Ùˆ UPDATE_ZIP_URL');
     
     const tmpDir = path.join(process.cwd(), 'temp');
     if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
@@ -183,11 +183,11 @@ async function restartProcess() {
 }
 
 export default {
-    command: 'تحديث',
-    aliases: ['update', 'upgrade', 'restart', 'تطوير'],
-    category: 'owner',
-    description: 'تحديث البوت من git أو zip دون إيقافه',
-    usage: '!تحديث [رابط_zip]',
+    command: 'ØªØ­Ø¯ÙŠØ«',
+    aliases: ['update', 'upgrade', 'restart', 'ØªØ·ÙˆÙŠØ±'],
+    category: 'Ø§Ù„Ù…Ø§Ù„Ùƒ',
+    description: 'ØªØ­Ø¯ÙŠØ« Ø§Ù„Ø¨ÙˆØª Ù…Ù† Ø¬ÙŠØª Ø£Ùˆ Ø²ÙŠØ¨ Ø¯ÙˆÙ† Ø¥ÙŠÙ‚Ø§ÙÙ‡',
+    usage: '!ØªØ­Ø¯ÙŠØ« [Ø±Ø§Ø¨Ø·_Ø²ÙŠØ¨]',
     ownerOnly: true,
     
     async handler(sock, message, args, context) {
@@ -195,7 +195,7 @@ export default {
         
         try {
             await sock.sendMessage(chatId, {
-                text: '🔄 جاري تحديث البوت، يرجى الانتظار…',
+                text: 'ðŸ”„ Ø¬Ø§Ø±ÙŠ ØªØ­Ø¯ÙŠØ« Ø§Ù„Ø¨ÙˆØªØŒ ÙŠØ±Ø¬Ù‰ Ø§Ù„Ø§Ù†ØªØ¸Ø§Ø±â€¦',
                 ...channelInfo
             }, { quoted: message });
             
@@ -205,43 +205,43 @@ export default {
                 const { oldRev, newRev, alreadyUpToDate, commits, files } = await updateViaGit();
                 
                 if (alreadyUpToDate) {
-                    changesSummary = `✅ البوت محدث بالفعل\nالنسخة الحالية: ${newRev.substring(0, 7)}`;
+                    changesSummary = `âœ… Ø§Ù„Ø¨ÙˆØª Ù…Ø­Ø¯Ø« Ø¨Ø§Ù„ÙØ¹Ù„\nØ§Ù„Ù†Ø³Ø®Ø© Ø§Ù„Ø­Ø§Ù„ÙŠØ©: ${newRev.substring(0, 7)}`;
                 } else {
-                    changesSummary = `✅ تم التحديث بنجاح!\n\n`;
-                    changesSummary += `📌 القديم: ${oldRev.substring(0, 7)}\n`;
-                    changesSummary += `📌 الجديد: ${newRev.substring(0, 7)}\n\n`;
+                    changesSummary = `âœ… ØªÙ… Ø§Ù„ØªØ­Ø¯ÙŠØ« Ø¨Ù†Ø¬Ø§Ø­!\n\n`;
+                    changesSummary += `ðŸ“Œ Ø§Ù„Ù‚Ø¯ÙŠÙ…: ${oldRev.substring(0, 7)}\n`;
+                    changesSummary += `ðŸ“Œ Ø§Ù„Ø¬Ø¯ÙŠØ¯: ${newRev.substring(0, 7)}\n\n`;
                     if (commits) {
                         const commitLines = String(commits).split('\n').slice(0, 5);
-                        changesSummary += `📝 آخر التحديثات:\n${commitLines.map(c => `• ${c}`).join('\n')}\n\n`;
+                        changesSummary += `ðŸ“ Ø¢Ø®Ø± Ø§Ù„ØªØ­Ø¯ÙŠØ«Ø§Øª:\n${commitLines.map(c => `â€¢ ${c}`).join('\n')}\n\n`;
                     }
                     if (files) {
                         const fileLines = String(files).split('\n').slice(0, 10);
-                        changesSummary += `📁 الملفات المتغيرة:\n${fileLines.map(f => `• ${f}`).join('\n')}`;
-                        if (String(files).split('\n').length > 10) changesSummary += `\n... و ${String(files).split('\n').length - 10} ملفات أخرى`;
+                        changesSummary += `ðŸ“ Ø§Ù„Ù…Ù„ÙØ§Øª Ø§Ù„Ù…ØªØºÙŠØ±Ø©:\n${fileLines.map(f => `â€¢ ${f}`).join('\n')}`;
+                        if (String(files).split('\n').length > 10) changesSummary += `\n... Ùˆ ${String(files).split('\n').length - 10} Ù…Ù„ÙØ§Øª Ø£Ø®Ø±Ù‰`;
                     }
                 }
                 await run('npm install --no-audit --no-fund');
             } else {
                 const zipOverride = args[0] || null;
                 const { copiedFiles } = await updateViaZip(sock, chatId, message, zipOverride);
-                changesSummary = `✅ تم التحديث من ZIP!\n\n`;
-                changesSummary += `📁 عدد الملفات المحدثة: ${copiedFiles.length}\n\n`;
+                changesSummary = `âœ… ØªÙ… Ø§Ù„ØªØ­Ø¯ÙŠØ« Ù…Ù† ZIP!\n\n`;
+                changesSummary += `ðŸ“ Ø¹Ø¯Ø¯ Ø§Ù„Ù…Ù„ÙØ§Øª Ø§Ù„Ù…Ø­Ø¯Ø«Ø©: ${copiedFiles.length}\n\n`;
                 if (copiedFiles.length > 0) {
                     const shown = copiedFiles.slice(0, 10);
-                    changesSummary += `آخر التغييرات:\n${shown.map(f => `• ${f}`).join('\n')}`;
-                    if (copiedFiles.length > 10) changesSummary += `\n... و ${copiedFiles.length - 10} ملفات أخرى`;
+                    changesSummary += `Ø¢Ø®Ø± Ø§Ù„ØªØºÙŠÙŠØ±Ø§Øª:\n${shown.map(f => `â€¢ ${f}`).join('\n')}`;
+                    if (copiedFiles.length > 10) changesSummary += `\n... Ùˆ ${copiedFiles.length - 10} Ù…Ù„ÙØ§Øª Ø£Ø®Ø±Ù‰`;
                 }
             }
             
             try {
                 delete require.cache[require.resolve('../config')];
                 const newSettings = (await import('../config.js')).default;
-                const v = newSettings.version || 'غير معروف';
-                changesSummary += `\n\n🔖 الإصدار: ${v}`;
+                const v = newSettings.version || 'ØºÙŠØ± Ù…Ø¹Ø±ÙˆÙ';
+                changesSummary += `\n\nðŸ”– Ø§Ù„Ø¥ØµØ¯Ø§Ø±: ${v}`;
             } catch { }
             
             await sock.sendMessage(chatId, {
-                text: `${changesSummary}\n\n♻️ جاري إعادة تشغيل البوت...`,
+                text: `${changesSummary}\n\nâ™»ï¸ Ø¬Ø§Ø±ÙŠ Ø¥Ø¹Ø§Ø¯Ø© ØªØ´ØºÙŠÙ„ Ø§Ù„Ø¨ÙˆØª...`,
                 ...channelInfo
             }, { quoted: message });
             
@@ -249,9 +249,9 @@ export default {
             await restartProcess();
             
         } catch (err) {
-            console.error('فشل التحديث:', err);
+            console.error('ÙØ´Ù„ Ø§Ù„ØªØ­Ø¯ÙŠØ«:', err);
             await sock.sendMessage(chatId, {
-                text: `❌ فشل التحديث:\n${String(err.message || err)}`,
+                text: `âŒ ÙØ´Ù„ Ø§Ù„ØªØ­Ø¯ÙŠØ«:\n${String(err.message || err)}`,
                 ...channelInfo
             }, { quoted: message });
         }
@@ -260,12 +260,13 @@ export default {
 
 /*****************************************************************************
  *                                                                           *
- *                     Developed By CRAZY-SEIF                               *
+ *                     Developed By Crazy Seif                               *
  *                                                                           *
- *  📞  WhatsApp : 201144534147                                              *
+ *  ðŸ“ž  WhatsApp : 01144534147                                              *
  *                                                                           *
- *    © 2026 CRAZY-SEIF. All rights reserved.                               *
+ *    Â© 2026 Crazy Seif. All rights reserved.                               *
  *                                                                           *
- *    Description: This file is part of the CRAZY-SEIF Bot Project.          *
+ *    Description: This file is part of the Crazy Seif BOT Project.          *
  *                                                                           *
  *****************************************************************************/
+

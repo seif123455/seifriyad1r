@@ -1,4 +1,4 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 import * as cheerio from 'cheerio';
 async function mediafireDl(url) {
     try {
@@ -19,26 +19,26 @@ async function mediafireDl(url) {
     }
 }
 export default {
-    command: 'mediafire',
-    aliases: ['mfire', 'mf'],
-    category: 'download',
-    description: 'Download files from MediaFire',
-    usage: '.mediafire <url>',
+    command: 'ميديافيري',
+    aliases: ['mfire', 'mf', 'mediafire'],
+    category: 'التحميل',
+    description: 'تحميل ملفس فروم ميديافيري',
+    usage: '.ميديافيري <رابط>',
     async handler(sock, message, args, context) {
         const { chatId } = context;
         const text = args.join(' ');
         if (!text)
-            return await sock.sendMessage(chatId, { text: "❌ Provide a MediaFire URL.\n\nExample:\n.mfire https://www.mediafire.com/file/5e54xv2cislhfgb/twoxzhn.zip/file" }, { quoted: message });
+            return await sock.sendMessage(chatId, { text: "âŒ Provide a MediaFire URL.\n\nExample:\n.mfire https://www.mediafire.com/file/5e54xv2cislhfgb/twoxzhn.zip/file" }, { quoted: message });
         try {
             const data = await mediafireDl(text);
             if (!data || !data.link) {
-                return await sock.sendMessage(chatId, { text: "❌ Failed to parse MediaFire page. Link might be private or broken." }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: "âŒ Failed to parse MediaFire page. Link might be private or broken." }, { quoted: message });
             }
-            let caption = `≡ *MEDIAFIRE DOWNLOADER*\n\n`;
-            caption += `▢ *File:* ${data.name}\n`;
-            caption += `▢ *Size:* ${data.size}\n`;
-            caption += `▢ *Extension:* ${data.ext}\n\n`;
-            caption += `*Download In Progress... Please Wait ⌛*`;
+            let caption = `â‰¡ *MEDIAFIRE DOWNLOADER*\n\n`;
+            caption += `â–¢ *File:* ${data.name}\n`;
+            caption += `â–¢ *Size:* ${data.size}\n`;
+            caption += `â–¢ *Extension:* ${data.ext}\n\n`;
+            caption += `*Download In Progress... Please Wait âŒ›*`;
             await sock.sendMessage(chatId, { text: caption }, { quoted: message });
             const response = await axios({
                 method: 'get',
@@ -51,7 +51,7 @@ export default {
             });
             const buffer = Buffer.from(response.data);
             if (buffer.length < 10000) {
-                return await sock.sendMessage(chatId, { text: "❌ Error: The downloaded file is corrupt or invalid." });
+                return await sock.sendMessage(chatId, { text: "âŒ Error: The downloaded file is corrupt or invalid." });
             }
             let mimeType = 'application/octet-stream';
             const mimes = {
@@ -69,12 +69,16 @@ export default {
                 document: buffer,
                 fileName: data.name,
                 mimetype: mimeType,
-                caption: `✅ *Download Complete:* ${data.name}`
+                caption: `âœ… *Download Complete:* ${data.name}`
             }, { quoted: message });
         }
         catch (err) {
             console.error('MF Download Error:', err);
-            await sock.sendMessage(chatId, { text: `❌ Error: ${ err.message}` }, { quoted: message });
+            await sock.sendMessage(chatId, { text: `âŒ Error: ${ err.message}` }, { quoted: message });
         }
     }
 };
+
+
+
+

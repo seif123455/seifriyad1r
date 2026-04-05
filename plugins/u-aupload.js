@@ -1,25 +1,25 @@
-import { downloadContentFromMessage } from '@whiskeysockets/baileys';
+﻿import { downloadContentFromMessage } from '@whiskeysockets/baileys';
 import fs from 'fs';
 import path from 'path';
 import { uploadFile } from '../lib/uploaders.js';
 export default {
-    command: 'aupload',
-    aliases: ['upall', 'aup', 'toall'],
+    command: 'اوبلواد',
+    aliases: ['upall', 'aup', 'toall', 'aupload'],
     category: 'upload',
-    description: 'Upload media to cloud and get URL',
-    usage: '.aupload (reply to image/video/gif/sticker)',
+    description: 'رفع وسائط تو كلوود اند جلب رابط',
+    usage: '.ارفع (رد تو صورة/فيديو/صورة متحركة/ملصق)',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
             const quotedMsg = message.message?.extendedTextMessage?.contextInfo?.quotedMessage;
             if (!quotedMsg) {
-                await sock.sendMessage(chatId, { text: '⚠️ Please reply to an image, video, GIF, or sticker!' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'âš ï¸ Please reply to an image, video, GIF, or sticker!' }, { quoted: message });
                 return;
             }
             const type = Object.keys(quotedMsg)[0];
             const supportedTypes = ['imageMessage', 'videoMessage', 'stickerMessage', 'documentMessage'];
             if (!supportedTypes.includes(type)) {
-                await sock.sendMessage(chatId, { text: '⚠️ Unsupported file type! Reply to image/video/gif/sticker/document' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'âš ï¸ Unsupported file type! Reply to image/video/gif/sticker/document' }, { quoted: message });
                 return;
             }
             await sock.sendMessage(chatId, { text: 'Uploading to cloud...' }, { quoted: message });
@@ -49,10 +49,10 @@ export default {
             const fileSizeMB = (stats.size / (1024 * 1024)).toFixed(2);
             const result = await uploadFile(tempPath);
             await sock.sendMessage(chatId, {
-                text: `✅ *Upload Successful!*\n\n` +
-                    `📊 *Service:* ${result.service}\n` +
-                    `📦 *Size:* ${fileSizeMB} MB\n` +
-                    `🔗 *URL:* ${result.url}\n\n` +
+                text: `âœ… *Upload Successful!*\n\n` +
+                    `ðŸ“Š *Service:* ${result.service}\n` +
+                    `ðŸ“¦ *Size:* ${fileSizeMB} MB\n` +
+                    `ðŸ”— *URL:* ${result.url}\n\n` +
                     `_Click the link to view/download_`
             }, { quoted: message });
             fs.unlinkSync(tempPath);
@@ -60,8 +60,12 @@ export default {
         catch (error) {
             console.error('Upload Error:', error);
             await sock.sendMessage(chatId, {
-                text: `❌ Upload failed!\n\nError: ${error.message}`
+                text: `âŒ Upload failed!\n\nError: ${error.message}`
             }, { quoted: message });
         }
     }
 };
+
+
+
+

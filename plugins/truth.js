@@ -1,9 +1,9 @@
-export default {
-    command: 'truth',
-    aliases: ['truthdare'],
-    category: 'games',
-    description: 'Get a random truth from the Shizo API.',
-    usage: '.truth',
+﻿export default {
+    command: 'حقيقة عشوائية',
+    aliases: ['truthdare', 'truth'],
+    category: 'ألعاب',
+    description: 'جلب ا عشوائي تروته فروم تهي سهيزو ابي.',
+    usage: '.تروته',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
@@ -21,8 +21,11 @@ export default {
         catch (error) {
             console.error('Error in truth command:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to get truth. Please try again later!'
+                text: 'âŒ Failed to get truth. Please try again later!'
             }, { quoted: message });
         }
     }
 };
+
+
+

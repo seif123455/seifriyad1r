@@ -1,4 +1,4 @@
-import store from '../lib/lightweight_store.js';
+﻿import store from '../lib/lightweight_store.js';
 const MONGO_URL = process.env.MONGO_URL;
 const POSTGRES_URL = process.env.POSTGRES_URL;
 const MYSQL_URL = process.env.MYSQL_URL;
@@ -23,11 +23,11 @@ async function saveUserNotes(userId, notes) {
     }
 }
 export default {
-    command: 'notes',
-    aliases: ['note'],
-    category: 'menu',
-    description: 'Store, view, and delete your personal notes',
-    usage: '.notes <add|all|del|delall> [text|ID]',
+    command: 'نوتيس',
+    aliases: ['note', 'notes'],
+    category: 'قوائم',
+    description: 'ستوري, عرض, اند حذف يوور بيرسونال ملاحظةس',
+    usage: '.ملاحظةس <إضافة|الل|ديل|ديلالل> [نص|معرف]',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const sender = message.key.participant || message.key.remoteJid;
@@ -35,22 +35,22 @@ export default {
             const action = args[0] ? args[0].toLowerCase() : null;
             const content = args.slice(1).join(" ").trim();
             const menuText = `
-╭───── *『 NOTES 』* ───◆
-┃ Store notes for later use
-┃ Storage: ${HAS_DB ? 'Database 🗄️' : 'Memory 📁'}
-┃
-┃ ● Add Note
-┃    .notes add your text here
-┃
-┃ ● Get All Notes
-┃    .notes all
-┃
-┃ ● Delete Note
-┃    .notes del noteID
-┃
-┃ ● Delete All Notes
-┃    .notes delall
-╰━━━━━━━━━━━━━━━━━──⊷`;
+â•­â”€â”€â”€â”€â”€ *ã€Ž NOTES ã€* â”€â”€â”€â—†
+â”ƒ Store notes for later use
+â”ƒ Storage: ${HAS_DB ? 'Database ðŸ—„ï¸' : 'Memory ðŸ“'}
+â”ƒ
+â”ƒ â— Add Note
+â”ƒ    .notes add your text here
+â”ƒ
+â”ƒ â— Get All Notes
+â”ƒ    .notes all
+â”ƒ
+â”ƒ â— Delete Note
+â”ƒ    .notes del noteID
+â”ƒ
+â”ƒ â— Delete All Notes
+â”ƒ    .notes delall
+â•°â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”€â”€âŠ·`;
             if (!action) {
                 return await sock.sendMessage(chatId, { text: menuText }, { quoted: message });
             }
@@ -65,7 +65,7 @@ export default {
                 userNotes.push({ id: newID, text: content, createdAt: Date.now() });
                 await saveUserNotes(sender, userNotes);
                 return await sock.sendMessage(chatId, {
-                    text: `✅ Note saved.\nID: ${newID}\nStorage: ${HAS_DB ? 'Database' : 'Memory'}`
+                    text: `âœ… Note saved.\nID: ${newID}\nStorage: ${HAS_DB ? 'Database' : 'Memory'}`
                 }, { quoted: message });
             }
             if (action === 'all') {
@@ -75,7 +75,7 @@ export default {
                 }
                 const list = userNotes.map((n) => `${n.id}. ${n.text}`).join("\n");
                 return await sock.sendMessage(chatId, {
-                    text: `*📝 Your Notes:*\n\n${list}\n\n_Total: ${userNotes.length} notes_`
+                    text: `*ðŸ“ Your Notes:*\n\n${list}\n\n_Total: ${userNotes.length} notes_`
                 }, { quoted: message });
             }
             if (action === 'del') {
@@ -88,7 +88,7 @@ export default {
                 }
                 const filteredNotes = userNotes.filter((n) => n.id !== id);
                 await saveUserNotes(sender, filteredNotes);
-                return await sock.sendMessage(chatId, { text: `*✅ Note ID ${id} deleted.*` }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: `*âœ… Note ID ${id} deleted.*` }, { quoted: message });
             }
             if (action === 'delall') {
                 const userNotes = await getUserNotes(sender);
@@ -96,13 +96,17 @@ export default {
                     return await sock.sendMessage(chatId, { text: "*You have no notes to delete.*" }, { quoted: message });
                 }
                 await saveUserNotes(sender, []);
-                return await sock.sendMessage(chatId, { text: "*✅ All notes deleted successfully.*" }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: "*âœ… All notes deleted successfully.*" }, { quoted: message });
             }
             return await sock.sendMessage(chatId, { text: menuText }, { quoted: message });
         }
         catch (err) {
             console.error("Notes Command Error:", err);
-            await sock.sendMessage(chatId, { text: "❌ Error in notes module." }, { quoted: message });
+            await sock.sendMessage(chatId, { text: "âŒ Error in notes module." }, { quoted: message });
         }
     }
 };
+
+
+
+

@@ -1,10 +1,10 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 export default {
-    command: 'tgstalk',
-    aliases: ['tguser', 'tginfo'],
+    command: 'تجستالك',
+    aliases: ['tguser', 'tginfo', 'tgstalk'],
     category: 'stalk',
-    description: 'Lookup Telegram channel or user',
-    usage: '.tgstalk <username>',
+    description: 'بحث تيليجرام قناة ور مستخدم',
+    usage: '.تجستالك <مستخدمنامي>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         if (!args.length) {
@@ -22,14 +22,14 @@ export default {
                 }
             });
             if (!data?.result) {
-                return await sock.sendMessage(chatId, { text: '❌ Telegram user/channel not found.' }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: 'âŒ Telegram user/channel not found.' }, { quoted: message });
             }
             const result = data.result;
             const profileImage = result.image_url || null;
-            const caption = `📱 *Telegram Info*\n\n` +
-                `👤 Title: ${result.title || 'N/A'}\n` +
-                `📝 Description: ${result.description || 'N/A'}\n` +
-                `🔗 Link: ${result.url || `https://t.me/${username}`}`;
+            const caption = `ðŸ“± *Telegram Info*\n\n` +
+                `ðŸ‘¤ Title: ${result.title || 'N/A'}\n` +
+                `ðŸ“ Description: ${result.description || 'N/A'}\n` +
+                `ðŸ”— Link: ${result.url || `https://t.me/${username}`}`;
             if (profileImage) {
                 await sock.sendMessage(chatId, { image: { url: profileImage }, caption }, { quoted: message });
             }
@@ -39,7 +39,11 @@ export default {
         }
         catch (err) {
             console.error('Telegram plugin error:', err);
-            await sock.sendMessage(chatId, { text: '❌ Failed to fetch Telegram info.' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ Failed to fetch Telegram info.' }, { quoted: message });
         }
     }
 };
+
+
+
+

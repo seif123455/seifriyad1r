@@ -1,4 +1,4 @@
-import yts from 'yt-search';
+﻿import yts from 'yt-search';
 import axios from 'axios';
 const DL_API = 'https://api.qasimdev.dpdns.org/api/loaderto/download';
 const API_KEY = 'xbps-install-Syu';
@@ -24,24 +24,24 @@ const downloadWithRetry = async (url, retries = 3) => {
     throw new Error('All download attempts failed');
 };
 export default {
-    command: 'play',
-    aliases: ['plays', 'music'],
-    category: 'music',
-    description: 'Search and download a song as MP3 from YouTube',
-    usage: '.play <song name>',
+    command: 'تشغيل أغنية',
+    aliases: ['plays', 'music', 'play'],
+    category: 'موسيقى',
+    description: 'بحث اند تحميل ا أغنية اس مب3 فروم يووتوبي',
+    usage: '.تشغيل <أغنية نامي>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const query = args.join(' ').trim();
         if (!query)
-            return sock.sendMessage(chatId, { text: '*Which song do you want to play?*\nUsage: .play <song name>' }, { quoted: message });
+            return sock.sendMessage(chatId, { text: '*Which song do you want to play?*\nUsage: .تشغيل <أغنية name>' }, { quoted: message });
         try {
-            await sock.sendMessage(chatId, { text: '🔍 *Searching...*' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'ðŸ” *Searching...*' }, { quoted: message });
             const { videos } = await yts(query);
             if (!videos?.length)
-                return sock.sendMessage(chatId, { text: '❌ *No results found!*' }, { quoted: message });
+                return sock.sendMessage(chatId, { text: 'âŒ *No results found!*' }, { quoted: message });
             const video = videos[0];
             await sock.sendMessage(chatId, {
-                text: `✅ *Found:* ${video.title}\n⏱️ ${video.timestamp}\n👤 ${video.author.name}\n\n⏳ *Downloading... (this may take up to 30s)*`
+                text: `âœ… *Found:* ${video.title}\nâ±ï¸ ${video.timestamp}\nðŸ‘¤ ${video.author.name}\n\nâ³ *Downloading... (this may take up to 30s)*`
             }, { quoted: message });
             const songData = await downloadWithRetry(video.url);
             let thumbnailBuffer;
@@ -57,7 +57,7 @@ export default {
                 contextInfo: {
                     externalAdReply: {
                         title: songData.title,
-                        body: `${video.author.name} • ${video.timestamp}`,
+                        body: `${video.author.name} â€¢ ${video.timestamp}`,
                         thumbnail: thumbnailBuffer,
                         mediaType: 2,
                         sourceUrl: video.url
@@ -72,7 +72,11 @@ export default {
                 : err.response?.status === 429
                     ? 'Rate limited. Wait a minute.'
                     : err.message;
-            await sock.sendMessage(chatId, { text: `❌ *Failed:* ${reason}` }, { quoted: message });
+            await sock.sendMessage(chatId, { text: `âŒ *Failed:* ${reason}` }, { quoted: message });
         }
     }
 };
+
+
+
+

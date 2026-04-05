@@ -1,9 +1,9 @@
-export default {
-    command: 'ping',
-    aliases: ['p', 'pong'],
-    category: 'general',
-    description: 'Check bot response time',
-    usage: '.ping',
+﻿export default {
+    command: 'Ø§Ø®ØªØ¨Ø§Ø± Ø§Ù„Ø³Ø±Ø¹Ø©',
+    aliases: ['p', 'pong', 'ping'],
+    category: 'Ø¹Ø§Ù…',
+    description: 'ØªØ­Ù‚Ù‚ Ø¨ÙˆØª Ø²Ù…Ù† Ø§Ù„Ø§Ø³ØªØ¬Ø§Ø¨Ø©',
+    usage: '.Ø¨ÙŠÙ†Ø¬',
     isPrefixless: true,
     async handler(sock, message, _args) {
         const start = Date.now();
@@ -13,8 +13,10 @@ export default {
         });
         const end = Date.now();
         await sock.sendMessage(chatId, {
-            text: `🏓 Pong!\nLatency: ${end - start}ms`,
+            text: `ðŸ“ Pong!\nLatency: ${end - start}ms`,
             edit: sent.key
         });
     }
 };
+
+

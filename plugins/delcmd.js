@@ -1,4 +1,4 @@
-import store from '../lib/lightweight_store.js';
+﻿import store from '../lib/lightweight_store.js';
 import fs from 'fs';
 import path from 'path';
 import { dataFile } from '../lib/paths.js';
@@ -38,11 +38,11 @@ async function saveStickerCommands(data) {
     }
 }
 export default {
-    command: 'delcmd',
-    aliases: ['removecmd'],
-    category: 'owner',
-    description: 'Delete a sticker command',
-    usage: '.delcmd <text>',
+    command: 'ديلكمد',
+    aliases: ['removecmd', 'delcmd'],
+    category: 'المالك',
+    description: '',
+    usage: '.ديلكمد <نص>',
     ownerOnly: true,
     async handler(sock, message, args, context) {
         const { chatId } = context;
@@ -55,7 +55,7 @@ export default {
         }
         if (!hash) {
             return await sock.sendMessage(chatId, {
-                text: '✳️ Please enter the command name or reply to a sticker'
+                text: 'âœ³ï¸ Please enter the command name or reply to a sticker'
             }, { quoted: message });
         }
         const stickers = await getStickerCommands();
@@ -67,18 +67,22 @@ export default {
         }
         if (stickers[hash] && stickers[hash].locked) {
             return await sock.sendMessage(chatId, {
-                text: '✳️ You cannot delete this command'
+                text: 'âœ³ï¸ You cannot delete this command'
             }, { quoted: message });
         }
         if (!stickers[hash]) {
             return await sock.sendMessage(chatId, {
-                text: '⚠️ Command not found'
+                text: 'âš ï¸ Command not found'
             }, { quoted: message });
         }
         delete stickers[hash];
         await saveStickerCommands(stickers);
         await sock.sendMessage(chatId, {
-            text: '✅ Command deleted'
+            text: 'âœ… Command deleted'
         }, { quoted: message });
     }
 };
+
+
+
+

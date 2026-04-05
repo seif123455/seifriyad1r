@@ -1,4 +1,4 @@
-import config from '../config.js';
+﻿import config from '../config.js';
 import { igdl } from 'ruhend-scraper';
 import axios from 'axios';
 import { exec } from 'child_process';
@@ -56,7 +56,7 @@ async function _convertBufferToStickerWebp(inputBuffer, isAnimated, cropSquare) 
     const json = {
         'sticker-pack-id': crypto.randomBytes(32).toString('hex'),
         'sticker-pack-name': config.packname || 'MegaBot',
-        'emojis': ['📸']
+        'emojis': ['ðŸ“¸']
     };
     const exifAttr = Buffer.from([0x49, 0x49, 0x2A, 0x00, 0x08, 0x00, 0x00, 0x00, 0x01, 0x00, 0x41, 0x57, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x16, 0x00, 0x00, 0x00]);
     const jsonBuffer = Buffer.from(JSON.stringify(json), 'utf8');
@@ -84,11 +84,11 @@ async function fetchBufferFromUrl(url) {
     }
 }
 export default {
-    command: 'igsc',
-    aliases: ['igstickercrop', 'instacrop'],
-    category: 'stickers',
-    description: 'Convert Instagram post/reel to cropped sticker',
-    usage: '.igsc <instagram URL>',
+    command: 'يجسك',
+    aliases: ['igstickercrop', 'instacrop', 'igsc'],
+    category: 'ملصقات',
+    description: 'تحويل ينستاجرام بوست/رييل تو كروببيد ملصق',
+    usage: '.يجسك <ينستاجرام رابط>',
     async handler(sock, message, args, context) {
         const { chatId, channelInfo } = context;
         try {
@@ -101,11 +101,11 @@ export default {
                 }, { quoted: message });
                 return;
             }
-            await sock.sendMessage(chatId, { react: { text: '🔄', key: message.key } });
+            await sock.sendMessage(chatId, { react: { text: 'ðŸ”„', key: message.key } });
             const downloadData = await igdl(urlMatch[0]).catch(() => null);
             if (!downloadData || !downloadData.data) {
                 await sock.sendMessage(chatId, {
-                    text: '❌ Failed to fetch media from Instagram link.',
+                    text: 'âŒ Failed to fetch media from Instagram link.',
                     ...channelInfo
                 }, { quoted: message });
                 return;
@@ -121,7 +121,7 @@ export default {
             }
             if (items.length === 0) {
                 await sock.sendMessage(chatId, {
-                    text: '❌ No media found at the provided link.',
+                    text: 'âŒ No media found at the provided link.',
                     ...channelInfo
                 }, { quoted: message });
                 return;
@@ -162,3 +162,7 @@ export default {
         }
     }
 };
+
+
+
+

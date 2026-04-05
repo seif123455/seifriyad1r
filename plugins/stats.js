@@ -1,12 +1,12 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
@@ -14,11 +14,11 @@
  *****************************************************************************/
 import CommandHandler from '../lib/commandHandler.js';
 export default {
-    command: 'perf',
-    aliases: ['metrics', 'diagnostics'],
-    category: 'general',
-    description: 'View command performance and error metrics',
-    usage: '.perf',
+    command: 'بيرف',
+    aliases: ['metrics', 'diagnostics', 'perf'],
+    category: 'عام',
+    description: 'عرض كومماند بيرفورمانكي اند خطأ ميتريكس',
+    usage: '.بيرف',
     ownerOnly: true,
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -27,13 +27,13 @@ export default {
             if (!report || report.length === 0) {
                 return await sock.sendMessage(chatId, { text: '_No performance data collected yet._' }, { quoted: message });
             }
-            let text = `📊 *PLUGINS PERFORMANCE*\n\n`;
+            let text = `ðŸ“Š *PLUGINS PERFORMANCE*\n\n`;
             report.forEach((cmd, index) => {
-                const errorText = cmd.errors > 0 ? `❗ Errors: ${cmd.errors}` : `✅ Smooth`;
+                const errorText = cmd.errors > 0 ? `â— Errors: ${cmd.errors}` : `âœ… Smooth`;
                 text += `${index + 1}. *${cmd.command.toUpperCase()}*\n`;
-                text += `   ↳ Calls: ${cmd.usage}\n`;
-                text += `   ↳ Latency: ${cmd.average_speed}\n`;
-                text += `   ↳ Status: ${errorText}\n\n`;
+                text += `   â†³ Calls: ${cmd.usage}\n`;
+                text += `   â†³ Latency: ${cmd.average_speed}\n`;
+                text += `   â†³ Status: ${errorText}\n\n`;
             });
             await sock.sendMessage(chatId, {
                 text: text.trim(),
@@ -50,21 +50,24 @@ export default {
         }
         catch (error) {
             console.error('Error in perf command:', error);
-            await sock.sendMessage(chatId, { text: '❌ Failed to fetch performance metrics.' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ Failed to fetch performance metrics.' }, { quoted: message });
         }
     }
 };
 /*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
  *                                                                           *
  *****************************************************************************/
+
+
+

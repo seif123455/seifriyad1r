@@ -1,12 +1,12 @@
-import { handleWelcome } from '../lib/welcome.js';
+﻿import { handleWelcome } from '../lib/welcome.js';
 import { isWelcomeOn, getWelcome } from '../lib/index.js';
 
 export default {
-    command: 'ترحيب',
-    aliases: ['welcome', 'setwelcome', 'ترحاب'],
-    category: 'admin',
-    description: 'إعداد رسالة الترحيب للمجموعة',
-    usage: '!ترحيب [on/off/رسالة]',
+    command: 'ØªØ±Ø­ÙŠØ¨',
+    aliases: ['welcome', 'setwelcome', 'ØªØ±Ø­Ø§Ø¨'],
+    category: 'Ø§Ù„Ù…Ø´Ø±ÙÙˆÙ†',
+    description: 'Ø¥Ø¹Ø¯Ø§Ø¯ Ø±Ø³Ø§Ù„Ø© Ø§Ù„ØªØ±Ø­ÙŠØ¨ Ù„Ù„Ù…Ø¬Ù…ÙˆØ¹Ø©',
+    usage: '!ØªØ±Ø­ÙŠØ¨ [ÙˆÙ†/ÙˆÙÙ/Ø±Ø³Ø§Ù„Ø©]',
     groupOnly: true,
     adminOnly: true,
     
@@ -24,15 +24,15 @@ async function handleJoinEvent(sock, id, participants) {
     const customMessage = await getWelcome(id);
     const groupMetadata = await sock.groupMetadata(id);
     const groupName = groupMetadata.subject;
-    const groupDesc = groupMetadata.desc || 'لا يوجد وصف';
+    const groupDesc = groupMetadata.desc || 'Ù„Ø§ ÙŠÙˆØ¬Ø¯ ÙˆØµÙ';
     
     const channelInfo = {
         contextInfo: {
             forwardingScore: 1,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
-                newsletterJid: '201144534147@newsletter',
-                newsletterName: 'CRAZY-SEIF',
+                newsletterJid: '01144534147@newsletter',
+                newsletterName: 'Crazy Seif',
                 serverMessageId: -1
             }
         }
@@ -56,7 +56,7 @@ async function handleJoinEvent(sock, id, participants) {
                     }
                 }
             } catch (nameError) {
-                console.log('لا يمكن جلب الاسم، استخدام رقم الهاتف');
+                console.log('Ù„Ø§ ÙŠÙ…ÙƒÙ† Ø¬Ù„Ø¨ Ø§Ù„Ø§Ø³Ù…ØŒ Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø±Ù‚Ù… Ø§Ù„Ù‡Ø§ØªÙ');
             }
             
             let finalMessage;
@@ -78,14 +78,14 @@ async function handleJoinEvent(sock, id, participants) {
                     hour12: true
                 });
                 
-                finalMessage = `╭╼━≪•🎉 عضو جديد •≫━╾╮\n` +
-                    `┃ مرحباً بك @${displayName} 👋\n` +
-                    `┃ عدد الأعضاء: ${groupMetadata.participants.length}\n` +
-                    `┃ الوقت: ${timeString} ⏰\n` +
-                    `╰━━━━━━━━━━━━━━━╯\n\n` +
-                    `*@${displayName}* اهلاً بك في *${groupName}*! 🎉\n\n` +
-                    `*📝 وصف المجموعة:*\n${groupDesc}\n\n` +
-                    `> 🔥 *CRAZY-SEIF BOT*`;
+                finalMessage = `â•­â•¼â”â‰ªâ€¢ðŸŽ‰ Ø¹Ø¶Ùˆ Ø¬Ø¯ÙŠØ¯ â€¢â‰«â”â•¾â•®\n` +
+                    `â”ƒ Ù…Ø±Ø­Ø¨Ø§Ù‹ Ø¨Ùƒ @${displayName} ðŸ‘‹\n` +
+                    `â”ƒ Ø¹Ø¯Ø¯ Ø§Ù„Ø£Ø¹Ø¶Ø§Ø¡: ${groupMetadata.participants.length}\n` +
+                    `â”ƒ Ø§Ù„ÙˆÙ‚Øª: ${timeString} â°\n` +
+                    `â•°â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â•¯\n\n` +
+                    `*@${displayName}* Ø§Ù‡Ù„Ø§Ù‹ Ø¨Ùƒ ÙÙŠ *${groupName}*! ðŸŽ‰\n\n` +
+                    `*ðŸ“ ÙˆØµÙ Ø§Ù„Ù…Ø¬Ù…ÙˆØ¹Ø©:*\n${groupDesc}\n\n` +
+                    `> ðŸ”¥ *Crazy Seif BOT*`;
             }
             
             try {
@@ -96,7 +96,7 @@ async function handleJoinEvent(sock, id, participants) {
                         profilePicUrl = profilePic;
                     }
                 } catch (profileError) {
-                    console.log('لا يمكن جلب الصورة الشخصية، استخدام صورة افتراضية');
+                    console.log('Ù„Ø§ ÙŠÙ…ÙƒÙ† Ø¬Ù„Ø¨ Ø§Ù„ØµÙˆØ±Ø© Ø§Ù„Ø´Ø®ØµÙŠØ©ØŒ Ø§Ø³ØªØ®Ø¯Ø§Ù… ØµÙˆØ±Ø© Ø§ÙØªØ±Ø§Ø¶ÙŠØ©');
                 }
                 
                 const apiUrl = `https://api.some-random-api.com/welcome/img/2/gaming3?type=join&textcolor=green&username=${encodeURIComponent(displayName)}&guildName=${encodeURIComponent(groupName)}&memberCount=${groupMetadata.participants.length}&avatar=${encodeURIComponent(profilePicUrl)}`;
@@ -113,7 +113,7 @@ async function handleJoinEvent(sock, id, participants) {
                     continue;
                 }
             } catch (imageError) {
-                console.log('فشل إنشاء الصورة، استخدام النص العادي');
+                console.log('ÙØ´Ù„ Ø¥Ù†Ø´Ø§Ø¡ Ø§Ù„ØµÙˆØ±Ø©ØŒ Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø§Ù„Ù†Øµ Ø§Ù„Ø¹Ø§Ø¯ÙŠ');
             }
             
             await sock.sendMessage(id, {
@@ -123,7 +123,7 @@ async function handleJoinEvent(sock, id, participants) {
             });
             
         } catch (error) {
-            console.error('خطأ في إرسال رسالة الترحيب:', error);
+            console.error('Ø®Ø·Ø£ ÙÙŠ Ø¥Ø±Ø³Ø§Ù„ Ø±Ø³Ø§Ù„Ø© Ø§Ù„ØªØ±Ø­ÙŠØ¨:', error);
             
             const participantString = typeof participant === 'string' ? participant : (participant.id || participant.toString());
             const user = participantString.split('@')[0];
@@ -135,7 +135,7 @@ async function handleJoinEvent(sock, id, participants) {
                     .replace(/{group}/g, groupName)
                     .replace(/{description}/g, groupDesc);
             } else {
-                fallbackMessage = `🎉 مرحباً @${user} في ${groupName}! 🎉\n🔥 CRAZY-SEIF BOT`;
+                fallbackMessage = `ðŸŽ‰ Ù…Ø±Ø­Ø¨Ø§Ù‹ @${user} ÙÙŠ ${groupName}! ðŸŽ‰\nðŸ”¥ Crazy Seif BOT`;
             }
             
             await sock.sendMessage(id, {
@@ -148,3 +148,4 @@ async function handleJoinEvent(sock, id, participants) {
 }
 
 export { handleJoinEvent };
+

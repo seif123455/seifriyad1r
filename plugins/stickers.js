@@ -1,10 +1,10 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 export default {
-    command: 'stickers',
-    aliases: ['stickersearch', 'ssticker'],
-    category: 'stickers',
-    description: 'Search for stickers using Tenor',
-    usage: '.stickers <search term>',
+    command: 'بحث ملصقات',
+    aliases: ['stickersearch', 'ssticker', 'stickers'],
+    category: 'ملصقات',
+    description: 'بحث فور ملصقس وسينج تينور',
+    usage: '.ملصقس <بحث تيرم>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const text = args?.join(' ')?.trim();
@@ -15,7 +15,7 @@ export default {
             await sock.sendMessage(chatId, { text: 'Searching for stickers...' }, { quoted: message });
             const { data } = await axios.get(`https://g.tenor.com/v1/search?q=${encodeURIComponent(text)}&key=LIVDSRZULELA&limit=8`);
             if (!data?.results?.length) {
-                return await sock.sendMessage(chatId, { text: '❌ No stickers found.' }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: 'âŒ No stickers found.' }, { quoted: message });
             }
             const limit = Math.min(data.results.length, 5);
             for (let i = 0; i < limit; i++) {
@@ -27,7 +27,11 @@ export default {
         }
         catch (error) {
             console.error('StickerSearch plugin error:', error);
-            await sock.sendMessage(chatId, { text: '❌ Failed to fetch stickers.' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ Failed to fetch stickers.' }, { quoted: message });
         }
     }
 };
+
+
+
+

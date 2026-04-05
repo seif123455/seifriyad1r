@@ -1,24 +1,24 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import { exec } from 'child_process';
 import path from 'path';
 export default {
-    command: 'emojimix',
-    aliases: ['mixemoji', 'emix'],
-    category: 'stickers',
-    description: 'Mix two emojis into a sticker',
-    usage: '.emojimix 😎+🥰',
+    command: 'يموجيميكس',
+    aliases: ['mixemoji', 'emix', 'emojimix'],
+    category: 'ملصقات',
+    description: '',
+    usage: '.يموجيميكس ðŸ˜Ž+ðŸ¥°',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
             if (!args[0]) {
                 await sock.sendMessage(chatId, {
-                    text: '🎴 Example: .emojimix 😎+🥰'
+                    text: 'ðŸŽ´ Example: .emojimix ðŸ˜Ž+ðŸ¥°'
                 }, { quoted: message });
                 return;
             }
             if (!args[0].includes('+')) {
                 await sock.sendMessage(chatId, {
-                    text: '✳️ Separate the emoji with a *+* sign\n\n📌 Example:\n.emojimix 😎+🥰'
+                    text: 'âœ³ï¸ Separate the emoji with a *+* sign\n\nðŸ“Œ Example:\n.emojimix ðŸ˜Ž+ðŸ¥°'
                 }, { quoted: message });
                 return;
             }
@@ -32,7 +32,7 @@ export default {
             const data = await response.json();
             if (!data.results || data.results.length === 0) {
                 await sock.sendMessage(chatId, {
-                    text: '❌ These emojis cannot be mixed! Try different ones.'
+                    text: 'âŒ These emojis cannot be mixed! Try different ones.'
                 }, { quoted: message });
                 return;
             }
@@ -80,9 +80,12 @@ export default {
         catch (error) {
             console.error('Error in emojimix command:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to mix emojis!\n\n' +
-                    '📌 Example:\n.emojimix 😎+🥰'
+                text: 'âŒ Failed to mix emojis!\n\n' +
+                    'ðŸ“Œ Example:\n.emojimix ðŸ˜Ž+ðŸ¥°'
             }, { quoted: message });
         }
     }
 };
+
+
+

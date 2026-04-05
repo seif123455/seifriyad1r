@@ -1,4 +1,4 @@
-import sharp from 'sharp';
+﻿import sharp from 'sharp';
 import fs from 'fs';
 import fsPromises from 'fs/promises';
 import path from 'path';
@@ -18,17 +18,17 @@ const scheduleFileDeletion = (filePath) => {
     }, 10000); // 10 seconds
 };
 export default {
-    command: 's2img',
-    aliases: ['simage', 'stoimg'],
-    category: 'stickers',
-    description: 'Convert a sticker to an image',
-    usage: '.s2img (reply to a sticker)',
+    command: 'س2يمج',
+    aliases: ['simage', 'stoimg', 's2img'],
+    category: 'ملصقات',
+    description: 'تحويل ا ملصق تو ان صورة',
+    usage: '.س2يمج (رد تو ا ملصق)',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
             const quotedMessage = message.message?.extendedTextMessage?.contextInfo?.quotedMessage;
             if (!quotedMessage?.stickerMessage) {
-                await sock.sendMessage(chatId, { text: '⚠️ Reply to a sticker with .simage to convert it.' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'âš ï¸ Reply to a sticker with .simage to convert it.' }, { quoted: message });
                 return;
             }
             const stickerFilePath = path.join(tempDir, `sticker_${Date.now()}.webp`);
@@ -40,13 +40,17 @@ export default {
             await fsPromises.writeFile(stickerFilePath, buffer);
             await sharp(stickerFilePath).toFormat('png').toFile(outputImagePath);
             const imageBuffer = await fsPromises.readFile(outputImagePath);
-            await sock.sendMessage(chatId, { image: imageBuffer, caption: '✨ Here is the converted image!' }, { quoted: message });
+            await sock.sendMessage(chatId, { image: imageBuffer, caption: 'âœ¨ Here is the converted image!' }, { quoted: message });
             scheduleFileDeletion(stickerFilePath);
             scheduleFileDeletion(outputImagePath);
         }
         catch (error) {
             console.error('SImage Command Error:', error);
-            await sock.sendMessage(chatId, { text: '❌ An error occurred while converting the sticker.' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ An error occurred while converting the sticker.' }, { quoted: message });
         }
     }
 };
+
+
+
+

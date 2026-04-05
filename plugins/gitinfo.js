@@ -1,10 +1,10 @@
-import simpleGit from 'simple-git';
+﻿import simpleGit from 'simple-git';
 export default {
-    command: 'gitinfo',
-    aliases: ['infogit'],
-    category: 'owner',
-    description: 'Show detailed git repository information',
-    usage: '.gitinfo',
+    command: 'جيتينفو',
+    aliases: ['infogit', 'gitinfo'],
+    category: 'المالك',
+    description: 'عرض ديتايليد جيت ريبوسيتوري معلوماترماتيون',
+    usage: '.جيتمعلومات',
     ownerOnly: true,
     async handler(sock, message) {
         const chatId = message.key.remoteJid;
@@ -12,7 +12,7 @@ export default {
         try {
             const isRepo = await git.checkIsRepo();
             if (!isRepo) {
-                return sock.sendMessage(chatId, { text: '❌ This project is not a git repository.' });
+                return sock.sendMessage(chatId, { text: 'âŒ This project is not a git repository.' });
             }
             const status = await git.status();
             const branch = status.current || 'unknown';
@@ -23,21 +23,25 @@ export default {
             const modifiedCount = status.files.length;
             const remotes = await git.getRemotes(true);
             const remoteText = remotes.length
-                ? remotes.map((r) => `• ${r.name}: ${r.refs.fetch}`).join('\n')
+                ? remotes.map((r) => `â€¢ ${r.name}: ${r.refs.fetch}`).join('\n')
                 : 'None';
-            const warning = dirty ? '⚠️ Warning: Working tree has uncommitted changes!' : '';
-            const text = `📦 *Git Repository Info*\n\n` +
-                `🌿 Branch: ${branch}\n` +
-                `🔖 Commit: ${commitHash}\n` +
-                `🧼 Working tree: ${dirty ? 'Dirty' : 'Clean'}\n` +
+            const warning = dirty ? 'âš ï¸ Warning: Working tree has uncommitted changes!' : '';
+            const text = `ðŸ“¦ *Git Repository Info*\n\n` +
+                `ðŸŒ¿ Branch: ${branch}\n` +
+                `ðŸ”– Commit: ${commitHash}\n` +
+                `ðŸ§¼ Working tree: ${dirty ? 'Dirty' : 'Clean'}\n` +
                 `${dirty ? `${warning }\n\n` : ''}` +
-                `📊 Ahead: ${ahead}, Behind: ${behind}\n` +
-                `📁 Modified/Untracked files: ${modifiedCount}\n\n` +
-                `🔗 Remotes:\n${remoteText}`;
+                `ðŸ“Š Ahead: ${ahead}, Behind: ${behind}\n` +
+                `ðŸ“ Modified/Untracked files: ${modifiedCount}\n\n` +
+                `ðŸ”— Remotes:\n${remoteText}`;
             await sock.sendMessage(chatId, { text });
         }
         catch (err) {
-            await sock.sendMessage(chatId, { text: `❌ Git error: ${err.message}` });
+            await sock.sendMessage(chatId, { text: `âŒ Git error: ${err.message}` });
         }
     }
 };
+
+
+
+

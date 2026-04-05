@@ -1,17 +1,17 @@
-import { join } from 'path';
+﻿import { join } from 'path';
 import { unlinkSync, readdirSync } from 'fs';
 export default {
-    command: 'delplugin',
-    aliases: ['deleteplugin', 'rmplugin'],
-    category: 'owner',
-    description: 'Delete a plugin by name (owner only)',
-    usage: '.delplugin <plugin_name>',
+    command: 'ديلبلوجين',
+    aliases: ['deleteplugin', 'rmplugin', 'delplugin'],
+    category: 'المالك',
+    description: '',
+    usage: '.ديلبلوجين <بلوجين_نامي>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
             if (!args || !args[0]) {
                 return await sock.sendMessage(chatId, {
-                    text: `*🌟Example usage:*\n.delplugin main-menu`
+                    text: `*ðŸŒŸExample usage:*\n.delplugin main-menu`
                 }, { quoted: message });
             }
             const pluginDir = join(process.cwd(), 'plugins');
@@ -19,17 +19,20 @@ export default {
             const pluginNames = pluginFiles.map(f => f.replace('.js', ''));
             if (!pluginNames.includes(args[0])) {
                 return await sock.sendMessage(chatId, {
-                    text: `🗃️ This plugin doesn't exist!\n\nAvailable plugins:\n${pluginNames.join('\n')}`
+                    text: `ðŸ—ƒï¸ This plugin doesn't exist!\n\nAvailable plugins:\n${pluginNames.join('\n')}`
                 }, { quoted: message });
             }
             const filePath = join(pluginDir, `${args[0] }.js`);
             unlinkSync(filePath);
-            await sock.sendMessage(chatId, { text: `⚠️ Plugin "${args[0]}.js" has been deleted.` }, { quoted: message });
+            await sock.sendMessage(chatId, { text: `âš ï¸ Plugin "${args[0]}.js" has been deleted.` }, { quoted: message });
         }
         catch (err) {
             console.error('rmplugin error:', err);
-            await sock.sendMessage(chatId, { text: `❌ Failed to delete plugin: ${err.message}`
+            await sock.sendMessage(chatId, { text: `âŒ Failed to delete plugin: ${err.message}`
             }, { quoted: message });
         }
     }
 };
+
+
+

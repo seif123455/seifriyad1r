@@ -1,29 +1,29 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 const OMDB_KEY = 'trilogy';
 export default {
-    command: 'movie',
-    aliases: ['film', 'bollywood', 'omdb', 'imdb'],
-    category: 'info',
-    description: 'Search movie info, ratings, cast, plot',
-    usage: '.movie <movie name>\n.movie Pathaan\n.movie Jawan 2023',
+    command: 'موفيي',
+    aliases: ['film', 'bollywood', 'omdb', 'imdb', 'movie'],
+    category: 'معلومات',
+    description: 'بحث موفيي معلومات, راتينجس, كاست, بلوت',
+    usage: '.موفيي <موفيي نامي>\ن.موفيي باتهاان\ن.موفيي جاوان 2023',
     async handler(sock, message, args, context) {
         const { chatId, channelInfo } = context;
         const input = args.join(' ').trim();
         if (!input) {
             return await sock.sendMessage(chatId, {
-                text: `🎬 *Movie Info*\n\n` +
+                text: `ðŸŽ¬ *Movie Info*\n\n` +
                     `*Usage:* \`.movie <name>\`\n\n` +
                     `*Examples:*\n` +
-                    `• \`.movie Pathaan\`\n` +
-                    `• \`.movie Jawan 2023\`\n` +
-                    `• \`.movie Avengers Endgame\`\n` +
-                    `• \`.movie RRR\`\n` +
-                    `• \`.movie Black Panther\`\n\n` +
+                    `â€¢ \`.movie Pathaan\`\n` +
+                    `â€¢ \`.movie Jawan 2023\`\n` +
+                    `â€¢ \`.movie Avengers Endgame\`\n` +
+                    `â€¢ \`.movie RRR\`\n` +
+                    `â€¢ \`.movie Black Panther\`\n\n` +
                     `Works for Bollywood, Hollywood, and all languages!`,
                 ...channelInfo
             }, { quoted: message });
         }
-        await sock.sendMessage(chatId, { text: `🔍 Searching *${input}*...`, ...channelInfo }, { quoted: message });
+        await sock.sendMessage(chatId, { text: `ðŸ” Searching *${input}*...`, ...channelInfo }, { quoted: message });
         try {
             // Try exact title first, then search
             const year = input.match(/\b(19|20)\d{2}\b/)?.[0];
@@ -45,33 +45,36 @@ export default {
             }
             if (data.Response === 'False') {
                 return await sock.sendMessage(chatId, {
-                    text: `❌ Movie not found: *${input}*`,
+                    text: `âŒ Movie not found: *${input}*`,
                     ...channelInfo
                 }, { quoted: message });
             }
-            const ratings = (data.Ratings || []).map((r) => `• ${r.Source}: *${r.Value}*`).join('\n');
+            const ratings = (data.Ratings || []).map((r) => `â€¢ ${r.Source}: *${r.Value}*`).join('\n');
             const imdbStars = data.imdbRating !== 'N/A'
-                ? `${'⭐'.repeat(Math.round(parseFloat(data.imdbRating) / 2)) } (${data.imdbRating}/10)`
+                ? `${'â­'.repeat(Math.round(parseFloat(data.imdbRating) / 2)) } (${data.imdbRating}/10)`
                 : 'N/A';
-            const text = `🎬 *${data.Title}* (${data.Year})\n\n` +
-                `🎭 *Genre:* ${data.Genre}\n` +
-                `🌍 *Language:* ${data.Language}\n` +
-                `🎬 *Director:* ${data.Director}\n` +
-                `🎭 *Cast:* ${data.Actors}\n` +
-                `⏱️ *Runtime:* ${data.Runtime}\n` +
-                `🏆 *Awards:* ${data.Awards}\n\n` +
+            const text = `ðŸŽ¬ *${data.Title}* (${data.Year})\n\n` +
+                `ðŸŽ­ *Genre:* ${data.Genre}\n` +
+                `ðŸŒ *Language:* ${data.Language}\n` +
+                `ðŸŽ¬ *Director:* ${data.Director}\n` +
+                `ðŸŽ­ *Cast:* ${data.Actors}\n` +
+                `â±ï¸ *Runtime:* ${data.Runtime}\n` +
+                `ðŸ† *Awards:* ${data.Awards}\n\n` +
                 `${imdbStars}\n` +
                 `${ratings}\n\n` +
-                `📝 *Plot:*\n${data.Plot}\n\n${ 
-                data.BoxOffice && data.BoxOffice !== 'N/A' ? `💰 *Box Office:* ${data.BoxOffice}\n` : '' 
-                }🔗 imdb.com/title/${data.imdbID}`;
+                `ðŸ“ *Plot:*\n${data.Plot}\n\n${ 
+                data.BoxOffice && data.BoxOffice !== 'N/A' ? `ðŸ’° *Box Office:* ${data.BoxOffice}\n` : '' 
+                }ðŸ”— imdb.com/title/${data.imdbID}`;
             await sock.sendMessage(chatId, { text, ...channelInfo }, { quoted: message });
         }
         catch (error) {
             await sock.sendMessage(chatId, {
-                text: `❌ Failed: ${error.message}`,
+                text: `âŒ Failed: ${error.message}`,
                 ...channelInfo
             }, { quoted: message });
         }
     }
 };
+
+
+

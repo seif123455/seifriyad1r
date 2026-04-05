@@ -1,23 +1,23 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
  *                                                                           *
  *****************************************************************************/
 export default {
-    command: 'add',
-    aliases: ['invite', 'gcadd', 'addgc'],
-    category: 'admin',
-    description: 'Add a user to the group',
-    usage: '.add <number> or reply to vcard/message',
+    command: 'ادد',
+    aliases: ['invite', 'gcadd', 'addgc', 'add'],
+    category: 'المشرفون',
+    description: 'إضافة ا مستخدم تو تهي مجموعة',
+    usage: '.إضافة <رقم> ور رد تو فكارد/رسالة',
     groupOnly: true,
     adminOnly: true,
     async handler(sock, message, args, context) {
@@ -57,14 +57,14 @@ export default {
         }
         if (!targetNumber) {
             return await sock.sendMessage(chatId, {
-                text: `❌ *Please provide a number to add!*
+                text: `âŒ *Please provide a number to add!*
 
 *Usage:*
-• \`.add 923051234567\`
-• \`.add +923051234567\`
-• \`.add 92 305 1234567\`
-• Reply to a vcard with \`.add\`
-• Reply to a message with \`.add\``,
+â€¢ \`.add 923051234567\`
+â€¢ \`.add +923051234567\`
+â€¢ \`.add 92 305 1234567\`
+â€¢ Reply to a vcard with \`.add\`
+â€¢ Reply to a message with \`.add\``,
                 ...channelInfo
             }, { quoted: message });
         }
@@ -72,7 +72,7 @@ export default {
             !targetNumber.startsWith('4') && !targetNumber.startsWith('5') && !targetNumber.startsWith('6') &&
             !targetNumber.startsWith('7') && !targetNumber.startsWith('8') && !targetNumber.startsWith('9')) {
             return await sock.sendMessage(chatId, {
-                text: '❌ *Invalid number format!*\n\nPlease include the country code.\nExample: 923051234567',
+                text: 'âŒ *Invalid number format!*\n\nPlease include the country code.\nExample: 923051234567',
                 ...channelInfo
             }, { quoted: message });
         }
@@ -82,33 +82,33 @@ export default {
             const participants = groupMetadata.participants.map((p) => p.id);
             if (participants.includes(targetJid)) {
                 return await sock.sendMessage(chatId, {
-                    text: `⚠️ *User is already in the group!*\n\n${targetNumber}`,
+                    text: `âš ï¸ *User is already in the group!*\n\n${targetNumber}`,
                     ...channelInfo
                 }, { quoted: message });
             }
             const result = await sock.groupParticipantsUpdate(chatId, [targetJid], 'add');
             if (result[0].status === '200') {
                 await sock.sendMessage(chatId, {
-                    text: `✅ *Successfully added!*\n\n@${targetNumber}`,
+                    text: `âœ… *Successfully added!*\n\n@${targetNumber}`,
                     mentions: [targetJid],
                     ...channelInfo
                 }, { quoted: message });
             }
             else if (result[0].status === '403') {
                 await sock.sendMessage(chatId, {
-                    text: `❌ *Failed to add user!*\n\n*Reason:* User has privacy settings that prevent being added to groups.\n\n*Solution:* Send them the group invite link.`,
+                    text: `âŒ *Failed to add user!*\n\n*Reason:* User has privacy settings that prevent being added to groups.\n\n*Solution:* Send them the group invite link.`,
                     ...channelInfo
                 }, { quoted: message });
             }
             else if (result[0].status === '408') {
                 await sock.sendMessage(chatId, {
-                    text: `⚠️ *Invite sent!*\n\nUser needs to accept the invitation to join.`,
+                    text: `âš ï¸ *Invite sent!*\n\nUser needs to accept the invitation to join.`,
                     ...channelInfo
                 }, { quoted: message });
             }
             else {
                 await sock.sendMessage(chatId, {
-                    text: `❌ *Failed to add user!*\n\n*Status:* ${result[0].status}\n\nThe user may have blocked the bot or changed their privacy settings.`,
+                    text: `âŒ *Failed to add user!*\n\n*Status:* ${result[0].status}\n\nThe user may have blocked the bot or changed their privacy settings.`,
                     ...channelInfo
                 }, { quoted: message });
             }
@@ -116,7 +116,7 @@ export default {
         catch (error) {
             console.error('Add command error:', error);
             await sock.sendMessage(chatId, {
-                text: `❌ *Error adding user!*\n\n${error.message}`,
+                text: `âŒ *Error adding user!*\n\n${error.message}`,
                 ...channelInfo
             }, { quoted: message });
         }
@@ -124,15 +124,19 @@ export default {
 };
 /*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
  *                                                                           *
  *****************************************************************************/
+
+
+
+

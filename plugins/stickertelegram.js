@@ -1,28 +1,28 @@
-const delay = (time) => new Promise(res => setTimeout(res, time));
+﻿const delay = (time) => new Promise(res => setTimeout(res, time));
 import fs from 'fs';
 import path from 'path';
 import webp from 'node-webpmux';
 import crypto from 'crypto';
 import { exec } from 'child_process';
 export default {
-    command: 'tgstk',
-    aliases: ['telegram', 'tgsticker'],
-    category: 'stickers',
-    description: 'Download stickers from Telegram',
-    usage: '.tgstk <telegram sticker URL>',
+    command: 'تجستك',
+    aliases: ['telegram', 'tgsticker', 'tgstk'],
+    category: 'ملصقات',
+    description: 'تحميل ملصقس فروم تيليجرام',
+    usage: '.تجستك <تيليجرام ملصق رابط>',
     async handler(sock, message, args, context) {
         const { chatId, config, channelInfo } = context;
         try {
             if (!args[0]) {
                 await sock.sendMessage(chatId, {
-                    text: '⚠️ Please enter the Telegram sticker URL!\n\nExample: .tgstk https://t.me/addstickers/Porcientoreal',
+                    text: 'âš ï¸ Please enter the Telegram sticker URL!\n\nExample: .tgstk https://t.me/addstickers/Porcientoreal',
                     ...channelInfo
                 }, { quoted: message });
                 return;
             }
             if (!args[0].match(/(https:\/\/t.me\/addstickers\/)/gi)) {
                 await sock.sendMessage(chatId, {
-                    text: '❌ Invalid URL! Make sure it\'s a Telegram sticker URL.',
+                    text: 'âŒ Invalid URL! Make sure it\'s a Telegram sticker URL.',
                     ...channelInfo
                 }, { quoted: message });
                 return;
@@ -45,7 +45,7 @@ export default {
                     throw new Error('Invalid sticker pack or API response');
                 }
                 await sock.sendMessage(chatId, {
-                    text: `📦 Found ${stickerSet.result.stickers.length} stickers\n⏳ Starting download...`,
+                    text: `ðŸ“¦ Found ${stickerSet.result.stickers.length} stickers\nâ³ Starting download...`,
                     ...channelInfo
                 }, { quoted: message });
                 const tmpDir = path.join(process.cwd(), 'temp');
@@ -89,7 +89,7 @@ export default {
                         const metadata = {
                             'sticker-pack-id': crypto.randomBytes(32).toString('hex'),
                             'sticker-pack-name': config.packname,
-                            'emojis': sticker.emoji ? [sticker.emoji] : ['🤖']
+                            'emojis': sticker.emoji ? [sticker.emoji] : ['ðŸ¤–']
                         };
                         const exifAttr = Buffer.from([0x49, 0x49, 0x2A, 0x00, 0x08, 0x00, 0x00, 0x00, 0x01, 0x00, 0x41, 0x57, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x16, 0x00, 0x00, 0x00]);
                         const jsonBuffer = Buffer.from(JSON.stringify(metadata), 'utf8');
@@ -117,7 +117,7 @@ export default {
                     }
                 }
                 await sock.sendMessage(chatId, {
-                    text: `✅ Successfully downloaded ${successCount}/${stickerSet.result.stickers.length} stickers!`,
+                    text: `âœ… Successfully downloaded ${successCount}/${stickerSet.result.stickers.length} stickers!`,
                     ...channelInfo
                 }, { quoted: message });
             }
@@ -128,9 +128,13 @@ export default {
         catch (error) {
             console.error('Error in stickertelegram command:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to process Telegram stickers!\nMake sure:\n1. The URL is correct\n2. The sticker pack exists\n3. The sticker pack is public',
+                text: 'âŒ Failed to process Telegram stickers!\nMake sure:\n1. The URL is correct\n2. The sticker pack exists\n3. The sticker pack is public',
                 ...channelInfo
             }, { quoted: message });
         }
     }
 };
+
+
+
+

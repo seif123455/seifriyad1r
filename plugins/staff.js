@@ -1,9 +1,9 @@
-export default {
-    command: 'staff',
-    aliases: ['admins', 'adminlist'],
-    category: 'group',
-    description: 'Display list of group admins',
-    usage: '.staff',
+﻿export default {
+    command: 'ستافف',
+    aliases: ['admins', 'adminlist', 'staff'],
+    category: 'المجموعة',
+    description: 'عرض قائمة وف مجموعة مشرفس',
+    usage: '.ستافف',
     groupOnly: true,
     async handler(sock, message, args, context) {
         const { chatId, channelInfo } = context;
@@ -18,14 +18,14 @@ export default {
             }
             const participants = groupMetadata.participants;
             const groupAdmins = participants.filter((p) => p.admin);
-            const listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).join('\n▢ ');
+            const listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).join('\nâ–¢ ');
             const owner = groupMetadata.owner || groupAdmins.find((p) => p.admin === 'superadmin')?.id || `${chatId.split('-')[0] }@s.whatsapp.net`;
             const text = `
-≡ *GROUP ADMINS* _${groupMetadata.subject}_
+â‰¡ *GROUP ADMINS* _${groupMetadata.subject}_
 
-┌─⊷ *ADMINS*
-▢ ${listAdmin}
-└───────────
+â”Œâ”€âŠ· *ADMINS*
+â–¢ ${listAdmin}
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 `.trim();
             await sock.sendMessage(chatId, {
                 image: { url: pp },
@@ -43,3 +43,6 @@ export default {
         }
     }
 };
+
+
+

@@ -1,9 +1,9 @@
-export default {
-    command: 'clear',
-    aliases: ['clr', 'clean'],
-    category: 'owner',
-    description: 'Clear bot messages from chat',
-    usage: '.clear',
+﻿export default {
+    command: 'كليار',
+    aliases: ['clr', 'clean', 'clear'],
+    category: 'المالك',
+    description: '',
+    usage: '.مسح',
     ownerOnly: true,
     async handler(sock, message, args, context) {
         const { chatId, channelInfo } = context;
@@ -24,3 +24,6 @@ export default {
         }
     }
 };
+
+
+

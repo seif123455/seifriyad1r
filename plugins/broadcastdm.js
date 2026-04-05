@@ -1,9 +1,9 @@
-export default {
-    command: 'broadcastdm',
-    aliases: ['bcdm', 'announcedm', 'dmall'],
-    category: 'owner',
-    description: 'Broadcast a message to all saved DM contacts',
-    usage: '.broadcastdm <message>',
+﻿export default {
+    command: 'بروادكاستدم',
+    aliases: ['bcdm', 'announcedm', 'dmall', 'broadcastdm'],
+    category: 'المالك',
+    description: '',
+    usage: '.بروادكاستدم <رسالة>',
     ownerOnly: true,
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -11,7 +11,7 @@ export default {
         const text = args.join(' ').trim();
         if (!text) {
             return await sock.sendMessage(chatId, {
-                text: `*📩 BROADCAST DM*\n\n*Usage:* .broadcastdm <message>\n\n*Example:*\n.broadcastdm Hey! Check out our new features!\n\n_Sends to all contacts in the bot's contact list. Has a 1.5s delay between each to avoid ban._`,
+                text: `*ðŸ“© BROADCAST DM*\n\n*Usage:* .broadcastdm <رسالة>\n\n*Example:*\n.broadcastdm Hey! Check out our new features!\n\n_Sends to all contacts in the bot's contact list. Has a 1.5s delay between each to avoid ban._`,
                 ...channelInfo
             }, { quoted: message });
         }
@@ -26,15 +26,15 @@ export default {
         }
         if (contacts.length === 0) {
             return await sock.sendMessage(chatId, {
-                text: '❌ No contacts found in the bot\'s contact list.',
+                text: 'âŒ No contacts found in the bot\'s contact list.',
                 ...channelInfo
             }, { quoted: message });
         }
         await sock.sendMessage(chatId, {
-            text: `📩 *Broadcasting to ${contacts.length} contact(s)...*\n\nThis may take a moment.`,
+            text: `ðŸ“© *Broadcasting to ${contacts.length} contact(s)...*\n\nThis may take a moment.`,
             ...channelInfo
         }, { quoted: message });
-        const broadcastText = `📩 *MESSAGE*\n\n${text}`;
+        const broadcastText = `ðŸ“© *MESSAGE*\n\n${text}`;
         let sent = 0;
         let failed = 0;
         for (const contactJid of contacts) {
@@ -61,8 +61,12 @@ export default {
             await new Promise(r => setTimeout(r, 1500));
         }
         await sock.sendMessage(chatId, {
-            text: `✅ *DM Broadcast Complete!*\n\n📤 Sent: ${sent}\n❌ Failed: ${failed}\n📊 Total: ${contacts.length}`,
+            text: `âœ… *DM Broadcast Complete!*\n\nðŸ“¤ Sent: ${sent}\nâŒ Failed: ${failed}\nðŸ“Š Total: ${contacts.length}`,
             ...channelInfo
         }, { quoted: message });
     }
 };
+
+
+
+

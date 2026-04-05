@@ -1,12 +1,12 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
 export default {
-    command: 'addplugin',
-    aliases: ['installplugin', 'install'],
-    category: 'owner',
-    description: 'Install a plugin from a GitHub Gist URL (owner only)',
-    usage: '.addplugin <Gist URL>',
+    command: 'اددبلوجين',
+    aliases: ['installplugin', 'install', 'addplugin'],
+    category: 'المالك',
+    description: 'ينستالل ا بلوجين فروم ا جيتهوب جيست رابط (المالك ونلي)',
+    usage: '.اددبلوجين <جيست رابط>',
     /**
      * @param {object} sock - Baileys sock
      * @param {object} message - the original message object
@@ -23,7 +23,7 @@ export default {
         }
         const gistMatch = text.match(/(?:\/|gist\.github\.com\/)([a-fA-F0-9]+)/);
         if (!gistMatch) {
-            return await sock.sendMessage(chatId, { text: '❌ Invalid plugin URL.' }, { quoted: message });
+            return await sock.sendMessage(chatId, { text: 'âŒ Invalid plugin URL.' }, { quoted: message });
         }
         const gistId = gistMatch[1];
         const gistURL = `https://api.github.com/gists/${gistId}`;
@@ -31,7 +31,7 @@ export default {
             const response = await axios.get(gistURL);
             const gistData = response.data;
             if (!gistData || !gistData.files) {
-                return await sock.sendMessage(chatId, { text: '❌ No valid files found in the Gist.' }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: 'âŒ No valid files found in the Gist.' }, { quoted: message });
             }
             const pluginDir = path.join(process.cwd(), 'plugins');
             for (const file of Object.values(gistData.files)) {
@@ -39,11 +39,15 @@ export default {
                 const pluginPath = path.join(pluginDir, pluginName);
                 await fs.promises.writeFile(pluginPath, file.content);
             }
-            await sock.sendMessage(chatId, { text: '*✅ Successfully installed plugin from Gist.*' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: '*âœ… Successfully installed plugin from Gist.*' }, { quoted: message });
         }
         catch (error) {
             console.error('install plugin error:', error);
-            await sock.sendMessage(chatId, { text: `❌ Error fetching or saving the plugin: ${error.message}` }, { quoted: message });
+            await sock.sendMessage(chatId, { text: `âŒ Error fetching or saving the plugin: ${error.message}` }, { quoted: message });
         }
     }
 };
+
+
+
+

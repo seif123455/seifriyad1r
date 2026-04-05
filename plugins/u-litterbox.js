@@ -1,25 +1,25 @@
-import { downloadContentFromMessage } from '@whiskeysockets/baileys';
+﻿import { downloadContentFromMessage } from '@whiskeysockets/baileys';
 import fs from 'fs';
 import path from 'path';
 import { uploadToLitterbox } from '../lib/uploaders.js';
 export default {
-    command: 'litterbox',
-    aliases: ['tempup', 'litter', 'litr'],
+    command: 'ليتتيربوكس',
+    aliases: ['tempup', 'litter', 'litr', 'litterbox'],
     category: 'upload',
-    description: 'Upload temporarily (1h/12h/24h/72h)',
-    usage: '.litterbox <1h/12h/24h/72h> (reply to media)',
+    description: 'رفع تيمبوراريلي (1ه/12ه/24ه/72ه)',
+    usage: '.ليتتيربوكس <1ه/12ه/24ه/72ه> (رد تو وسائط)',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
             const quotedMsg = message.message?.extendedTextMessage?.contextInfo?.quotedMessage;
             if (!quotedMsg) {
-                await sock.sendMessage(chatId, { text: '⚠️ Please reply to media!' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'âš ï¸ Please reply to media!' }, { quoted: message });
                 return;
             }
             const type = Object.keys(quotedMsg)[0];
             const supportedTypes = ['imageMessage', 'videoMessage', 'stickerMessage', 'documentMessage'];
             if (!supportedTypes.includes(type)) {
-                await sock.sendMessage(chatId, { text: '⚠️ Unsupported type!' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'âš ï¸ Unsupported type!' }, { quoted: message });
                 return;
             }
             const time = args[0] || '1h';
@@ -49,16 +49,20 @@ export default {
             fs.writeFileSync(tempPath, buffer);
             const result = await uploadToLitterbox(tempPath, uploadTime);
             await sock.sendMessage(chatId, {
-                text: `✅ *Litterbox Upload Success!*\n\n` +
-                    `⏰ *Expires:* ${result.expires}\n` +
-                    `🔗 *URL:* ${result.url}\n\n` +
+                text: `âœ… *Litterbox Upload Success!*\n\n` +
+                    `â° *Expires:* ${result.expires}\n` +
+                    `ðŸ”— *URL:* ${result.url}\n\n` +
                     `_Link will expire after ${result.expires}_`
             }, { quoted: message });
             fs.unlinkSync(tempPath);
         }
         catch (error) {
             console.error('Litterbox Error:', error);
-            await sock.sendMessage(chatId, { text: `❌ Error: ${error.message}` }, { quoted: message });
+            await sock.sendMessage(chatId, { text: `âŒ Error: ${error.message}` }, { quoted: message });
         }
     }
 };
+
+
+
+

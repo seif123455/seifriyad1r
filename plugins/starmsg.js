@@ -1,9 +1,9 @@
-export default {
-    command: 'star',
-    aliases: ['starmsg', 'unstar', 'unstarmsg'],
-    category: 'owner',
-    description: 'Star or unstar a replied message',
-    usage: '.star — reply to a message | .unstar — reply to a message',
+﻿export default {
+    command: 'ستار',
+    aliases: ['starmsg', 'unstar', 'unstarmsg', 'star'],
+    category: 'المالك',
+    description: 'ستار ور ونستار ا ريبلييد رسالة',
+    usage: '.ستار â€” رد تو ا رسالة | .ونستار â€” رد تو ا رسالة',
     ownerOnly: true,
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -22,7 +22,7 @@ export default {
             null;
         if (!contextInfo?.stanzaId) {
             return await sock.sendMessage(chatId, {
-                text: `*⭐ STAR MESSAGE*\n\n_Reply to any message with:_\n• \`.star\` — to star it\n• \`.unstar\` — to unstar it`,
+                text: `*â­ STAR MESSAGE*\n\n_Reply to any message with:_\nâ€¢ \`.star\` â€” to star it\nâ€¢ \`.unstar\` â€” to unstar it`,
                 ...channelInfo
             }, { quoted: message });
         }
@@ -39,16 +39,19 @@ export default {
                 }
             }, chatId);
             await sock.sendMessage(chatId, {
-                text: shouldStar ? `⭐ *Message starred!*` : `✴️ *Message unstarred!*`,
+                text: shouldStar ? `â­ *Message starred!*` : `âœ´ï¸ *Message unstarred!*`,
                 ...channelInfo
             }, { quoted: message });
         }
         catch (e) {
             console.error('[STARMSG] Error:', e.message);
             await sock.sendMessage(chatId, {
-                text: `❌ Failed to ${shouldStar ? 'star' : 'unstar'} message: ${e.message}`,
+                text: `âŒ Failed to ${shouldStar ? 'star' : 'unstar'} message: ${e.message}`,
                 ...channelInfo
             }, { quoted: message });
         }
     }
 };
+
+
+

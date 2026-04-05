@@ -1,9 +1,9 @@
-export default {
-    command: 'translate',
-    aliases: ['trt'],
-    category: 'tools',
-    description: 'Translate text to the specified language.',
-    usage: '.translate <text> <lang> or reply to a message with .translate <lang>',
+﻿export default {
+    command: 'ترجمة',
+    aliases: ['trt', 'translate'],
+    category: 'أدوات',
+    description: 'ترجمة نص تو تهي سبيكيفييد لانجواجي.',
+    usage: '.ترجمة <نص> <لانج> ور رد تو ا رسالة ويته .ترجمة <لانج>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
@@ -84,11 +84,15 @@ export default {
             });
         }
         catch (error) {
-            console.error('❌ Error in translate command:', error);
+            console.error('âŒ Error in translate command:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to translate text. Please try again later.\n\nUsage:\n1. Reply to a message with: .translate <lang> or .trt <lang>\n2. Or type: .translate <text> <lang> or .trt <text> <lang>',
+                text: 'âŒ Failed to translate text. Please try again later.\n\nUsage:\n1. Reply to a message with: .translate <lang> or .trt <lang>\n2. Or type: .translate <text> <lang> or .trt <text> <lang>',
                 quoted: message
             });
         }
     }
 };
+
+
+
+

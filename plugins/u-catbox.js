@@ -1,25 +1,25 @@
-import { downloadContentFromMessage } from '@whiskeysockets/baileys';
+﻿import { downloadContentFromMessage } from '@whiskeysockets/baileys';
 import fs from 'fs';
 import path from 'path';
 import { uploadToCatbox } from '../lib/uploaders.js';
 export default {
-    command: 'catbox',
-    aliases: ['cb'],
+    command: 'كاتبوكس',
+    aliases: ['cb', 'catbox'],
     category: 'upload',
-    description: 'Upload to Catbox.moe (200MB, permanent)',
-    usage: '.catbox (reply to media)',
+    description: 'رفع تو كاتبوكس.موي (200مب, بيرمانينت)',
+    usage: '.كاتبوكس (رد تو وسائط)',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
             const quotedMsg = message.message?.extendedTextMessage?.contextInfo?.quotedMessage;
             if (!quotedMsg) {
-                await sock.sendMessage(chatId, { text: '⚠️ Please reply to media!' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'âš ï¸ Please reply to media!' }, { quoted: message });
                 return;
             }
             const type = Object.keys(quotedMsg)[0];
             const supportedTypes = ['imageMessage', 'videoMessage', 'stickerMessage', 'documentMessage'];
             if (!supportedTypes.includes(type)) {
-                await sock.sendMessage(chatId, { text: '⚠️ Unsupported type!' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'âš ï¸ Unsupported type!' }, { quoted: message });
                 return;
             }
             await sock.sendMessage(chatId, { text: 'Uploading to Catbox...' }, { quoted: message });
@@ -46,13 +46,17 @@ export default {
             fs.writeFileSync(tempPath, buffer);
             const result = await uploadToCatbox(tempPath);
             await sock.sendMessage(chatId, {
-                text: `✅ *Catbox Upload Success!*\n\n🔗 ${result.url}`
+                text: `âœ… *Catbox Upload Success!*\n\nðŸ”— ${result.url}`
             }, { quoted: message });
             fs.unlinkSync(tempPath);
         }
         catch (error) {
             console.error('Catbox Error:', error);
-            await sock.sendMessage(chatId, { text: `❌ Error: ${error.message}` }, { quoted: message });
+            await sock.sendMessage(chatId, { text: `âŒ Error: ${error.message}` }, { quoted: message });
         }
     }
 };
+
+
+
+

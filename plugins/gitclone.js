@@ -1,14 +1,14 @@
-export default {
-    command: 'gitclone',
-    aliases: ['githubdl', 'clone'],
-    category: 'download',
-    description: 'Download a GitHub repository as zip',
-    usage: '.gitclone <url> OR <username> <repo>',
+﻿export default {
+    command: 'جيتكلوني',
+    aliases: ['githubdl', 'clone', 'gitclone'],
+    category: 'التحميل',
+    description: 'تحميل ا جيتهوب ريبوسيتوري اس زيب',
+    usage: '.جيتكلوني <رابط> ور <مستخدمنامي> <ريبو>',
     async handler(sock, message, args) {
         const chatId = message.key.remoteJid;
         if (!args || args.length === 0) {
             return sock.sendMessage(chatId, {
-                text: '*🌟 Please provide a GitHub URL or username and repository name.*\n\n*Example usage:*\n\n.clone https://github.com/GlobalTechInfo/MEGA-MD\n\n.clone GlobalTechInfo MEGA-MD'
+                text: '*ðŸŒŸ Please provide a GitHub URL or username and repository name.*\n\n*Example usage:*\n\n.clone https://github.com/CrazySeif/MEGA-MD\n\n.clone CrazySeif MEGA-MD'
             });
         }
         let url = '';
@@ -30,10 +30,10 @@ export default {
         }
         else {
             return sock.sendMessage(chatId, {
-                text: '*Missing repository info.*\n\n*Example usage:*\n\n.clone https://github.com/GlobalTechInfo/MEGA-MD\n\n.clone GlobalTechInfo MEGA-MD'
+                text: '*Missing repository info.*\n\n*Example usage:*\n\n.clone https://github.com/CrazySeif/MEGA-MD\n\n.clone CrazySeif MEGA-MD'
             });
         }
-        await sock.sendMessage(chatId, { text: '⏱️ Preparing repository zip...' });
+        await sock.sendMessage(chatId, { text: 'â±ï¸ Preparing repository zip...' });
         try {
             await sock.sendMessage(chatId, {
                 document: { url },
@@ -44,8 +44,12 @@ export default {
         catch (e) {
             console.error(e);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to fetch the repository. Please make sure the repository exists and try again.'
+                text: 'âŒ Failed to fetch the repository. Please make sure the repository exists and try again.'
             });
         }
     }
 };
+
+
+
+

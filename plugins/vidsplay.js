@@ -1,11 +1,11 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 
 export default {
-    command: 'فيديو',
-    aliases: ['vidsplay', 'vidsplaydl', 'vidsplayvideo', 'تحميل_فيديو'],
-    category: 'download',
-    description: 'تحميل فيديو وصورة مصغرة من Vidsplay',
-    usage: '!فيديو <رابط Vidsplay>',
+    command: 'ÙÙŠØ¯ÙŠÙˆ',
+    aliases: ['vidsplay', 'vidsplaydl', 'vidsplayvideo', 'ØªØ­Ù…ÙŠÙ„_ÙÙŠØ¯ÙŠÙˆ'],
+    category: 'Ø§Ù„ØªØ­Ù…ÙŠÙ„',
+    description: 'ØªØ­Ù…ÙŠÙ„ ÙÙŠØ¯ÙŠÙˆ ÙˆØµÙˆØ±Ø© Ù…ØµØºØ±Ø© Ù…Ù† ÙÙŠØ¯Ø³Ø¨Ù„Ø§ÙŠ',
+    usage: '!ÙÙŠØ¯ÙŠÙˆ <Ø±Ø§Ø¨Ø· ÙÙŠØ¯Ø³Ø¨Ù„Ø§ÙŠ>',
     
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -13,9 +13,9 @@ export default {
         
         if (!url) {
             return await sock.sendMessage(chatId, { 
-                text: '🎬 *تحميل فيديو من Vidsplay*\n\n' +
-                    '*الاستخدام:* `!فيديو <الرابط>`\n' +
-                    '*مثال:* `!فيديو https://www.vidsplay.com/golf-free-stock-video/`' 
+                text: 'ðŸŽ¬ *ØªØ­Ù…ÙŠÙ„ ÙÙŠØ¯ÙŠÙˆ Ù…Ù† Vidsplay*\n\n' +
+                    '*Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…:* `!ÙÙŠØ¯ÙŠÙˆ <Ø§Ù„Ø±Ø§Ø¨Ø·>`\n' +
+                    '*Ù…Ø«Ø§Ù„:* `!ÙÙŠØ¯ÙŠÙˆ https://www.vidsplay.com/golf-free-stock-video/`' 
             }, { quoted: message });
         }
         
@@ -25,7 +25,7 @@ export default {
             
             if (!data?.status || !data.result?.length) {
                 return await sock.sendMessage(chatId, { 
-                    text: '❌ لا يوجد فيديو لهذا الرابط.' 
+                    text: 'âŒ Ù„Ø§ ÙŠÙˆØ¬Ø¯ ÙÙŠØ¯ÙŠÙˆ Ù„Ù‡Ø°Ø§ Ø§Ù„Ø±Ø§Ø¨Ø·.' 
                 }, { quoted: message });
             }
             
@@ -35,29 +35,30 @@ export default {
             if (imageUrl) {
                 await sock.sendMessage(chatId, { 
                     image: { url: imageUrl }, 
-                    caption: '🖼️ *الصورة المصغرة*\n🔥 CRAZY-SEIF BOT' 
+                    caption: 'ðŸ–¼ï¸ *Ø§Ù„ØµÙˆØ±Ø© Ø§Ù„Ù…ØµØºØ±Ø©*\nðŸ”¥ Crazy Seif BOT' 
                 }, { quoted: message });
             }
             
             if (videoUrl) {
                 await sock.sendMessage(chatId, { 
                     video: { url: videoUrl }, 
-                    caption: '🎬 *الفيديو*\n🔥 CRAZY-SEIF BOT | 📞 201144534147' 
+                    caption: 'ðŸŽ¬ *Ø§Ù„ÙÙŠØ¯ÙŠÙˆ*\nðŸ”¥ Crazy Seif BOT | ðŸ“ž 01144534147' 
                 }, { quoted: message });
             }
             
         } catch (error) {
-            console.error('خطأ في أمر فيديو Vidsplay:', error);
+            console.error('Ø®Ø·Ø£ ÙÙŠ Ø£Ù…Ø± ÙÙŠØ¯ÙŠÙˆ Vidsplay:', error);
             
             if (error.code === 'ECONNABORTED') {
                 await sock.sendMessage(chatId, { 
-                    text: '❌ انتهت مهلة الطلب. قد تكون واجهة البرمجة بطيئة أو لا يمكن الوصول إليها.' 
+                    text: 'âŒ Ø§Ù†ØªÙ‡Øª Ù…Ù‡Ù„Ø© Ø§Ù„Ø·Ù„Ø¨. Ù‚Ø¯ ØªÙƒÙˆÙ† ÙˆØ§Ø¬Ù‡Ø© Ø§Ù„Ø¨Ø±Ù…Ø¬Ø© Ø¨Ø·ÙŠØ¦Ø© Ø£Ùˆ Ù„Ø§ ÙŠÙ…ÙƒÙ† Ø§Ù„ÙˆØµÙˆÙ„ Ø¥Ù„ÙŠÙ‡Ø§.' 
                 }, { quoted: message });
             } else {
                 await sock.sendMessage(chatId, { 
-                    text: '❌ فشل في جلب الفيديو من Vidsplay.' 
+                    text: 'âŒ ÙØ´Ù„ ÙÙŠ Ø¬Ù„Ø¨ Ø§Ù„ÙÙŠØ¯ÙŠÙˆ Ù…Ù† Vidsplay.' 
                 }, { quoted: message });
             }
         }
     }
 };
+

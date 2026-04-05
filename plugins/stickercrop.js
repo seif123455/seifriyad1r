@@ -1,4 +1,4 @@
-import config from '../config.js';
+﻿import config from '../config.js';
 import { downloadMediaMessage } from '@whiskeysockets/baileys';
 import { exec } from 'child_process';
 import fs from 'fs';
@@ -39,7 +39,7 @@ export async function stickercropFromBuffer(inputBuffer, isAnimated) {
     const json = {
         'sticker-pack-id': crypto.randomBytes(32).toString('hex'),
         'sticker-pack-name': config.packname || 'MEGA-MD',
-        'emojis': ['✂️']
+        'emojis': ['âœ‚ï¸']
     };
     const exifAttr = Buffer.from([0x49, 0x49, 0x2A, 0x00, 0x08, 0x00, 0x00, 0x00, 0x01, 0x00, 0x41, 0x57, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x16, 0x00, 0x00, 0x00]);
     const jsonBuffer = Buffer.from(JSON.stringify(json), 'utf8');
@@ -55,11 +55,11 @@ export async function stickercropFromBuffer(inputBuffer, isAnimated) {
     return finalBuffer;
 }
 export default {
-    command: 'crop',
-    aliases: ['stickercrop', 'scrop'],
-    category: 'stickers',
-    description: 'Crop image/video/sticker to circle sticker',
-    usage: '.crop (reply to image/video/sticker)',
+    command: 'كروب',
+    aliases: ['stickercrop', 'scrop', 'crop'],
+    category: 'ملصقات',
+    description: 'كروب صورة/فيديو/ملصق تو كيركلي ملصق',
+    usage: '.كروب (رد تو صورة/فيديو/ملصق)',
     async handler(sock, message, args, context) {
         const { chatId, channelInfo } = context;
         const messageToQuote = message;
@@ -143,14 +143,14 @@ export default {
             const finalSizeKB = webpBuffer.length / 1024;
             console.log(`Final sticker size: ${Math.round(finalSizeKB)} KB`);
             if (finalSizeKB > 1000) {
-                console.log(`⚠️ Warning: Sticker size (${Math.round(finalSizeKB)} KB) exceeds recommended limit but will be sent anyway`);
+                console.log(`âš ï¸ Warning: Sticker size (${Math.round(finalSizeKB)} KB) exceeds recommended limit but will be sent anyway`);
             }
             const img = new webp.Image();
             await img.load(webpBuffer);
             const json = {
                 'sticker-pack-id': crypto.randomBytes(32).toString('hex'),
                 'sticker-pack-name': config.packname || 'MegaBot',
-                'emojis': ['✂️']
+                'emojis': ['âœ‚ï¸']
             };
             const exifAttr = Buffer.from([0x49, 0x49, 0x2A, 0x00, 0x08, 0x00, 0x00, 0x00, 0x01, 0x00, 0x41, 0x57, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x16, 0x00, 0x00, 0x00]);
             const jsonBuffer = Buffer.from(JSON.stringify(json), 'utf8');
@@ -180,3 +180,7 @@ export default {
     },
     stickercropFromBuffer
 };
+
+
+
+

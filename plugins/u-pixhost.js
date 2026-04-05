@@ -1,13 +1,13 @@
-import { downloadContentFromMessage } from '@whiskeysockets/baileys';
+﻿import { downloadContentFromMessage } from '@whiskeysockets/baileys';
 import fs from 'fs';
 import path from 'path';
 import { uploadToPixhost } from '../lib/uploaders.js';
 export default {
-    command: 'pixhost',
-    aliases: ['ph', 'pix'],
+    command: 'بيكسهوست',
+    aliases: ['ph', 'pix', 'pixhost'],
     category: 'upload',
-    description: 'Upload to Pixhost (images only)',
-    usage: '.pixhost (reply to media or caption on media)',
+    description: 'رفع تو بيكسهوست (صورةس ونلي)',
+    usage: '.بيكسهوست (رد تو وسائط ور كابتيون ون وسائط)',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
@@ -17,13 +17,13 @@ export default {
                 message.message?.documentMessage;
             const quotedMsg = message.message?.extendedTextMessage?.contextInfo?.quotedMessage;
             if (!hasMedia && !quotedMsg) {
-                await sock.sendMessage(chatId, { text: '⚠️ Please send media with caption or reply to media!' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'âš ï¸ Please send media with caption or reply to media!' }, { quoted: message });
                 return;
             }
             const mediaSource = hasMedia ? message.message : quotedMsg;
             const type = Object.keys(mediaSource).find(key => ['imageMessage', 'videoMessage', 'stickerMessage', 'documentMessage'].includes(key));
             if (!type) {
-                await sock.sendMessage(chatId, { text: '⚠️ Unsupported media type!' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'âš ï¸ Unsupported media type!' }, { quoted: message });
                 return;
             }
             await sock.sendMessage(chatId, { text: 'Uploading to Pixhost...' }, { quoted: message });
@@ -50,13 +50,17 @@ export default {
             fs.writeFileSync(tempPath, buffer);
             const result = await uploadToPixhost(tempPath);
             await sock.sendMessage(chatId, {
-                text: `✅ *Pixhost Upload Success!*\n\n🔗 ${result.url}`
+                text: `âœ… *Pixhost Upload Success!*\n\nðŸ”— ${result.url}`
             }, { quoted: message });
             fs.unlinkSync(tempPath);
         }
         catch (error) {
             console.error('Pixhost Error:', error);
-            await sock.sendMessage(chatId, { text: `❌ Error: ${error.message}` }, { quoted: message });
+            await sock.sendMessage(chatId, { text: `âŒ Error: ${error.message}` }, { quoted: message });
         }
     }
 };
+
+
+
+

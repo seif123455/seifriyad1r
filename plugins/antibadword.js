@@ -1,4 +1,4 @@
-import store from '../lib/lightweight_store.js';
+﻿import store from '../lib/lightweight_store.js';
 
 async function getAntibadwordSettings(chatId) {
     const settings = await store.getSetting(chatId, 'antibadword');
@@ -15,18 +15,18 @@ async function handleAntiBadwordCommand(sock, chatId, message, match) {
     const settings = await getAntibadwordSettings(chatId);
     
     if (!action || action === 'status') {
-        const status = settings.enabled ? '✅ مفعل' : '❌ معطل';
+        const status = settings.enabled ? 'âœ… Ù…ÙØ¹Ù„' : 'âŒ Ù…Ø¹Ø·Ù„';
         const wordCount = settings.words?.length || 0;
         await sock.sendMessage(chatId, {
-            text: `*🚫 منع الكلمات البذيئة*\n\n` +
-                `📊 *الحالة:* ${status}\n` +
-                `📝 *الكلمات المحظورة:* ${wordCount}\n\n` +
-                `📌 *الاستخدام:*\n` +
-                `• \`!منع on\` - تفعيل\n` +
-                `• \`!منع off\` - تعطيل\n` +
-                `• \`!منع add <كلمة>\` - إضافة كلمة\n` +
-                `• \`!منع remove <كلمة>\` - حذف كلمة\n` +
-                `• \`!منع list\` - عرض الكلمات`
+            text: `*ðŸš« Ù…Ù†Ø¹ Ø§Ù„ÙƒÙ„Ù…Ø§Øª Ø§Ù„Ø¨Ø°ÙŠØ¦Ø©*\n\n` +
+                `ðŸ“Š *Ø§Ù„Ø­Ø§Ù„Ø©:* ${status}\n` +
+                `ðŸ“ *Ø§Ù„ÙƒÙ„Ù…Ø§Øª Ø§Ù„Ù…Ø­Ø¸ÙˆØ±Ø©:* ${wordCount}\n\n` +
+                `ðŸ“Œ *Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…:*\n` +
+                `â€¢ \`!Ù…Ù†Ø¹ on\` - ØªÙØ¹ÙŠÙ„\n` +
+                `â€¢ \`!Ù…Ù†Ø¹ off\` - ØªØ¹Ø·ÙŠÙ„\n` +
+                `â€¢ \`!Ù…Ù†Ø¹ add <ÙƒÙ„Ù…Ø©>\` - Ø¥Ø¶Ø§ÙØ© ÙƒÙ„Ù…Ø©\n` +
+                `â€¢ \`!Ù…Ù†Ø¹ remove <ÙƒÙ„Ù…Ø©>\` - Ø­Ø°Ù ÙƒÙ„Ù…Ø©\n` +
+                `â€¢ \`!Ù…Ù†Ø¹ list\` - Ø¹Ø±Ø¶ Ø§Ù„ÙƒÙ„Ù…Ø§Øª`
         }, { quoted: message });
         return;
     }
@@ -35,7 +35,7 @@ async function handleAntiBadwordCommand(sock, chatId, message, match) {
         settings.enabled = true;
         await saveAntibadwordSettings(chatId, settings);
         await sock.sendMessage(chatId, {
-            text: '✅ *تم تفعيل منع الكلمات البذيئة*\n\nسيتم حذف أي رسالة تحتوي على كلمات ممنوعة.'
+            text: 'âœ… *ØªÙ… ØªÙØ¹ÙŠÙ„ Ù…Ù†Ø¹ Ø§Ù„ÙƒÙ„Ù…Ø§Øª Ø§Ù„Ø¨Ø°ÙŠØ¦Ø©*\n\nØ³ÙŠØªÙ… Ø­Ø°Ù Ø£ÙŠ Ø±Ø³Ø§Ù„Ø© ØªØ­ØªÙˆÙŠ Ø¹Ù„Ù‰ ÙƒÙ„Ù…Ø§Øª Ù…Ù…Ù†ÙˆØ¹Ø©.'
         }, { quoted: message });
         return;
     }
@@ -44,7 +44,7 @@ async function handleAntiBadwordCommand(sock, chatId, message, match) {
         settings.enabled = false;
         await saveAntibadwordSettings(chatId, settings);
         await sock.sendMessage(chatId, {
-            text: '❌ *تم تعطيل منع الكلمات البذيئة*\n\nلن يتم فلترة الرسائل.'
+            text: 'âŒ *ØªÙ… ØªØ¹Ø·ÙŠÙ„ Ù…Ù†Ø¹ Ø§Ù„ÙƒÙ„Ù…Ø§Øª Ø§Ù„Ø¨Ø°ÙŠØ¦Ø©*\n\nÙ„Ù† ÙŠØªÙ… ÙÙ„ØªØ±Ø© Ø§Ù„Ø±Ø³Ø§Ø¦Ù„.'
         }, { quoted: message });
         return;
     }
@@ -53,21 +53,21 @@ async function handleAntiBadwordCommand(sock, chatId, message, match) {
         const word = args.slice(1).join(' ').toLowerCase().trim();
         if (!word) {
             await sock.sendMessage(chatId, {
-                text: '❌ *الرجاء تحديد الكلمة المراد إضافتها*\n\nمثال: `!منع add كلمة`'
+                text: 'âŒ *Ø§Ù„Ø±Ø¬Ø§Ø¡ ØªØ­Ø¯ÙŠØ¯ Ø§Ù„ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±Ø§Ø¯ Ø¥Ø¶Ø§ÙØªÙ‡Ø§*\n\nÙ…Ø«Ø§Ù„: `!Ù…Ù†Ø¹ add ÙƒÙ„Ù…Ø©`'
             }, { quoted: message });
             return;
         }
         if (!settings.words) settings.words = [];
         if (settings.words.includes(word)) {
             await sock.sendMessage(chatId, {
-                text: `❌ *الكلمة موجودة بالفعل*\n\n"${word}" محظورة بالفعل.`
+                text: `âŒ *Ø§Ù„ÙƒÙ„Ù…Ø© Ù…ÙˆØ¬ÙˆØ¯Ø© Ø¨Ø§Ù„ÙØ¹Ù„*\n\n"${word}" Ù…Ø­Ø¸ÙˆØ±Ø© Ø¨Ø§Ù„ÙØ¹Ù„.`
             }, { quoted: message });
             return;
         }
         settings.words.push(word);
         await saveAntibadwordSettings(chatId, settings);
         await sock.sendMessage(chatId, {
-            text: `✅ *تم إضافة الكلمة*\n\nتم إضافة "${word}" إلى قائمة الكلمات المحظورة.\n\nإجمالي الكلمات المحظورة: ${settings.words.length}`
+            text: `âœ… *ØªÙ… Ø¥Ø¶Ø§ÙØ© Ø§Ù„ÙƒÙ„Ù…Ø©*\n\nØªÙ… Ø¥Ø¶Ø§ÙØ© "${word}" Ø¥Ù„Ù‰ Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„ÙƒÙ„Ù…Ø§Øª Ø§Ù„Ù…Ø­Ø¸ÙˆØ±Ø©.\n\nØ¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„ÙƒÙ„Ù…Ø§Øª Ø§Ù„Ù…Ø­Ø¸ÙˆØ±Ø©: ${settings.words.length}`
         }, { quoted: message });
         return;
     }
@@ -76,20 +76,20 @@ async function handleAntiBadwordCommand(sock, chatId, message, match) {
         const word = args.slice(1).join(' ').toLowerCase().trim();
         if (!word) {
             await sock.sendMessage(chatId, {
-                text: '❌ *الرجاء تحديد الكلمة المراد حذفها*\n\nمثال: `!منع remove كلمة`'
+                text: 'âŒ *Ø§Ù„Ø±Ø¬Ø§Ø¡ ØªØ­Ø¯ÙŠØ¯ Ø§Ù„ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±Ø§Ø¯ Ø­Ø°ÙÙ‡Ø§*\n\nÙ…Ø«Ø§Ù„: `!Ù…Ù†Ø¹ remove ÙƒÙ„Ù…Ø©`'
             }, { quoted: message });
             return;
         }
         if (!settings.words || !settings.words.includes(word)) {
             await sock.sendMessage(chatId, {
-                text: `❌ *الكلمة غير موجودة*\n\n"${word}" غير موجودة في قائمة الكلمات المحظورة.`
+                text: `âŒ *Ø§Ù„ÙƒÙ„Ù…Ø© ØºÙŠØ± Ù…ÙˆØ¬ÙˆØ¯Ø©*\n\n"${word}" ØºÙŠØ± Ù…ÙˆØ¬ÙˆØ¯Ø© ÙÙŠ Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„ÙƒÙ„Ù…Ø§Øª Ø§Ù„Ù…Ø­Ø¸ÙˆØ±Ø©.`
             }, { quoted: message });
             return;
         }
         settings.words = settings.words.filter((w) => w !== word);
         await saveAntibadwordSettings(chatId, settings);
         await sock.sendMessage(chatId, {
-            text: `✅ *تم حذف الكلمة*\n\nتم حذف "${word}" من قائمة الكلمات المحظورة.\n\nالكلمات المتبقية: ${settings.words.length}`
+            text: `âœ… *ØªÙ… Ø­Ø°Ù Ø§Ù„ÙƒÙ„Ù…Ø©*\n\nØªÙ… Ø­Ø°Ù "${word}" Ù…Ù† Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„ÙƒÙ„Ù…Ø§Øª Ø§Ù„Ù…Ø­Ø¸ÙˆØ±Ø©.\n\nØ§Ù„ÙƒÙ„Ù…Ø§Øª Ø§Ù„Ù…ØªØ¨Ù‚ÙŠØ©: ${settings.words.length}`
         }, { quoted: message });
         return;
     }
@@ -97,23 +97,23 @@ async function handleAntiBadwordCommand(sock, chatId, message, match) {
     if (action === 'list') {
         if (!settings.words || settings.words.length === 0) {
             await sock.sendMessage(chatId, {
-                text: '📝 *قائمة الكلمات المحظورة*\n\nلا توجد كلمات محظورة حالياً.\n\nاستخدم `!منع add <كلمة>` لإضافة كلمات.'
+                text: 'ðŸ“ *Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„ÙƒÙ„Ù…Ø§Øª Ø§Ù„Ù…Ø­Ø¸ÙˆØ±Ø©*\n\nÙ„Ø§ ØªÙˆØ¬Ø¯ ÙƒÙ„Ù…Ø§Øª Ù…Ø­Ø¸ÙˆØ±Ø© Ø­Ø§Ù„ÙŠØ§Ù‹.\n\nØ§Ø³ØªØ®Ø¯Ù… `!Ù…Ù†Ø¹ add <ÙƒÙ„Ù…Ø©>` Ù„Ø¥Ø¶Ø§ÙØ© ÙƒÙ„Ù…Ø§Øª.'
             }, { quoted: message });
             return;
         }
         const wordList = settings.words.map((w, i) => `${i + 1}. ${w}`).join('\n');
         await sock.sendMessage(chatId, {
-            text: `📝 *قائمة الكلمات المحظورة*\n\n${wordList}\n\n📊 الإجمالي: ${settings.words.length} كلمة`
+            text: `ðŸ“ *Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„ÙƒÙ„Ù…Ø§Øª Ø§Ù„Ù…Ø­Ø¸ÙˆØ±Ø©*\n\n${wordList}\n\nðŸ“Š Ø§Ù„Ø¥Ø¬Ù…Ø§Ù„ÙŠ: ${settings.words.length} ÙƒÙ„Ù…Ø©`
         }, { quoted: message });
         return;
     }
     
     await sock.sendMessage(chatId, {
-        text: '❌ *إجراء غير صحيح*\n\nالاستخدام:\n' +
-            '• `!منع on/off`\n' +
-            '• `!منع add <كلمة>`\n' +
-            '• `!منع remove <كلمة>`\n' +
-            '• `!منع list`'
+        text: 'âŒ *Ø¥Ø¬Ø±Ø§Ø¡ ØºÙŠØ± ØµØ­ÙŠØ­*\n\nØ§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…:\n' +
+            'â€¢ `!Ù…Ù†Ø¹ on/off`\n' +
+            'â€¢ `!Ù…Ù†Ø¹ add <ÙƒÙ„Ù…Ø©>`\n' +
+            'â€¢ `!Ù…Ù†Ø¹ remove <ÙƒÙ„Ù…Ø©>`\n' +
+            'â€¢ `!Ù…Ù†Ø¹ list`'
     }, { quoted: message });
 }
 
@@ -137,11 +137,11 @@ async function checkAntiBadword(sock, message) {
             try {
                 await sock.sendMessage(chatId, { delete: message.key });
                 await sock.sendMessage(chatId, {
-                    text: `❌ تم حذف الرسالة: تحتوي على كلمة ممنوعة "${word}"`
+                    text: `âŒ ØªÙ… Ø­Ø°Ù Ø§Ù„Ø±Ø³Ø§Ù„Ø©: ØªØ­ØªÙˆÙŠ Ø¹Ù„Ù‰ ÙƒÙ„Ù…Ø© Ù…Ù…Ù†ÙˆØ¹Ø© "${word}"`
                 });
                 return true;
             } catch (error) {
-                console.error('خطأ في حذف الرسالة:', error);
+                console.error('Ø®Ø·Ø£ ÙÙŠ Ø­Ø°Ù Ø§Ù„Ø±Ø³Ø§Ù„Ø©:', error);
             }
             break;
         }
@@ -150,11 +150,11 @@ async function checkAntiBadword(sock, message) {
 }
 
 export default {
-    command: 'منع',
-    aliases: ['antibadword', 'abw', 'badword', 'antibad', 'كلمات_ممنوعة'],
-    category: 'admin',
-    description: 'إعداد فلتر منع الكلمات البذيئة لحذف الرسائل التي تحتوي على كلمات غير لائقة',
-    usage: '!منع <on|off|add|remove|list>',
+    command: 'Ù…Ù†Ø¹',
+    aliases: ['antibadword', 'abw', 'badword', 'antibad', 'ÙƒÙ„Ù…Ø§Øª_Ù…Ù…Ù†ÙˆØ¹Ø©'],
+    category: 'Ø§Ù„Ù…Ø´Ø±ÙÙˆÙ†',
+    description: 'Ø¥Ø¹Ø¯Ø§Ø¯ ÙÙ„ØªØ± Ù…Ù†Ø¹ Ø§Ù„ÙƒÙ„Ù…Ø§Øª Ø§Ù„Ø¨Ø°ÙŠØ¦Ø© Ù„Ø­Ø°Ù Ø§Ù„Ø±Ø³Ø§Ø¦Ù„ Ø§Ù„ØªÙŠ ØªØ­ØªÙˆÙŠ Ø¹Ù„Ù‰ ÙƒÙ„Ù…Ø§Øª ØºÙŠØ± Ù„Ø§Ø¦Ù‚Ø©',
+    usage: '!Ù…Ù†Ø¹ <ÙˆÙ†|ÙˆÙÙ|Ø¥Ø¶Ø§ÙØ©|Ø­Ø°Ù|Ø¹Ø±Ø¶>',
     groupOnly: true,
     adminOnly: true,
     
@@ -164,9 +164,9 @@ export default {
         try {
             await handleAntiBadwordCommand(sock, chatId, message, match);
         } catch (error) {
-            console.error('خطأ في أمر منع الكلمات:', error);
+            console.error('Ø®Ø·Ø£ ÙÙŠ Ø£Ù…Ø± Ù…Ù†Ø¹ Ø§Ù„ÙƒÙ„Ù…Ø§Øª:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ *خطأ في معالجة الأمر*\n\nيرجى المحاولة مرة أخرى لاحقاً.'
+                text: 'âŒ *Ø®Ø·Ø£ ÙÙŠ Ù…Ø¹Ø§Ù„Ø¬Ø© Ø§Ù„Ø£Ù…Ø±*\n\nÙŠØ±Ø¬Ù‰ Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø© Ù…Ø±Ø© Ø£Ø®Ø±Ù‰ Ù„Ø§Ø­Ù‚Ø§Ù‹.'
             }, { quoted: message });
         }
     }
@@ -174,3 +174,4 @@ export default {
 
 export { handleAntiBadwordCommand };
 export { checkAntiBadword };
+

@@ -78,8 +78,12 @@
     "yt-search": "^2.12.1"
   },
   "devDependencies": {
+    "@babel/generator": "^7.29.1",
+    "@babel/parser": "^7.29.2",
+    "@babel/traverse": "^7.29.0",
     "eslint": "^10.0.2",
     "nodemon": "^3.1.14",
+    "translate-google": "^1.4.0",
     "vitest": "^4.0.18"
   },
   "overrides": {

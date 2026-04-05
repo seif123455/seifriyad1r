@@ -1,4 +1,4 @@
-const compliments = [
+﻿const compliments = [
     "You're amazing just the way you are!",
     "You have a great sense of humor!",
     "You're incredibly thoughtful and kind.",
@@ -31,11 +31,11 @@ const compliments = [
     "You make the world a better place just by being in it."
 ];
 export default {
-    command: 'compliment',
-    aliases: ['praise', 'nice'],
-    category: 'group',
-    description: 'Send a random compliment to a user',
-    usage: '.compliment @user',
+    command: 'كومبليمينت',
+    aliases: ['praise', 'nice', 'compliment'],
+    category: 'المجموعة',
+    description: '',
+    usage: '.كومبليمينت @مستخدم',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
@@ -91,3 +91,7 @@ export default {
         }
     }
 };
+
+
+
+

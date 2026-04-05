@@ -1,4 +1,4 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 
 async function fetchWithRetries(url, retries = 3, delay = 2000) {
     let attempt = 0;
@@ -8,19 +8,19 @@ async function fetchWithRetries(url, retries = 3, delay = 2000) {
             return data;
         } catch (err) {
             attempt++;
-            console.error(`[لماذا] المحاولة ${attempt} فشلت:`, err.message);
-            if (attempt >= retries) throw new Error('تم الوصول للحد الأقصى من المحاولات');
+            console.error(`[Ù„Ù…Ø§Ø°Ø§] Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø© ${attempt} ÙØ´Ù„Øª:`, err.message);
+            if (attempt >= retries) throw new Error('ØªÙ… Ø§Ù„ÙˆØµÙˆÙ„ Ù„Ù„Ø­Ø¯ Ø§Ù„Ø£Ù‚ØµÙ‰ Ù…Ù† Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø§Øª');
             await new Promise(r => setTimeout(r, delay));
         }
     }
 }
 
 export default {
-    command: 'لماذا',
-    aliases: ['why', 'whyme', 'question', 'سؤال', 'ليش'],
-    category: 'fun',
-    description: 'الحصول على سؤال "لماذا" عشوائي',
-    usage: '!لماذا',
+    command: 'Ù„Ù…Ø§Ø°Ø§',
+    aliases: ['why', 'whyme', 'question', 'Ø³Ø¤Ø§Ù„', 'Ù„ÙŠØ´'],
+    category: 'ØªØ³Ù„ÙŠØ©',
+    description: 'Ø§Ù„Ø­ØµÙˆÙ„ Ø¹Ù„Ù‰ Ø³Ø¤Ø§Ù„ "Ù„Ù…Ø§Ø°Ø§" Ø¹Ø´ÙˆØ§Ø¦ÙŠ',
+    usage: '!Ù„Ù…Ø§Ø°Ø§',
     
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -30,29 +30,30 @@ export default {
             
             if (!data?.why?.trim()) {
                 return await sock.sendMessage(chatId, { 
-                    text: '❌ رد غير صالح من واجهة البرمجة. حاول مرة أخرى.' 
+                    text: 'âŒ Ø±Ø¯ ØºÙŠØ± ØµØ§Ù„Ø­ Ù…Ù† ÙˆØ§Ø¬Ù‡Ø© Ø§Ù„Ø¨Ø±Ù…Ø¬Ø©. Ø­Ø§ÙˆÙ„ Ù…Ø±Ø© Ø£Ø®Ø±Ù‰.' 
                 }, { quoted: message });
             }
             
             const whyText = data.why;
             
-            // ترجمة "Why?" إلى "لماذا؟" في بداية السؤال
+            // ØªØ±Ø¬Ù…Ø© "Why?" Ø¥Ù„Ù‰ "Ù„Ù…Ø§Ø°Ø§ØŸ" ÙÙŠ Ø¨Ø¯Ø§ÙŠØ© Ø§Ù„Ø³Ø¤Ø§Ù„
             let finalText = whyText;
             if (whyText.toLowerCase().startsWith('why')) {
-                finalText = '🤔 *لماذا؟*\n\n' + whyText.replace(/^why\s*/i, '');
+                finalText = 'ðŸ¤” *Ù„Ù…Ø§Ø°Ø§ØŸ*\n\n' + whyText.replace(/^why\s*/i, '');
             } else {
-                finalText = `🤔 *لماذا؟*\n\n${whyText}`;
+                finalText = `ðŸ¤” *Ù„Ù…Ø§Ø°Ø§ØŸ*\n\n${whyText}`;
             }
             
             await sock.sendMessage(chatId, { 
-                text: finalText + '\n\n🔥 *CRAZY-SEIF BOT* | 📞 201144534147' 
+                text: finalText + '\n\nðŸ”¥ *Crazy Seif BOT* | ðŸ“ž 01144534147' 
             }, { quoted: message });
             
         } catch (error) {
-            console.error('خطأ في أمر "لماذا":', error);
+            console.error('Ø®Ø·Ø£ ÙÙŠ Ø£Ù…Ø± "Ù„Ù…Ø§Ø°Ø§":', error);
             await sock.sendMessage(chatId, { 
-                text: '❌ فشل في جلب السؤال. حاول مرة أخرى لاحقاً.' 
+                text: 'âŒ ÙØ´Ù„ ÙÙŠ Ø¬Ù„Ø¨ Ø§Ù„Ø³Ø¤Ø§Ù„. Ø­Ø§ÙˆÙ„ Ù…Ø±Ø© Ø£Ø®Ø±Ù‰ Ù„Ø§Ø­Ù‚Ø§Ù‹.' 
             }, { quoted: message });
         }
     }
 };
+

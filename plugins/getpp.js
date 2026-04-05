@@ -1,9 +1,9 @@
-export default {
-    command: 'getpp',
-    aliases: ['dlpp', 'profilepic', 'getdp'],
-    category: 'general',
-    description: 'Get user profile picture',
-    usage: '.getpp @user or reply or number',
+﻿export default {
+    command: 'جيتبب',
+    aliases: ['dlpp', 'profilepic', 'getdp', 'getpp'],
+    category: 'عام',
+    description: 'جلب مستخدم صورة شخصية صورة',
+    usage: '.جلببب @مستخدم ور رد ور رقم',
     async handler(sock, message, args, _context) {
         const chatId = message.key.remoteJid;
         const isGroup = chatId.endsWith('@g.us');
@@ -27,13 +27,13 @@ export default {
             }
             else {
                 return await sock.sendMessage(chatId, {
-                    text: '❌ Invalid number. Use format: 923051234567 or +923051234567'
+                    text: 'âŒ Invalid number. Use format: 923051234567 or +923051234567'
                 }, { quoted: message });
             }
         }
         else {
             return await sock.sendMessage(chatId, {
-                text: '📸 *Get Profile Picture*\n\nUsage:\n• Reply to a message\n• Mention someone: `.getpp @user`\n• Provide a number: `.getpp 923001234567`'
+                text: 'ðŸ“¸ *Get Profile Picture*\n\nUsage:\nâ€¢ Reply to a message\nâ€¢ Mention someone: `.getpp @user`\nâ€¢ Provide a number: `.getpp 923001234567`'
             }, { quoted: message });
         }
         try {
@@ -62,21 +62,25 @@ export default {
             }
             catch (e) {
                 return await sock.sendMessage(chatId, {
-                    text: `❌ No profile picture found for *${displayName}* (${displayNumber})`
+                    text: `âŒ No profile picture found for *${displayName}* (${displayNumber})`
                 }, { quoted: message });
             }
             if (ppUrl) {
                 await sock.sendMessage(chatId, {
                     image: { url: ppUrl },
-                    caption: `📸 *Profile Picture*${displayName && displayName !== 'Unknown' ? `\n\n👤 *Name:* ${ displayName}` : ''}${displayNumber ? `\n📱 *Number:* ${ displayNumber}` : ''}`
+                    caption: `ðŸ“¸ *Profile Picture*${displayName && displayName !== 'Unknown' ? `\n\nðŸ‘¤ *Name:* ${ displayName}` : ''}${displayNumber ? `\nðŸ“± *Number:* ${ displayNumber}` : ''}`
                 }, { quoted: message });
             }
         }
         catch (error) {
             console.error('GetPP Error:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to fetch profile picture.'
+                text: 'âŒ Failed to fetch profile picture.'
             }, { quoted: message });
         }
     }
 };
+
+
+
+

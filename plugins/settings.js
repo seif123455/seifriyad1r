@@ -1,12 +1,12 @@
-import isOwnerOrSudo, { cleanJid } from '../lib/isOwner.js';
+﻿import isOwnerOrSudo, { cleanJid } from '../lib/isOwner.js';
 import { getChatbot, getWelcome, getGoodbye, getAntitag } from '../lib/index.js';
 import store from '../lib/lightweight_store.js';
 export default {
-    command: 'settings',
-    aliases: ['config', 'setting'],
-    category: 'owner',
-    description: 'Show bot settings and per-group configurations',
-    usage: '.settings',
+    command: 'إعدادات',
+    aliases: ['config', 'setting', 'settings'],
+    category: 'المالك',
+    description: 'عرض بوت إعدادات اند بير-مجموعة كونفيجوراتيونس',
+    usage: '.إعدادات',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const senderId = message.key.participant || message.key.remoteJid;
@@ -15,7 +15,7 @@ export default {
             const isMe = message.key.fromMe;
             if (!isMe && !isOwner) {
                 return await sock.sendMessage(chatId, {
-                    text: '❌ *Access Denied:* Only Owner/Sudo can view settings.'
+                    text: 'âŒ *Access Denied:* Only Owner/Sudo can view settings.'
                 }, { quoted: message });
             }
             const isGroup = chatId.endsWith('@g.us');
@@ -40,22 +40,22 @@ export default {
             catch {
                 cmdReactEnabled = true;
             }
-            const getSt = (val) => val ? '✅' : '❌';
-            let menuText = `╭━〔 *MEGA CONFIG* 〕━┈\n┃\n`;
-            menuText += `┃ 👤 *User:* @${cleanJid(senderId)}\n`;
-            menuText += `┃ 🤖 *Mode:* ${botMode.toUpperCase()}\n`;
-            menuText += `┃\n┣━〔 *GLOBAL CONFIG* 〕━┈\n`;
-            menuText += `┃ ${getSt(autoStatus?.enabled)} *Auto Status*\n`;
-            menuText += `┃ ${getSt(autoread?.enabled)} *Auto Read*\n`;
-            menuText += `┃ ${getSt(autotyping?.enabled)} *Auto Typing*\n`;
-            menuText += `┃ ${getSt(pmblocker?.enabled)} *PM Blocker*\n`;
-            menuText += `┃ ${getSt(anticall?.enabled)} *Anti Call*\n`;
-            menuText += `┃ ${getSt(autoReaction)} *Auto Reaction*\n`;
-            menuText += `┃ ${getSt(cmdReactEnabled)} *Cmd Reactions*\n`;
-            menuText += `┃ ${getSt(stealthMode?.enabled)} *Stealth Mode*\n`;
-            menuText += `┃ ${getSt(autoBio?.enabled)} *Auto Bio*\n`;
-            menuText += `┃ ${getSt(mentionData?.enabled)} *Mention Alert*\n`;
-            menuText += `┃\n`;
+            const getSt = (val) => val ? 'âœ…' : 'âŒ';
+            let menuText = `â•­â”ã€” *MEGA CONFIG* ã€•â”â”ˆ\nâ”ƒ\n`;
+            menuText += `â”ƒ ðŸ‘¤ *User:* @${cleanJid(senderId)}\n`;
+            menuText += `â”ƒ ðŸ¤– *Mode:* ${botMode.toUpperCase()}\n`;
+            menuText += `â”ƒ\nâ”£â”ã€” *GLOBAL CONFIG* ã€•â”â”ˆ\n`;
+            menuText += `â”ƒ ${getSt(autoStatus?.enabled)} *Auto Status*\n`;
+            menuText += `â”ƒ ${getSt(autoread?.enabled)} *Auto Read*\n`;
+            menuText += `â”ƒ ${getSt(autotyping?.enabled)} *Auto Typing*\n`;
+            menuText += `â”ƒ ${getSt(pmblocker?.enabled)} *PM Blocker*\n`;
+            menuText += `â”ƒ ${getSt(anticall?.enabled)} *Anti Call*\n`;
+            menuText += `â”ƒ ${getSt(autoReaction)} *Auto Reaction*\n`;
+            menuText += `â”ƒ ${getSt(cmdReactEnabled)} *Cmd Reactions*\n`;
+            menuText += `â”ƒ ${getSt(stealthMode?.enabled)} *Stealth Mode*\n`;
+            menuText += `â”ƒ ${getSt(autoBio?.enabled)} *Auto Bio*\n`;
+            menuText += `â”ƒ ${getSt(mentionData?.enabled)} *Mention Alert*\n`;
+            menuText += `â”ƒ\n`;
             if (isGroup) {
                 const groupSettings = await store.getAllSettings(chatId);
                 const groupAntilink = groupSettings.antilink || { enabled: false };
@@ -71,18 +71,18 @@ export default {
                 const groupWelcome = welcomeData !== null && welcomeData !== undefined && welcomeData !== false;
                 // getGoodbye returns null or message string or {enabled}
                 const groupGoodbye = goodbyeData !== null && goodbyeData !== undefined && goodbyeData !== false;
-                menuText += `┣━〔 *GROUP CONFIG* 〕━┈\n`;
-                menuText += `┃ ${getSt(groupAntilink.enabled)} *Antilink*\n`;
-                menuText += `┃ ${getSt(groupBadword.enabled)} *Antibadword*\n`;
-                menuText += `┃ ${getSt(groupAntitag.enabled)} *Antitag*\n`;
-                menuText += `┃ ${getSt(groupChatbot)} *Chatbot*\n`;
-                menuText += `┃ ${getSt(groupWelcome)} *Welcome*\n`;
-                menuText += `┃ ${getSt(groupGoodbye)} *Goodbye*\n`;
+                menuText += `â”£â”ã€” *GROUP CONFIG* ã€•â”â”ˆ\n`;
+                menuText += `â”ƒ ${getSt(groupAntilink.enabled)} *Antilink*\n`;
+                menuText += `â”ƒ ${getSt(groupBadword.enabled)} *Antibadword*\n`;
+                menuText += `â”ƒ ${getSt(groupAntitag.enabled)} *Antitag*\n`;
+                menuText += `â”ƒ ${getSt(groupChatbot)} *Chatbot*\n`;
+                menuText += `â”ƒ ${getSt(groupWelcome)} *Welcome*\n`;
+                menuText += `â”ƒ ${getSt(groupGoodbye)} *Goodbye*\n`;
             }
             else {
-                menuText += `┃ 💡 *Note:* _Use in group for group configs._\n`;
+                menuText += `â”ƒ ðŸ’¡ *Note:* _Use in group for group configs._\n`;
             }
-            menuText += `┃\n╰━━━━━━━━━━━━━━━━┈`;
+            menuText += `â”ƒ\nâ•°â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”ˆ`;
             await sock.sendMessage(chatId, {
                 text: menuText,
                 mentions: [senderId],
@@ -90,7 +90,7 @@ export default {
                     externalAdReply: {
                         title: "SYSTEM SETTINGS PANEL",
                         body: "Configuration Status",
-                        thumbnailUrl: "https://github.com/GlobalTechInfo.png",
+                        thumbnailUrl: "https://github.com/CrazySeif.png",
                         mediaType: 1,
                         renderLargerThumbnail: true
                     }
@@ -100,8 +100,12 @@ export default {
         catch (error) {
             console.error('Settings Command Error:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Error: Failed to load settings.'
+                text: 'âŒ Error: Failed to load settings.'
             }, { quoted: message });
         }
     }
 };
+
+
+
+

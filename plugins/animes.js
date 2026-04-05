@@ -1,4 +1,4 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 
 const supportedAnimes = [
     'akira', 'akiyama', 'anna', 'asuna', 'ayuzawa', 'boruto', 'chiho', 'chitoge',
@@ -13,51 +13,51 @@ function pickRandom(arr, count = 1) {
     return shuffled.slice(0, count);
 }
 
-const animuMenu = '🎀 *قائمة الأنمي* 🎀\n\n' +
-    '• *akira*\n' +
-    '• *akiyama*\n' +
-    '• *anna*\n' +
-    '• *asuna*\n' +
-    '• *ayuzawa*\n' +
-    '• *boruto*\n' +
-    '• *chiho*\n' +
-    '• *chitoge*\n' +
-    '• *deidara*\n' +
-    '• *erza*\n' +
-    '• *elaina*\n' +
-    '• *eba*\n' +
-    '• *emilia*\n' +
-    '• *hestia*\n' +
-    '• *hinata*\n' +
-    '• *inori*\n' +
-    '• *isuzu*\n' +
-    '• *itachi*\n' +
-    '• *itori*\n' +
-    '• *kaga*\n' +
-    '• *kagura*\n' +
-    '• *kaori*\n' +
-    '• *keneki*\n' +
-    '• *kotori*\n' +
-    '• *kurumi*\n' +
-    '• *madara*\n' +
-    '• *mikasa*\n' +
-    '• *miku*\n' +
-    '• *minato*\n' +
-    '• *naruto*\n' +
-    '• *nezuko*\n' +
-    '• *sagiri*\n' +
-    '• *sasuke*\n' +
-    '• *sakura*\n\n' +
-    '📌 *الاستخدام:*\n' +
-    '!انمي <اسم الأنمي>\n' +
-    '*مثال:* `!انمي ناروتو` أو `!انمي naruto`';
+const animuMenu = 'ðŸŽ€ *Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„Ø£Ù†Ù…ÙŠ* ðŸŽ€\n\n' +
+    'â€¢ *akira*\n' +
+    'â€¢ *akiyama*\n' +
+    'â€¢ *anna*\n' +
+    'â€¢ *asuna*\n' +
+    'â€¢ *ayuzawa*\n' +
+    'â€¢ *boruto*\n' +
+    'â€¢ *chiho*\n' +
+    'â€¢ *chitoge*\n' +
+    'â€¢ *deidara*\n' +
+    'â€¢ *erza*\n' +
+    'â€¢ *elaina*\n' +
+    'â€¢ *eba*\n' +
+    'â€¢ *emilia*\n' +
+    'â€¢ *hestia*\n' +
+    'â€¢ *hinata*\n' +
+    'â€¢ *inori*\n' +
+    'â€¢ *isuzu*\n' +
+    'â€¢ *itachi*\n' +
+    'â€¢ *itori*\n' +
+    'â€¢ *kaga*\n' +
+    'â€¢ *kagura*\n' +
+    'â€¢ *kaori*\n' +
+    'â€¢ *keneki*\n' +
+    'â€¢ *kotori*\n' +
+    'â€¢ *kurumi*\n' +
+    'â€¢ *madara*\n' +
+    'â€¢ *mikasa*\n' +
+    'â€¢ *miku*\n' +
+    'â€¢ *minato*\n' +
+    'â€¢ *naruto*\n' +
+    'â€¢ *nezuko*\n' +
+    'â€¢ *sagiri*\n' +
+    'â€¢ *sasuke*\n' +
+    'â€¢ *sakura*\n\n' +
+    'ðŸ“Œ *Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…:*\n' +
+    '!Ø§Ù†Ù…ÙŠ <Ø§Ø³Ù… Ø§Ù„Ø£Ù†Ù…ÙŠ>\n' +
+    '*Ù…Ø«Ø§Ù„:* `!Ø§Ù†Ù…ÙŠ Ù†Ø§Ø±ÙˆØªÙˆ` Ø£Ùˆ `!Ø§Ù†Ù…ÙŠ naruto`';
 
 export default {
-    command: 'انمي',
-    aliases: ['animes', 'animeimg', 'animepic', 'صور_انمي'],
-    category: 'fun',
-    description: 'إرسال صور أنمي عشوائية',
-    usage: '!انمي <اسم_الأنمي>',
+    command: 'Ø§Ù†Ù…ÙŠ',
+    aliases: ['animes', 'animeimg', 'animepic', 'ØµÙˆØ±_Ø§Ù†Ù…ÙŠ'],
+    category: 'ØªØ³Ù„ÙŠØ©',
+    description: 'Ø¥Ø±Ø³Ø§Ù„ ØµÙˆØ± Ø£Ù†Ù…ÙŠ Ø¹Ø´ÙˆØ§Ø¦ÙŠØ©',
+    usage: '!Ø§Ù†Ù…ÙŠ <Ø§Ø³Ù…_Ø§Ù„Ø£Ù†Ù…ÙŠ>',
     
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -66,7 +66,7 @@ export default {
         
         if (!input || !supportedAnimes.includes(typeLower)) {
             const replyText = input && !supportedAnimes.includes(typeLower)
-                ? `❌ أنمي غير مدعوم: ${typeLower}\n\n`
+                ? `âŒ Ø£Ù†Ù…ÙŠ ØºÙŠØ± Ù…Ø¯Ø¹ÙˆÙ…: ${typeLower}\n\n`
                 : '';
             return await sock.sendMessage(chatId, { text: replyText + animuMenu }, { quoted: message });
         }
@@ -77,7 +77,7 @@ export default {
             const images = res.data;
             
             if (!Array.isArray(images) || images.length === 0)
-                throw new Error('لا توجد صور');
+                throw new Error('Ù„Ø§ ØªÙˆØ¬Ø¯ ØµÙˆØ±');
             
             const randomImages = pickRandom(images, Math.min(3, images.length));
             
@@ -86,15 +86,16 @@ export default {
                     const imageData = await axios.get(img, { responseType: 'arraybuffer', timeout: 15000 });
                     await sock.sendMessage(chatId, { 
                         image: Buffer.from(imageData.data), 
-                        caption: `✨ *${typeLower}*\n🔥 CRAZY-SEIF` 
+                        caption: `âœ¨ *${typeLower}*\nðŸ”¥ Crazy Seif` 
                     }, { quoted: message });
                 } catch { }
             }
             
         } catch (err) {
             await sock.sendMessage(chatId, { 
-                text: '❌ فشل في جلب صور الأنمي. يرجى المحاولة مرة أخرى لاحقاً.' 
+                text: 'âŒ ÙØ´Ù„ ÙÙŠ Ø¬Ù„Ø¨ ØµÙˆØ± Ø§Ù„Ø£Ù†Ù…ÙŠ. ÙŠØ±Ø¬Ù‰ Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø© Ù…Ø±Ø© Ø£Ø®Ø±Ù‰ Ù„Ø§Ø­Ù‚Ø§Ù‹.' 
             }, { quoted: message });
         }
     }
 };
+

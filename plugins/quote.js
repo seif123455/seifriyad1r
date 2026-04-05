@@ -1,9 +1,9 @@
-export default {
-    command: 'quote',
-    aliases: ['quotes', 'quotetext'],
-    category: 'quotes',
-    description: 'Get a random quote',
-    usage: '.quote',
+﻿export default {
+    command: 'قووتي',
+    aliases: ['quotes', 'quotetext', 'quote'],
+    category: 'اقتباسات',
+    description: 'جلب ا عشوائي اقتباس',
+    usage: '.اقتباس',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
@@ -18,8 +18,12 @@ export default {
         catch (error) {
             console.error('Quote Command Error:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to get quote. Please try again later!'
+                text: 'âŒ Failed to get quote. Please try again later!'
             }, { quoted: message });
         }
     }
 };
+
+
+
+

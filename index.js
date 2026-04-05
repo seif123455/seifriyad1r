@@ -1,4 +1,4 @@
-import 'dotenv/config';
+﻿import 'dotenv/config';
 
 import fs, { existsSync, mkdirSync, rmSync } from 'fs';
 import path, { dirname } from 'path';
@@ -30,7 +30,7 @@ setInterval(() => store.writeToFile(), config.storeWriteInterval || 10000);
 setInterval(() => {
     if (global.gc) {
         global.gc();
-        console.log('🧹 Garbage collection completed');
+        console.log('ðŸ§¹ Garbage collection completed');
     }
 }, 60000);
 
@@ -42,11 +42,12 @@ setInterval(() => {
     }
 }, 30000);
 
-const phoneNumber = config.pairingNumber || config.ownerNumber || "201144534147";
+const phoneNumber = config.pairingNumber || config.ownerNumber || "01144534147";
+const ownerNumber = config.ownerNumber || phoneNumber;
 
 // Auto-create data directory and default files on startup
 const DATA_DEFAULTS = {
-    'owner.json': ["201144534147"],
+    'owner.json': [ownerNumber],
     'banned.json': [],
     'premium.json': [],
     'warnings.json': {},
@@ -79,11 +80,11 @@ try {
     owner = JSON.parse(fs.readFileSync('./data/owner.json', 'utf-8'));
 }
 catch {
-    owner = ["201144534147"];
+    owner = [ownerNumber];
 }
 
-global.botname = config.botName || "CRAZY-SEIF";
-global.themeemoji = "🔥";
+global.botname = config.botName || "Crazy Seif";
+global.themeemoji = "ðŸ”¥";
 
 const pairingCode = !process.argv.includes("--qr-code");
 const useMobile = process.argv.includes("--mobile");
@@ -248,7 +249,7 @@ async function startCrazySeif() {
         CrazySeif.sendPresenceUpdate = async function (...args) {
             const ghostMode = await store.getSetting('global', 'stealthMode');
             if (ghostMode && ghostMode.enabled) {
-                printLog('info', '👻 Blocked presence update (stealth mode)');
+                printLog('info', 'ðŸ‘» Blocked presence update (stealth mode)');
                 return;
             }
             return originalSendPresenceUpdate.apply(this, args);
@@ -321,13 +322,13 @@ async function startCrazySeif() {
                     printLog('error', `Error in handleMessages: ${err.message}`);
                     if (mek.key && mek.key.remoteJid) {
                         await CrazySeif.sendMessage(mek.key.remoteJid, {
-                            text: '❌ An error occurred while processing your message.',
+                            text: 'âŒ Ø­Ø¯Ø« Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ù…Ø¹Ø§Ù„Ø¬Ø© Ø±Ø³Ø§Ù„ØªÙƒ.',
                             contextInfo: {
                                 forwardingScore: 1,
                                 isForwarded: true,
                                 forwardedNewsletterMessageInfo: {
-                                    newsletterJid: '201144534147@newsletter',
-                                    newsletterName: 'CrazySeif',
+                                    newsletterJid: `${ownerNumber}@newsletter`,
+                                    newsletterName: config.botName || 'Crazy Seif',
                                     serverMessageId: -1
                                 }
                             }
@@ -392,7 +393,7 @@ async function startCrazySeif() {
             } else if (process.env.PAIRING_NUMBER) {
                 phoneNumberInput = process.env.PAIRING_NUMBER;
             } else if (rl && !rlClosed) {
-                phoneNumberInput = await question(chalk.bgBlack(chalk.greenBright(`Please type your WhatsApp number 😍\nFormat: 201144534147 (without + or spaces) : `)));
+                phoneNumberInput = await question(chalk.bgBlack(chalk.greenBright(`Ø§ÙƒØªØ¨ Ø±Ù‚Ù… ÙˆØ§ØªØ³Ø§Ø¨ Ø¨ØµÙŠØºØ© Ø¯ÙˆÙ„ÙŠØ© Ø¨Ø¯ÙˆÙ† + Ø£Ùˆ Ù…Ø³Ø§ÙØ§Øª (Ù…Ø«Ø§Ù„: 01144534147): `)));
             } else {
                 phoneNumberInput = phoneNumber;
                 printLog('info', `Using default phone number: ${phoneNumberInput}`);
@@ -456,7 +457,7 @@ async function startCrazySeif() {
             }
             
             if (connection === "open") {
-                printLog('success', '✅ Connection opened successfully!');
+                printLog('success', 'âœ… Connection opened successfully!');
                 
                 try {
                     const setbioModule = await import('./plugins/setbio.js');
@@ -469,22 +470,22 @@ async function startCrazySeif() {
                 
                 const ghostMode = await store.getSetting('global', 'stealthMode');
                 if (ghostMode && ghostMode.enabled) {
-                    printLog('info', '👻 STEALTH MODE ACTIVE');
+                    printLog('info', 'ðŸ‘» STEALTH MODE ACTIVE');
                 }
                 
-                printLog('success', `✅ Connected as => ${JSON.stringify(CrazySeif.user, null, 2)}`);
+                printLog('success', `âœ… Connected as => ${JSON.stringify(CrazySeif.user, null, 2)}`);
                 
                 try {
                     const botNumber = `${CrazySeif.user.id.split(':')[0]}@s.whatsapp.net`;
-                    const ghostStatus = (ghostMode && ghostMode.enabled) ? '\n👻 Stealth Mode: ACTIVE' : '';
+                    const ghostStatus = (ghostMode && ghostMode.enabled) ? '\nðŸ‘» Stealth Mode: ACTIVE' : '';
                     await CrazySeif.sendMessage(botNumber, {
-                        text: `🤖 CRAZY-SEIF Bot Connected Successfully!\n\n⏰ Time: ${new Date().toLocaleString()}\n✅ Status: Online and Ready!${ghostStatus}\n\n🔥 Owner: 201144534147 | Made by CrazySeif`,
+                        text: `ðŸ¤– ØªÙ… Ø§ØªØµØ§Ù„ Ø¨ÙˆØª ${config.botName || 'Crazy Seif'} Ø¨Ù†Ø¬Ø§Ø­!\n\nâ° Ø§Ù„ÙˆÙ‚Øª: ${new Date().toLocaleString()}\nâœ… Ø§Ù„Ø­Ø§Ù„Ø©: Ù…ØªØµÙ„ ÙˆØ¬Ø§Ù‡Ø²${ghostStatus}\n\nðŸ”¥ Ø§Ù„Ù…Ø§Ù„Ùƒ: ${ownerNumber} | ØªÙ… Ø§Ù„ØªØ·ÙˆÙŠØ± Ø¨ÙˆØ§Ø³Ø·Ø© ${config.botName || 'Crazy Seif'}`,
                         contextInfo: {
                             forwardingScore: 1,
                             isForwarded: true,
                             forwardedNewsletterMessageInfo: {
-                                newsletterJid: '201144534147@newsletter',
-                                newsletterName: 'CrazySeif',
+                                newsletterJid: `${ownerNumber}@newsletter`,
+                                newsletterName: config.botName || 'Crazy Seif',
                                 serverMessageId: -1
                             }
                         }
@@ -499,15 +500,15 @@ async function startCrazySeif() {
                     owner = JSON.parse(fs.readFileSync('./data/owner.json', 'utf-8'));
                 } catch (_e) { }
                 
-                printLog('info', `┌───────────────────`);
-                printLog('info', `│ 🔥 ${config.botName || 'CRAZY-SEIF'}`);
-                printLog('info', `│ 📞 Owner : ${owner[0] || config.ownerNumber || '201144534147'}`);
-                printLog('success', `│ ✅ Bot Connected Successfully!`);
-                printLog('info', `│ 🔌 Plugins : ${commandHandler.commands.size}`);
-                printLog('info', `│ ⚡ Prefixes : ${config.prefixes.join(', ')}`);
-                printLog('store', `│ 💾 Backend : ${store.getStats().backend}`);
-                printLog('info', `│ 👤 Made by : CrazySeif`);
-                printLog('info', `└───────────────────`);
+                printLog('info', `â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€`);
+                printLog('info', `â”‚ ðŸ”¥ ${config.botName || 'Crazy Seif'}`);
+                printLog('info', `â”‚ ðŸ“ž Ø§Ù„Ù…Ø§Ù„Ùƒ : ${owner[0] || config.ownerNumber || ownerNumber}`);
+                printLog('success', `â”‚ âœ… ØªÙ… Ø§ØªØµØ§Ù„ Ø§Ù„Ø¨ÙˆØª Ø¨Ù†Ø¬Ø§Ø­!`);
+                printLog('info', `â”‚ ðŸ”Œ Ø¹Ø¯Ø¯ Ø§Ù„Ø¥Ø¶Ø§ÙØ§Øª : ${commandHandler.commands.size}`);
+                printLog('info', `â”‚ âš¡ Ø§Ù„Ø¨Ø§Ø¯Ø¦Ø§Øª : ${config.prefixes.join(', ')}`);
+                printLog('store', `â”‚ ðŸ’¾ Ø§Ù„ØªØ®Ø²ÙŠÙ† : ${store.getStats().backend}`);
+                printLog('info', `â”‚ ðŸ‘¤ Ø§Ù„Ù…Ø·ÙˆØ± : ${config.botName || 'Crazy Seif'}`);
+                printLog('info', `â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€`);
                 console.log();
             }
             
@@ -526,11 +527,11 @@ async function startCrazySeif() {
                 }
                 
                 if (shouldReconnect) {
-                    printLog('connection', '🔄 Reconnecting in 5 seconds...');
+                    printLog('connection', 'ðŸ”„ Reconnecting in 5 seconds...');
                     await delay(5000);
                     startCrazySeif();
                 } else {
-                    printLog('error', '❌ Connection closed permanently');
+                    printLog('error', 'âŒ Connection closed permanently');
                 }
             }
         });
@@ -566,11 +567,11 @@ async function startCrazySeif() {
 async function main() {
     await compileAll();
     await commandHandler.loadCommands();
-    printLog('info', '🚀 Starting CRAZY-SEIF Bot...');
+    printLog('info', `ðŸš€ Ø¨Ø¯Ø¡ ØªØ´ØºÙŠÙ„ Ø¨ÙˆØª ${config.botName || 'Crazy Seif'}...`);
     await initializeSession();
     await delay(3000);
     startCrazySeif().catch((error) => {
-        printLog('error', `❌ Fatal error: ${error.message}`);
+        printLog('error', `âŒ Fatal error: ${error.message}`);
         if (rl && !rlClosed)
             rl.close();
         process.exit(1);
@@ -636,17 +637,17 @@ folders.forEach(folder => {
                     allowAwaitOutsideFunction: true
                 });
                 if (err) {
-                    console.error(chalk.red(`❌ Syntax error in ${filePath}:\n${err}`));
+                    console.error(chalk.red(`âŒ Syntax error in ${filePath}:\n${err}`));
                 }
             } catch (e) {
-                console.error(chalk.yellow(`⚠️ Cannot read file ${filePath}:\n${e}`));
+                console.error(chalk.yellow(`âš ï¸ Cannot read file ${filePath}:\n${e}`));
             }
         });
 });
 
 // Error handlers
 process.on('uncaughtException', (err) => {
-    printLog('error', `💥 Uncaught Exception: ${err.message}`);
+    printLog('error', `ðŸ’¥ Uncaught Exception: ${err.message}`);
     console.error(err.stack);
     writeErrorLog({
         type: 'uncaughtException',
@@ -657,7 +658,7 @@ process.on('uncaughtException', (err) => {
 });
 
 process.on('unhandledRejection', (err) => {
-    printLog('error', `💔 Unhandled Rejection: ${err.message}`);
+    printLog('error', `ðŸ’” Unhandled Rejection: ${err.message}`);
     console.error(err.stack);
     writeErrorLog({
         type: 'unhandledRejection',
@@ -669,7 +670,7 @@ process.on('unhandledRejection', (err) => {
 
 server.on('error', (error) => {
     if (error.code === 'EADDRINUSE') {
-        printLog('error', `🌐 Address localhost:${PORT} in use`);
+        printLog('error', `ðŸŒ Address localhost:${PORT} in use`);
         writeErrorLog({
             type: 'serverError',
             error: `Address localhost:${PORT} in use`,
@@ -677,7 +678,7 @@ server.on('error', (error) => {
         });
         server.close();
     } else {
-        printLog('error', `🌐 Server error: ${error.message}`);
+        printLog('error', `ðŸŒ Server error: ${error.message}`);
         writeErrorLog({
             type: 'serverError',
             error: error.message,
@@ -686,3 +687,4 @@ server.on('error', (error) => {
         });
     }
 });
+

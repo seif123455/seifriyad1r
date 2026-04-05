@@ -1,4 +1,4 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import { dataFile } from '../lib/paths.js';
 import { downloadContentFromMessage } from '@whiskeysockets/baileys';
@@ -30,7 +30,7 @@ const getFolderSizeInMB = (folderPath) => {
         }
         return totalSize / (1024 * 1024);
     } catch (err) {
-        console.error('خطأ في حساب حجم المجلد:', err);
+        console.error('Ø®Ø·Ø£ ÙÙŠ Ø­Ø³Ø§Ø¨ Ø­Ø¬Ù… Ø§Ù„Ù…Ø¬Ù„Ø¯:', err);
         return 0;
     }
 };
@@ -46,7 +46,7 @@ const cleanTempFolderIfLarge = () => {
             }
         }
     } catch (err) {
-        console.error('خطأ في تنظيف المجلد المؤقت:', err);
+        console.error('Ø®Ø·Ø£ ÙÙŠ ØªÙ†Ø¸ÙŠÙ Ø§Ù„Ù…Ø¬Ù„Ø¯ Ø§Ù„Ù…Ø¤Ù‚Øª:', err);
     }
 };
 
@@ -74,7 +74,7 @@ async function saveAntideleteConfig(config) {
             fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
         }
     } catch (err) {
-        console.error('خطأ في حفظ الإعدادات:', err);
+        console.error('Ø®Ø·Ø£ ÙÙŠ Ø­ÙØ¸ Ø§Ù„Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª:', err);
     }
 }
 
@@ -94,7 +94,7 @@ export async function storeMessage(sock, message) {
         
         if (viewOnceContainer) {
             if (viewOnceContainer.imageMessage) {
-                mediaType = 'صورة';
+                mediaType = 'ØµÙˆØ±Ø©';
                 content = viewOnceContainer.imageMessage.caption || '';
                 const stream = await downloadContentFromMessage(viewOnceContainer.imageMessage, 'image');
                 let buffer = Buffer.from([]);
@@ -105,7 +105,7 @@ export async function storeMessage(sock, message) {
                 await writeFile(mediaPath, buffer);
                 isViewOnce = true;
             } else if (viewOnceContainer.videoMessage) {
-                mediaType = 'فيديو';
+                mediaType = 'ÙÙŠØ¯ÙŠÙˆ';
                 content = viewOnceContainer.videoMessage.caption || '';
                 const stream = await downloadContentFromMessage(viewOnceContainer.videoMessage, 'video');
                 let buffer = Buffer.from([]);
@@ -121,7 +121,7 @@ export async function storeMessage(sock, message) {
         } else if (message.message?.extendedTextMessage?.text) {
             content = message.message.extendedTextMessage.text;
         } else if (message.message?.imageMessage) {
-            mediaType = 'صورة';
+            mediaType = 'ØµÙˆØ±Ø©';
             content = message.message.imageMessage.caption || '';
             const stream = await downloadContentFromMessage(message.message.imageMessage, 'image');
             let buffer = Buffer.from([]);
@@ -131,7 +131,7 @@ export async function storeMessage(sock, message) {
             mediaPath = path.join(TEMP_MEDIA_DIR, `${messageId}.jpg`);
             await writeFile(mediaPath, buffer);
         } else if (message.message?.stickerMessage) {
-            mediaType = 'ملصق';
+            mediaType = 'Ù…Ù„ØµÙ‚';
             const stream = await downloadContentFromMessage(message.message.stickerMessage, 'sticker');
             let buffer = Buffer.from([]);
             for await (const chunk of stream) {
@@ -140,7 +140,7 @@ export async function storeMessage(sock, message) {
             mediaPath = path.join(TEMP_MEDIA_DIR, `${messageId}.webp`);
             await writeFile(mediaPath, buffer);
         } else if (message.message?.videoMessage) {
-            mediaType = 'فيديو';
+            mediaType = 'ÙÙŠØ¯ÙŠÙˆ';
             content = message.message.videoMessage.caption || '';
             const stream = await downloadContentFromMessage(message.message.videoMessage, 'video');
             let buffer = Buffer.from([]);
@@ -150,7 +150,7 @@ export async function storeMessage(sock, message) {
             mediaPath = path.join(TEMP_MEDIA_DIR, `${messageId}.mp4`);
             await writeFile(mediaPath, buffer);
         } else if (message.message?.audioMessage) {
-            mediaType = 'صوت';
+            mediaType = 'ØµÙˆØª';
             const mime = message.message.audioMessage.mimetype || '';
             const ext = mime.includes('mpeg') ? 'mp3' : (mime.includes('ogg') ? 'ogg' : 'mp3');
             const stream = await downloadContentFromMessage(message.message.audioMessage, 'audio');
@@ -176,19 +176,19 @@ export async function storeMessage(sock, message) {
                 const ownerNumber = `${sock.user.id.split(':')[0]}@s.whatsapp.net`;
                 const senderName = sender.split('@')[0];
                 const mediaOptions = {
-                    caption: `*📸 صورة مرة واحدة*\nمن: @${senderName}`,
+                    caption: `*ðŸ“¸ ØµÙˆØ±Ø© Ù…Ø±Ø© ÙˆØ§Ø­Ø¯Ø©*\nÙ…Ù†: @${senderName}`,
                     mentions: [sender]
                 };
-                if (mediaType === 'صورة') {
+                if (mediaType === 'ØµÙˆØ±Ø©') {
                     await sock.sendMessage(ownerNumber, { image: { url: mediaPath }, ...mediaOptions });
-                } else if (mediaType === 'فيديو') {
+                } else if (mediaType === 'ÙÙŠØ¯ÙŠÙˆ') {
                     await sock.sendMessage(ownerNumber, { video: { url: mediaPath }, ...mediaOptions });
                 }
                 try { fs.unlinkSync(mediaPath); } catch { }
             } catch (e) { }
         }
     } catch (err) {
-        console.error('خطأ في حفظ الرسالة:', err);
+        console.error('Ø®Ø·Ø£ ÙÙŠ Ø­ÙØ¸ Ø§Ù„Ø±Ø³Ø§Ù„Ø©:', err);
     }
 }
 
@@ -215,14 +215,14 @@ export async function handleMessageRevocation(sock, revocationMessage) {
             day: '2-digit', month: '2-digit', year: 'numeric'
         });
         
-        let text = `*🔰 تقرير مكافحة الحذف 🔰*\n\n` +
-            `*🗑️ حذف بواسطة:* @${deletedBy.split('@')[0]}\n` +
-            `*👤 المرسل:* @${senderName}\n` +
-            `*📱 الرقم:* ${sender}\n` +
-            `*🕒 الوقت:* ${time}\n`;
-        if (groupName) text += `*👥 المجموعة:* ${groupName}\n`;
+        let text = `*ðŸ”° ØªÙ‚Ø±ÙŠØ± Ù…ÙƒØ§ÙØ­Ø© Ø§Ù„Ø­Ø°Ù ðŸ”°*\n\n` +
+            `*ðŸ—‘ï¸ Ø­Ø°Ù Ø¨ÙˆØ§Ø³Ø·Ø©:* @${deletedBy.split('@')[0]}\n` +
+            `*ðŸ‘¤ Ø§Ù„Ù…Ø±Ø³Ù„:* @${senderName}\n` +
+            `*ðŸ“± Ø§Ù„Ø±Ù‚Ù…:* ${sender}\n` +
+            `*ðŸ•’ Ø§Ù„ÙˆÙ‚Øª:* ${time}\n`;
+        if (groupName) text += `*ðŸ‘¥ Ø§Ù„Ù…Ø¬Ù…ÙˆØ¹Ø©:* ${groupName}\n`;
         if (original.content) {
-            text += `\n*💬 الرسالة المحذوفة:*\n${original.content}`;
+            text += `\n*ðŸ’¬ Ø§Ù„Ø±Ø³Ø§Ù„Ø© Ø§Ù„Ù…Ø­Ø°ÙˆÙØ©:*\n${original.content}`;
         }
         
         await sock.sendMessage(ownerNumber, {
@@ -232,41 +232,41 @@ export async function handleMessageRevocation(sock, revocationMessage) {
         
         if (original.mediaType && fs.existsSync(original.mediaPath)) {
             const mediaOptions = {
-                caption: `*${original.mediaType} محذوفة*\nمن: @${senderName}`,
+                caption: `*${original.mediaType} Ù…Ø­Ø°ÙˆÙØ©*\nÙ…Ù†: @${senderName}`,
                 mentions: [sender]
             };
             try {
                 switch (original.mediaType) {
-                    case 'صورة':
+                    case 'ØµÙˆØ±Ø©':
                         await sock.sendMessage(ownerNumber, { image: { url: original.mediaPath }, ...mediaOptions });
                         break;
-                    case 'ملصق':
+                    case 'Ù…Ù„ØµÙ‚':
                         await sock.sendMessage(ownerNumber, { sticker: { url: original.mediaPath }, ...mediaOptions });
                         break;
-                    case 'فيديو':
+                    case 'ÙÙŠØ¯ÙŠÙˆ':
                         await sock.sendMessage(ownerNumber, { video: { url: original.mediaPath }, ...mediaOptions });
                         break;
-                    case 'صوت':
+                    case 'ØµÙˆØª':
                         await sock.sendMessage(ownerNumber, { audio: { url: original.mediaPath }, mimetype: 'audio/mpeg', ptt: false, ...mediaOptions });
                         break;
                 }
             } catch (err) {
-                await sock.sendMessage(ownerNumber, { text: `⚠️ خطأ في إرسال الوسائط: ${err.message}` });
+                await sock.sendMessage(ownerNumber, { text: `âš ï¸ Ø®Ø·Ø£ ÙÙŠ Ø¥Ø±Ø³Ø§Ù„ Ø§Ù„ÙˆØ³Ø§Ø¦Ø·: ${err.message}` });
             }
-            try { fs.unlinkSync(original.mediaPath); } catch (err) { console.error('خطأ في حذف الوسائط:', err); }
+            try { fs.unlinkSync(original.mediaPath); } catch (err) { console.error('Ø®Ø·Ø£ ÙÙŠ Ø­Ø°Ù Ø§Ù„ÙˆØ³Ø§Ø¦Ø·:', err); }
         }
         messageStore.delete(messageId);
     } catch (err) {
-        console.error('خطأ في معالجة الحذف:', err);
+        console.error('Ø®Ø·Ø£ ÙÙŠ Ù…Ø¹Ø§Ù„Ø¬Ø© Ø§Ù„Ø­Ø°Ù:', err);
     }
 }
 
 export default {
-    command: 'حذف',
-    aliases: ['antidelete', 'antidel', 'adel', 'مكافحة_الحذف'],
-    category: 'owner',
-    description: 'تفعيل أو تعطيل ميزة تتبع الرسائل المحذوفة',
-    usage: '!حذف <on|off>',
+    command: 'Ø­Ø°Ù',
+    aliases: ['antidelete', 'antidel', 'adel', 'Ù…ÙƒØ§ÙØ­Ø©_Ø§Ù„Ø­Ø°Ù'],
+    category: 'Ø§Ù„Ù…Ø§Ù„Ùƒ',
+    description: 'ØªÙØ¹ÙŠÙ„ Ø£Ùˆ ØªØ¹Ø·ÙŠÙ„ Ù…ÙŠØ²Ø© ØªØªØ¨Ø¹ Ø§Ù„Ø±Ø³Ø§Ø¦Ù„ Ø§Ù„Ù…Ø­Ø°ÙˆÙØ©',
+    usage: '!Ø­Ø°Ù <ÙˆÙ†|ÙˆÙÙ>',
     ownerOnly: true,
     
     async handler(sock, message, args, context) {
@@ -276,17 +276,17 @@ export default {
         
         if (!action) {
             await sock.sendMessage(chatId, {
-                text: `*🔰 إعدادات مكافحة الحذف 🔰*\n\n` +
-                    `*الحالة:* ${config.enabled ? '✅ مفعل' : '❌ معطل'}\n` +
-                    `*التخزين:* ${HAS_DB ? 'قاعدة بيانات' : 'ملفات'}\n\n` +
-                    `*الأوامر:*\n` +
-                    `• \`!حذف on\` - تفعيل\n` +
-                    `• \`!حذف off\` - تعطيل\n\n` +
-                    `*المميزات:*\n` +
-                    `• تتبع الرسائل المحذوفة\n` +
-                    `• حفظ الوسائط المحذوفة\n` +
-                    `• حفظ صور/فيديوهات مرة واحدة\n` +
-                    `• إرسال التقارير للمالك`
+                text: `*ðŸ”° Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ù…ÙƒØ§ÙØ­Ø© Ø§Ù„Ø­Ø°Ù ðŸ”°*\n\n` +
+                    `*Ø§Ù„Ø­Ø§Ù„Ø©:* ${config.enabled ? 'âœ… Ù…ÙØ¹Ù„' : 'âŒ Ù…Ø¹Ø·Ù„'}\n` +
+                    `*Ø§Ù„ØªØ®Ø²ÙŠÙ†:* ${HAS_DB ? 'Ù‚Ø§Ø¹Ø¯Ø© Ø¨ÙŠØ§Ù†Ø§Øª' : 'Ù…Ù„ÙØ§Øª'}\n\n` +
+                    `*Ø§Ù„Ø£ÙˆØ§Ù…Ø±:*\n` +
+                    `â€¢ \`!Ø­Ø°Ù on\` - ØªÙØ¹ÙŠÙ„\n` +
+                    `â€¢ \`!Ø­Ø°Ù off\` - ØªØ¹Ø·ÙŠÙ„\n\n` +
+                    `*Ø§Ù„Ù…Ù…ÙŠØ²Ø§Øª:*\n` +
+                    `â€¢ ØªØªØ¨Ø¹ Ø§Ù„Ø±Ø³Ø§Ø¦Ù„ Ø§Ù„Ù…Ø­Ø°ÙˆÙØ©\n` +
+                    `â€¢ Ø­ÙØ¸ Ø§Ù„ÙˆØ³Ø§Ø¦Ø· Ø§Ù„Ù…Ø­Ø°ÙˆÙØ©\n` +
+                    `â€¢ Ø­ÙØ¸ ØµÙˆØ±/ÙÙŠØ¯ÙŠÙˆÙ‡Ø§Øª Ù…Ø±Ø© ÙˆØ§Ø­Ø¯Ø©\n` +
+                    `â€¢ Ø¥Ø±Ø³Ø§Ù„ Ø§Ù„ØªÙ‚Ø§Ø±ÙŠØ± Ù„Ù„Ù…Ø§Ù„Ùƒ`
             }, { quoted: message });
             return;
         }
@@ -295,24 +295,24 @@ export default {
             config.enabled = true;
             await saveAntideleteConfig(config);
             await sock.sendMessage(chatId, {
-                text: `✅ *تم تفعيل مكافحة الحذف!*\n\n` +
-                    `التخزين: ${HAS_DB ? 'قاعدة بيانات' : 'ملفات'}\n\n` +
-                    `البوت الآن سوف:\n` +
-                    `• تتبع جميع الرسائل\n` +
-                    `• مراقبة الرسائل المحذوفة\n` +
-                    `• حفظ صور/فيديوهات مرة واحدة\n` +
-                    `• إرسال تقارير الحذف للمالك`
+                text: `âœ… *ØªÙ… ØªÙØ¹ÙŠÙ„ Ù…ÙƒØ§ÙØ­Ø© Ø§Ù„Ø­Ø°Ù!*\n\n` +
+                    `Ø§Ù„ØªØ®Ø²ÙŠÙ†: ${HAS_DB ? 'Ù‚Ø§Ø¹Ø¯Ø© Ø¨ÙŠØ§Ù†Ø§Øª' : 'Ù…Ù„ÙØ§Øª'}\n\n` +
+                    `Ø§Ù„Ø¨ÙˆØª Ø§Ù„Ø¢Ù† Ø³ÙˆÙ:\n` +
+                    `â€¢ ØªØªØ¨Ø¹ Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø±Ø³Ø§Ø¦Ù„\n` +
+                    `â€¢ Ù…Ø±Ø§Ù‚Ø¨Ø© Ø§Ù„Ø±Ø³Ø§Ø¦Ù„ Ø§Ù„Ù…Ø­Ø°ÙˆÙØ©\n` +
+                    `â€¢ Ø­ÙØ¸ ØµÙˆØ±/ÙÙŠØ¯ÙŠÙˆÙ‡Ø§Øª Ù…Ø±Ø© ÙˆØ§Ø­Ø¯Ø©\n` +
+                    `â€¢ Ø¥Ø±Ø³Ø§Ù„ ØªÙ‚Ø§Ø±ÙŠØ± Ø§Ù„Ø­Ø°Ù Ù„Ù„Ù…Ø§Ù„Ùƒ`
             }, { quoted: message });
         } else if (action === 'off') {
             config.enabled = false;
             await saveAntideleteConfig(config);
             await sock.sendMessage(chatId, {
-                text: `❌ *تم تعطيل مكافحة الحذف!*\n\n` +
-                    `لن يقوم البوت بتتبع الرسائل المحذوفة.`
+                text: `âŒ *ØªÙ… ØªØ¹Ø·ÙŠÙ„ Ù…ÙƒØ§ÙØ­Ø© Ø§Ù„Ø­Ø°Ù!*\n\n` +
+                    `Ù„Ù† ÙŠÙ‚ÙˆÙ… Ø§Ù„Ø¨ÙˆØª Ø¨ØªØªØ¨Ø¹ Ø§Ù„Ø±Ø³Ø§Ø¦Ù„ Ø§Ù„Ù…Ø­Ø°ÙˆÙØ©.`
             }, { quoted: message });
         } else {
             await sock.sendMessage(chatId, {
-                text: '❌ *أمر غير صحيح*\n\nاستخدم: `!حذف on/off`'
+                text: 'âŒ *Ø£Ù…Ø± ØºÙŠØ± ØµØ­ÙŠØ­*\n\nØ§Ø³ØªØ®Ø¯Ù…: `!Ø­Ø°Ù on/off`'
             }, { quoted: message });
         }
     },
@@ -321,3 +321,4 @@ export default {
     loadAntideleteConfig,
     saveAntideleteConfig
 };
+

@@ -1,4 +1,4 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import { dataFile } from '../lib/paths.js';
 import store from '../lib/lightweight_store.js';
@@ -25,8 +25,8 @@ const channelInfo = {
         forwardingScore: 1,
         isForwarded: true,
         forwardedNewsletterMessageInfo: {
-            newsletterJid: '201144534147@newsletter',
-            newsletterName: 'CRAZY-SEIF',
+            newsletterJid: '01144534147@newsletter',
+            newsletterName: 'Crazy Seif',
             serverMessageId: -1
         }
     }
@@ -45,7 +45,7 @@ async function readConfig() {
             };
         }
     } catch (error) {
-        console.error('خطأ في قراءة إعدادات الحالة التلقائية:', error);
+        console.error('Ø®Ø·Ø£ ÙÙŠ Ù‚Ø±Ø§Ø¡Ø© Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ø§Ù„Ø­Ø§Ù„Ø© Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©:', error);
         return { enabled: false, reactOn: false };
     }
 }
@@ -58,7 +58,7 @@ async function writeConfig(config) {
             fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
         }
     } catch (error) {
-        console.error('خطأ في حفظ إعدادات الحالة التلقائية:', error);
+        console.error('Ø®Ø·Ø£ ÙÙŠ Ø­ÙØ¸ Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ø§Ù„Ø­Ø§Ù„Ø© Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©:', error);
     }
 }
 
@@ -85,15 +85,15 @@ async function reactToStatus(sock, statusKey) {
                     participant: statusKey.participant || statusKey.remoteJid,
                     fromMe: false
                 },
-                text: '💚'
+                text: 'ðŸ’š'
             }
         }, {
             messageId: statusKey.id,
             statusJidList: [statusKey.remoteJid, statusKey.participant || statusKey.remoteJid]
         });
-        console.log('✅ تم التفاعل مع الحالة');
+        console.log('âœ… ØªÙ… Ø§Ù„ØªÙØ§Ø¹Ù„ Ù…Ø¹ Ø§Ù„Ø­Ø§Ù„Ø©');
     } catch (error) {
-        console.error('❌ خطأ في التفاعل مع الحالة:', error.message);
+        console.error('âŒ Ø®Ø·Ø£ ÙÙŠ Ø§Ù„ØªÙØ§Ø¹Ù„ Ù…Ø¹ Ø§Ù„Ø­Ø§Ù„Ø©:', error.message);
     }
 }
 
@@ -109,11 +109,11 @@ async function handleStatusUpdate(sock, status) {
             if (msg.key && msg.key.remoteJid === 'status@broadcast') {
                 try {
                     await sock.readMessages([msg.key]);
-                    console.log('✅ تم مشاهدة الحالة من الرسائل');
+                    console.log('âœ… ØªÙ… Ù…Ø´Ø§Ù‡Ø¯Ø© Ø§Ù„Ø­Ø§Ù„Ø© Ù…Ù† Ø§Ù„Ø±Ø³Ø§Ø¦Ù„');
                     await reactToStatus(sock, msg.key);
                 } catch (err) {
                     if (err.message?.includes('rate-overlimit')) {
-                        console.log('⚠️ تم تجاوز الحد، انتظار قبل إعادة المحاولة...');
+                        console.log('âš ï¸ ØªÙ… ØªØ¬Ø§ÙˆØ² Ø§Ù„Ø­Ø¯ØŒ Ø§Ù†ØªØ¸Ø§Ø± Ù‚Ø¨Ù„ Ø¥Ø¹Ø§Ø¯Ø© Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø©...');
                         await new Promise(resolve => setTimeout(resolve, 2000));
                         await sock.readMessages([msg.key]);
                     } else {
@@ -127,11 +127,11 @@ async function handleStatusUpdate(sock, status) {
         if (status.key && status.key.remoteJid === 'status@broadcast') {
             try {
                 await sock.readMessages([status.key]);
-                console.log('✅ تم مشاهدة الحالة من المفتاح');
+                console.log('âœ… ØªÙ… Ù…Ø´Ø§Ù‡Ø¯Ø© Ø§Ù„Ø­Ø§Ù„Ø© Ù…Ù† Ø§Ù„Ù…ÙØªØ§Ø­');
                 await reactToStatus(sock, status.key);
             } catch (err) {
                 if (err.message?.includes('rate-overlimit')) {
-                    console.log('⚠️ تم تجاوز الحد، انتظار قبل إعادة المحاولة...');
+                    console.log('âš ï¸ ØªÙ… ØªØ¬Ø§ÙˆØ² Ø§Ù„Ø­Ø¯ØŒ Ø§Ù†ØªØ¸Ø§Ø± Ù‚Ø¨Ù„ Ø¥Ø¹Ø§Ø¯Ø© Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø©...');
                     await new Promise(resolve => setTimeout(resolve, 2000));
                     await sock.readMessages([status.key]);
                 } else {
@@ -144,11 +144,11 @@ async function handleStatusUpdate(sock, status) {
         if (status.reaction && status.reaction.key.remoteJid === 'status@broadcast') {
             try {
                 await sock.readMessages([status.reaction.key]);
-                console.log('✅ تم مشاهدة الحالة من التفاعل');
+                console.log('âœ… ØªÙ… Ù…Ø´Ø§Ù‡Ø¯Ø© Ø§Ù„Ø­Ø§Ù„Ø© Ù…Ù† Ø§Ù„ØªÙØ§Ø¹Ù„');
                 await reactToStatus(sock, status.reaction.key);
             } catch (err) {
                 if (err.message?.includes('rate-overlimit')) {
-                    console.log('⚠️ تم تجاوز الحد، انتظار قبل إعادة المحاولة...');
+                    console.log('âš ï¸ ØªÙ… ØªØ¬Ø§ÙˆØ² Ø§Ù„Ø­Ø¯ØŒ Ø§Ù†ØªØ¸Ø§Ø± Ù‚Ø¨Ù„ Ø¥Ø¹Ø§Ø¯Ø© Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø©...');
                     await new Promise(resolve => setTimeout(resolve, 2000));
                     await sock.readMessages([status.reaction.key]);
                 } else {
@@ -157,16 +157,16 @@ async function handleStatusUpdate(sock, status) {
             }
         }
     } catch (error) {
-        console.error('❌ خطأ في مشاهدة الحالة التلقائية:', error.message);
+        console.error('âŒ Ø®Ø·Ø£ ÙÙŠ Ù…Ø´Ø§Ù‡Ø¯Ø© Ø§Ù„Ø­Ø§Ù„Ø© Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©:', error.message);
     }
 }
 
 export default {
-    command: 'حالات',
-    aliases: ['autostatus', 'autoview', 'statusview', 'حالة_تلقائي', 'مشاهدة_حالات'],
-    category: 'owner',
-    description: 'مشاهدة وتفاعل تلقائي مع حالات الواتساب',
-    usage: '!حالات <on|off|تفاعل on|تفاعل off>',
+    command: 'Ø­Ø§Ù„Ø§Øª',
+    aliases: ['autostatus', 'autoview', 'statusview', 'Ø­Ø§Ù„Ø©_ØªÙ„Ù‚Ø§Ø¦ÙŠ', 'Ù…Ø´Ø§Ù‡Ø¯Ø©_Ø­Ø§Ù„Ø§Øª'],
+    category: 'Ø§Ù„Ù…Ø§Ù„Ùƒ',
+    description: 'Ù…Ø´Ø§Ù‡Ø¯Ø© ÙˆØªÙØ§Ø¹Ù„ ØªÙ„Ù‚Ø§Ø¦ÙŠ Ù…Ø¹ Ø­Ø§Ù„Ø§Øª Ø§Ù„ÙˆØ§ØªØ³Ø§Ø¨',
+    usage: '!Ø­Ø§Ù„Ø§Øª <ÙˆÙ†|ÙˆÙÙ|ØªÙØ§Ø¹Ù„ ÙˆÙ†|ØªÙØ§Ø¹Ù„ ÙˆÙÙ>',
     ownerOnly: true,
     
     async handler(sock, message, args, context) {
@@ -176,19 +176,19 @@ export default {
             const config = await readConfig();
             
             if (!args || args.length === 0) {
-                const viewStatus = config.enabled ? '✅ مفعل' : '❌ معطل';
-                const reactStatus = config.reactOn ? '✅ مفعل' : '❌ معطل';
+                const viewStatus = config.enabled ? 'âœ… Ù…ÙØ¹Ù„' : 'âŒ Ù…Ø¹Ø·Ù„';
+                const reactStatus = config.reactOn ? 'âœ… Ù…ÙØ¹Ù„' : 'âŒ Ù…Ø¹Ø·Ù„';
                 
                 await sock.sendMessage(chatId, {
-                    text: `🔄 *إعدادات الحالات التلقائية*\n\n` +
-                        `📱 *مشاهدة الحالات:* ${viewStatus}\n` +
-                        `💫 *التفاعل مع الحالات:* ${reactStatus}\n` +
-                        `🗄️ *التخزين:* ${HAS_DB ? 'قاعدة بيانات' : 'ملفات'}\n\n` +
-                        `*الأوامر:*\n` +
-                        `• \`!حالات on\` - تفعيل المشاهدة التلقائية\n` +
-                        `• \`!حالات off\` - تعطيل المشاهدة التلقائية\n` +
-                        `• \`!حالات تفاعل on\` - تفعيل التفاعل\n` +
-                        `• \`!حالات تفاعل off\` - تعطيل التفاعل`,
+                    text: `ðŸ”„ *Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ø§Ù„Ø­Ø§Ù„Ø§Øª Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©*\n\n` +
+                        `ðŸ“± *Ù…Ø´Ø§Ù‡Ø¯Ø© Ø§Ù„Ø­Ø§Ù„Ø§Øª:* ${viewStatus}\n` +
+                        `ðŸ’« *Ø§Ù„ØªÙØ§Ø¹Ù„ Ù…Ø¹ Ø§Ù„Ø­Ø§Ù„Ø§Øª:* ${reactStatus}\n` +
+                        `ðŸ—„ï¸ *Ø§Ù„ØªØ®Ø²ÙŠÙ†:* ${HAS_DB ? 'Ù‚Ø§Ø¹Ø¯Ø© Ø¨ÙŠØ§Ù†Ø§Øª' : 'Ù…Ù„ÙØ§Øª'}\n\n` +
+                        `*Ø§Ù„Ø£ÙˆØ§Ù…Ø±:*\n` +
+                        `â€¢ \`!Ø­Ø§Ù„Ø§Øª on\` - ØªÙØ¹ÙŠÙ„ Ø§Ù„Ù…Ø´Ø§Ù‡Ø¯Ø© Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©\n` +
+                        `â€¢ \`!Ø­Ø§Ù„Ø§Øª off\` - ØªØ¹Ø·ÙŠÙ„ Ø§Ù„Ù…Ø´Ø§Ù‡Ø¯Ø© Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©\n` +
+                        `â€¢ \`!Ø­Ø§Ù„Ø§Øª ØªÙØ§Ø¹Ù„ on\` - ØªÙØ¹ÙŠÙ„ Ø§Ù„ØªÙØ§Ø¹Ù„\n` +
+                        `â€¢ \`!Ø­Ø§Ù„Ø§Øª ØªÙØ§Ø¹Ù„ off\` - ØªØ¹Ø·ÙŠÙ„ Ø§Ù„ØªÙØ§Ø¹Ù„`,
                     ...channelInfo
                 }, { quoted: message });
                 return;
@@ -200,8 +200,8 @@ export default {
                 config.enabled = true;
                 await writeConfig(config);
                 await sock.sendMessage(chatId, {
-                    text: '✅ *تم تفعيل مشاهدة الحالات التلقائية!*\n\n' +
-                        'سيقوم البوت الآن بمشاهدة جميع حالات جهات الاتصال.',
+                    text: 'âœ… *ØªÙ… ØªÙØ¹ÙŠÙ„ Ù…Ø´Ø§Ù‡Ø¯Ø© Ø§Ù„Ø­Ø§Ù„Ø§Øª Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©!*\n\n' +
+                        'Ø³ÙŠÙ‚ÙˆÙ… Ø§Ù„Ø¨ÙˆØª Ø§Ù„Ø¢Ù† Ø¨Ù…Ø´Ø§Ù‡Ø¯Ø© Ø¬Ù…ÙŠØ¹ Ø­Ø§Ù„Ø§Øª Ø¬Ù‡Ø§Øª Ø§Ù„Ø§ØªØµØ§Ù„.',
                     ...channelInfo
                 }, { quoted: message });
                 
@@ -209,16 +209,16 @@ export default {
                 config.enabled = false;
                 await writeConfig(config);
                 await sock.sendMessage(chatId, {
-                    text: '❌ *تم تعطيل مشاهدة الحالات التلقائية!*\n\n' +
-                        'لن يقوم البوت بمشاهدة الحالات تلقائياً.',
+                    text: 'âŒ *ØªÙ… ØªØ¹Ø·ÙŠÙ„ Ù…Ø´Ø§Ù‡Ø¯Ø© Ø§Ù„Ø­Ø§Ù„Ø§Øª Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©!*\n\n' +
+                        'Ù„Ù† ÙŠÙ‚ÙˆÙ… Ø§Ù„Ø¨ÙˆØª Ø¨Ù…Ø´Ø§Ù‡Ø¯Ø© Ø§Ù„Ø­Ø§Ù„Ø§Øª ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹.',
                     ...channelInfo
                 }, { quoted: message });
                 
-            } else if (command === 'تفاعل' || command === 'react') {
+            } else if (command === 'ØªÙØ§Ø¹Ù„' || command === 'react') {
                 if (!args[1]) {
                     await sock.sendMessage(chatId, {
-                        text: '❌ *الرجاء تحديد on/off للتفاعلات!*\n\n' +
-                            'الاستخدام: `!حالات تفاعل on/off`',
+                        text: 'âŒ *Ø§Ù„Ø±Ø¬Ø§Ø¡ ØªØ­Ø¯ÙŠØ¯ on/off Ù„Ù„ØªÙØ§Ø¹Ù„Ø§Øª!*\n\n' +
+                            'Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…: `!Ø­Ø§Ù„Ø§Øª ØªÙØ§Ø¹Ù„ on/off`',
                         ...channelInfo
                     }, { quoted: message });
                     return;
@@ -230,8 +230,8 @@ export default {
                     config.reactOn = true;
                     await writeConfig(config);
                     await sock.sendMessage(chatId, {
-                        text: '💫 *تم تفعيل التفاعل مع الحالات!*\n\n' +
-                            'سيقوم البوت بالتفاعل مع الحالات بـ 💚',
+                        text: 'ðŸ’« *ØªÙ… ØªÙØ¹ÙŠÙ„ Ø§Ù„ØªÙØ§Ø¹Ù„ Ù…Ø¹ Ø§Ù„Ø­Ø§Ù„Ø§Øª!*\n\n' +
+                            'Ø³ÙŠÙ‚ÙˆÙ… Ø§Ù„Ø¨ÙˆØª Ø¨Ø§Ù„ØªÙØ§Ø¹Ù„ Ù…Ø¹ Ø§Ù„Ø­Ø§Ù„Ø§Øª Ø¨Ù€ ðŸ’š',
                         ...channelInfo
                     }, { quoted: message });
                     
@@ -239,34 +239,34 @@ export default {
                     config.reactOn = false;
                     await writeConfig(config);
                     await sock.sendMessage(chatId, {
-                        text: '❌ *تم تعطيل التفاعل مع الحالات!*\n\n' +
-                            'لن يقوم البوت بالتفاعل مع الحالات.',
+                        text: 'âŒ *ØªÙ… ØªØ¹Ø·ÙŠÙ„ Ø§Ù„ØªÙØ§Ø¹Ù„ Ù…Ø¹ Ø§Ù„Ø­Ø§Ù„Ø§Øª!*\n\n' +
+                            'Ù„Ù† ÙŠÙ‚ÙˆÙ… Ø§Ù„Ø¨ÙˆØª Ø¨Ø§Ù„ØªÙØ§Ø¹Ù„ Ù…Ø¹ Ø§Ù„Ø­Ø§Ù„Ø§Øª.',
                         ...channelInfo
                     }, { quoted: message });
                     
                 } else {
                     await sock.sendMessage(chatId, {
-                        text: '❌ *أمر تفاعل غير صحيح!*\n\n' +
-                            'الاستخدام: `!حالات تفاعل on/off`',
+                        text: 'âŒ *Ø£Ù…Ø± ØªÙØ§Ø¹Ù„ ØºÙŠØ± ØµØ­ÙŠØ­!*\n\n' +
+                            'Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…: `!Ø­Ø§Ù„Ø§Øª ØªÙØ§Ø¹Ù„ on/off`',
                         ...channelInfo
                     }, { quoted: message });
                 }
                 
             } else {
                 await sock.sendMessage(chatId, {
-                    text: '❌ *أمر غير صحيح!*\n\n' +
-                        '*الاستخدام:*\n' +
-                        '• `!حالات on/off` - تفعيل/تعطيل المشاهدة التلقائية\n' +
-                        '• `!حالات تفاعل on/off` - تفعيل/تعطيل التفاعلات',
+                    text: 'âŒ *Ø£Ù…Ø± ØºÙŠØ± ØµØ­ÙŠØ­!*\n\n' +
+                        '*Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…:*\n' +
+                        'â€¢ `!Ø­Ø§Ù„Ø§Øª on/off` - ØªÙØ¹ÙŠÙ„/ØªØ¹Ø·ÙŠÙ„ Ø§Ù„Ù…Ø´Ø§Ù‡Ø¯Ø© Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©\n' +
+                        'â€¢ `!Ø­Ø§Ù„Ø§Øª ØªÙØ§Ø¹Ù„ on/off` - ØªÙØ¹ÙŠÙ„/ØªØ¹Ø·ÙŠÙ„ Ø§Ù„ØªÙØ§Ø¹Ù„Ø§Øª',
                     ...channelInfo
                 }, { quoted: message });
             }
             
         } catch (error) {
-            console.error('خطأ في أمر الحالات التلقائية:', error);
+            console.error('Ø®Ø·Ø£ ÙÙŠ Ø£Ù…Ø± Ø§Ù„Ø­Ø§Ù„Ø§Øª Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ *حدث خطأ أثناء إدارة الحالات التلقائية!*\n\n' +
-                    `الخطأ: ${error.message}`,
+                text: 'âŒ *Ø­Ø¯Ø« Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ø­Ø§Ù„Ø§Øª Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©!*\n\n' +
+                    `Ø§Ù„Ø®Ø·Ø£: ${error.message}`,
                 ...channelInfo
             }, { quoted: message });
         }
@@ -278,3 +278,4 @@ export default {
     readConfig,
     writeConfig
 };
+

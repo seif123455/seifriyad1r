@@ -1,4 +1,4 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 import yts from 'yt-search';
 
 const DL_API = 'https://api.qasimdev.dpdns.org/api/loaderto/download';
@@ -13,22 +13,22 @@ const downloadWithRetry = async (url, retries = 3) => {
                 timeout: 90000
             });
             if (data?.data?.downloadUrl) return data.data;
-            throw new Error('لا يوجد رابط تحميل');
+            throw new Error('Ù„Ø§ ÙŠÙˆØ¬Ø¯ Ø±Ø§Ø¨Ø· ØªØ­Ù…ÙŠÙ„');
         } catch (err) {
             if (i === retries - 1) throw err;
-            console.log(`محاولة التحميل ${i + 1} فشلت، إعادة المحاولة بعد 5 ثوانٍ...`);
+            console.log(`Ù…Ø­Ø§ÙˆÙ„Ø© Ø§Ù„ØªØ­Ù…ÙŠÙ„ ${i + 1} ÙØ´Ù„ØªØŒ Ø¥Ø¹Ø§Ø¯Ø© Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø© Ø¨Ø¹Ø¯ 5 Ø«ÙˆØ§Ù†Ù...`);
             await wait(5000);
         }
     }
-    throw new Error('جميع محاولات التحميل فشلت');
+    throw new Error('Ø¬Ù…ÙŠØ¹ Ù…Ø­Ø§ÙˆÙ„Ø§Øª Ø§Ù„ØªØ­Ù…ÙŠÙ„ ÙØ´Ù„Øª');
 };
 
 export default {
-    command: 'فيديو',
-    aliases: ['video', 'ytmp4', 'ytvideo', 'ytdl', 'تحميل_فيديو_يوتيوب'],
-    category: 'download',
-    description: 'تحميل فيديوهات من يوتيوب بالرابط أو البحث',
-    usage: '!فيديو <رابط يوتيوب | نص البحث>',
+    command: 'ÙÙŠØ¯ÙŠÙˆ',
+    aliases: ['video', 'ytmp4', 'ytvideo', 'ytdl', 'ØªØ­Ù…ÙŠÙ„_ÙÙŠØ¯ÙŠÙˆ_ÙŠÙˆØªÙŠÙˆØ¨'],
+    category: 'Ø§Ù„ØªØ­Ù…ÙŠÙ„',
+    description: 'ØªØ­Ù…ÙŠÙ„ ÙÙŠØ¯ÙŠÙˆÙ‡Ø§Øª Ù…Ù† ÙŠÙˆØªÙŠÙˆØ¨ Ø¨Ø§Ù„Ø±Ø§Ø¨Ø· Ø£Ùˆ Ø§Ù„Ø¨Ø­Ø«',
+    usage: '!ÙÙŠØ¯ÙŠÙˆ <Ø±Ø§Ø¨Ø· ÙŠÙˆØªÙŠÙˆØ¨ | Ù†Øµ Ø§Ù„Ø¨Ø­Ø«>',
     
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -36,10 +36,10 @@ export default {
         
         if (!query) {
             return sock.sendMessage(chatId, { 
-                text: '🎥 *تحميل فيديو من يوتيوب*\n\n' +
-                    '*الاستخدام:* `!فيديو <الرابط أو نص البحث>`\n' +
-                    '*مثال:* `!فيديو Alan Walker Faded`\n' +
-                    '*مثال:* `!فيديو https://youtu.be/...`' 
+                text: 'ðŸŽ¥ *ØªØ­Ù…ÙŠÙ„ ÙÙŠØ¯ÙŠÙˆ Ù…Ù† ÙŠÙˆØªÙŠÙˆØ¨*\n\n' +
+                    '*Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…:* `!ÙÙŠØ¯ÙŠÙˆ <Ø§Ù„Ø±Ø§Ø¨Ø· Ø£Ùˆ Ù†Øµ Ø§Ù„Ø¨Ø­Ø«>`\n' +
+                    '*Ù…Ø«Ø§Ù„:* `!ÙÙŠØ¯ÙŠÙˆ Alan Walker Faded`\n' +
+                    '*Ù…Ø«Ø§Ù„:* `!ÙÙŠØ¯ÙŠÙˆ https://youtu.be/...`' 
             }, { quoted: message });
         }
         
@@ -53,7 +53,7 @@ export default {
             } else {
                 const { videos } = await yts(query);
                 if (!videos?.length) return sock.sendMessage(chatId, { 
-                    text: '❌ لا توجد فيديوهات مطابقة للبحث!' 
+                    text: 'âŒ Ù„Ø§ ØªÙˆØ¬Ø¯ ÙÙŠØ¯ÙŠÙˆÙ‡Ø§Øª Ù…Ø·Ø§Ø¨Ù‚Ø© Ù„Ù„Ø¨Ø­Ø«!' 
                 }, { quoted: message });
                 
                 videoUrl = videos[0].url;
@@ -63,7 +63,7 @@ export default {
             
             const validYT = videoUrl.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/|embed\/))([a-zA-Z0-9_-]{11})/);
             if (!validYT) return sock.sendMessage(chatId, { 
-                text: '❌ رابط يوتيوب غير صالح!' 
+                text: 'âŒ Ø±Ø§Ø¨Ø· ÙŠÙˆØªÙŠÙˆØ¨ ØºÙŠØ± ØµØ§Ù„Ø­!' 
             }, { quoted: message });
             
             const ytId = validYT[1];
@@ -71,7 +71,7 @@ export default {
             
             await sock.sendMessage(chatId, {
                 image: { url: thumb },
-                caption: `🎬 *${videoTitle || query}*\n⬇️ جاري التحميل... *(قد يستغرق حتى 30 ثانية)*`
+                caption: `ðŸŽ¬ *${videoTitle || query}*\nâ¬‡ï¸ Ø¬Ø§Ø±ÙŠ Ø§Ù„ØªØ­Ù…ÙŠÙ„... *(Ù‚Ø¯ ÙŠØ³ØªØºØ±Ù‚ Ø­ØªÙ‰ 30 Ø«Ø§Ù†ÙŠØ©)*`
             }, { quoted: message });
             
             const videoData = await downloadWithRetry(videoUrl);
@@ -80,19 +80,20 @@ export default {
                 video: { url: videoData.downloadUrl },
                 mimetype: 'video/mp4',
                 fileName: `${(videoData.title || videoTitle || 'video').replace(/[^\w\u0600-\u06FF\s]/g, '')}.mp4`,
-                caption: `🎬 *${videoData.title || videoTitle || 'فيديو'}*\n\n> 🔥 *CRAZY-SEIF BOT* | 📞 201144534147`
+                caption: `ðŸŽ¬ *${videoData.title || videoTitle || 'ÙÙŠØ¯ÙŠÙˆ'}*\n\n> ðŸ”¥ *Crazy Seif BOT* | ðŸ“ž 01144534147`
             }, { quoted: message });
             
         } catch (err) {
-            console.error('[فيديو] خطأ:', err.message);
+            console.error('[ÙÙŠØ¯ÙŠÙˆ] Ø®Ø·Ø£:', err.message);
             
             const reason = err.response?.status === 408
-                ? 'انتهت مهلة التحميل. حاول مرة أخرى.'
+                ? 'Ø§Ù†ØªÙ‡Øª Ù…Ù‡Ù„Ø© Ø§Ù„ØªØ­Ù…ÙŠÙ„. Ø­Ø§ÙˆÙ„ Ù…Ø±Ø© Ø£Ø®Ø±Ù‰.'
                 : err.message;
                 
             await sock.sendMessage(chatId, { 
-                text: `❌ فشل التحميل!\nالسبب: ${reason}` 
+                text: `âŒ ÙØ´Ù„ Ø§Ù„ØªØ­Ù…ÙŠÙ„!\nØ§Ù„Ø³Ø¨Ø¨: ${reason}` 
             }, { quoted: message });
         }
     }
 };
+

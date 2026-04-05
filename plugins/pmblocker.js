@@ -1,4 +1,4 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import store from '../lib/lightweight_store.js';
 const MONGO_URL = process.env.MONGO_URL;
 const POSTGRES_URL = process.env.POSTGRES_URL;
@@ -6,7 +6,7 @@ const MYSQL_URL = process.env.MYSQL_URL;
 const SQLITE_URL = process.env.DB_URL;
 const HAS_DB = !!(MONGO_URL || POSTGRES_URL || MYSQL_URL || SQLITE_URL);
 const PMBLOCKER_PATH = './data/pmblocker.json';
-const DEFAULT_MESSAGE = '⚠️ Direct messages are blocked!\nYou cannot DM this bot. Please contact the owner in group chats only.';
+const DEFAULT_MESSAGE = 'âš ï¸ Direct messages are blocked!\nYou cannot DM this bot. Please contact the owner in group chats only.';
 async function readState() {
     try {
         if (HAS_DB) {
@@ -61,11 +61,11 @@ async function writeState(enabled, message) {
     }
 }
 export default {
-    command: 'pmblocker',
-    aliases: ['pmblock', 'blockpm', 'antipm'],
-    category: 'owner',
-    description: 'Block private messages and auto-block users who DM the bot',
-    usage: '.pmblocker <on|off|status|setmsg>',
+    command: 'بمبلوككير',
+    aliases: ['pmblock', 'blockpm', 'antipm', 'pmblocker'],
+    category: 'المالك',
+    description: 'حظر بريفاتي رسالةس اند اوتو-حظر مستخدمس وهو دم تهي بوت',
+    usage: '.بمبلوككير <ون|وفف|حالة|سيتمسج>',
     ownerOnly: true,
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -74,21 +74,21 @@ export default {
         const rest = args.slice(1);
         if (!sub || !['on', 'off', 'status', 'setmsg'].includes(sub)) {
             await sock.sendMessage(chatId, {
-                text: `📵 *PM BLOCKER*\n\n` +
+                text: `ðŸ“µ *PM BLOCKER*\n\n` +
                     `*Storage:* ${HAS_DB ? 'Database' : 'File System'}\n\n` +
                     `*Commands:*\n` +
-                    `• \`.pmblocker on\` - Enable DM blocking\n` +
-                    `• \`.pmblocker off\` - Disable DM blocking\n` +
-                    `• \`.pmblocker status\` - Current status\n` +
-                    `• \`.pmblocker setmsg <text>\` - Set warning message\n\n` +
-                    `*Current Status:* ${state.enabled ? '✅ ENABLED' : '❌ DISABLED'}`
+                    `â€¢ \`.pmblocker on\` - Enable DM blocking\n` +
+                    `â€¢ \`.pmblocker off\` - Disable DM blocking\n` +
+                    `â€¢ \`.pmblocker status\` - Current status\n` +
+                    `â€¢ \`.pmblocker setmsg <text>\` - Set warning message\n\n` +
+                    `*Current Status:* ${state.enabled ? 'âœ… ENABLED' : 'âŒ DISABLED'}`
             }, { quoted: message });
             return;
         }
         if (sub === 'status') {
             await sock.sendMessage(chatId, {
-                text: `📵 *PM BLOCKER STATUS*\n\n` +
-                    `*Status:* ${state.enabled ? '✅ ENABLED' : '❌ DISABLED'}\n` +
+                text: `ðŸ“µ *PM BLOCKER STATUS*\n\n` +
+                    `*Status:* ${state.enabled ? 'âœ… ENABLED' : 'âŒ DISABLED'}\n` +
                     `*Storage:* ${HAS_DB ? 'Database' : 'File System'}\n\n` +
                     `*Warning Message:*\n${state.message}`
             }, { quoted: message });
@@ -104,17 +104,21 @@ export default {
             }
             await writeState(state.enabled, newMsg);
             await sock.sendMessage(chatId, {
-                text: `✅ *PM blocker message updated!*\n\n*New message:*\n${newMsg}`
+                text: `âœ… *PM blocker message updated!*\n\n*New message:*\n${newMsg}`
             }, { quoted: message });
             return;
         }
         const enable = sub === 'on';
         await writeState(enable, undefined);
         await sock.sendMessage(chatId, {
-            text: `📵 *PM Blocker ${enable ? 'ENABLED' : 'DISABLED'}*\n\n` +
-                `${enable ? '✅ Users who DM the bot will be warned and blocked.' : '❌ Private messages are now allowed.'}`
+            text: `ðŸ“µ *PM Blocker ${enable ? 'ENABLED' : 'DISABLED'}*\n\n` +
+                `${enable ? 'âœ… Users who DM the bot will be warned and blocked.' : 'âŒ Private messages are now allowed.'}`
         }, { quoted: message });
     },
     readState,
     writeState
 };
+
+
+
+

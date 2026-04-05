@@ -1,4 +1,4 @@
-// Safe math evaluator using pure Node.js - no Python needed
+﻿// Safe math evaluator using pure Node.js - no Python needed
 function safeMath(expr) {
     // Replace math function names to JS equivalents
     const sanitized = expr
@@ -24,7 +24,7 @@ function safeMath(expr) {
     const mathFunctions = /Math\.[a-z]+/g;
     const cleaned = sanitized.replace(mathFunctions, '');
     if (blocked.test(cleaned)) {
-        throw new Error('Invalid expression — only math operators and functions allowed');
+        throw new Error('Invalid expression â€” only math operators and functions allowed');
     }
     // Only allow safe characters
     if (!/^[\d\s+\-*/%.(),Math.a-zA-Z]+$/.test(sanitized)) {
@@ -39,25 +39,25 @@ function safeMath(expr) {
     return Number.isInteger(result) ? String(result) : result.toPrecision(10).replace(/\.?0+$/, '');
 }
 export default {
-    command: 'calc',
-    aliases: ['math', 'calculate', 'solve'],
-    category: 'utility',
-    description: 'Advanced calculator',
-    usage: '.calc <expression>',
+    command: 'آلة حاسبة',
+    aliases: ['math', 'calculate', 'solve', 'calc'],
+    category: 'مرافق',
+    description: '',
+    usage: '.كالك <يكسبريسسيون>',
     async handler(sock, message, args, context) {
         const { chatId, channelInfo } = context;
         const expr = args.join(' ').trim();
         if (!expr) {
             return await sock.sendMessage(chatId, {
-                text: `🧮 *CALCULATOR*\n\n` +
-                    `*Usage:* \`.calc <expression>\`\n\n` +
+                text: `ðŸ§® *CALCULATOR*\n\n` +
+                    `*Usage:* \`.كالك <يكسبريسسيون>\`\n\n` +
                     `*Examples:*\n` +
-                    `• \`.calc 2 ** 10\` → 1024\n` +
-                    `• \`.calc sqrt(144)\` → 12\n` +
-                    `• \`.calc sin(pi / 2)\` → 1\n` +
-                    `• \`.calc log(1000)\` → 3\n` +
-                    `• \`.calc (3 + 4) * 2\` → 14\n` +
-                    `• \`.calc pow(2, 8)\` → 256\n\n` +
+                    `â€¢ \`.calc 2 ** 10\` â†’ 1024\n` +
+                    `â€¢ \`.calc sqrt(144)\` â†’ 12\n` +
+                    `â€¢ \`.calc sin(pi / 2)\` â†’ 1\n` +
+                    `â€¢ \`.calc log(1000)\` â†’ 3\n` +
+                    `â€¢ \`.calc (3 + 4) * 2\` â†’ 14\n` +
+                    `â€¢ \`.calc pow(2, 8)\` â†’ 256\n\n` +
                     `*Functions:* sqrt, cbrt, abs, sin, cos, tan, log, ln, floor, ceil, round, pow, min, max\n` +
                     `*Constants:* pi, e`,
                 ...channelInfo
@@ -66,15 +66,18 @@ export default {
         try {
             const result = safeMath(expr);
             await sock.sendMessage(chatId, {
-                text: `🧮 *Calculator*\n\n📥 *Input:* \`${expr}\`\n📤 *Result:* \`${result}\``,
+                text: `ðŸ§® *Calculator*\n\nðŸ“¥ *Input:* \`${expr}\`\nðŸ“¤ *Result:* \`${result}\``,
                 ...channelInfo
             }, { quoted: message });
         }
         catch (error) {
             await sock.sendMessage(chatId, {
-                text: `❌ *Error:* ${error.message}`,
+                text: `âŒ *Error:* ${error.message}`,
                 ...channelInfo
             }, { quoted: message });
         }
     }
 };
+
+
+

@@ -1,4 +1,4 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 
 const AI_APIS = [
     (q) => `https://mistral.stacktoy.workers.dev/?apikey=Suhail&text=${encodeURIComponent(q)}`,
@@ -6,53 +6,54 @@ const AI_APIS = [
     (q) => `https://mistral.gtech-apiz.workers.dev/?apikey=Suhail&text=${encodeURIComponent(q)}`
 ];
 
-const اسال_الذكاء = async (السؤال) => {
-    for (const رابط_الapi of AI_APIS) {
+const Ø§Ø³Ø§Ù„_Ø§Ù„Ø°ÙƒØ§Ø¡ = async (Ø§Ù„Ø³Ø¤Ø§Ù„) => {
+    for (const Ø±Ø§Ø¨Ø·_Ø§Ù„api of AI_APIS) {
         try {
-            const { data } = await axios.get(رابط_الapi(السؤال), { timeout: 15000 });
-            const الرد = data?.data?.response;
-            if (الرد && typeof الرد === 'string' && الرد.trim()) {
-                return الرد.trim();
+            const { data } = await axios.get(Ø±Ø§Ø¨Ø·_Ø§Ù„api(Ø§Ù„Ø³Ø¤Ø§Ù„), { timeout: 15000 });
+            const Ø§Ù„Ø±Ø¯ = data?.data?.response;
+            if (Ø§Ù„Ø±Ø¯ && typeof Ø§Ù„Ø±Ø¯ === 'string' && Ø§Ù„Ø±Ø¯.trim()) {
+                return Ø§Ù„Ø±Ø¯.trim();
             }
         }
         catch {
             continue;
         }
     }
-    throw new Error('جميع خدمات الذكاء الاصطناعي فشلت');
+    throw new Error('Ø¬Ù…ÙŠØ¹ Ø®Ø¯Ù…Ø§Øª Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ ÙØ´Ù„Øª');
 };
 
 export default {
-    command: 'ذكاء',
-    aliases: ['mistral', 'ai', 'chat', 'ask', 'اسال', 'سؤال', 'gpt', 'llama'],
-    category: 'ai',
-    description: 'اسأل سؤال للذكاء الاصطناعي',
-    usage: '!ذكاء <السؤال>',
+    command: 'Ø°ÙƒØ§Ø¡',
+    aliases: ['mistral', 'ai', 'chat', 'ask', 'Ø§Ø³Ø§Ù„', 'Ø³Ø¤Ø§Ù„', 'gpt', 'llama'],
+    category: 'Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ',
+    description: 'Ø§Ø³Ø£Ù„ Ø³Ø¤Ø§Ù„ Ù„Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ',
+    usage: '!Ø°ÙƒØ§Ø¡ <Ø§Ù„Ø³Ø¤Ø§Ù„>',
     
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
-        const السؤال = args.join(' ').trim();
+        const Ø§Ù„Ø³Ø¤Ø§Ù„ = args.join(' ').trim();
         
-        if (!السؤال) {
+        if (!Ø§Ù„Ø³Ø¤Ø§Ù„) {
             return sock.sendMessage(chatId, { 
-                text: `🤖 *مساعد الذكاء الاصطناعي*\n\n` +
-                    `*الاستخدام:* \`!ذكاء <سؤالك>\`\n\n` +
-                    `*أمثلة:*\n` +
-                    `• \`!ذكاء ما هي عاصمة مصر؟\`\n` +
-                    `• \`!ذكاء اشرح لي الذكاء الاصطناعي\`\n` +
-                    `• \`!ذكاء كم عمرك؟\``
+                text: `ðŸ¤– *Ù…Ø³Ø§Ø¹Ø¯ Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ*\n\n` +
+                    `*Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…:* \`!Ø°ÙƒØ§Ø¡ <Ø³Ø¤Ø§Ù„Ùƒ>\`\n\n` +
+                    `*Ø£Ù…Ø«Ù„Ø©:*\n` +
+                    `â€¢ \`!Ø°ÙƒØ§Ø¡ Ù…Ø§ Ù‡ÙŠ Ø¹Ø§ØµÙ…Ø© Ù…ØµØ±ØŸ\`\n` +
+                    `â€¢ \`!Ø°ÙƒØ§Ø¡ Ø§Ø´Ø±Ø­ Ù„ÙŠ Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ\`\n` +
+                    `â€¢ \`!Ø°ÙƒØ§Ø¡ ÙƒÙ… Ø¹Ù…Ø±ÙƒØŸ\``
             }, { quoted: message });
         }
         
         try {
-            await sock.sendMessage(chatId, { react: { text: '🤖', key: message.key } });
-            const الرد = await اسال_الذكاء(السؤال);
-            await sock.sendMessage(chatId, { text: الرد }, { quoted: message });
+            await sock.sendMessage(chatId, { react: { text: 'ðŸ¤–', key: message.key } });
+            const Ø§Ù„Ø±Ø¯ = await Ø§Ø³Ø§Ù„_Ø§Ù„Ø°ÙƒØ§Ø¡(Ø§Ù„Ø³Ø¤Ø§Ù„);
+            await sock.sendMessage(chatId, { text: Ø§Ù„Ø±Ø¯ }, { quoted: message });
         } catch (error) {
-            console.error('خطأ في أمر الذكاء:', error.message);
+            console.error('Ø®Ø·Ø£ ÙÙŠ Ø£Ù…Ø± Ø§Ù„Ø°ÙƒØ§Ø¡:', error.message);
             await sock.sendMessage(chatId, { 
-                text: '❌ فشل الحصول على رد من الذكاء الاصطناعي. حاول مرة أخرى لاحقاً.' 
+                text: 'âŒ ÙØ´Ù„ Ø§Ù„Ø­ØµÙˆÙ„ Ø¹Ù„Ù‰ Ø±Ø¯ Ù…Ù† Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ. Ø­Ø§ÙˆÙ„ Ù…Ø±Ø© Ø£Ø®Ø±Ù‰ Ù„Ø§Ø­Ù‚Ø§Ù‹.' 
             }, { quoted: message });
         }
     }
 };
+

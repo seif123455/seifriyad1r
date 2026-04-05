@@ -1,9 +1,9 @@
-export default {
-    command: 'tagall',
-    aliases: ['everyone', 'all'],
-    category: 'admin',
-    description: 'Tag all group members with their usernames',
-    usage: '.tagall',
+﻿export default {
+    command: 'تاجالل',
+    aliases: ['everyone', 'all', 'tagall'],
+    category: 'المشرفون',
+    description: 'تاج الل مجموعة عضوس ويته تهيير مستخدمناميس',
+    usage: '.تاجالل',
     groupOnly: true,
     adminOnly: true,
     async handler(sock, message, args, context) {
@@ -18,7 +18,7 @@ export default {
                 }, { quoted: message });
                 return;
             }
-            let messageText = '🔊 *Hello Everyone:*\n\n';
+            let messageText = 'ðŸ”Š *Hello Everyone:*\n\n';
             participants.forEach((participant) => {
                 messageText += `@${participant.id.split('@')[0]}\n`;
             });
@@ -37,3 +37,6 @@ export default {
         }
     }
 };
+
+
+

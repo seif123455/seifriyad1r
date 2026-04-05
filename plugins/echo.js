@@ -1,14 +1,14 @@
-export default {
-    command: 'echo',
-    aliases: [],
-    category: 'general',
-    description: 'Repeats your message a specified number of times.',
-    usage: '.echo <text> <count>',
+﻿export default {
+    command: 'يكهو',
+    aliases: ['echo'],
+    category: 'عام',
+    description: '',
+    usage: '.يكهو <نص> <كوونت>',
     isPrefixless: true,
     async handler(sock, message, args) {
         const chatId = message.key.remoteJid;
         if (args.length < 2) {
-            return await sock.sendMessage(chatId, { text: 'Usage: .echo <text> <count>' }, { quoted: message });
+            return await sock.sendMessage(chatId, { text: 'Usage: .echo <نص> <count>' }, { quoted: message });
         }
         const count = parseInt(args[args.length - 1], 10);
         if (isNaN(count) || count <= 0) {
@@ -20,3 +20,7 @@ export default {
         await sock.sendMessage(chatId, { text: repeated }, { quoted: message });
     }
 };
+
+
+
+

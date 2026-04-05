@@ -1,4 +1,4 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import store from '../lib/lightweight_store.js';
 
@@ -43,11 +43,11 @@ async function saveWarnings(warnings) {
 }
 
 export default {
-    command: 'تحذير',
-    aliases: ['warn', 'warning', 'انذار'],
-    category: 'admin',
-    description: 'تحذير مستخدم (الطرد التلقائي بعد 3 تحذيرات)',
-    usage: '!تحذير [@المستخدم] أو رد على رسالة',
+    command: 'ØªØ­Ø°ÙŠØ±',
+    aliases: ['warn', 'warning', 'Ø§Ù†Ø°Ø§Ø±'],
+    category: 'Ø§Ù„Ù…Ø´Ø±ÙÙˆÙ†',
+    description: 'ØªØ­Ø°ÙŠØ± Ù…Ø³ØªØ®Ø¯Ù… (Ø§Ù„Ø·Ø±Ø¯ Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠ Ø¨Ø¹Ø¯ 3 ØªØ­Ø°ÙŠØ±Ø§Øª)',
+    usage: '!ØªØ­Ø°ÙŠØ± [@Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…] Ø£Ùˆ Ø±Ø¯ Ø¹Ù„Ù‰ Ø±Ø³Ø§Ù„Ø©',
     groupOnly: true,
     adminOnly: true,
     
@@ -68,10 +68,10 @@ export default {
             
             if (!userToWarn) {
                 await sock.sendMessage(chatId, {
-                    text: '⚠️ *تحذير مستخدم*\n\n' +
-                        '*الاستخدام:* `!تحذير @المستخدم`\n' +
-                        '*مثال:* `!تحذير @username`\n\n' +
-                        '*أو رد على رسالة الشخص ثم اكتب:* `!تحذير`',
+                    text: 'âš ï¸ *ØªØ­Ø°ÙŠØ± Ù…Ø³ØªØ®Ø¯Ù…*\n\n' +
+                        '*Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…:* `!ØªØ­Ø°ÙŠØ± @Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…`\n' +
+                        '*Ù…Ø«Ø§Ù„:* `!ØªØ­Ø°ÙŠØ± @username`\n\n' +
+                        '*Ø£Ùˆ Ø±Ø¯ Ø¹Ù„Ù‰ Ø±Ø³Ø§Ù„Ø© Ø§Ù„Ø´Ø®Øµ Ø«Ù… Ø§ÙƒØªØ¨:* `!ØªØ­Ø°ÙŠØ±`',
                     ...channelInfo
                 }, { quoted: message });
                 return;
@@ -96,21 +96,21 @@ export default {
                 let warnStatus = '';
                 
                 if (remainingWarns === 2) {
-                    warnStatus = '⚠️ تحذير واحد متبقي قبل الطرد';
+                    warnStatus = 'âš ï¸ ØªØ­Ø°ÙŠØ± ÙˆØ§Ø­Ø¯ Ù…ØªØ¨Ù‚ÙŠ Ù‚Ø¨Ù„ Ø§Ù„Ø·Ø±Ø¯';
                 } else if (remainingWarns === 1) {
-                    warnStatus = '🔴 تحذير أخير!';
+                    warnStatus = 'ðŸ”´ ØªØ­Ø°ÙŠØ± Ø£Ø®ÙŠØ±!';
                 } else {
-                    warnStatus = 'سيتم طرد المستخدم';
+                    warnStatus = 'Ø³ÙŠØªÙ… Ø·Ø±Ø¯ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…';
                 }
                 
-                const warningMessage = `*『 ⚠️ تحذير 』*\n\n` +
-                    `👤 *المستخدم:* ${userName}\n` +
-                    `⚠️ *عدد التحذيرات:* ${warningCount}/3\n` +
-                    `📊 *المتبقي:* ${remainingWarns} تحذيرات\n` +
-                    `👑 *تم بواسطة:* @${senderId.split('@')[0]}\n` +
-                    `💾 *التخزين:* ${HAS_DB ? 'قاعدة بيانات' : 'ملفات'}\n\n` +
-                    `📅 *التاريخ:* ${new Date().toLocaleString('ar-EG')}\n\n` +
-                    `${warnStatus === 'سيتم طرد المستخدم' ? '🚫 سيتم طرد المستخدم تلقائياً بعد 3 تحذيرات!' : `⚠️ ${warnStatus}`}`;
+                const warningMessage = `*ã€Ž âš ï¸ ØªØ­Ø°ÙŠØ± ã€*\n\n` +
+                    `ðŸ‘¤ *Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…:* ${userName}\n` +
+                    `âš ï¸ *Ø¹Ø¯Ø¯ Ø§Ù„ØªØ­Ø°ÙŠØ±Ø§Øª:* ${warningCount}/3\n` +
+                    `ðŸ“Š *Ø§Ù„Ù…ØªØ¨Ù‚ÙŠ:* ${remainingWarns} ØªØ­Ø°ÙŠØ±Ø§Øª\n` +
+                    `ðŸ‘‘ *ØªÙ… Ø¨ÙˆØ§Ø³Ø·Ø©:* @${senderId.split('@')[0]}\n` +
+                    `ðŸ’¾ *Ø§Ù„ØªØ®Ø²ÙŠÙ†:* ${HAS_DB ? 'Ù‚Ø§Ø¹Ø¯Ø© Ø¨ÙŠØ§Ù†Ø§Øª' : 'Ù…Ù„ÙØ§Øª'}\n\n` +
+                    `ðŸ“… *Ø§Ù„ØªØ§Ø±ÙŠØ®:* ${new Date().toLocaleString('ar-EG')}\n\n` +
+                    `${warnStatus === 'Ø³ÙŠØªÙ… Ø·Ø±Ø¯ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…' ? 'ðŸš« Ø³ÙŠØªÙ… Ø·Ø±Ø¯ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹ Ø¨Ø¹Ø¯ 3 ØªØ­Ø°ÙŠØ±Ø§Øª!' : `âš ï¸ ${warnStatus}`}`;
                 
                 await sock.sendMessage(chatId, {
                     text: warningMessage,
@@ -124,9 +124,9 @@ export default {
                     delete warnings[chatId][userToWarn];
                     await saveWarnings(warnings);
                     
-                    const kickMessage = `*『 🚫 طرد تلقائي 』*\n\n` +
-                        `@${userToWarn.split('@')[0]} تم طرده من المجموعة بعد وصوله لـ 3 تحذيرات! ⚠️\n\n` +
-                        `🔥 *CRAZY-SEIF BOT* | 📞 201144534147`;
+                    const kickMessage = `*ã€Ž ðŸš« Ø·Ø±Ø¯ ØªÙ„Ù‚Ø§Ø¦ÙŠ ã€*\n\n` +
+                        `@${userToWarn.split('@')[0]} ØªÙ… Ø·Ø±Ø¯Ù‡ Ù…Ù† Ø§Ù„Ù…Ø¬Ù…ÙˆØ¹Ø© Ø¨Ø¹Ø¯ ÙˆØµÙˆÙ„Ù‡ Ù„Ù€ 3 ØªØ­Ø°ÙŠØ±Ø§Øª! âš ï¸\n\n` +
+                        `ðŸ”¥ *Crazy Seif BOT* | ðŸ“ž 01144534147`;
                     
                     await sock.sendMessage(chatId, {
                         text: kickMessage,
@@ -136,36 +136,37 @@ export default {
                 }
                 
             } catch (error) {
-                console.error('خطأ في أمر التحذير:', error);
+                console.error('Ø®Ø·Ø£ ÙÙŠ Ø£Ù…Ø± Ø§Ù„ØªØ­Ø°ÙŠØ±:', error);
                 await sock.sendMessage(chatId, {
-                    text: '❌ فشل في تحذير المستخدم!',
+                    text: 'âŒ ÙØ´Ù„ ÙÙŠ ØªØ­Ø°ÙŠØ± Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…!',
                     ...channelInfo
                 }, { quoted: message });
             }
             
         } catch (error) {
-            console.error('خطأ في أمر التحذير:', error);
+            console.error('Ø®Ø·Ø£ ÙÙŠ Ø£Ù…Ø± Ø§Ù„ØªØ­Ø°ÙŠØ±:', error);
             
             if (error.data === 429) {
                 await new Promise(resolve => setTimeout(resolve, 2000));
                 try {
                     await sock.sendMessage(chatId, {
-                        text: '❌ تم تجااز الحد المسموح. حاول مرة أخرى بعد بضع ثوانٍ.',
+                        text: 'âŒ ØªÙ… ØªØ¬Ø§Ø§Ø² Ø§Ù„Ø­Ø¯ Ø§Ù„Ù…Ø³Ù…ÙˆØ­. Ø­Ø§ÙˆÙ„ Ù…Ø±Ø© Ø£Ø®Ø±Ù‰ Ø¨Ø¹Ø¯ Ø¨Ø¶Ø¹ Ø«ÙˆØ§Ù†Ù.',
                         ...channelInfo
                     }, { quoted: message });
                 } catch (retryError) {
-                    console.error('خطأ في إرسال رسالة إعادة المحاولة:', retryError);
+                    console.error('Ø®Ø·Ø£ ÙÙŠ Ø¥Ø±Ø³Ø§Ù„ Ø±Ø³Ø§Ù„Ø© Ø¥Ø¹Ø§Ø¯Ø© Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø©:', retryError);
                 }
             } else {
                 try {
                     await sock.sendMessage(chatId, {
-                        text: '❌ فشل في تحذير المستخدم. تأكد من أن البوت أدمن ولديه الصلاحيات الكافية.',
+                        text: 'âŒ ÙØ´Ù„ ÙÙŠ ØªØ­Ø°ÙŠØ± Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…. ØªØ£ÙƒØ¯ Ù…Ù† Ø£Ù† Ø§Ù„Ø¨ÙˆØª Ø£Ø¯Ù…Ù† ÙˆÙ„Ø¯ÙŠÙ‡ Ø§Ù„ØµÙ„Ø§Ø­ÙŠØ§Øª Ø§Ù„ÙƒØ§ÙÙŠØ©.',
                         ...channelInfo
                     }, { quoted: message });
                 } catch (sendError) {
-                    console.error('خطأ في إرسال رسالة الخطأ:', sendError);
+                    console.error('Ø®Ø·Ø£ ÙÙŠ Ø¥Ø±Ø³Ø§Ù„ Ø±Ø³Ø§Ù„Ø© Ø§Ù„Ø®Ø·Ø£:', sendError);
                 }
             }
         }
     }
 };
+

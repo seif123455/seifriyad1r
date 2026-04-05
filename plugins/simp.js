@@ -1,9 +1,9 @@
-export default {
-    command: 'simp',
-    aliases: ['simpcard'],
-    category: 'group',
-    description: 'Generate a simp card for a user',
-    usage: '.simp (reply to user or mention someone)',
+﻿export default {
+    command: 'سيمب',
+    aliases: ['simpcard', 'simp'],
+    category: 'المجموعة',
+    description: 'توليد ا سيمب كارد فور ا مستخدم',
+    usage: '.سيمب (رد تو مستخدم ور مينتيون سوميوني)',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const sender = message.key.participant || message.key.remoteJid;
@@ -46,7 +46,7 @@ export default {
         catch (error) {
             console.error('Simp Command Error:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Sorry, I couldn\'t generate the simp card. Please try again later!',
+                text: 'âŒ Sorry, I couldn\'t generate the simp card. Please try again later!',
                 contextInfo: {
                     forwardingScore: 1,
                     isForwarded: true,
@@ -60,3 +60,7 @@ export default {
         }
     }
 };
+
+
+
+

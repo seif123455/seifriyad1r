@@ -1,12 +1,12 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
@@ -57,29 +57,29 @@ async function saveStickerCommands(data) {
     }
 }
 export default {
-    command: 'setcmd',
-    aliases: ['addcmd'],
-    category: 'owner',
-    description: 'Set a sticker command',
-    usage: '.setcmd <text>',
+    command: 'سيتكمد',
+    aliases: ['addcmd', 'setcmd'],
+    category: 'المالك',
+    description: 'تعيين ا ملصق كومماند',
+    usage: '.سيتكمد <نص>',
     ownerOnly: true,
     async handler(sock, message, args, context) {
         const { chatId, senderId } = context;
         if (!message.message?.extendedTextMessage?.contextInfo?.quotedMessage) {
             return await sock.sendMessage(chatId, {
-                text: '✳️ Please reply to a sticker to set a command'
+                text: 'âœ³ï¸ Please reply to a sticker to set a command'
             }, { quoted: message });
         }
         const quotedMsg = message.message.extendedTextMessage.contextInfo.quotedMessage;
         if (!quotedMsg.stickerMessage) {
             return await sock.sendMessage(chatId, {
-                text: '⚠️ Please reply to a sticker, not a regular message'
+                text: 'âš ï¸ Please reply to a sticker, not a regular message'
             }, { quoted: message });
         }
         const fileSha256 = quotedMsg.stickerMessage.fileSha256;
         if (!fileSha256) {
             return await sock.sendMessage(chatId, {
-                text: '⚠️ File SHA256 not found'
+                text: 'âš ï¸ File SHA256 not found'
             }, { quoted: message });
         }
         const text = args.join(' ');
@@ -92,7 +92,7 @@ export default {
         const hash = Buffer.from(fileSha256).toString('base64');
         if (stickers[hash] && stickers[hash].locked) {
             return await sock.sendMessage(chatId, {
-                text: '⚠️ You do not have permission to change this sticker command'
+                text: 'âš ï¸ You do not have permission to change this sticker command'
             }, { quoted: message });
         }
         stickers[hash] = {
@@ -104,21 +104,25 @@ export default {
         };
         await saveStickerCommands(stickers);
         await sock.sendMessage(chatId, {
-            text: '✅ Command saved successfully'
+            text: 'âœ… Command saved successfully'
         }, { quoted: message });
     }
 };
 /*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
  *                                                                           *
  *****************************************************************************/
+
+
+
+

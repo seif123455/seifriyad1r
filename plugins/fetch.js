@@ -1,11 +1,11 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 import { fileTypeFromBuffer } from 'file-type';
 export default {
-    command: 'fetch',
-    aliases: ['get', 'download'],
-    category: 'tools',
-    description: 'Download a file directly from a URL',
-    usage: '.fetch <url>',
+    command: 'فيتكه',
+    aliases: ['get', 'download', 'fetch'],
+    category: 'أدوات',
+    description: 'تحميل ا ملف ديريكتلي فروم ا رابط',
+    usage: '.فيتكه <رابط>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const url = args[0];
@@ -13,7 +13,7 @@ export default {
             return await sock.sendMessage(chatId, { text: 'Provide a valid URL starting with http/https.' });
         }
         try {
-            await sock.sendMessage(chatId, { text: '📡 *Fetching data...*' });
+            await sock.sendMessage(chatId, { text: 'ðŸ“¡ *Fetching data...*' });
             const res = await axios.get(url, { responseType: 'arraybuffer' });
             const buffer = Buffer.from(res.data, 'binary');
             const type = await fileTypeFromBuffer(buffer);
@@ -34,7 +34,11 @@ export default {
             }
         }
         catch (err) {
-            await sock.sendMessage(chatId, { text: '❌ Failed to fetch. URL might be private or invalid.' });
+            await sock.sendMessage(chatId, { text: 'âŒ Failed to fetch. URL might be private or invalid.' });
         }
     }
 };
+
+
+
+

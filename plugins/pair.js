@@ -1,10 +1,10 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 export default {
-    command: 'pair',
-    aliases: ['paircode', 'session', 'getsession', 'sessionid'],
-    category: 'general',
-    description: 'Get session id for MEGA-MD',
-    usage: '.pair 92305395XXXX',
+    command: 'باير',
+    aliases: ['paircode', 'session', 'getsession', 'sessionid', 'pair'],
+    category: 'عام',
+    description: 'جلب معرف الجلسة فور ميجا-مد',
+    usage: '.باير 92305395كسكسكسكس',
     async handler(sock, message, args, context) {
         const { chatId } = context;
         const forwardInfo = {
@@ -19,19 +19,19 @@ export default {
         const query = args.join('').trim();
         if (!query) {
             return await sock.sendMessage(chatId, {
-                text: "❌ *Missing Number*\nExample: .pair 92305395XXXX",
+                text: "âŒ *Missing Number*\nExample: .باير 92305395كسكسكسكس",
                 contextInfo: forwardInfo
             }, { quoted: message });
         }
         const number = query.replace(/[^0-9]/g, '');
         if (number.length < 10 || number.length > 15) {
             return await sock.sendMessage(chatId, {
-                text: "❌ *Invalid Format*\nPlease provide the number with country code but without + or spaces.",
+                text: "âŒ *Invalid Format*\nPlease provide the number with country code but without + or spaces.",
                 contextInfo: forwardInfo
             }, { quoted: message });
         }
         await sock.sendMessage(chatId, {
-            text: "⚡ *Requesting code from server...*",
+            text: "âš¡ *Requesting code from server...*",
             contextInfo: forwardInfo
         }, { quoted: message });
         try {
@@ -43,7 +43,7 @@ export default {
                 if (pairingCode.includes("Unavailable") || pairingCode.includes("Error")) {
                     throw new Error("Server is busy");
                 }
-                const successText = `✅ *MEGA-MD PAIRING CODE*\n\n` +
+                const successText = `âœ… *MEGA-MD PAIRING CODE*\n\n` +
                     `Code: *${pairingCode}*\n\n` +
                     `*How to use:*\n` +
                     `1. Open WhatsApp Settings\n` +
@@ -62,7 +62,7 @@ export default {
         }
         catch (error) {
             console.error('Pairing Plugin Error:', error.message);
-            let errorMsg = "❌ *Pairing Failed*\nReason: ";
+            let errorMsg = "âŒ *Pairing Failed*\nReason: ";
             if (error.code === 'ECONNABORTED') {
                 errorMsg += "Server timeout. Please try again in 1 minute.";
             }
@@ -79,3 +79,6 @@ export default {
         }
     }
 };
+
+
+

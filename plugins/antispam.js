@@ -1,4 +1,4 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import { dataFile } from '../lib/paths.js';
 import store from '../lib/lightweight_store.js';
@@ -11,10 +11,10 @@ const SQLITE_URL = process.env.DB_URL;
 const HAS_DB = !!(MONGO_URL || POSTGRES_URL || MYSQL_URL || SQLITE_URL);
 const configPath = dataFile('antispam.json');
 
-// ── متتبع الرسائل المكررة ────────────────────────────────────────────────
+// â”€â”€ Ù…ØªØªØ¨Ø¹ Ø§Ù„Ø±Ø³Ø§Ø¦Ù„ Ø§Ù„Ù…ÙƒØ±Ø±Ø© â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const tracker = new Map();
 const metaCache = new Map();
-const META_TTL_MS = 5 * 60 * 1000; // 5 دقائق
+const META_TTL_MS = 5 * 60 * 1000; // 5 Ø¯Ù‚Ø§Ø¦Ù‚
 
 async function getParticipants(sock, chatId) {
     const cached = metaCache.get(chatId);
@@ -97,7 +97,7 @@ async function saveConfig(config) {
     }
 }
 
-// ── دالة منع التكرار الرئيسية ────────────────────────────────────────────
+// â”€â”€ Ø¯Ø§Ù„Ø© Ù…Ù†Ø¹ Ø§Ù„ØªÙƒØ±Ø§Ø± Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ© â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export async function handleAntiSpam(sock, chatId, message, senderId, senderIsOwnerOrSudo) {
     try {
         if (message.key.fromMe || senderIsOwnerOrSudo) return false;
@@ -134,7 +134,7 @@ export async function handleAntiSpam(sock, chatId, message, senderId, senderIsOw
         userData.count++;
         if (userData.count <= groupConfig.maxMessages) return false;
         
-        // ── تم اكتشاف تكرار ──────────────────────────────────────────────────
+        // â”€â”€ ØªÙ… Ø§ÙƒØªØ´Ø§Ù ØªÙƒØ±Ø§Ø± â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         userData.count = 0;
         userData.firstMessageTime = now;
         
@@ -144,7 +144,7 @@ export async function handleAntiSpam(sock, chatId, message, senderId, senderIsOw
             try {
                 if (warnsLeft > 0) {
                     await sock.sendMessage(chatId, {
-                        text: `⚠️ @${senderId.split('@')[0]} *ممنوع التكرار!*\n_تحذير ${userData.warns}/${groupConfig.warnCount}. باقي ${warnsLeft} تحذير قبل الطرد._`,
+                        text: `âš ï¸ @${senderId.split('@')[0]} *Ù…Ù…Ù†ÙˆØ¹ Ø§Ù„ØªÙƒØ±Ø§Ø±!*\n_ØªØ­Ø°ÙŠØ± ${userData.warns}/${groupConfig.warnCount}. Ø¨Ø§Ù‚ÙŠ ${warnsLeft} ØªØ­Ø°ÙŠØ± Ù‚Ø¨Ù„ Ø§Ù„Ø·Ø±Ø¯._`,
                         mentions: [senderId],
                         ...channelInfo
                     });
@@ -152,13 +152,13 @@ export async function handleAntiSpam(sock, chatId, message, senderId, senderIsOw
                     userData.warns = 0;
                     if (!isBotAdmin) {
                         await sock.sendMessage(chatId, {
-                            text: `⚠️ @${senderId.split('@')[0]} وصل للحد الأقصى من التحذيرات لكن البوت ليس أدمن.`,
+                            text: `âš ï¸ @${senderId.split('@')[0]} ÙˆØµÙ„ Ù„Ù„Ø­Ø¯ Ø§Ù„Ø£Ù‚ØµÙ‰ Ù…Ù† Ø§Ù„ØªØ­Ø°ÙŠØ±Ø§Øª Ù„ÙƒÙ† Ø§Ù„Ø¨ÙˆØª Ù„ÙŠØ³ Ø£Ø¯Ù…Ù†.`,
                             mentions: [senderId],
                             ...channelInfo
                         });
                     } else {
                         await sock.sendMessage(chatId, {
-                            text: `🚫 @${senderId.split('@')[0]} تم *طرده* بسبب التكرار المستمر.`,
+                            text: `ðŸš« @${senderId.split('@')[0]} ØªÙ… *Ø·Ø±Ø¯Ù‡* Ø¨Ø³Ø¨Ø¨ Ø§Ù„ØªÙƒØ±Ø§Ø± Ø§Ù„Ù…Ø³ØªÙ…Ø±.`,
                             mentions: [senderId],
                             ...channelInfo
                         });
@@ -167,7 +167,7 @@ export async function handleAntiSpam(sock, chatId, message, senderId, senderIsOw
                     }
                 }
             } catch (sendErr) {
-                console.error('[ANTISPAM] فشل إرسال التحذير:', sendErr.message);
+                console.error('[ANTISPAM] ÙØ´Ù„ Ø¥Ø±Ø³Ø§Ù„ Ø§Ù„ØªØ­Ø°ÙŠØ±:', sendErr.message);
             }
             return true;
         }
@@ -175,13 +175,13 @@ export async function handleAntiSpam(sock, chatId, message, senderId, senderIsOw
         if (groupConfig.action === 'kick') {
             if (!isBotAdmin) {
                 await sock.sendMessage(chatId, {
-                    text: `⚠️ تكرار من @${senderId.split('@')[0]} — البوت يحتاج صلاحيات أدمن للطرد.`,
+                    text: `âš ï¸ ØªÙƒØ±Ø§Ø± Ù…Ù† @${senderId.split('@')[0]} â€” Ø§Ù„Ø¨ÙˆØª ÙŠØ­ØªØ§Ø¬ ØµÙ„Ø§Ø­ÙŠØ§Øª Ø£Ø¯Ù…Ù† Ù„Ù„Ø·Ø±Ø¯.`,
                     mentions: [senderId],
                     ...channelInfo
                 });
             } else {
                 await sock.sendMessage(chatId, {
-                    text: `🚫 @${senderId.split('@')[0]} تم طرده بسبب التكرار.`,
+                    text: `ðŸš« @${senderId.split('@')[0]} ØªÙ… Ø·Ø±Ø¯Ù‡ Ø¨Ø³Ø¨Ø¨ Ø§Ù„ØªÙƒØ±Ø§Ø±.`,
                     mentions: [senderId],
                     ...channelInfo
                 });
@@ -193,13 +193,13 @@ export async function handleAntiSpam(sock, chatId, message, senderId, senderIsOw
         if (groupConfig.action === 'mute') {
             if (!isBotAdmin) {
                 await sock.sendMessage(chatId, {
-                    text: `⚠️ تكرار من @${senderId.split('@')[0]} — البوت يحتاج صلاحيات أدمن للكتم.`,
+                    text: `âš ï¸ ØªÙƒØ±Ø§Ø± Ù…Ù† @${senderId.split('@')[0]} â€” Ø§Ù„Ø¨ÙˆØª ÙŠØ­ØªØ§Ø¬ ØµÙ„Ø§Ø­ÙŠØ§Øª Ø£Ø¯Ù…Ù† Ù„Ù„ÙƒØªÙ….`,
                     mentions: [senderId],
                     ...channelInfo
                 });
             } else {
                 await sock.sendMessage(chatId, {
-                    text: `🔇 @${senderId.split('@')[0]} تم كتمه بسبب التكرار.`,
+                    text: `ðŸ”‡ @${senderId.split('@')[0]} ØªÙ… ÙƒØªÙ…Ù‡ Ø¨Ø³Ø¨Ø¨ Ø§Ù„ØªÙƒØ±Ø§Ø±.`,
                     mentions: [senderId],
                     ...channelInfo
                 });
@@ -210,12 +210,12 @@ export async function handleAntiSpam(sock, chatId, message, senderId, senderIsOw
         
         return false;
     } catch (e) {
-        console.error('[ANTISPAM] خطأ:', e.message);
+        console.error('[ANTISPAM] Ø®Ø·Ø£:', e.message);
         return false;
     }
 }
 
-// تحديث الكاش عند تغيير المشاركين
+// ØªØ­Ø¯ÙŠØ« Ø§Ù„ÙƒØ§Ø´ Ø¹Ù†Ø¯ ØªØºÙŠÙŠØ± Ø§Ù„Ù…Ø´Ø§Ø±ÙƒÙŠÙ†
 export function invalidateGroupCache(chatId) {
     metaCache.delete(chatId);
     tracker.delete(chatId);
@@ -224,11 +224,11 @@ export function invalidateGroupCache(chatId) {
 export { loadConfig, saveConfig, DEFAULT_GROUP_CONFIG };
 
 export default {
-    command: 'تكرار',
-    aliases: ['antispam', 'floodprotect', 'antiflood', 'منع_التكرار'],
-    category: 'admin',
-    description: 'إعداد حماية منع التكرار في المجموعة',
-    usage: '!تكرار on/off | !تكرار set <عدد> <ثواني> | !تكرار action <warn/kick/mute> | !تكرار warns <عدد>',
+    command: 'ØªÙƒØ±Ø§Ø±',
+    aliases: ['antispam', 'floodprotect', 'antiflood', 'Ù…Ù†Ø¹_Ø§Ù„ØªÙƒØ±Ø§Ø±'],
+    category: 'Ø§Ù„Ù…Ø´Ø±ÙÙˆÙ†',
+    description: 'Ø¥Ø¹Ø¯Ø§Ø¯ Ø­Ù…Ø§ÙŠØ© Ù…Ù†Ø¹ Ø§Ù„ØªÙƒØ±Ø§Ø± ÙÙŠ Ø§Ù„Ù…Ø¬Ù…ÙˆØ¹Ø©',
+    usage: '!ØªÙƒØ±Ø§Ø± ÙˆÙ†/ÙˆÙÙ | !ØªÙƒØ±Ø§Ø± ØªØ¹ÙŠÙŠÙ† <Ø¹Ø¯Ø¯> <Ø«ÙˆØ§Ù†ÙŠ> | !ØªÙƒØ±Ø§Ø± Ø§ÙƒØªÙŠÙˆÙ† <ÙˆØ§Ø±Ù†/Ø·Ø±Ø¯/ÙƒØªÙ…> | !ØªÙƒØ±Ø§Ø± ÙˆØ§Ø±Ù†Ø³ <Ø¹Ø¯Ø¯>',
     groupOnly: true,
     adminOnly: true,
     
@@ -244,82 +244,83 @@ export default {
         
         if (!action || action === 'status') {
             return await sock.sendMessage(chatId, {
-                text: `*🛡️ حالة منع التكرار*\n\n` +
-                    `*الحالة:* ${groupConfig.enabled ? '✅ مفعل' : '❌ معطل'}\n` +
-                    `*الحد:* ${groupConfig.maxMessages} رسالة في ${groupConfig.windowSeconds} ثانية\n` +
-                    `*الإجراء:* ${groupConfig.action.toUpperCase()}\n` +
-                    `*حد التحذيرات:* ${groupConfig.warnCount} تحذير قبل الطرد\n` +
-                    `*البوت أدمن:* ${isBotAdmin ? '✅ نعم' : '❌ لا'}\n\n` +
-                    `*الأوامر:*\n` +
-                    `• \`!تكرار on/off\`\n` +
-                    `• \`!تكرار set 5 10\` — 5 رسائل في 10 ثواني\n` +
-                    `• \`!تكرار action warn/kick/mute\`\n` +
-                    `• \`!تكرار warns 3\` — تحذيرات قبل الطرد`,
+                text: `*ðŸ›¡ï¸ Ø­Ø§Ù„Ø© Ù…Ù†Ø¹ Ø§Ù„ØªÙƒØ±Ø§Ø±*\n\n` +
+                    `*Ø§Ù„Ø­Ø§Ù„Ø©:* ${groupConfig.enabled ? 'âœ… Ù…ÙØ¹Ù„' : 'âŒ Ù…Ø¹Ø·Ù„'}\n` +
+                    `*Ø§Ù„Ø­Ø¯:* ${groupConfig.maxMessages} Ø±Ø³Ø§Ù„Ø© ÙÙŠ ${groupConfig.windowSeconds} Ø«Ø§Ù†ÙŠØ©\n` +
+                    `*Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡:* ${groupConfig.action.toUpperCase()}\n` +
+                    `*Ø­Ø¯ Ø§Ù„ØªØ­Ø°ÙŠØ±Ø§Øª:* ${groupConfig.warnCount} ØªØ­Ø°ÙŠØ± Ù‚Ø¨Ù„ Ø§Ù„Ø·Ø±Ø¯\n` +
+                    `*Ø§Ù„Ø¨ÙˆØª Ø£Ø¯Ù…Ù†:* ${isBotAdmin ? 'âœ… Ù†Ø¹Ù…' : 'âŒ Ù„Ø§'}\n\n` +
+                    `*Ø§Ù„Ø£ÙˆØ§Ù…Ø±:*\n` +
+                    `â€¢ \`!ØªÙƒØ±Ø§Ø± on/off\`\n` +
+                    `â€¢ \`!ØªÙƒØ±Ø§Ø± set 5 10\` â€” 5 Ø±Ø³Ø§Ø¦Ù„ ÙÙŠ 10 Ø«ÙˆØ§Ù†ÙŠ\n` +
+                    `â€¢ \`!ØªÙƒØ±Ø§Ø± action warn/kick/mute\`\n` +
+                    `â€¢ \`!ØªÙƒØ±Ø§Ø± warns 3\` â€” ØªØ­Ø°ÙŠØ±Ø§Øª Ù‚Ø¨Ù„ Ø§Ù„Ø·Ø±Ø¯`,
                 ...channelInfo
             }, { quoted: message });
         }
         
         if (action === 'on' || action === 'enable') {
             if (groupConfig.enabled)
-                return await sock.sendMessage(chatId, { text: '⚠️ منع التكرار مفعل بالفعل.', ...channelInfo }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: 'âš ï¸ Ù…Ù†Ø¹ Ø§Ù„ØªÙƒØ±Ø§Ø± Ù…ÙØ¹Ù„ Ø¨Ø§Ù„ÙØ¹Ù„.', ...channelInfo }, { quoted: message });
             
             if (!isBotAdmin && groupConfig.action !== 'warn') {
-                await sock.sendMessage(chatId, { text: `⚠️ البوت ليس أدمن — لن يعمل الطرد/الكتم حتى يصبح البوت أدمن.`, ...channelInfo }, { quoted: message });
+                await sock.sendMessage(chatId, { text: `âš ï¸ Ø§Ù„Ø¨ÙˆØª Ù„ÙŠØ³ Ø£Ø¯Ù…Ù† â€” Ù„Ù† ÙŠØ¹Ù…Ù„ Ø§Ù„Ø·Ø±Ø¯/Ø§Ù„ÙƒØªÙ… Ø­ØªÙ‰ ÙŠØµØ¨Ø­ Ø§Ù„Ø¨ÙˆØª Ø£Ø¯Ù…Ù†.`, ...channelInfo }, { quoted: message });
             }
             
             groupConfig.enabled = true;
             await saveConfig(config);
             return await sock.sendMessage(chatId, {
-                text: `✅ *تم تفعيل منع التكرار!*\nالحد: ${groupConfig.maxMessages} رسالة في ${groupConfig.windowSeconds} ثانية | الإجراء: ${groupConfig.action.toUpperCase()}`,
+                text: `âœ… *ØªÙ… ØªÙØ¹ÙŠÙ„ Ù…Ù†Ø¹ Ø§Ù„ØªÙƒØ±Ø§Ø±!*\nØ§Ù„Ø­Ø¯: ${groupConfig.maxMessages} Ø±Ø³Ø§Ù„Ø© ÙÙŠ ${groupConfig.windowSeconds} Ø«Ø§Ù†ÙŠØ© | Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡: ${groupConfig.action.toUpperCase()}`,
                 ...channelInfo
             }, { quoted: message });
         }
         
         if (action === 'off' || action === 'disable') {
             if (!groupConfig.enabled)
-                return await sock.sendMessage(chatId, { text: '⚠️ منع التكرار معطل بالفعل.', ...channelInfo }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: 'âš ï¸ Ù…Ù†Ø¹ Ø§Ù„ØªÙƒØ±Ø§Ø± Ù…Ø¹Ø·Ù„ Ø¨Ø§Ù„ÙØ¹Ù„.', ...channelInfo }, { quoted: message });
             
             groupConfig.enabled = false;
             await saveConfig(config);
-            return await sock.sendMessage(chatId, { text: '❌ *تم تعطيل منع التكرار.*', ...channelInfo }, { quoted: message });
+            return await sock.sendMessage(chatId, { text: 'âŒ *ØªÙ… ØªØ¹Ø·ÙŠÙ„ Ù…Ù†Ø¹ Ø§Ù„ØªÙƒØ±Ø§Ø±.*', ...channelInfo }, { quoted: message });
         }
         
         if (action === 'set') {
             const maxMsgs = parseInt(args[1], 10);
             const windowSec = parseInt(args[2], 10);
             if (isNaN(maxMsgs) || isNaN(windowSec) || maxMsgs < 2 || windowSec < 1) {
-                return await sock.sendMessage(chatId, { text: '❌ الاستخدام: `!تكرار set <رسائل> <ثواني>`\nمثال: `!تكرار set 5 10`', ...channelInfo }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: 'âŒ Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…: `!ØªÙƒØ±Ø§Ø± set <Ø±Ø³Ø§Ø¦Ù„> <Ø«ÙˆØ§Ù†ÙŠ>`\nÙ…Ø«Ø§Ù„: `!ØªÙƒØ±Ø§Ø± set 5 10`', ...channelInfo }, { quoted: message });
             }
             groupConfig.maxMessages = maxMsgs;
             groupConfig.windowSeconds = windowSec;
             await saveConfig(config);
-            return await sock.sendMessage(chatId, { text: `✅ تم ضبط الحد: *${maxMsgs} رسالة* في *${windowSec} ثانية*`, ...channelInfo }, { quoted: message });
+            return await sock.sendMessage(chatId, { text: `âœ… ØªÙ… Ø¶Ø¨Ø· Ø§Ù„Ø­Ø¯: *${maxMsgs} Ø±Ø³Ø§Ù„Ø©* ÙÙŠ *${windowSec} Ø«Ø§Ù†ÙŠØ©*`, ...channelInfo }, { quoted: message });
         }
         
         if (action === 'action') {
             const newAction = args[1]?.toLowerCase();
             if (!['warn', 'kick', 'mute'].includes(newAction)) {
-                return await sock.sendMessage(chatId, { text: '❌ اختر: `warn`, `kick`, أو `mute`', ...channelInfo }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: 'âŒ Ø§Ø®ØªØ±: `warn`, `kick`, Ø£Ùˆ `mute`', ...channelInfo }, { quoted: message });
             }
             if (newAction !== 'warn' && !isBotAdmin) {
-                await sock.sendMessage(chatId, { text: `⚠️ تم ضبط الإجراء على *${newAction.toUpperCase()}* لكن البوت يحتاج صلاحيات أدمن.`, ...channelInfo }, { quoted: message });
+                await sock.sendMessage(chatId, { text: `âš ï¸ ØªÙ… Ø¶Ø¨Ø· Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡ Ø¹Ù„Ù‰ *${newAction.toUpperCase()}* Ù„ÙƒÙ† Ø§Ù„Ø¨ÙˆØª ÙŠØ­ØªØ§Ø¬ ØµÙ„Ø§Ø­ÙŠØ§Øª Ø£Ø¯Ù…Ù†.`, ...channelInfo }, { quoted: message });
             }
             groupConfig.action = newAction;
             await saveConfig(config);
-            return await sock.sendMessage(chatId, { text: `✅ الإجراء: *${newAction.toUpperCase()}*`, ...channelInfo }, { quoted: message });
+            return await sock.sendMessage(chatId, { text: `âœ… Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡: *${newAction.toUpperCase()}*`, ...channelInfo }, { quoted: message });
         }
         
         if (action === 'warns') {
             const count = parseInt(args[1], 10);
             if (isNaN(count) || count < 1)
-                return await sock.sendMessage(chatId, { text: '❌ مثال: `!تكرار warns 3`', ...channelInfo }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: 'âŒ Ù…Ø«Ø§Ù„: `!ØªÙƒØ±Ø§Ø± warns 3`', ...channelInfo }, { quoted: message });
             groupConfig.warnCount = count;
             await saveConfig(config);
-            return await sock.sendMessage(chatId, { text: `✅ حد التحذيرات: *${count}* تحذير قبل الإجراء.`, ...channelInfo }, { quoted: message });
+            return await sock.sendMessage(chatId, { text: `âœ… Ø­Ø¯ Ø§Ù„ØªØ­Ø°ÙŠØ±Ø§Øª: *${count}* ØªØ­Ø°ÙŠØ± Ù‚Ø¨Ù„ Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡.`, ...channelInfo }, { quoted: message });
         }
         
-        return await sock.sendMessage(chatId, { text: '❌ أمر غير معروف. استخدم `!تكرار status`', ...channelInfo }, { quoted: message });
+        return await sock.sendMessage(chatId, { text: 'âŒ Ø£Ù…Ø± ØºÙŠØ± Ù…Ø¹Ø±ÙˆÙ. Ø§Ø³ØªØ®Ø¯Ù… `!ØªÙƒØ±Ø§Ø± status`', ...channelInfo }, { quoted: message });
     },
     handleAntiSpam,
     invalidateGroupCache
 };
+

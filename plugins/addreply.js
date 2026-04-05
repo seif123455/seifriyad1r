@@ -1,11 +1,11 @@
-import { initConfig, saveConfig } from './autoreply.js';
+﻿import { initConfig, saveConfig } from './autoreply.js';
 
 export default {
-    command: 'رد',
-    aliases: ['addreply', 'newtrigger', 'setreply', 'اضافة_رد', 'رد_تلقائي'],
-    category: 'owner',
-    description: 'إضافة رد تلقائي',
-    usage: 'رد <المشغل> | <الرد>\nللمطابقة التامة: رد exact:<المشغل> | <الرد>\nاستخدم {name} لذكر اسم المرسل',
+    command: 'Ø±Ø¯ ØªÙ„Ù‚Ø§Ø¦ÙŠ',
+    aliases: ['Ø±Ø¯', 'addreply', 'newtrigger', 'setreply', 'Ø§Ø¶Ø§ÙØ© Ø±Ø¯', 'Ø±Ø¯ Ø¢Ù„ÙŠ'],
+    category: 'Ù…Ø§Ù„Ùƒ',
+    description: 'Ø¥Ø¶Ø§ÙØ© Ø±Ø¯ ØªÙ„Ù‚Ø§Ø¦ÙŠ Ø¬Ø¯ÙŠØ¯ Ø¹Ù†Ø¯Ù…Ø§ ÙŠÙƒØªØ¨ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… ÙƒÙ„Ù…Ø© Ù…Ø¹ÙŠÙ†Ø©',
+    usage: '.Ø±Ø¯ ØªÙ„Ù‚Ø§Ø¦ÙŠ <Ø§Ù„Ù…Ø´ØºÙ„> | <Ø§Ù„Ø±Ø¯>\Ù†\Ù†Ù…Ø«Ø§Ù„: .Ø±Ø¯ ØªÙ„Ù‚Ø§Ø¦ÙŠ Ù…Ø±Ø­Ø¨Ø§ | Ø£Ù‡Ù„Ø§Ù‹ Ø¨Ùƒ',
     ownerOnly: true,
     
     async handler(sock, message, args, context) {
@@ -16,13 +16,13 @@ export default {
         
         if (!fullText || pipeIndex === -1) {
             return await sock.sendMessage(chatId, {
-                text: `*➕ إضافة رد تلقائي*\n\n` +
-                    `*الاستخدام:*\n` +
-                    `\`رد <المشغل> | <الرد>\`\n\n` +
-                    `*أمثلة:*\n` +
-                    `• \`رد مرحبا | أهلاً بك! 👋\`\n` +
-                    `• \`رد exact:صباح الخير | صباح النور! ☀️\`\n` +
-                    `• \`رد مرحبا | مرحباً {name}! كيف حالك؟\``
+                text: `*âž• Ø¥Ø¶Ø§ÙØ© Ø±Ø¯ ØªÙ„Ù‚Ø§Ø¦ÙŠ*\n\n` +
+                    `*Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…:*\n` +
+                    `\`.Ø±Ø¯ ØªÙ„Ù‚Ø§Ø¦ÙŠ <Ø§Ù„Ù…Ø´ØºÙ„> | <Ø§Ù„Ø±Ø¯>\`\n\n` +
+                    `*Ø£Ù…Ø«Ù„Ø©:*\n` +
+                    `â€¢ \`.Ø±Ø¯ ØªÙ„Ù‚Ø§Ø¦ÙŠ Ù…Ø±Ø­Ø¨Ø§ | Ø£Ù‡Ù„Ø§Ù‹ Ø¨Ùƒ! ðŸ‘‹\`\n` +
+                    `â€¢ \`.Ø±Ø¯ ØªÙ„Ù‚Ø§Ø¦ÙŠ exact:ØµØ¨Ø§Ø­ Ø§Ù„Ø®ÙŠØ± | ØµØ¨Ø§Ø­ Ø§Ù„Ù†ÙˆØ±! â˜€ï¸\`\n` +
+                    `â€¢ \`.Ø±Ø¯ ØªÙ„Ù‚Ø§Ø¦ÙŠ Ù…Ø±Ø­Ø¨Ø§ | Ù…Ø±Ø­Ø¨Ø§Ù‹ {name}! ÙƒÙŠÙ Ø­Ø§Ù„ÙƒØŸ\``
             }, { quoted: message });
         }
         
@@ -31,7 +31,7 @@ export default {
         
         if (!trigger || !response) {
             return await sock.sendMessage(chatId, {
-                text: '❌ المشغل والرد مطلوبان.'
+                text: 'âŒ *Ø§Ù„Ù…Ø´ØºÙ„ ÙˆØ§Ù„Ø±Ø¯ Ù…Ø·Ù„ÙˆØ¨Ø§Ù†.*'
             }, { quoted: message });
         }
         
@@ -46,7 +46,7 @@ export default {
         
         if (exists) {
             return await sock.sendMessage(chatId, {
-                text: `⚠️ الرد لـ *"${trigger}"* موجود بالفعل!`
+                text: `âš ï¸ *Ø§Ù„Ø±Ø¯ Ù„Ù€ "${trigger}" Ù…ÙˆØ¬ÙˆØ¯ Ø¨Ø§Ù„ÙØ¹Ù„!*`
             }, { quoted: message });
         }
         
@@ -61,10 +61,11 @@ export default {
         await saveConfig(config);
         
         await sock.sendMessage(chatId, {
-            text: `✅ *تم إضافة الرد التلقائي!*\n\n` +
-                `🔑 *المشغل:* ${trigger}\n` +
-                `🎯 *المطابقة:* ${exactMatch ? 'تامة' : 'احتواء'}\n` +
-                `💬 *الرد:* ${response}`
+            text: `âœ… *ØªÙ… Ø¥Ø¶Ø§ÙØ© Ø§Ù„Ø±Ø¯ Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠ!*\n\n` +
+                `ðŸ”‘ *Ø§Ù„ÙƒÙ„Ù…Ø©:* ${trigger}\n` +
+                `ðŸŽ¯ *Ø§Ù„Ù…Ø·Ø§Ø¨Ù‚Ø©:* ${exactMatch ? 'ØªØ§Ù…Ø©' : 'Ø§Ø­ØªÙˆØ§Ø¡'}\n` +
+                `ðŸ’¬ *Ø§Ù„Ø±Ø¯:* ${response}`
         }, { quoted: message });
     }
 };
+

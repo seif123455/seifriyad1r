@@ -1,9 +1,9 @@
-export default {
-    command: 'groupinfo',
-    aliases: ['ginfo', 'gcinfo', 'infogroup'],
-    category: 'group',
-    description: 'Display detailed group information',
-    usage: '.groupinfo',
+﻿export default {
+    command: 'جرووبينفو',
+    aliases: ['ginfo', 'gcinfo', 'infogroup', 'groupinfo'],
+    category: 'المجموعة',
+    description: 'عرض ديتايليد مجموعة معلوماترماتيون',
+    usage: '.مجموعةمعلومات',
     groupOnly: true,
     async handler(sock, message, args, context) {
         const { chatId, channelInfo } = context;
@@ -21,20 +21,20 @@ export default {
             const listAdmin = groupAdmins.map((v, i) => `${i + 1}. @${v.id.split('@')[0]}`).join('\n');
             const owner = groupMetadata.owner || groupAdmins.find((p) => p.admin === 'superadmin')?.id || `${chatId.split('-')[0] }@s.whatsapp.net`;
             const text = `
-┌──「 *INFO GROUP* 」
-▢ *♻️ID:*
-   • ${groupMetadata.id}
-▢ *🔖NAME* : 
-• ${groupMetadata.subject}
-▢ *👥Members* :
-• ${participants.length}
-▢ *🤿Group Owner:*
-• @${owner.split('@')[0]}
-▢ *🕵🏻‍♂️Admins:*
+â”Œâ”€â”€ã€Œ *INFO GROUP* ã€
+â–¢ *â™»ï¸ID:*
+   â€¢ ${groupMetadata.id}
+â–¢ *ðŸ”–NAME* : 
+â€¢ ${groupMetadata.subject}
+â–¢ *ðŸ‘¥Members* :
+â€¢ ${participants.length}
+â–¢ *ðŸ¤¿Group Owner:*
+â€¢ @${owner.split('@')[0]}
+â–¢ *ðŸ•µðŸ»â€â™‚ï¸Admins:*
 ${listAdmin}
 
-▢ *📌Description* :
-   • ${groupMetadata.desc?.toString() || 'No description'}
+â–¢ *ðŸ“ŒDescription* :
+   â€¢ ${groupMetadata.desc?.toString() || 'No description'}
 `.trim();
             await sock.sendMessage(chatId, {
                 image: { url: pp },
@@ -52,3 +52,7 @@ ${listAdmin}
         }
     }
 };
+
+
+
+

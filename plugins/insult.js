@@ -1,4 +1,4 @@
-const insults = [
+﻿const insults = [
     "You're like a cloud. When you disappear, it's a beautiful day!",
     "You bring everyone so much joy when you leave the room!",
     "I'd agree with you, but then we'd both be wrong.",
@@ -8,33 +8,33 @@ const insults = [
     "You have something on your chin... no, the third one down.",
     "You're like a software update. Whenever I see you, I think, 'Do I really need this right now?'",
     "You bring everyone happiness... you know, when you leave.",
-    "You're like a penny—two-faced and not worth much.",
+    "You're like a pennyâ€”two-faced and not worth much.",
     "You have something on your mind... oh wait, never mind.",
     "You're the reason they put directions on shampoo bottles.",
     "You're like a cloud. Always floating around with no real purpose.",
-    "Your jokes are like expired milk—sour and hard to digest.",
+    "Your jokes are like expired milkâ€”sour and hard to digest.",
     "You're like a candle in the wind... useless when things get tough.",
-    "You have something unique—your ability to annoy everyone equally.",
-    "You're like a Wi-Fi signal—always weak when needed most.",
+    "You have something uniqueâ€”your ability to annoy everyone equally.",
+    "You're like a Wi-Fi signalâ€”always weak when needed most.",
     "You're proof that not everyone needs a filter to be unappealing.",
-    "Your energy is like a black hole—it just sucks the life out of the room.",
+    "Your energy is like a black holeâ€”it just sucks the life out of the room.",
     "You have the perfect face for radio.",
-    "You're like a traffic jam—nobody wants you, but here you are.",
-    "You're like a broken pencil—pointless.",
+    "You're like a traffic jamâ€”nobody wants you, but here you are.",
+    "You're like a broken pencilâ€”pointless.",
     "Your ideas are so original, I'm sure I've heard them all before.",
     "You're living proof that even mistakes can be productive.",
     "You're not lazy; you're just highly motivated to do nothing.",
-    "Your brain's running Windows 95—slow and outdated.",
-    "You're like a speed bump—nobody likes you, but everyone has to deal with you.",
-    "You're like a cloud of mosquitoes—just irritating.",
+    "Your brain's running Windows 95â€”slow and outdated.",
+    "You're like a speed bumpâ€”nobody likes you, but everyone has to deal with you.",
+    "You're like a cloud of mosquitoesâ€”just irritating.",
     "You bring people together... to talk about how annoying you are."
 ];
 export default {
-    command: 'insult',
-    aliases: ['roast', 'mock'],
-    category: 'group',
-    description: 'Send a playful insult to someone by mentioning them or replying to their message',
-    usage: '.insult @username or reply to their message with .insult',
+    command: 'ينسولت',
+    aliases: ['roast', 'mock', 'insult'],
+    category: 'المجموعة',
+    description: 'إرسال ا تشغيلفول ينسولت تو سوميوني بي مينتيونينج تهيم ور ردينج تو تهيير رسالة',
+    usage: '.ينسولت @مستخدمنامي ور رد تو تهيير رسالة ويته .ينسولت',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
@@ -47,7 +47,7 @@ export default {
             }
             if (!userToInsult) {
                 await sock.sendMessage(chatId, {
-                    text: '❌ Please mention someone or reply to their message to insult them!',
+                    text: 'âŒ Please mention someone or reply to their message to insult them!',
                     quoted: message
                 });
                 return;
@@ -66,7 +66,7 @@ export default {
                 await new Promise(resolve => setTimeout(resolve, 2000));
                 try {
                     await sock.sendMessage(chatId, {
-                        text: '⚠️ Too many requests. Please try again in a few seconds.',
+                        text: 'âš ï¸ Too many requests. Please try again in a few seconds.',
                         quoted: message
                     });
                 }
@@ -77,7 +77,7 @@ export default {
             else {
                 try {
                     await sock.sendMessage(chatId, {
-                        text: '❌ An error occurred while sending the insult.',
+                        text: 'âŒ An error occurred while sending the insult.',
                         quoted: message
                     });
                 }
@@ -88,3 +88,7 @@ export default {
         }
     }
 };
+
+
+
+

@@ -1,15 +1,15 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 export default {
-    command: 'github',
-    aliases: ['ghprofile', 'gh'],
+    command: 'جيتهوب',
+    aliases: ['ghprofile', 'gh', 'github'],
     category: 'stalk',
-    description: 'Lookup GitHub user profile',
-    usage: '.github <username>',
+    description: 'بحث جيتهوب مستخدم صورة شخصية',
+    usage: '.جيتهوب <مستخدمنامي>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         if (!args.length) {
             return await sock.sendMessage(chatId, {
-                text: '*Please provide a GitHub username.*\nExample: .github GlobalTechInfo'
+                text: '*Please provide a GitHub username.*\nExample: .github CrazySeif'
             }, { quoted: message });
         }
         const username = args[0];
@@ -22,27 +22,31 @@ export default {
                 }
             });
             if (!data?.result) {
-                return await sock.sendMessage(chatId, { text: '❌ GitHub user not found.' }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: 'âŒ GitHub user not found.' }, { quoted: message });
             }
             const result = data.result;
-            const caption = `🐙 *GitHub Profile Info*\n\n` +
-                `👤 Name: ${result.nickname || 'N/A'}\n` +
-                `🆔 Username: ${result.username || 'N/A'}\n` +
-                `🏢 Company: ${result.company || 'N/A'}\n` +
-                `📍 Location: ${result.location || 'N/A'}\n` +
-                `💬 Bio: ${result.bio || 'N/A'}\n` +
-                `📦 Public Repos: ${result.public_repo || 0}\n` +
-                `📜 Public Gists: ${result.public_gists || 0}\n` +
-                `👥 Followers: ${result.followers || 0}\n` +
-                `➡ Following: ${result.following || 0}\n` +
-                `🔗 Profile URL: ${result.url || 'N/A'}\n` +
-                `📅 Created At: ${new Date(result.created_at).toDateString()}\n` +
-                `🕒 Last Updated: ${new Date(result.updated_at).toDateString()}`;
+            const caption = `ðŸ™ *GitHub Profile Info*\n\n` +
+                `ðŸ‘¤ Name: ${result.nickname || 'N/A'}\n` +
+                `ðŸ†” Username: ${result.username || 'N/A'}\n` +
+                `ðŸ¢ Company: ${result.company || 'N/A'}\n` +
+                `ðŸ“ Location: ${result.location || 'N/A'}\n` +
+                `ðŸ’¬ Bio: ${result.bio || 'N/A'}\n` +
+                `ðŸ“¦ Public Repos: ${result.public_repo || 0}\n` +
+                `ðŸ“œ Public Gists: ${result.public_gists || 0}\n` +
+                `ðŸ‘¥ Followers: ${result.followers || 0}\n` +
+                `âž¡ Following: ${result.following || 0}\n` +
+                `ðŸ”— Profile URL: ${result.url || 'N/A'}\n` +
+                `ðŸ“… Created At: ${new Date(result.created_at).toDateString()}\n` +
+                `ðŸ•’ Last Updated: ${new Date(result.updated_at).toDateString()}`;
             await sock.sendMessage(chatId, { image: { url: result.profile_pic }, caption }, { quoted: message });
         }
         catch (err) {
             console.error('GitHub plugin error:', err);
-            await sock.sendMessage(chatId, { text: '❌ Failed to fetch GitHub profile.' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ Failed to fetch GitHub profile.' }, { quoted: message });
         }
     }
 };
+
+
+
+

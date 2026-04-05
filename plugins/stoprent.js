@@ -1,12 +1,12 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
@@ -52,22 +52,22 @@ async function deleteAllCloneSessions() {
     }
 }
 export default {
-    command: 'stoprent',
-    aliases: ['stopclone', 'delrent'],
-    category: 'owner',
-    description: 'Stop a specific sub-bot or all sub-bots',
-    usage: '.stoprent [number/all]',
+    command: 'Ø³ØªÙˆØ¨Ø±ÙŠÙ†Øª',
+    aliases: ['stopclone', 'delrent', 'stoprent'],
+    category: 'Ø§Ù„Ù…Ø§Ù„Ùƒ',
+    description: 'Ø¥ÙŠÙ‚Ø§Ù Ø§ Ø³Ø¨ÙŠÙƒÙŠÙÙŠÙƒ Ø³ÙˆØ¨-Ø¨ÙˆØª ÙˆØ± Ø§Ù„Ù„ Ø³ÙˆØ¨-Ø¨ÙˆØªØ³',
+    usage: '.Ø³ØªÙˆØ¨Ø±ÙŠÙ†Øª [Ø±Ù‚Ù…/Ø§Ù„Ù„]',
     ownerOnly: true,
     async handler(sock, message, args, context) {
         const { chatId } = context;
         if (!global.conns || global.conns.length === 0) {
             return await sock.sendMessage(chatId, {
-                text: "❌ No sub-bots are currently running."
+                text: "âŒ No sub-bots are currently running."
             }, { quoted: message });
         }
         if (!args[0]) {
             return await sock.sendMessage(chatId, {
-                text: `❌ Please provide a number from the list or type 'all'.\nExample: \`.stoprent 1\``
+                text: `âŒ Please provide a number from the list or type 'all'.\nExample: \`.stoprent 1\``
             }, { quoted: message });
         }
         if (args[0].toLowerCase() === 'all') {
@@ -99,7 +99,7 @@ export default {
                 }
             }
             return await sock.sendMessage(chatId, {
-                text: `✅ All sub-bots have been stopped and removed.\n\n` +
+                text: `âœ… All sub-bots have been stopped and removed.\n\n` +
                     `Stopped: ${stoppedCount}\n` +
                     `Storage: ${HAS_DB ? 'Database cleared' : 'Files deleted'}`
             }, { quoted: message });
@@ -107,7 +107,7 @@ export default {
         const index = parseInt(args[0], 10) - 1;
         if (isNaN(index) || !global.conns[index]) {
             return await sock.sendMessage(chatId, {
-                text: "❌ Invalid index number. Check `.listrent` first."
+                text: "âŒ Invalid index number. Check `.listrent` first."
             }, { quoted: message });
         }
         try {
@@ -147,7 +147,7 @@ export default {
                 }
             }
             await sock.sendMessage(chatId, {
-                text: `✅ Stopped and removed sub-bot: @${targetNumber}\n\n` +
+                text: `âœ… Stopped and removed sub-bot: @${targetNumber}\n\n` +
                     `Storage: ${HAS_DB ? 'Database cleared' : 'Files deleted'}`,
                 mentions: [targetJid]
             }, { quoted: message });
@@ -155,22 +155,24 @@ export default {
         catch (err) {
             console.error(err);
             await sock.sendMessage(chatId, {
-                text: "❌ Error while stopping the sub-bot."
+                text: "âŒ Error while stopping the sub-bot."
             }, { quoted: message });
         }
     }
 };
 /*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
  *                                                                           *
  *****************************************************************************/
+
+

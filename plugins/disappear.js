@@ -1,10 +1,10 @@
-import isAdmin from '../lib/isAdmin.js';
+﻿import isAdmin from '../lib/isAdmin.js';
 export default {
-    command: 'disappear',
-    aliases: ['ephemeral', 'disappearing', 'vanish'],
-    category: 'admin',
-    description: 'Enable or disable disappearing messages in chat',
-    usage: '.disappear off | .disappear 24h | .disappear 7d | .disappear 90d',
+    command: 'ديساببيار',
+    aliases: ['ephemeral', 'disappearing', 'vanish', 'disappear'],
+    category: 'المشرفون',
+    description: '',
+    usage: '.ديساببيار وفف | .ديساببيار 24ه | .ديساببيار 7د | .ديساببيار 90د',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const channelInfo = context.channelInfo || {};
@@ -16,26 +16,26 @@ export default {
             const { isSenderAdmin } = await isAdmin(sock, chatId, senderId);
             if (!isSenderAdmin) {
                 return await sock.sendMessage(chatId, {
-                    text: '❌ Only group admins or bot owner can change disappearing messages.',
+                    text: 'âŒ Only group admins or bot owner can change disappearing messages.',
                     ...channelInfo
                 }, { quoted: message });
             }
         }
         if (!isGroup && !senderIsOwnerOrSudo && !message.key.fromMe) {
             return await sock.sendMessage(chatId, {
-                text: '❌ Only the bot owner can change disappearing messages in DMs.',
+                text: 'âŒ Only the bot owner can change disappearing messages in DMs.',
                 ...channelInfo
             }, { quoted: message });
         }
         const input = args[0]?.toLowerCase();
         if (!input) {
             return await sock.sendMessage(chatId, {
-                text: `*⏳ DISAPPEARING MESSAGES*\n\n` +
+                text: `*â³ DISAPPEARING MESSAGES*\n\n` +
                     `*Usage:*\n` +
-                    `• \`.disappear off\` — Disable\n` +
-                    `• \`.disappear 24h\` — 24 hours\n` +
-                    `• \`.disappear 7d\` — 7 days (default)\n` +
-                    `• \`.disappear 90d\` — 90 days`,
+                    `â€¢ \`.disappear off\` â€” Disable\n` +
+                    `â€¢ \`.disappear 24h\` â€” 24 hours\n` +
+                    `â€¢ \`.disappear 7d\` â€” 7 days (default)\n` +
+                    `â€¢ \`.disappear 90d\` â€” 90 days`,
                 ...channelInfo
             }, { quoted: message });
         }
@@ -51,7 +51,7 @@ export default {
         };
         if (!(input in durations)) {
             return await sock.sendMessage(chatId, {
-                text: `❌ Invalid option: *${input}*\n\nChoose: \`off\`, \`24h\`, \`7d\`, \`90d\``,
+                text: `âŒ Invalid option: *${input}*\n\nChoose: \`off\`, \`24h\`, \`7d\`, \`90d\``,
                 ...channelInfo
             }, { quoted: message });
         }
@@ -61,14 +61,14 @@ export default {
                 disappearingMessagesInChat: seconds === false ? false : seconds
             });
             const labels = {
-                'off': '❌ Disappearing messages *disabled*',
-                '0': '❌ Disappearing messages *disabled*',
-                '24h': '⏳ Disappearing messages set to *24 hours*',
-                '1d': '⏳ Disappearing messages set to *24 hours*',
-                '7d': '⏳ Disappearing messages set to *7 days*',
-                '1w': '⏳ Disappearing messages set to *7 days*',
-                '90d': '⏳ Disappearing messages set to *90 days*',
-                '3m': '⏳ Disappearing messages set to *90 days*',
+                'off': 'âŒ Disappearing messages *disabled*',
+                '0': 'âŒ Disappearing messages *disabled*',
+                '24h': 'â³ Disappearing messages set to *24 hours*',
+                '1d': 'â³ Disappearing messages set to *24 hours*',
+                '7d': 'â³ Disappearing messages set to *7 days*',
+                '1w': 'â³ Disappearing messages set to *7 days*',
+                '90d': 'â³ Disappearing messages set to *90 days*',
+                '3m': 'â³ Disappearing messages set to *90 days*',
             };
             await sock.sendMessage(chatId, {
                 text: labels[input],
@@ -78,9 +78,12 @@ export default {
         catch (e) {
             console.error('[DISAPPEAR] Error:', e.message);
             await sock.sendMessage(chatId, {
-                text: `❌ Failed to change disappearing messages: ${e.message}`,
+                text: `âŒ Failed to change disappearing messages: ${e.message}`,
                 ...channelInfo
             }, { quoted: message });
         }
     }
 };
+
+
+

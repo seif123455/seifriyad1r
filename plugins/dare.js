@@ -1,9 +1,9 @@
-export default {
-    command: 'dare',
-    aliases: ['truthordare', 'challenge'],
-    category: 'games',
-    description: 'Get a random dare',
-    usage: '.dare',
+﻿export default {
+    command: 'داري',
+    aliases: ['truthordare', 'challenge', 'dare'],
+    category: 'ألعاب',
+    description: '',
+    usage: '.داري',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
@@ -21,8 +21,11 @@ export default {
         catch (error) {
             console.error('Error in dare command:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to get dare. Please try again later!'
+                text: 'âŒ Failed to get dare. Please try again later!'
             }, { quoted: message });
         }
     }
 };
+
+
+

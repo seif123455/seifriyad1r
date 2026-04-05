@@ -1,23 +1,23 @@
-import { downloadContentFromMessage } from '@whiskeysockets/baileys';
+﻿import { downloadContentFromMessage } from '@whiskeysockets/baileys';
 import fs from 'fs';
 import path from 'path';
 import { exec } from 'child_process';
 
-const effectsMenu = '🎧 *تأثيرات الصوت* 🎧\n\n' +
-    '• *bass* - عمق الجهير\n' +
-    '• *blown* - صوت مشوه\n' +
-    '• *deep* - صوت عميق\n' +
-    '• *earrape* - صوت عالي جداً\n' +
-    '• *fast* - سرعة عالية\n' +
-    '• *fat* - صوت سميك\n' +
-    '• *nightcore* - نايت كور\n' +
-    '• *reverse* - عكس الصوت\n' +
-    '• *robot* - صوت روبوت\n' +
-    '• *slow* - صوت بطيء\n' +
-    '• *chipmunk* - صوت السناجب\n\n' +
-    '📌 *الاستخدام:*\n' +
-    'رد على رسالة صوتية مع الأمر:\n' +
-    '*مثال:* `!بصمة bass`';
+const effectsMenu = 'ðŸŽ§ *ØªØ£Ø«ÙŠØ±Ø§Øª Ø§Ù„ØµÙˆØª* ðŸŽ§\n\n' +
+    'â€¢ *bass* - Ø¹Ù…Ù‚ Ø§Ù„Ø¬Ù‡ÙŠØ±\n' +
+    'â€¢ *blown* - ØµÙˆØª Ù…Ø´ÙˆÙ‡\n' +
+    'â€¢ *deep* - ØµÙˆØª Ø¹Ù…ÙŠÙ‚\n' +
+    'â€¢ *earrape* - ØµÙˆØª Ø¹Ø§Ù„ÙŠ Ø¬Ø¯Ø§Ù‹\n' +
+    'â€¢ *fast* - Ø³Ø±Ø¹Ø© Ø¹Ø§Ù„ÙŠØ©\n' +
+    'â€¢ *fat* - ØµÙˆØª Ø³Ù…ÙŠÙƒ\n' +
+    'â€¢ *nightcore* - Ù†Ø§ÙŠØª ÙƒÙˆØ±\n' +
+    'â€¢ *reverse* - Ø¹ÙƒØ³ Ø§Ù„ØµÙˆØª\n' +
+    'â€¢ *robot* - ØµÙˆØª Ø±ÙˆØ¨ÙˆØª\n' +
+    'â€¢ *slow* - ØµÙˆØª Ø¨Ø·ÙŠØ¡\n' +
+    'â€¢ *chipmunk* - ØµÙˆØª Ø§Ù„Ø³Ù†Ø§Ø¬Ø¨\n\n' +
+    'ðŸ“Œ *Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…:*\n' +
+    'Ø±Ø¯ Ø¹Ù„Ù‰ Ø±Ø³Ø§Ù„Ø© ØµÙˆØªÙŠØ© Ù…Ø¹ Ø§Ù„Ø£Ù…Ø±:\n' +
+    '*Ù…Ø«Ø§Ù„:* `!Ø¨ØµÙ…Ø© bass`';
 
 function getFilter(cmd) {
     if (/bass/i.test(cmd)) return 'equalizer=f=94:width_type=o:width=2:g=30';
@@ -47,14 +47,14 @@ async function getAudio(message) {
 }
 
 export default {
-    command: 'بصمة',
+    command: 'Ø¨ØµÙ…Ø©',
     aliases: [
         'audiofx', 'bass', 'blown', 'deep', 'earrape', 'fast', 'fat',
-        'nightcore', 'reverse', 'robot', 'slow', 'chipmunk', 'تأثير', 'صوت'
+        'nightcore', 'reverse', 'robot', 'slow', 'chipmunk', 'ØªØ£Ø«ÙŠØ±', 'ØµÙˆØª'
     ],
-    category: 'fun',
-    description: 'تطبيق تأثيرات صوتية على الرسائل الصوتية',
-    usage: '!بصمة <تأثير> (رد على رسالة صوتية)',
+    category: 'ØªØ³Ù„ÙŠØ©',
+    description: 'ØªØ·Ø¨ÙŠÙ‚ ØªØ£Ø«ÙŠØ±Ø§Øª ØµÙˆØªÙŠØ© Ø¹Ù„Ù‰ Ø§Ù„Ø±Ø³Ø§Ø¦Ù„ Ø§Ù„ØµÙˆØªÙŠØ©',
+    usage: '!Ø¨ØµÙ…Ø© <ØªØ£Ø«ÙŠØ±> (Ø±Ø¯ Ø¹Ù„Ù‰ Ø±Ø³Ø§Ù„Ø© ØµÙˆØªÙŠØ©)',
     
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -87,8 +87,9 @@ export default {
             });
         } catch {
             await sock.sendMessage(chatId, { 
-                text: '❌ فشل معالجة الصوت. تأكد من تثبيت ffmpeg.' 
+                text: 'âŒ ÙØ´Ù„ Ù…Ø¹Ø§Ù„Ø¬Ø© Ø§Ù„ØµÙˆØª. ØªØ£ÙƒØ¯ Ù…Ù† ØªØ«Ø¨ÙŠØª ffmpeg.' 
             }, { quoted: message });
         }
     }
 };
+

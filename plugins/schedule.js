@@ -1,4 +1,4 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import { dataFile } from '../lib/paths.js';
 import store from '../lib/lightweight_store.js';
@@ -90,8 +90,8 @@ function formatTimeLeft(ms) {
         parts.push(`${s}s`);
     return parts.join(' ');
 }
-// ── Scheduler Engine ───────────────────────────────────────────────────────
-// Started once when bot connects — checks every 10s for due messages
+// â”€â”€ Scheduler Engine â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Started once when bot connects â€” checks every 10s for due messages
 let _engineStarted = false;
 export function startSchedulerEngine(sock) {
     if (_engineStarted)
@@ -118,10 +118,10 @@ export function startSchedulerEngine(sock) {
                                 }
                             }
                         });
-                        console.log(`[SCHEDULE] ✅ Sent message ID:${item.id} to ${item.chatId}`);
+                        console.log(`[SCHEDULE] âœ… Sent message ID:${item.id} to ${item.chatId}`);
                     }
                     catch (e) {
-                        console.error(`[SCHEDULE] ❌ Failed to send ID:${item.id}: ${e.message}`);
+                        console.error(`[SCHEDULE] âŒ Failed to send ID:${item.id}: ${e.message}`);
                     }
                     changed = true;
                 }
@@ -139,11 +139,11 @@ export function startSchedulerEngine(sock) {
 }
 export { loadSchedules, saveSchedules, generateId, parseTime, formatTimeLeft };
 export default {
-    command: 'schedule',
-    aliases: ['sched', 'remind', 'remindme'],
-    category: 'utility',
-    description: 'Schedule a message to be sent later in this chat',
-    usage: '.schedule <time> <message>\nTime: 10m | 2h | 1h30m | 14:30 | 10:30am',
+    command: 'سكهيدولي',
+    aliases: ['sched', 'remind', 'remindme', 'schedule'],
+    category: 'مرافق',
+    description: 'جدولة ا رسالة تو بي سينت لاتير ين تهيس دردشة',
+    usage: '.جدولة <وقت> <رسالة>\نتيمي: 10م | 2ه | 1ه30م | 14:30 | 10:30ام',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const senderId = context.senderId || message.key.remoteJid;
@@ -152,14 +152,14 @@ export default {
         startSchedulerEngine(sock);
         if (!args || args.length < 2) {
             return await sock.sendMessage(chatId, {
-                text: `*⏰ SCHEDULE A MESSAGE*\n\n` +
+                text: `*â° SCHEDULE A MESSAGE*\n\n` +
                     `*Usage:*\n\`.schedule <time> <message>\`\n\n` +
                     `*Time formats:*\n` +
-                    `• \`10m\` → in 10 minutes\n` +
-                    `• \`2h\` → in 2 hours\n` +
-                    `• \`1h30m\` → in 1 hour 30 minutes\n` +
-                    `• \`14:30\` → today at 2:30 PM\n` +
-                    `• \`10:30am\` → today at 10:30 AM\n\n` +
+                    `â€¢ \`10m\` â†’ in 10 minutes\n` +
+                    `â€¢ \`2h\` â†’ in 2 hours\n` +
+                    `â€¢ \`1h30m\` â†’ in 1 hour 30 minutes\n` +
+                    `â€¢ \`14:30\` â†’ today at 2:30 PM\n` +
+                    `â€¢ \`10:30am\` â†’ today at 10:30 AM\n\n` +
                     `*Examples:*\n` +
                     `\`.schedule 10m Good morning everyone!\`\n` +
                     `\`.schedule 2h Team meeting starting now!\`\n` +
@@ -171,14 +171,14 @@ export default {
         const msgText = args.slice(1).join(' ').trim();
         if (!msgText) {
             return await sock.sendMessage(chatId, {
-                text: '❌ Please provide a message after the time.\n\nExample: `.schedule 10m Hello!`',
+                text: 'âŒ Please provide a message after the time.\n\nExample: `.schedule 10m Hello!`',
                 ...channelInfo
             }, { quoted: message });
         }
         const targetDate = parseTime(timeInput);
         if (!targetDate) {
             return await sock.sendMessage(chatId, {
-                text: `❌ Invalid time format: *${timeInput}*\n\nValid: \`10m\` \`2h\` \`1h30m\` \`14:30\` \`10:30am\``,
+                text: `âŒ Invalid time format: *${timeInput}*\n\nValid: \`10m\` \`2h\` \`1h30m\` \`14:30\` \`10:30am\``,
                 ...channelInfo
             }, { quoted: message });
         }
@@ -196,12 +196,16 @@ export default {
         const timeLeft = formatTimeLeft(targetDate.getTime() - Date.now());
         const timeStr = targetDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         await sock.sendMessage(chatId, {
-            text: `✅ *Message Scheduled!*\n\n` +
-                `📌 *ID:* ${newItem.id}\n` +
-                `⏳ *Sends in:* ${timeLeft} (at ${timeStr})\n` +
-                `💬 *Message:* ${msgText}\n\n` +
+            text: `âœ… *Message Scheduled!*\n\n` +
+                `ðŸ“Œ *ID:* ${newItem.id}\n` +
+                `â³ *Sends in:* ${timeLeft} (at ${timeStr})\n` +
+                `ðŸ’¬ *Message:* ${msgText}\n\n` +
                 `_Use .schedulecancel ${newItem.id} to cancel_`,
             ...channelInfo
         }, { quoted: message });
     }
 };
+
+
+
+

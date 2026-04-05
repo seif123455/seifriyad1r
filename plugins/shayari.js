@@ -1,9 +1,9 @@
-export default {
-    command: 'shayari',
-    aliases: ['poetry', 'shayar'],
-    category: 'quotes',
-    description: 'Get a random shayari',
-    usage: '.shayari',
+﻿export default {
+    command: 'سهاياري',
+    aliases: ['poetry', 'shayar', 'shayari'],
+    category: 'اقتباسات',
+    description: 'جلب ا عشوائي سهاياري',
+    usage: '.سهاياري',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
@@ -13,8 +13,8 @@ export default {
                 throw new Error('Invalid response from API');
             }
             const buttons = [
-                { buttonId: '.shayari', buttonText: { displayText: 'Shayari 🪄' }, type: 1 },
-                { buttonId: '.roseday', buttonText: { displayText: '🌹 RoseDay' }, type: 1 }
+                { buttonId: '.سهاياري', buttonText: { displayText: 'Shayari ðŸª„' }, type: 1 },
+                { buttonId: '.roseday', buttonText: { displayText: 'ðŸŒ¹ RoseDay' }, type: 1 }
             ];
             await sock.sendMessage(chatId, {
                 text: data.result,
@@ -25,8 +25,11 @@ export default {
         catch (error) {
             console.error('Shayari Command Error:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to fetch shayari. Please try again later.',
+                text: 'âŒ Failed to fetch shayari. Please try again later.',
             }, { quoted: message });
         }
     }
 };
+
+
+

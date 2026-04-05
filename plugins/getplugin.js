@@ -1,12 +1,12 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
@@ -15,11 +15,11 @@
 import fs from 'fs';
 import path from 'path';
 export default {
-    command: 'inspect',
-    aliases: ['cat', 'readcode', 'getplugin'],
-    category: 'owner',
-    description: 'Read the source code of a specific plugin',
-    usage: '.inspect [plugin_name]',
+    command: 'ينسبيكت',
+    aliases: ['cat', 'readcode', 'getplugin', 'inspect'],
+    category: 'المالك',
+    description: 'رياد تهي سووركي كود وف ا سبيكيفيك بلوجين',
+    usage: '.ينسبيكت [بلوجين_نامي]',
     ownerOnly: true,
     async handler(sock, message, args, _context) {
         const chatId = message.key.remoteJid;
@@ -44,16 +44,16 @@ export default {
                 }
             }
             if (!fs.existsSync(filePath)) {
-                return await sock.sendMessage(chatId, { text: `❌ Plugin "${base}" not found.` }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: `âŒ Plugin "${base}" not found.` }, { quoted: message });
             }
             const code = fs.readFileSync(filePath, 'utf8');
-            const formattedCode = `💻 *SOURCE CODE: ${fileName}*\n\n\`\`\`javascript\n${code}\n\`\`\``;
+            const formattedCode = `ðŸ’» *SOURCE CODE: ${fileName}*\n\n\`\`\`javascript\n${code}\n\`\`\``;
             if (formattedCode.length > 4000) {
                 await sock.sendMessage(chatId, {
                     document: Buffer.from(code),
                     fileName,
                     mimetype: 'text/javascript',
-                    caption: `📄 Code for *${fileName}* (File too large for text message)`
+                    caption: `ðŸ“„ Code for *${fileName}* (File too large for text message)`
                 }, { quoted: message });
             }
             else {
@@ -62,21 +62,24 @@ export default {
         }
         catch (error) {
             console.error('Inspect Error:', error);
-            await sock.sendMessage(chatId, { text: '❌ Failed to read the plugin file.' });
+            await sock.sendMessage(chatId, { text: 'âŒ Failed to read the plugin file.' });
         }
     }
 };
 /*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
  *                                                                           *
  *****************************************************************************/
+
+
+

@@ -1,4 +1,4 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import isOwnerOrSudo from '../lib/isOwner.js';
 function clearDirectory(dirPath) {
@@ -46,11 +46,11 @@ async function clearTmpDirectory() {
     return { success, message, totalDeleted };
 }
 export default {
-    command: 'cleartmp',
-    aliases: ['cleartemp', 'tmpclear'],
-    category: 'owner',
-    description: 'Clear tmp and temp directories',
-    usage: '.cleartmp',
+    command: 'كليارتمب',
+    aliases: ['cleartemp', 'tmpclear', 'cleartmp'],
+    category: 'المالك',
+    description: '',
+    usage: '.كليارتمب',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const senderId = message.key.participant || message.key.remoteJid;
@@ -64,8 +64,8 @@ export default {
             }
             const result = await clearTmpDirectory();
             const text = result.success
-                ? `✅ *Temporary Files Cleared!*\n\n${result.message}`
-                : `❌ *Clear Failed!*\n\n${result.message}`;
+                ? `âœ… *Temporary Files Cleared!*\n\n${result.message}`
+                : `âŒ *Clear Failed!*\n\n${result.message}`;
             await sock.sendMessage(chatId, {
                 text
             }, { quoted: message });
@@ -73,7 +73,7 @@ export default {
         catch (error) {
             console.error('Error in cleartmp command:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to clear temporary files!'
+                text: 'âŒ Failed to clear temporary files!'
             }, { quoted: message });
         }
     }
@@ -83,3 +83,6 @@ function startAutoClear() {
     setInterval(clearTmpDirectory, 1 * 60 * 60 * 1000);
 }
 startAutoClear();
+
+
+

@@ -1,11 +1,11 @@
-import pkg from 'api-qasim';
+﻿import pkg from 'api-qasim';
 const QasimAny = pkg;
 export default {
-    command: 'stext',
-    aliases: ['fancytext', 'textstyle', 'styletext'],
-    category: 'menu',
-    description: 'Style text in different fancy formats',
-    usage: '.stext <text>',
+    command: 'ستيكست',
+    aliases: ['fancytext', 'textstyle', 'styletext', 'stext'],
+    category: 'قوائم',
+    description: 'ستيلي نص ين ديففيرينت فانكي فورماتس',
+    usage: '.سنص <نص>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const text = args.join(' ');
@@ -70,8 +70,12 @@ export default {
         catch (error) {
             console.error('Error in styleTextCommand:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to style the text. Please try again later.'
+                text: 'âŒ Failed to style the text. Please try again later.'
             }, { quoted: message });
         }
     }
 };
+
+
+
+

@@ -1,10 +1,10 @@
-import simpleGit from 'simple-git';
+﻿import simpleGit from 'simple-git';
 export default {
-    command: 'gitpull',
-    aliases: ['refresh', 'pull'],
-    category: 'owner',
-    description: 'Reload all plugins (Pull changes from git if available)',
-    usage: '.gitpull',
+    command: 'Ø¬ÙŠØªØ¨ÙˆÙ„Ù„',
+    aliases: ['refresh', 'pull', 'gitpull'],
+    category: 'Ø§Ù„Ù…Ø§Ù„Ùƒ',
+    description: 'Ø±ÙŠÙ„ÙˆØ§Ø¯ Ø§Ù„Ù„ Ø¨Ù„ÙˆØ¬ÙŠÙ†Ø³ (Ø¨ÙˆÙ„Ù„ ÙƒÙ‡Ø§Ù†Ø¬ÙŠØ³ ÙØ±ÙˆÙ… Ø¬ÙŠØª ÙŠÙ Ø§ÙØ§ÙŠÙ„Ø§Ø¨Ù„ÙŠ)',
+    usage: '.Ø¬ÙŠØªØ¨ÙˆÙ„Ù„',
     ownerOnly: true,
     async handler(sock, message) {
         const chatId = message.key.remoteJid;
@@ -29,16 +29,18 @@ export default {
             commandHandler.reloadCommands();
             const end = Date.now();
             await sock.sendMessage(chatId, {
-                text: `✅ Reload complete\n` +
-                    `🔄 Mode: ${gitStatus}\n` +
-                    `📦 Plugins: ${commandHandler.commands.size}\n` +
-                    `⏱ Time: ${end - start}ms`
+                text: `âœ… Reload complete\n` +
+                    `ðŸ”„ Mode: ${gitStatus}\n` +
+                    `ðŸ“¦ Plugins: ${commandHandler.commands.size}\n` +
+                    `â± Time: ${end - start}ms`
             });
         }
         catch (error) {
             await sock.sendMessage(chatId, {
-                text: `❌ Reload failed: ${error.message}`
+                text: `âŒ Reload failed: ${error.message}`
             });
         }
     }
 };
+
+

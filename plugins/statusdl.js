@@ -1,10 +1,10 @@
-import { downloadContentFromMessage } from '@whiskeysockets/baileys';
+﻿import { downloadContentFromMessage } from '@whiskeysockets/baileys';
 export default {
-    command: 'dlstatus',
-    aliases: ['swdl', 'statusdl'],
-    category: 'download',
-    description: 'Download quoted Status updates',
-    usage: 'Reply to a status and type .dlstatus',
+    command: 'دلستاتوس',
+    aliases: ['swdl', 'statusdl', 'dlstatus'],
+    category: 'التحميل',
+    description: 'تحميل اقتباسد حالة وبداتيس',
+    usage: 'رد تو ا حالة اند تيبي .دلحالة',
     ownerOnly: true,
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -24,7 +24,7 @@ export default {
             const mediaData = quotedMsg[quotedType];
             if (quotedType === 'conversation' || quotedType === 'extendedTextMessage') {
                 const text = quotedMsg.conversation || quotedMsg.extendedTextMessage?.text;
-                return await sock.sendMessage(chatId, { text: `📝 *Status Text:*\n\n${text}` }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: `ðŸ“ *Status Text:*\n\n${text}` }, { quoted: message });
             }
             const stream = await downloadContentFromMessage(mediaData, quotedType.replace('Message', ''));
             let buffer = Buffer.from([]);
@@ -40,7 +40,11 @@ export default {
         }
         catch (e) {
             console.error('SW Download Error:', e);
-            await sock.sendMessage(chatId, { text: "❌ Failed to download status media." }, { quoted: message });
+            await sock.sendMessage(chatId, { text: "âŒ Failed to download status media." }, { quoted: message });
         }
     }
 };
+
+
+
+

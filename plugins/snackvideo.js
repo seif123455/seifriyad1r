@@ -1,10 +1,10 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 export default {
-    command: 'snack',
-    aliases: ['snackvideo', 'snackdl'],
-    category: 'download',
-    description: 'Download media (video or image) from SnackVideo URL',
-    usage: '.snack <SnackVideo URL>',
+    command: 'سناكك',
+    aliases: ['snackvideo', 'snackdl', 'snack'],
+    category: 'التحميل',
+    description: 'تحميل وسائط (فيديو ور صورة) فروم سناككفيديو رابط',
+    usage: '.سناكك <سناككفيديو رابط>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const url = args?.[0];
@@ -15,25 +15,29 @@ export default {
             const apiUrl = `https://discardapi.dpdns.org/api/dl/snack?apikey=guru&url=${encodeURIComponent(url)}`;
             const { data } = await axios.get(apiUrl, { timeout: 10000 });
             if (!data?.status || !data.result?.length) {
-                return await sock.sendMessage(chatId, { text: '❌ No media found for this SnackVideo URL.' }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: 'âŒ No media found for this SnackVideo URL.' }, { quoted: message });
             }
             for (const mediaItem of data.result) {
                 if (mediaItem.video) {
-                    await sock.sendMessage(chatId, { video: { url: mediaItem.video }, caption: '📹 SnackVideo Video' }, { quoted: message });
+                    await sock.sendMessage(chatId, { video: { url: mediaItem.video }, caption: 'ðŸ“¹ SnackVideo Video' }, { quoted: message });
                 }
                 if (mediaItem.image) {
-                    await sock.sendMessage(chatId, { image: { url: mediaItem.image }, caption: '🖼 SnackVideo Image' }, { quoted: message });
+                    await sock.sendMessage(chatId, { image: { url: mediaItem.image }, caption: 'ðŸ–¼ SnackVideo Image' }, { quoted: message });
                 }
             }
         }
         catch (error) {
             console.error('SnackVideo plugin error:', error);
             if (error.code === 'ECONNABORTED') {
-                await sock.sendMessage(chatId, { text: '❌ Request timed out. The API may be slow or unreachable.' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'âŒ Request timed out. The API may be slow or unreachable.' }, { quoted: message });
             }
             else {
-                await sock.sendMessage(chatId, { text: '❌ Failed to fetch SnackVideo media.' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'âŒ Failed to fetch SnackVideo media.' }, { quoted: message });
             }
         }
     }
 };
+
+
+
+

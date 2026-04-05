@@ -1,4 +1,4 @@
-import store from '../lib/lightweight_store.js';
+﻿import store from '../lib/lightweight_store.js';
 import isOwnerOrSudo from '../lib/isOwner.js';
 import isAdmin from '../lib/isAdmin.js';
 
@@ -11,7 +11,7 @@ async function setAntilink(chatId, type, action) {
         });
         return true;
     } catch (error) {
-        console.error('خطأ في حفظ إعدادات منع الروابط:', error);
+        console.error('Ø®Ø·Ø£ ÙÙŠ Ø­ÙØ¸ Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ù…Ù†Ø¹ Ø§Ù„Ø±ÙˆØ§Ø¨Ø·:', error);
         return false;
     }
 }
@@ -21,7 +21,7 @@ async function getAntilink(chatId, _type) {
         const settings = await store.getSetting(chatId, 'antilink');
         return settings || null;
     } catch (error) {
-        console.error('خطأ في جلب إعدادات منع الروابط:', error);
+        console.error('Ø®Ø·Ø£ ÙÙŠ Ø¬Ù„Ø¨ Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ù…Ù†Ø¹ Ø§Ù„Ø±ÙˆØ§Ø¨Ø·:', error);
         return null;
     }
 }
@@ -35,7 +35,7 @@ async function removeAntilink(chatId, _type) {
         });
         return true;
     } catch (error) {
-        console.error('خطأ في إلغاء منع الروابط:', error);
+        console.error('Ø®Ø·Ø£ ÙÙŠ Ø¥Ù„ØºØ§Ø¡ Ù…Ù†Ø¹ Ø§Ù„Ø±ÙˆØ§Ø¨Ø·:', error);
         return false;
     }
 }
@@ -66,16 +66,16 @@ export async function handleLinkDetection(sock, chatId, message, userMessage, se
 
         if (linkPatterns.whatsappGroup.test(userMessage)) {
             shouldAct = true;
-            linkType = 'رابط جروب واتساب';
+            linkType = 'Ø±Ø§Ø¨Ø· Ø¬Ø±ÙˆØ¨ ÙˆØ§ØªØ³Ø§Ø¨';
         } else if (linkPatterns.whatsappChannel.test(userMessage)) {
             shouldAct = true;
-            linkType = 'رابط قناة واتساب';
+            linkType = 'Ø±Ø§Ø¨Ø· Ù‚Ù†Ø§Ø© ÙˆØ§ØªØ³Ø§Ø¨';
         } else if (linkPatterns.telegram.test(userMessage)) {
             shouldAct = true;
-            linkType = 'رابط تيليجرام';
+            linkType = 'Ø±Ø§Ø¨Ø· ØªÙŠÙ„ÙŠØ¬Ø±Ø§Ù…';
         } else if (linkPatterns.allLinks.test(userMessage)) {
             shouldAct = true;
-            linkType = 'رابط';
+            linkType = 'Ø±Ø§Ø¨Ø·';
         }
 
         if (!shouldAct) return;
@@ -94,13 +94,13 @@ export async function handleLinkDetection(sock, chatId, message, userMessage, se
                     }
                 });
             } catch (error) {
-                console.error('فشل حذف الرسالة:', error);
+                console.error('ÙØ´Ù„ Ø­Ø°Ù Ø§Ù„Ø±Ø³Ø§Ù„Ø©:', error);
             }
         }
 
         if (action === 'warn' || action === 'delete') {
             await sock.sendMessage(chatId, {
-                text: `⚠️ *تحذير*\n\n@${senderId.split('@')[0]}، ممنوع إرسال ${linkType}!`,
+                text: `âš ï¸ *ØªØ­Ø°ÙŠØ±*\n\n@${senderId.split('@')[0]}ØŒ Ù…Ù…Ù†ÙˆØ¹ Ø¥Ø±Ø³Ø§Ù„ ${linkType}!`,
                 mentions: [senderId]
             });
         }
@@ -109,28 +109,28 @@ export async function handleLinkDetection(sock, chatId, message, userMessage, se
             try {
                 await sock.groupParticipantsUpdate(chatId, [senderId], 'remove');
                 await sock.sendMessage(chatId, {
-                    text: `🚫 تم طرد @${senderId.split('@')[0]} بسبب إرسال ${linkType}`,
+                    text: `ðŸš« ØªÙ… Ø·Ø±Ø¯ @${senderId.split('@')[0]} Ø¨Ø³Ø¨Ø¨ Ø¥Ø±Ø³Ø§Ù„ ${linkType}`,
                     mentions: [senderId]
                 });
             } catch (error) {
-                console.error('فشل طرد المستخدم:', error);
+                console.error('ÙØ´Ù„ Ø·Ø±Ø¯ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…:', error);
                 await sock.sendMessage(chatId, {
-                    text: `⚠️ فشل في طرد المستخدم، تأكد إن البوت أدمن`
+                    text: `âš ï¸ ÙØ´Ù„ ÙÙŠ Ø·Ø±Ø¯ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…ØŒ ØªØ£ÙƒØ¯ Ø¥Ù† Ø§Ù„Ø¨ÙˆØª Ø£Ø¯Ù…Ù†`
                 });
             }
         }
 
     } catch (error) {
-        console.error('خطأ في كشف الروابط:', error);
+        console.error('Ø®Ø·Ø£ ÙÙŠ ÙƒØ´Ù Ø§Ù„Ø±ÙˆØ§Ø¨Ø·:', error);
     }
 }
 
 export default {
-    command: 'منع روابط',
-    aliases: ['antilink', 'alink', 'linkblock', 'رابط', 'منع_الروابط'],
-    category: 'admin',
-    description: 'منع إرسال الروابط في الجروب',
-    usage: '!منع روابط <on|off|set>',
+    command: 'Ù…Ù†Ø¹ Ø±ÙˆØ§Ø¨Ø·',
+    aliases: ['antilink', 'alink', 'linkblock', 'Ø±Ø§Ø¨Ø·', 'Ù…Ù†Ø¹_Ø§Ù„Ø±ÙˆØ§Ø¨Ø·'],
+    category: 'Ø§Ù„Ù…Ø´Ø±ÙÙˆÙ†',
+    description: 'Ù…Ù†Ø¹ Ø¥Ø±Ø³Ø§Ù„ Ø§Ù„Ø±ÙˆØ§Ø¨Ø· ÙÙŠ Ø§Ù„Ø¬Ø±ÙˆØ¨',
+    usage: '!Ù…Ù†Ø¹ Ø±ÙˆØ§Ø¨Ø· <ÙˆÙ†|ÙˆÙÙ|ØªØ¹ÙŠÙŠÙ†>',
     groupOnly: true,
     adminOnly: true,
 
@@ -142,25 +142,25 @@ export default {
             const config = await getAntilink(chatId, 'on');
             await sock.sendMessage(chatId, {
                 text:
-`🔗 *إعدادات منع الروابط*
+`ðŸ”— *Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ù…Ù†Ø¹ Ø§Ù„Ø±ÙˆØ§Ø¨Ø·*
 
-📊 الحالة: ${config?.enabled ? 'مفعل ✅' : 'متوقف ❌'}
-⚙️ الإجراء: ${config?.action || 'غير محدد'}
+ðŸ“Š Ø§Ù„Ø­Ø§Ù„Ø©: ${config?.enabled ? 'Ù…ÙØ¹Ù„ âœ…' : 'Ù…ØªÙˆÙ‚Ù âŒ'}
+âš™ï¸ Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡: ${config?.action || 'ØºÙŠØ± Ù…Ø­Ø¯Ø¯'}
 
-📌 الأوامر:
-• \`!منع روابط on\` → تشغيل
-• \`!منع روابط off\` → إيقاف
-• \`!منع روابط set delete\` → حذف الرابط
-• \`!منع روابط set kick\` → طرد المستخدم
-• \`!منع روابط set warn\` → تحذير فقط
+ðŸ“Œ Ø§Ù„Ø£ÙˆØ§Ù…Ø±:
+â€¢ \`!Ù…Ù†Ø¹ Ø±ÙˆØ§Ø¨Ø· on\` â†’ ØªØ´ØºÙŠÙ„
+â€¢ \`!Ù…Ù†Ø¹ Ø±ÙˆØ§Ø¨Ø· off\` â†’ Ø¥ÙŠÙ‚Ø§Ù
+â€¢ \`!Ù…Ù†Ø¹ Ø±ÙˆØ§Ø¨Ø· set delete\` â†’ Ø­Ø°Ù Ø§Ù„Ø±Ø§Ø¨Ø·
+â€¢ \`!Ù…Ù†Ø¹ Ø±ÙˆØ§Ø¨Ø· set kick\` â†’ Ø·Ø±Ø¯ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…
+â€¢ \`!Ù…Ù†Ø¹ Ø±ÙˆØ§Ø¨Ø· set warn\` â†’ ØªØ­Ø°ÙŠØ± ÙÙ‚Ø·
 
-🔒 الروابط المحمية:
-• جروبات واتساب
-• قنوات واتساب
-• تيليجرام
-• جميع الروابط
+ðŸ”’ Ø§Ù„Ø±ÙˆØ§Ø¨Ø· Ø§Ù„Ù…Ø­Ù…ÙŠØ©:
+â€¢ Ø¬Ø±ÙˆØ¨Ø§Øª ÙˆØ§ØªØ³Ø§Ø¨
+â€¢ Ù‚Ù†ÙˆØ§Øª ÙˆØ§ØªØ³Ø§Ø¨
+â€¢ ØªÙŠÙ„ÙŠØ¬Ø±Ø§Ù…
+â€¢ Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø±ÙˆØ§Ø¨Ø·
 
-👑 الأدمن والمالك مستثنين`
+ðŸ‘‘ Ø§Ù„Ø£Ø¯Ù…Ù† ÙˆØ§Ù„Ù…Ø§Ù„Ùƒ Ù…Ø³ØªØ«Ù†ÙŠÙ†`
             }, { quoted: message });
             return;
         }
@@ -170,7 +170,7 @@ export default {
                 const existingConfig = await getAntilink(chatId, 'on');
                 if (existingConfig?.enabled) {
                     await sock.sendMessage(chatId, {
-                        text: '⚠️ النظام مفعل بالفعل'
+                        text: 'âš ï¸ Ø§Ù„Ù†Ø¸Ø§Ù… Ù…ÙØ¹Ù„ Ø¨Ø§Ù„ÙØ¹Ù„'
                     }, { quoted: message });
                     return;
                 }
@@ -178,22 +178,22 @@ export default {
                 const result = await setAntilink(chatId, 'on', 'delete');
                 await sock.sendMessage(chatId, {
                     text: result
-                        ? '✅ تم تشغيل منع الروابط\n📌 الوضع الافتراضي: حذف'
-                        : '❌ فشل في التشغيل'
+                        ? 'âœ… ØªÙ… ØªØ´ØºÙŠÙ„ Ù…Ù†Ø¹ Ø§Ù„Ø±ÙˆØ§Ø¨Ø·\nðŸ“Œ Ø§Ù„ÙˆØ¶Ø¹ Ø§Ù„Ø§ÙØªØ±Ø§Ø¶ÙŠ: Ø­Ø°Ù'
+                        : 'âŒ ÙØ´Ù„ ÙÙŠ Ø§Ù„ØªØ´ØºÙŠÙ„'
                 }, { quoted: message });
                 break;
 
             case 'off':
                 await removeAntilink(chatId, 'on');
                 await sock.sendMessage(chatId, {
-                    text: '❌ تم إيقاف منع الروابط'
+                    text: 'âŒ ØªÙ… Ø¥ÙŠÙ‚Ø§Ù Ù…Ù†Ø¹ Ø§Ù„Ø±ÙˆØ§Ø¨Ø·'
                 }, { quoted: message });
                 break;
 
             case 'set':
                 if (args.length < 2) {
                     await sock.sendMessage(chatId, {
-                        text: '❌ حدد نوع الإجراء\nمثال: `!منع روابط set delete`'
+                        text: 'âŒ Ø­Ø¯Ø¯ Ù†ÙˆØ¹ Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡\nÙ…Ø«Ø§Ù„: `!Ù…Ù†Ø¹ Ø±ÙˆØ§Ø¨Ø· set delete`'
                     }, { quoted: message });
                     return;
                 }
@@ -202,7 +202,7 @@ export default {
 
                 if (!['delete', 'kick', 'warn'].includes(setAction)) {
                     await sock.sendMessage(chatId, {
-                        text: '❌ اختيار غير صحيح (delete / kick / warn)'
+                        text: 'âŒ Ø§Ø®ØªÙŠØ§Ø± ØºÙŠØ± ØµØ­ÙŠØ­ (delete / kick / warn)'
                     }, { quoted: message });
                     return;
                 }
@@ -210,13 +210,13 @@ export default {
                 await setAntilink(chatId, 'on', setAction);
 
                 await sock.sendMessage(chatId, {
-                    text: `✅ تم التغيير إلى: ${setAction === 'delete' ? 'حذف' : setAction === 'kick' ? 'طرد' : 'تحذير'}`
+                    text: `âœ… ØªÙ… Ø§Ù„ØªØºÙŠÙŠØ± Ø¥Ù„Ù‰: ${setAction === 'delete' ? 'Ø­Ø°Ù' : setAction === 'kick' ? 'Ø·Ø±Ø¯' : 'ØªØ­Ø°ÙŠØ±'}`
                 }, { quoted: message });
                 break;
 
             default:
                 await sock.sendMessage(chatId, {
-                    text: '❌ أمر غير صحيح\nاكتب `!منع روابط` للمساعدة'
+                    text: 'âŒ Ø£Ù…Ø± ØºÙŠØ± ØµØ­ÙŠØ­\nØ§ÙƒØªØ¨ `!Ù…Ù†Ø¹ Ø±ÙˆØ§Ø¨Ø·` Ù„Ù„Ù…Ø³Ø§Ø¹Ø¯Ø©'
                 }, { quoted: message });
         }
     },
@@ -226,3 +226,4 @@ export default {
     getAntilink,
     removeAntilink
 };
+

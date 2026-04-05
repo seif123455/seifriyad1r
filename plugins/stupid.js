@@ -1,9 +1,9 @@
-export default {
-    command: 'stupid',
-    aliases: ['stupidcard', 'dumb'],
-    category: 'group',
-    description: 'Generate a stupid card for a user',
-    usage: '.stupid (reply to user, mention someone, or add text)',
+﻿export default {
+    command: 'ستوبيد',
+    aliases: ['stupidcard', 'dumb', 'stupid'],
+    category: 'المجموعة',
+    description: 'توليد ا ستوبيد كارد فور ا مستخدم',
+    usage: '.ستوبيد (رد تو مستخدم, مينتيون سوميوني, ور إضافة نص)',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const sender = message.key.participant || message.key.remoteJid;
@@ -38,8 +38,12 @@ export default {
         catch (error) {
             console.error('Stupid Command Error:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Sorry, I couldn\'t generate the stupid card. Please try again later!'
+                text: 'âŒ Sorry, I couldn\'t generate the stupid card. Please try again later!'
             }, { quoted: message });
         }
     }
 };
+
+
+
+

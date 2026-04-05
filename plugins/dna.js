@@ -1,4 +1,4 @@
-import { downloadMediaMessage } from '@whiskeysockets/baileys';
+﻿import { downloadMediaMessage } from '@whiskeysockets/baileys';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import path from 'path';
@@ -11,20 +11,20 @@ function getQuoted(message) {
 }
 
 function getMediaType(quoted) {
-    if (quoted?.imageMessage) return 'صورة';
-    if (quoted?.videoMessage) return 'فيديو';
-    if (quoted?.audioMessage) return 'صوت';
-    if (quoted?.documentMessage) return 'ملف';
-    if (quoted?.stickerMessage) return 'ملصق';
+    if (quoted?.imageMessage) return 'ØµÙˆØ±Ø©';
+    if (quoted?.videoMessage) return 'ÙÙŠØ¯ÙŠÙˆ';
+    if (quoted?.audioMessage) return 'ØµÙˆØª';
+    if (quoted?.documentMessage) return 'Ù…Ù„Ù';
+    if (quoted?.stickerMessage) return 'Ù…Ù„ØµÙ‚';
     return null;
 }
 
 export default {
-    command: 'حمض',
-    aliases: ['dna', 'dnaencode', 'dnadecode', 'تشفير_حمض', 'فك_حمض'],
-    category: 'utility',
-    description: 'تشفير أي نص أو وسائط إلى تسلسل DNA (ATCG) أو فك التشفير',
-    usage: '!حمض تشفير <نص أو رد على وسائط>\n!حمض فك <حمض أو رد على ملف حمض>',
+    command: 'Ø­Ù…Ø¶',
+    aliases: ['dna', 'dnaencode', 'dnadecode', 'ØªØ´ÙÙŠØ±_Ø­Ù…Ø¶', 'ÙÙƒ_Ø­Ù…Ø¶'],
+    category: 'Ù…Ø±Ø§ÙÙ‚',
+    description: 'ØªØ´ÙÙŠØ± Ø£ÙŠ Ù†Øµ Ø£Ùˆ ÙˆØ³Ø§Ø¦Ø· Ø¥Ù„Ù‰ ØªØ³Ù„Ø³Ù„ Ø¯Ù†Ø§ (Ø§ØªÙƒØ¬) Ø£Ùˆ ÙÙƒ Ø§Ù„ØªØ´ÙÙŠØ±',
+    usage: '!Ø­Ù…Ø¶ ØªØ´ÙÙŠØ± <Ù†Øµ Ø£Ùˆ Ø±Ø¯ Ø¹Ù„Ù‰ ÙˆØ³Ø§Ø¦Ø·>\Ù†!Ø­Ù…Ø¶ ÙÙƒ <Ø­Ù…Ø¶ Ø£Ùˆ Ø±Ø¯ Ø¹Ù„Ù‰ Ù…Ù„Ù Ø­Ù…Ø¶>',
     
     async handler(sock, message, args, context) {
         const { chatId, channelInfo } = context;
@@ -34,32 +34,32 @@ export default {
         
         if (!args.length) {
             return await sock.sendMessage(chatId, {
-                text: `🧬 *تشفير/فك تشفير DNA*\n\n` +
-                    `*نص:*\n` +
-                    `\`!حمض تشفير مرحبا\`\n` +
-                    `\`!حمض فك ATCGATCG...\`\n\n` +
-                    `*وسائط (رد على أي ملف):*\n` +
-                    `\`!حمض تشفير\` — رد على صورة/فيديو/صوت/ملف\n` +
-                    `\`!حمض فك\` — رد على ملف .txt يحتوي على حمض\n\n` +
-                    `ℹ️ كل بايت يصبح 4 قواعد DNA (A, T, C, G)`,
+                text: `ðŸ§¬ *ØªØ´ÙÙŠØ±/ÙÙƒ ØªØ´ÙÙŠØ± DNA*\n\n` +
+                    `*Ù†Øµ:*\n` +
+                    `\`!Ø­Ù…Ø¶ ØªØ´ÙÙŠØ± Ù…Ø±Ø­Ø¨Ø§\`\n` +
+                    `\`!Ø­Ù…Ø¶ ÙÙƒ ATCGATCG...\`\n\n` +
+                    `*ÙˆØ³Ø§Ø¦Ø· (Ø±Ø¯ Ø¹Ù„Ù‰ Ø£ÙŠ Ù…Ù„Ù):*\n` +
+                    `\`!Ø­Ù…Ø¶ ØªØ´ÙÙŠØ±\` â€” Ø±Ø¯ Ø¹Ù„Ù‰ ØµÙˆØ±Ø©/ÙÙŠØ¯ÙŠÙˆ/ØµÙˆØª/Ù…Ù„Ù\n` +
+                    `\`!Ø­Ù…Ø¶ ÙÙƒ\` â€” Ø±Ø¯ Ø¹Ù„Ù‰ Ù…Ù„Ù .txt ÙŠØ­ØªÙˆÙŠ Ø¹Ù„Ù‰ Ø­Ù…Ø¶\n\n` +
+                    `â„¹ï¸ ÙƒÙ„ Ø¨Ø§ÙŠØª ÙŠØµØ¨Ø­ 4 Ù‚ÙˆØ§Ø¹Ø¯ DNA (A, T, C, G)`,
                 ...channelInfo
             }, { quoted: message });
         }
         
         const mode = args[0]?.toLowerCase();
         
-        if (mode !== 'تشفير' && mode !== 'فك' && mode !== 'encode' && mode !== 'decode') {
+        if (mode !== 'ØªØ´ÙÙŠØ±' && mode !== 'ÙÙƒ' && mode !== 'encode' && mode !== 'decode') {
             return await sock.sendMessage(chatId, {
-                text: `❌ استخدم \`تشفير\` أو \`فك\``,
+                text: `âŒ Ø§Ø³ØªØ®Ø¯Ù… \`ØªØ´ÙÙŠØ±\` Ø£Ùˆ \`ÙÙƒ\``,
                 ...channelInfo
             }, { quoted: message });
         }
         
-        // التحقق من وجود الملف الثنائي
+        // Ø§Ù„ØªØ­Ù‚Ù‚ Ù…Ù† ÙˆØ¬ÙˆØ¯ Ø§Ù„Ù…Ù„Ù Ø§Ù„Ø«Ù†Ø§Ø¦ÙŠ
         const binPath = path.join(process.cwd(), 'lib', 'bin', 'dna');
         if (!fs.existsSync(binPath)) {
             return await sock.sendMessage(chatId, {
-                text: `❌ أداة DNA غير متوفرة على هذا الخادم.`,
+                text: `âŒ Ø£Ø¯Ø§Ø© DNA ØºÙŠØ± Ù…ØªÙˆÙØ±Ø© Ø¹Ù„Ù‰ Ù‡Ø°Ø§ Ø§Ù„Ø®Ø§Ø¯Ù….`,
                 ...channelInfo
             }, { quoted: message });
         }
@@ -69,34 +69,34 @@ export default {
         const id = Date.now();
         
         try {
-            const isEncode = (mode === 'تشفير' || mode === 'encode');
+            const isEncode = (mode === 'ØªØ´ÙÙŠØ±' || mode === 'encode');
             
             if (isEncode) {
                 let inputBuffer;
                 let sourceLabel;
                 
                 if (mediaType && quoted) {
-                    await sock.sendMessage(chatId, { text: '⏳ جاري تحميل الوسائط...', ...channelInfo }, { quoted: message });
-                    const msgObj = { message: { [`${mediaType === 'صورة' ? 'imageMessage' : mediaType === 'فيديو' ? 'videoMessage' : mediaType === 'صوت' ? 'audioMessage' : 'documentMessage'}`]: quoted[`${mediaType === 'صورة' ? 'imageMessage' : mediaType === 'فيديو' ? 'videoMessage' : mediaType === 'صوت' ? 'audioMessage' : 'documentMessage'}`] } };
+                    await sock.sendMessage(chatId, { text: 'â³ Ø¬Ø§Ø±ÙŠ ØªØ­Ù…ÙŠÙ„ Ø§Ù„ÙˆØ³Ø§Ø¦Ø·...', ...channelInfo }, { quoted: message });
+                    const msgObj = { message: { [`${mediaType === 'ØµÙˆØ±Ø©' ? 'imageMessage' : mediaType === 'ÙÙŠØ¯ÙŠÙˆ' ? 'videoMessage' : mediaType === 'ØµÙˆØª' ? 'audioMessage' : 'documentMessage'}`]: quoted[`${mediaType === 'ØµÙˆØ±Ø©' ? 'imageMessage' : mediaType === 'ÙÙŠØ¯ÙŠÙˆ' ? 'videoMessage' : mediaType === 'ØµÙˆØª' ? 'audioMessage' : 'documentMessage'}`] } };
                     inputBuffer = await downloadMediaMessage(msgObj, 'buffer', {});
-                    sourceLabel = `${mediaType} (${inputBuffer.length.toLocaleString()} بايت)`;
+                    sourceLabel = `${mediaType} (${inputBuffer.length.toLocaleString()} Ø¨Ø§ÙŠØª)`;
                 } else {
                     const textInput = args.slice(1).join(' ').trim() || quotedText;
                     if (!textInput) {
                         return await sock.sendMessage(chatId, {
-                            text: `❌ لا يوجد نص. أرسل نصاً أو رد على رسالة وسائط.`,
+                            text: `âŒ Ù„Ø§ ÙŠÙˆØ¬Ø¯ Ù†Øµ. Ø£Ø±Ø³Ù„ Ù†ØµØ§Ù‹ Ø£Ùˆ Ø±Ø¯ Ø¹Ù„Ù‰ Ø±Ø³Ø§Ù„Ø© ÙˆØ³Ø§Ø¦Ø·.`,
                             ...channelInfo
                         }, { quoted: message });
                     }
                     inputBuffer = Buffer.from(textInput, 'utf8');
-                    sourceLabel = `نص (${inputBuffer.length.toLocaleString()} بايت)`;
+                    sourceLabel = `Ù†Øµ (${inputBuffer.length.toLocaleString()} Ø¨Ø§ÙŠØª)`;
                 }
                 
                 const inFile = path.join(tempDir, `dna_in_${id}.bin`);
                 const outFile = path.join(tempDir, `dna_out_${id}.txt`);
                 fs.writeFileSync(inFile, inputBuffer);
                 
-                await sock.sendMessage(chatId, { text: '🧬 جاري التشفير إلى DNA...', ...channelInfo }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'ðŸ§¬ Ø¬Ø§Ø±ÙŠ Ø§Ù„ØªØ´ÙÙŠØ± Ø¥Ù„Ù‰ DNA...', ...channelInfo }, { quoted: message });
                 
                 const b64 = inputBuffer.toString('base64');
                 const b64File = path.join(tempDir, `dna_b64_${id}.txt`);
@@ -110,10 +110,10 @@ export default {
                     document: fs.readFileSync(outFile),
                     mimetype: 'text/plain',
                     fileName: `dna_encoded_${id}.txt`,
-                    caption: `🧬 *تم تشفير DNA*\n\n` +
-                        `📥 *المصدر:* ${sourceLabel}\n` +
-                        `📤 *قواعد DNA:* ${dnaResult.length.toLocaleString()}\n\n` +
-                        `_رد على هذا الملف بـ \`!حمض فك\` لاستعادته_`,
+                    caption: `ðŸ§¬ *ØªÙ… ØªØ´ÙÙŠØ± DNA*\n\n` +
+                        `ðŸ“¥ *Ø§Ù„Ù…ØµØ¯Ø±:* ${sourceLabel}\n` +
+                        `ðŸ“¤ *Ù‚ÙˆØ§Ø¹Ø¯ DNA:* ${dnaResult.length.toLocaleString()}\n\n` +
+                        `_Ø±Ø¯ Ø¹Ù„Ù‰ Ù‡Ø°Ø§ Ø§Ù„Ù…Ù„Ù Ø¨Ù€ \`!Ø­Ù…Ø¶ ÙÙƒ\` Ù„Ø§Ø³ØªØ¹Ø§Ø¯ØªÙ‡_`,
                     ...channelInfo
                 }, { quoted: message });
                 
@@ -121,11 +121,11 @@ export default {
                     try { fs.unlinkSync(f); } catch { }
                     
             } else {
-                // فك التشفير
+                // ÙÙƒ Ø§Ù„ØªØ´ÙÙŠØ±
                 let dnaInput;
                 
                 if (quoted?.documentMessage) {
-                    await sock.sendMessage(chatId, { text: '⏳ جاري قراءة ملف DNA...', ...channelInfo }, { quoted: message });
+                    await sock.sendMessage(chatId, { text: 'â³ Ø¬Ø§Ø±ÙŠ Ù‚Ø±Ø§Ø¡Ø© Ù…Ù„Ù DNA...', ...channelInfo }, { quoted: message });
                     const msgObj = { message: { documentMessage: quoted.documentMessage } };
                     const buf = await downloadMediaMessage(msgObj, 'buffer', {});
                     dnaInput = buf.toString('utf8').trim();
@@ -135,25 +135,25 @@ export default {
                 
                 if (!dnaInput) {
                     return await sock.sendMessage(chatId, {
-                        text: `❌ لا يوجد حمض DNA. أرسل تسلسل DNA أو رد على ملف .txt يحتوي على حمض.`,
+                        text: `âŒ Ù„Ø§ ÙŠÙˆØ¬Ø¯ Ø­Ù…Ø¶ DNA. Ø£Ø±Ø³Ù„ ØªØ³Ù„Ø³Ù„ DNA Ø£Ùˆ Ø±Ø¯ Ø¹Ù„Ù‰ Ù…Ù„Ù .txt ÙŠØ­ØªÙˆÙŠ Ø¹Ù„Ù‰ Ø­Ù…Ø¶.`,
                         ...channelInfo
                     }, { quoted: message });
                 }
                 
                 if (!/^[ATCGatcg\s]+$/.test(dnaInput)) {
                     return await sock.sendMessage(chatId, {
-                        text: `❌ تسلسل DNA غير صالح. يُسمح فقط بـ A, T, C, G.`,
+                        text: `âŒ ØªØ³Ù„Ø³Ù„ DNA ØºÙŠØ± ØµØ§Ù„Ø­. ÙŠÙØ³Ù…Ø­ ÙÙ‚Ø· Ø¨Ù€ A, T, C, G.`,
                         ...channelInfo
                     }, { quoted: message });
                 }
                 
                 const cleanDna = dnaInput.replace(/\s/g, '');
-                await sock.sendMessage(chatId, { text: '🔬 جاري فك تشفير DNA...', ...channelInfo }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'ðŸ”¬ Ø¬Ø§Ø±ÙŠ ÙÙƒ ØªØ´ÙÙŠØ± DNA...', ...channelInfo }, { quoted: message });
                 
                 const { stdout, stderr } = await execAsync(`"${binPath}" decode "${cleanDna}"`, { timeout: 30000, maxBuffer: 50 * 1024 * 1024 });
                 
                 if (stderr && !stdout) {
-                    return await sock.sendMessage(chatId, { text: `❌ ${stderr.trim()}`, ...channelInfo }, { quoted: message });
+                    return await sock.sendMessage(chatId, { text: `âŒ ${stderr.trim()}`, ...channelInfo }, { quoted: message });
                 }
                 
                 const decoded = stdout.trim();
@@ -168,8 +168,8 @@ export default {
                         document: fileBuffer,
                         mimetype: 'application/octet-stream',
                         fileName: `dna_decoded_${id}`,
-                        caption: `🧬 *تم فك تشفير DNA*\n\n` +
-                            `📦 *الملف المستعاد:* ${fileBuffer.length.toLocaleString()} بايت`,
+                        caption: `ðŸ§¬ *ØªÙ… ÙÙƒ ØªØ´ÙÙŠØ± DNA*\n\n` +
+                            `ðŸ“¦ *Ø§Ù„Ù…Ù„Ù Ø§Ù„Ù…Ø³ØªØ¹Ø§Ø¯:* ${fileBuffer.length.toLocaleString()} Ø¨Ø§ÙŠØª`,
                         ...channelInfo
                     }, { quoted: message });
                     try { fs.unlinkSync(outFile); } catch { }
@@ -181,14 +181,14 @@ export default {
                             document: fs.readFileSync(outFile),
                             mimetype: 'text/plain',
                             fileName: `dna_decoded_${id}.txt`,
-                            caption: `🧬 *تم فك تشفير DNA* — ${decoded.length} حرف`,
+                            caption: `ðŸ§¬ *ØªÙ… ÙÙƒ ØªØ´ÙÙŠØ± DNA* â€” ${decoded.length} Ø­Ø±Ù`,
                             ...channelInfo
                         }, { quoted: message });
                         try { fs.unlinkSync(outFile); } catch { }
                     } else {
                         await sock.sendMessage(chatId, {
-                            text: `🧬 *تم فك تشفير DNA*\n\n` +
-                                `📤 *النتيجة:*\n\`\`\`\n${decoded}\n\`\`\``,
+                            text: `ðŸ§¬ *ØªÙ… ÙÙƒ ØªØ´ÙÙŠØ± DNA*\n\n` +
+                                `ðŸ“¤ *Ø§Ù„Ù†ØªÙŠØ¬Ø©:*\n\`\`\`\n${decoded}\n\`\`\``,
                             ...channelInfo
                         }, { quoted: message });
                     }
@@ -196,9 +196,10 @@ export default {
             }
         } catch (error) {
             await sock.sendMessage(chatId, {
-                text: `❌ فشل: ${error.message}`,
+                text: `âŒ ÙØ´Ù„: ${error.message}`,
                 ...channelInfo
             }, { quoted: message });
         }
     }
 };
+

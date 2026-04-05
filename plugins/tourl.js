@@ -1,4 +1,4 @@
-import { downloadMediaMessage } from '@whiskeysockets/baileys';
+﻿import { downloadMediaMessage } from '@whiskeysockets/baileys';
 import axios from 'axios';
 import FormData from 'form-data';
 import { fileTypeFromBuffer } from 'file-type';
@@ -23,11 +23,11 @@ function getQuotedMessage(message) {
     };
 }
 export default {
-    command: 'tourl',
-    aliases: ['mediaurl', 'upload'],
-    category: 'tools',
-    description: 'Upload media and get a URL.',
-    usage: '.tourl (reply to media or send media with caption)',
+    command: 'توورل',
+    aliases: ['mediaurl', 'upload', 'tourl'],
+    category: 'أدوات',
+    description: 'رفع وسائط اند جلب ا رابط.',
+    usage: '.تورابط (رد تو وسائط ور إرسال وسائط ويته كابتيون)',
     async handler(sock, message) {
         const chatId = message.key.remoteJid;
         try {
@@ -51,7 +51,7 @@ export default {
             if (!buffer)
                 throw new Error('Failed to download media');
             if (buffer.length > 10 * 1024 * 1024) {
-                return sock.sendMessage(chatId, { text: '✴️ Media exceeds 10 MB limit.' }, { quoted: message });
+                return sock.sendMessage(chatId, { text: 'âœ´ï¸ Media exceeds 10 MB limit.' }, { quoted: message });
             }
             const type = await fileTypeFromBuffer(buffer);
             if (!type)
@@ -65,11 +65,15 @@ export default {
                 throw new Error('Invalid upload URL');
             }
             const sizeMB = (buffer.length / 1024 / 1024).toFixed(2);
-            await sock.sendMessage(chatId, { text: `✅ Upload Successful\n🔗 ${url}\n💾 ${sizeMB} MB` }, { quoted: message });
+            await sock.sendMessage(chatId, { text: `âœ… Upload Successful\nðŸ”— ${url}\nðŸ’¾ ${sizeMB} MB` }, { quoted: message });
         }
         catch (e) {
             console.error('Catbox upload error:', e);
-            await sock.sendMessage(chatId, { text: `❌ Upload failed: ${e.message}` }, { quoted: message });
+            await sock.sendMessage(chatId, { text: `âŒ Upload failed: ${e.message}` }, { quoted: message });
         }
     }
 };
+
+
+
+

@@ -1,9 +1,9 @@
-export default {
-    command: 'base64',
-    aliases: ['b64', 'encode'],
-    category: 'tools',
-    description: 'Encode text to Base64',
-    usage: '.base64 <text> OR reply to a message',
+﻿export default {
+    command: 'باسي64',
+    aliases: ['b64', 'encode', 'base64'],
+    category: 'أدوات',
+    description: '',
+    usage: '.باسي64 <نص> ور رد تو ا رسالة',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
@@ -21,12 +21,16 @@ export default {
                 return await sock.sendMessage(chatId, { text: '*Please provide text to encode or reply to a message.*\nExample: .base64 Hello World' }, { quoted: message });
             }
             const encoded = Buffer.from(txt, 'utf-8').toString('base64');
-            const response = `*🔗 Base64 Encoded:*\n\n${encoded}`;
+            const response = `*ðŸ”— Base64 Encoded:*\n\n${encoded}`;
             await sock.sendMessage(chatId, { text: response }, { quoted: message });
         }
         catch (err) {
             console.error('Base64 plugin error:', err);
-            await sock.sendMessage(chatId, { text: '❌ Failed to encode text.' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ Failed to encode text.' }, { quoted: message });
         }
     }
 };
+
+
+
+

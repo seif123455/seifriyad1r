@@ -1,4 +1,4 @@
-import { File } from 'megajs';
+﻿import { File } from 'megajs';
 import path from 'path';
 const formatBytes = (bytes) => {
     if (bytes === 0)
@@ -11,7 +11,7 @@ const formatBytes = (bytes) => {
 const generateBar = (percentage) => {
     const totalBars = 10;
     const filledBars = Math.floor((percentage / 100) * totalBars);
-    return '█'.repeat(filledBars) + '░'.repeat(totalBars - filledBars);
+    return 'â–ˆ'.repeat(filledBars) + 'â–‘'.repeat(totalBars - filledBars);
 };
 const MIME_TYPES = {
     '.mp4': 'video/mp4',
@@ -25,11 +25,11 @@ const MIME_TYPES = {
     '.mkv': 'video/x-matroska'
 };
 export default {
-    command: 'mega',
-    aliases: ['megadl'],
-    category: 'download',
-    description: 'Download from MEGA with real-time progress',
-    usage: '.mega <mega-url>',
+    command: 'ميجا',
+    aliases: ['megadl', 'mega'],
+    category: 'التحميل',
+    description: 'تحميل فروم ميجا مع تقدم زمني حي',
+    usage: '.ميجا <ميجا-رابط>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const text = args.join(' ').trim();
@@ -40,10 +40,10 @@ export default {
             const file = File.fromURL(text);
             await file.loadAttributes();
             if (file.size >= 500 * 1024 * 1024) {
-                return sock.sendMessage(chatId, { text: '❌ *Error:* File too large (Limit: 500MB)' }, { quoted: message });
+                return sock.sendMessage(chatId, { text: 'âŒ *Error:* File too large (Limit: 500MB)' }, { quoted: message });
             }
             const { key } = await sock.sendMessage(chatId, {
-                text: `🌩️ *MEGA DOWNLOAD*\n\n▢ *File:* ${file.name}\n▢ *Size:* ${formatBytes(file.size)}\n\n*Progress:* 0% [░░░░░░░░░░]`
+                text: `ðŸŒ©ï¸ *MEGA DOWNLOAD*\n\nâ–¢ *File:* ${file.name}\nâ–¢ *Size:* ${formatBytes(file.size)}\n\n*Progress:* 0% [â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘]`
             }, { quoted: message });
             const stream = file.download();
             const chunks = [];
@@ -54,7 +54,7 @@ export default {
                 if (Date.now() - lastUpdate > 3000 || percentage === 100) {
                     const bar = generateBar(percentage);
                     await sock.sendMessage(chatId, {
-                        text: `🌩️ *MEGA DOWNLOAD*\n\n▢ *File:* ${file.name}\n▢ *Size:* ${formatBytes(bytesTotal)}\n\n*Progress:* ${percentage}% [${bar}]`,
+                        text: `ðŸŒ©ï¸ *MEGA DOWNLOAD*\n\nâ–¢ *File:* ${file.name}\nâ–¢ *Size:* ${formatBytes(bytesTotal)}\n\n*Progress:* ${percentage}% [${bar}]`,
                         edit: key
                     });
                     lastUpdate = Date.now();
@@ -68,15 +68,19 @@ export default {
                     document: buffer,
                     fileName: file.name,
                     mimetype: MIME_TYPES[ext] || 'application/octet-stream',
-                    caption: `✅ *Download Complete*\n▢ *File:* ${file.name}\n▢ *Size:* ${formatBytes(file.size)}`
+                    caption: `âœ… *Download Complete*\nâ–¢ *File:* ${file.name}\nâ–¢ *Size:* ${formatBytes(file.size)}`
                 }, { quoted: message });
             });
             stream.on('error', async (err) => {
-                await sock.sendMessage(chatId, { text: `❌ *Download Error:* ${err.message}` }, { quoted: message });
+                await sock.sendMessage(chatId, { text: `âŒ *Download Error:* ${err.message}` }, { quoted: message });
             });
         }
         catch (error) {
-            await sock.sendMessage(chatId, { text: `❌ *Error:* ${error.message}` }, { quoted: message });
+            await sock.sendMessage(chatId, { text: `âŒ *Error:* ${error.message}` }, { quoted: message });
         }
     }
 };
+
+
+
+

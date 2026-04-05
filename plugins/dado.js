@@ -1,9 +1,9 @@
-export default {
-    command: 'dado',
-    aliases: ['dados', 'dice'],
-    category: 'games',
-    description: 'Roll a random dice sticker',
-    usage: '.dado',
+﻿export default {
+    command: 'دادو',
+    aliases: ['dados', 'dice', 'dado'],
+    category: 'ألعاب',
+    description: '',
+    usage: '.دادو',
     async handler(sock, message, _args, _context) {
         const chatId = message.key.remoteJid;
         const diceLinks = [
@@ -24,8 +24,11 @@ export default {
             console.error('Dice Plugin Error:', e);
             await sock.sendMessage(chatId, {
                 image: { url: randomDice },
-                caption: '🎲 The dice rolled!'
+                caption: 'ðŸŽ² The dice rolled!'
             }, { quoted: message });
         }
     }
 };
+
+
+

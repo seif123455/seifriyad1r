@@ -1,12 +1,12 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
@@ -74,11 +74,11 @@ async function _getAllCloneSessions() {
     }
 }
 export default {
-    command: 'rentbot',
-    aliases: ['botclone', 'clonebot'],
-    category: 'owner',
-    description: 'Start a sub-bot clone via pairing code',
-    usage: '.rentbot 92305xxxxxxx',
+    command: 'رينتبوت',
+    aliases: ['botclone', 'clonebot', 'rentbot'],
+    category: 'المالك',
+    description: 'بدء ا سوب-بوت كلوني فيا بايرينج كود',
+    usage: '.رينتبوت 92305كسكسكسكسكسكسكس',
     ownerOnly: true,
     async handler(sock, message, args, context) {
         const { chatId } = context;
@@ -129,7 +129,7 @@ export default {
                 }
                 catch (err) {
                     console.error("Pairing Error:", err);
-                    await sock.sendMessage(chatId, { text: "❌ Failed to request code. Try again in 1 minute." });
+                    await sock.sendMessage(chatId, { text: "âŒ Failed to request code. Try again in 1 minute." });
                 }
             }
             conn.ev.on('creds.update', async () => {
@@ -160,7 +160,7 @@ export default {
                         });
                     }
                     await sock.sendMessage(chatId, {
-                        text: `✅ Clone is now Online!\n\n` +
+                        text: `âœ… Clone is now Online!\n\n` +
                             `ID: ${authId}\n` +
                             `Storage: ${HAS_DB ? 'Database' : 'File System'}`
                     }, { quoted: message });
@@ -194,15 +194,18 @@ export default {
 };
 /*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
  *                                                                           *
  *****************************************************************************/
+
+
+

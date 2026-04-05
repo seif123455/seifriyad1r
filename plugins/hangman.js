@@ -1,14 +1,14 @@
-const words = ['javascript', 'bot', 'hangman', 'whatsapp', 'nodejs', 'python', 'programming', 'developer', 'computer', 'algorithm'];
+﻿const words = ['javascript', 'bot', 'hangman', 'whatsapp', 'nodejs', 'python', 'programming', 'developer', 'computer', 'algorithm'];
 const hangmanGames = {};
 function guessLetter(sock, chatId, letter) {
     if (!hangmanGames[chatId]) {
-        sock.sendMessage(chatId, { text: '❌ *No game in progress*\n\nStart a new game with `.hangman`' });
+        sock.sendMessage(chatId, { text: 'âŒ *No game in progress*\n\nStart a new game with `.hangman`' });
         return;
     }
     const game = hangmanGames[chatId];
     const { word, guessedLetters, maskedWord, maxWrongGuesses } = game;
     if (guessedLetters.includes(letter)) {
-        sock.sendMessage(chatId, { text: `⚠️ *You already guessed "${letter}"*\n\nTry another letter.` });
+        sock.sendMessage(chatId, { text: `âš ï¸ *You already guessed "${letter}"*\n\nTry another letter.` });
         return;
     }
     guessedLetters.push(letter);
@@ -18,27 +18,27 @@ function guessLetter(sock, chatId, letter) {
                 maskedWord[i] = letter;
             }
         }
-        sock.sendMessage(chatId, { text: `✅ *Good guess!*\n\n${maskedWord.join(' ')}` });
+        sock.sendMessage(chatId, { text: `âœ… *Good guess!*\n\n${maskedWord.join(' ')}` });
         if (!maskedWord.includes('_')) {
-            sock.sendMessage(chatId, { text: `🎉 *Congratulations!*\n\nYou guessed the word: *${word}*` });
+            sock.sendMessage(chatId, { text: `ðŸŽ‰ *Congratulations!*\n\nYou guessed the word: *${word}*` });
             delete hangmanGames[chatId];
         }
     }
     else {
         game.wrongGuesses += 1;
-        sock.sendMessage(chatId, { text: `❌ *Wrong guess!*\n\nYou have *${maxWrongGuesses - game.wrongGuesses}* tries left.\n\n${maskedWord.join(' ')}` });
+        sock.sendMessage(chatId, { text: `âŒ *Wrong guess!*\n\nYou have *${maxWrongGuesses - game.wrongGuesses}* tries left.\n\n${maskedWord.join(' ')}` });
         if (game.wrongGuesses >= maxWrongGuesses) {
-            sock.sendMessage(chatId, { text: `💀 *Game over!*\n\nThe word was: *${word}*` });
+            sock.sendMessage(chatId, { text: `ðŸ’€ *Game over!*\n\nThe word was: *${word}*` });
             delete hangmanGames[chatId];
         }
     }
 }
 export default {
-    command: 'hangman',
-    aliases: ['hang', 'hm'],
-    category: 'games',
-    description: 'Play hangman word guessing game',
-    usage: '.hangman to start, then .guess <letter>',
+    command: 'الرجل المشنوق',
+    aliases: ['hang', 'hm', 'hangman'],
+    category: 'ألعاب',
+    description: 'تشغيل هانجمان وورد جويسسينج لعبة',
+    usage: '.هانجمان تو بدء, تهين .جويسس <ليتتير>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const word = words[Math.floor(Math.random() * words.length)];
@@ -51,14 +51,17 @@ export default {
             maxWrongGuesses: 6,
         };
         await sock.sendMessage(chatId, {
-            text: `🎮 *HANGMAN GAME STARTED!*\n\n` +
+            text: `ðŸŽ® *HANGMAN GAME STARTED!*\n\n` +
                 `The word is: ${maskedWord}\n\n` +
                 `*How to play:*\n` +
-                `• Use \`.guess <letter>\` to guess\n` +
-                `• You have 6 wrong guesses allowed\n` +
-                `• Guess the word before running out of tries!\n\n` +
-                `Good luck! 🍀`
+                `â€¢ Use \`.guess <letter>\` to guess\n` +
+                `â€¢ You have 6 wrong guesses allowed\n` +
+                `â€¢ Guess the word before running out of tries!\n\n` +
+                `Good luck! ðŸ€`
         }, { quoted: message });
     },
     guessLetter
 };
+
+
+

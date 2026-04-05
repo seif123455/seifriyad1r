@@ -1,15 +1,15 @@
-import { downloadMediaMessage } from '@whiskeysockets/baileys';
+﻿import { downloadMediaMessage } from '@whiskeysockets/baileys';
 import { exec } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import webp from 'node-webpmux';
 import crypto from 'crypto';
 export default {
-    command: 'sticker2',
-    aliases: ['s2', 'stik2'],
-    category: 'stickers',
-    description: 'Convert image/video to sticker',
-    usage: '.sticker2 (reply to image/video or send with caption)',
+    command: 'ملصق2',
+    aliases: ['s2', 'stik2', 'sticker2'],
+    category: 'ملصقات',
+    description: 'تحويل صورة/فيديو تو ملصق',
+    usage: '.ملصق2 (رد تو صورة/فيديو ور إرسال ويته كابتيون)',
     async handler(sock, message, args, context) {
         const { chatId, config, channelInfo } = context;
         const messageToQuote = message;
@@ -95,7 +95,7 @@ export default {
             const json = {
                 'sticker-pack-id': crypto.randomBytes(32).toString('hex'),
                 'sticker-pack-name': config.packname || 'MEGA-MD',
-                'emojis': ['🤖']
+                'emojis': ['ðŸ¤–']
             };
             const exifAttr = Buffer.from([0x49, 0x49, 0x2A, 0x00, 0x08, 0x00, 0x00, 0x00, 0x01, 0x00, 0x41, 0x57, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x16, 0x00, 0x00, 0x00]);
             const jsonBuffer = Buffer.from(JSON.stringify(json), 'utf8');
@@ -117,7 +117,7 @@ export default {
                         const json2 = {
                             'sticker-pack-id': crypto.randomBytes(32).toString('hex'),
                             'sticker-pack-name': config.packname || 'MEGA-MD',
-                            'emojis': ['🤖']
+                            'emojis': ['ðŸ¤–']
                         };
                         const exifAttr2 = Buffer.from([0x49, 0x49, 0x2A, 0x00, 0x08, 0x00, 0x00, 0x00, 0x01, 0x00, 0x41, 0x57, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x16, 0x00, 0x00, 0x00]);
                         const jsonBuffer2 = Buffer.from(JSON.stringify(json2), 'utf8');
@@ -154,3 +154,7 @@ export default {
         }
     }
 };
+
+
+
+

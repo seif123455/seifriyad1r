@@ -1,4 +1,4 @@
-import { createRequire } from 'module';
+﻿import { createRequire } from 'module';
 import fs from 'fs';
 import path from 'path';
 const acrcloud = createRequire(import.meta.url)('acrcloud');
@@ -33,17 +33,17 @@ async function downloadMedia(msg, type) {
 }
 /* ================= COMMAND MODULE ================= */
 export default {
-    command: 'shazam',
-    aliases: ['whatmusic', 'songid'],
-    category: 'info',
-    description: 'Identify a song from audio or video',
-    usage: '.shazam (reply to audio or video)',
+    command: 'سهازام',
+    aliases: ['whatmusic', 'songid', 'shazam'],
+    category: 'معلومات',
+    description: 'يدينتيفي ا أغنية فروم صوت ور فيديو',
+    usage: '.سهازام (رد تو صوت ور فيديو)',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
             const media = getAudioOrVideo(message);
             if (!media) {
-                return await sock.sendMessage(chatId, { text: '⚠️ *RESPOND TO AN AUDIO OR VIDEO*' }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: 'âš ï¸ *RESPOND TO AN AUDIO OR VIDEO*' }, { quoted: message });
             }
             const buffer = await downloadMedia(media.msg, media.type);
             const tmpDir = path.join(process.cwd(), 'tmp');
@@ -60,18 +60,22 @@ export default {
             if (!music)
                 throw new Error('No match found');
             const text = `
-𝚁𝙴𝚂𝚄𝙻𝚃
-• 📌 *TITLE*: ${music.title || 'NOT FOUND'}
-• 👨‍🎤 *ARTIST*: ${music.artists?.map((a) => a.name).join(', ') || 'NOT FOUND'}
-• 💾 *ALBUM*: ${music.album?.name || 'NOT FOUND'}
-• 🌐 *GENRE*: ${music.genres?.map((g) => g.name).join(', ') || 'NOT FOUND'}
-• 📆 *RELEASE DATE*: ${music.release_date || 'NOT FOUND'}
+ðšð™´ðš‚ðš„ð™»ðšƒ
+â€¢ ðŸ“Œ *TITLE*: ${music.title || 'NOT FOUND'}
+â€¢ ðŸ‘¨â€ðŸŽ¤ *ARTIST*: ${music.artists?.map((a) => a.name).join(', ') || 'NOT FOUND'}
+â€¢ ðŸ’¾ *ALBUM*: ${music.album?.name || 'NOT FOUND'}
+â€¢ ðŸŒ *GENRE*: ${music.genres?.map((g) => g.name).join(', ') || 'NOT FOUND'}
+â€¢ ðŸ“† *RELEASE DATE*: ${music.release_date || 'NOT FOUND'}
 `.trim();
             await sock.sendMessage(chatId, { text }, { quoted: message });
         }
         catch (err) {
             console.error('[SHZ]', err);
-            await sock.sendMessage(chatId, { text: `❌ Error: ${err}` }, { quoted: message });
+            await sock.sendMessage(chatId, { text: `âŒ Error: ${err}` }, { quoted: message });
         }
     }
 };
+
+
+
+

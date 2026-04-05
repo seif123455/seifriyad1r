@@ -1,4 +1,4 @@
-import { downloadContentFromMessage } from '@whiskeysockets/baileys';
+﻿import { downloadContentFromMessage } from '@whiskeysockets/baileys';
 import fs from 'fs';
 import path from 'path';
 async function downloadMediaMessage(message, mediaType) {
@@ -15,11 +15,11 @@ async function downloadMediaMessage(message, mediaType) {
     return filePath;
 }
 export default {
-    command: 'hidetag',
-    aliases: ['ht', 'htag'],
-    category: 'admin',
-    description: 'Tag all non-admin members without showing their names',
-    usage: '.hidetag <message> or reply to message',
+    command: 'هيديتاج',
+    aliases: ['ht', 'htag', 'hidetag'],
+    category: 'المشرفون',
+    description: 'تاج الل نون-مشرف عضوس ويتهووت عرضينج تهيير ناميس',
+    usage: '.هيديتاج <رسالة> ور رد تو رسالة',
     groupOnly: true,
     adminOnly: true,
     async handler(sock, message, args, context) {
@@ -29,7 +29,7 @@ export default {
         const messageText = rawText.slice(8).trim();
         if (!isBotAdmin) {
             await sock.sendMessage(chatId, {
-                text: '❌ *Please make the bot an admin first*'
+                text: 'âŒ *Please make the bot an admin first*'
             }, { quoted: message });
             return;
         }
@@ -76,9 +76,13 @@ export default {
         }
         else {
             await sock.sendMessage(chatId, {
-                text: messageText || '📢 *Announcement for all members*',
+                text: messageText || 'ðŸ“¢ *Announcement for all members*',
                 mentions: nonAdmins
             });
         }
     }
 };
+
+
+
+

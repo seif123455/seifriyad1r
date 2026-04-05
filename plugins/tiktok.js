@@ -1,10 +1,10 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 export default {
-    command: 'tiktok',
-    aliases: ['tt', 'ttdl', 'tiktokdl'],
-    category: 'download',
-    description: 'Download TikTok video without watermark (HD if available)',
-    usage: '.tiktok <TikTok URL>',
+    command: 'تيكتوك',
+    aliases: ['tt', 'ttdl', 'tiktokdl', 'tiktok'],
+    category: 'التحميل',
+    description: 'تحميل تيكتوك فيديو بدون علامة مائية (هد يف افايلابلي)',
+    usage: '.تيكتوك <تيكتوك رابط>',
     async handler(sock, message, args, context) {
         const { chatId, rawText } = context;
         const prefix = rawText.match(/^[.!#]/)?.[0] || '.';
@@ -13,12 +13,12 @@ export default {
         const url = parts.slice(1).join(' ').trim();
         if (!url) {
             return await sock.sendMessage(chatId, {
-                text: '🎵 *TikTok Downloader*\n\nPlease provide a TikTok URL.\nExample:\n.tiktok https://vm.tiktok.com/XXXX'
+                text: 'ðŸŽµ *TikTok Downloader*\n\nPlease provide a TikTok URL.\nExample:\n.tiktok https://vm.tiktok.com/XXXX'
             }, { quoted: message });
         }
         try {
             await sock.sendMessage(chatId, {
-                text: '⏳ Downloading TikTok video...'
+                text: 'â³ Downloading TikTok video...'
             }, { quoted: message });
             const apiUrl = `https://discardapi.onrender.com/api/dl/tiktok?apikey=guru&url=${encodeURIComponent(url)}`;
             const { data } = await axios.get(apiUrl, {
@@ -37,26 +37,26 @@ export default {
             if (!videoUrl) {
                 throw new Error('No downloadable video found');
             }
-            const caption = `🎵 *TikTok Downloader*
-━━━━━━━━━━━━━━━━━━━
-👤 *User:* ${res.author.nickname}
-🆔 *Username:* ${res.author.fullname}
-🌍 *Region:* ${res.region}
-⏱️ *Duration:* ${res.duration}
+            const caption = `ðŸŽµ *TikTok Downloader*
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
+ðŸ‘¤ *User:* ${res.author.nickname}
+ðŸ†” *Username:* ${res.author.fullname}
+ðŸŒ *Region:* ${res.region}
+â±ï¸ *Duration:* ${res.duration}
 
-❤️ *Likes:* ${res.stats.likes}
-💬 *Comments:* ${res.stats.comment}
-🔁 *Shares:* ${res.stats.share}
-👀 *Views:* ${res.stats.views}
+â¤ï¸ *Likes:* ${res.stats.likes}
+ðŸ’¬ *Comments:* ${res.stats.comment}
+ðŸ” *Shares:* ${res.stats.share}
+ðŸ‘€ *Views:* ${res.stats.views}
 
-🎧 *Sound:* ${res.music_info.title}
-📅 *Posted:* ${res.taken_at}
+ðŸŽ§ *Sound:* ${res.music_info.title}
+ðŸ“… *Posted:* ${res.taken_at}
 
-📝 *Caption:*
+ðŸ“ *Caption:*
 ${res.title || 'No caption'}
 
-✨ *Quality:* ${hd ? 'HD No Watermark' : 'No Watermark'}
-━━━━━━━━━━━━━━━━━━━`;
+âœ¨ *Quality:* ${hd ? 'HD No Watermark' : 'No Watermark'}
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”`;
             await sock.sendMessage(chatId, {
                 video: { url: videoUrl },
                 mimetype: 'video/mp4',
@@ -67,14 +67,18 @@ ${res.title || 'No caption'}
             console.error('TikTok plugin error:', error);
             if (error.code === 'ECONNABORTED') {
                 await sock.sendMessage(chatId, {
-                    text: '⏱️ Request timed out. Please try again later.'
+                    text: 'â±ï¸ Request timed out. Please try again later.'
                 }, { quoted: message });
             }
             else {
                 await sock.sendMessage(chatId, {
-                    text: `❌ Failed to download TikTok video.\nReason: ${error.message}`
+                    text: `âŒ Failed to download TikTok video.\nReason: ${error.message}`
                 }, { quoted: message });
             }
         }
     }
 };
+
+
+
+

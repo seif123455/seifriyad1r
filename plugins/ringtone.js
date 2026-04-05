@@ -1,12 +1,12 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
@@ -14,11 +14,11 @@
  *****************************************************************************/
 import axios from 'axios';
 export default {
-    command: 'ringtone',
-    aliases: ['ring', 'tone'],
-    category: 'music',
-    description: 'Search and download ringtones',
-    usage: '.ringtone <search term>',
+    command: 'رينجتوني',
+    aliases: ['ring', 'tone', 'ringtone'],
+    category: 'موسيقى',
+    description: 'بحث اند تحميل رينجتونيس',
+    usage: '.رينجتوني <بحث تيرم>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const searchQuery = args.join(' ').trim();
@@ -29,14 +29,14 @@ export default {
                 }, { quoted: message });
             }
             await sock.sendMessage(chatId, {
-                text: "🔍 *Searching for ringtones...*"
+                text: "ðŸ” *Searching for ringtones...*"
             }, { quoted: message });
             await new Promise(resolve => setTimeout(resolve, 10000));
             const searchUrl = `https://discardapi.dpdns.org/api/dl/ringtone?apikey=guru&title=${encodeURIComponent(searchQuery)}`;
             const response = await axios.get(searchUrl, { timeout: 30000 });
             if (!response.data?.result || response.data.result.length === 0) {
                 return await sock.sendMessage(chatId, {
-                    text: "❌ *No ringtones found!*\nTry a different search term."
+                    text: "âŒ *No ringtones found!*\nTry a different search term."
                 }, { quoted: message });
             }
             const ringtones = response.data.result;
@@ -68,12 +68,12 @@ export default {
                 }
             }
             await sock.sendMessage(chatId, {
-                text: `✅ *Sent ${limit} ringtones!*\n\n${totalFound > limit ? `📊 *${totalFound - limit} more available*\nUse the same command again for different results.` : ''}`
+                text: `âœ… *Sent ${limit} ringtones!*\n\n${totalFound > limit ? `ðŸ“Š *${totalFound - limit} more available*\nUse the same command again for different results.` : ''}`
             }, { quoted: message });
         }
         catch (error) {
             console.error('Ringtone Command Error:', error);
-            let errorMsg = "❌ *Search failed!*\n\n";
+            let errorMsg = "âŒ *Search failed!*\n\n";
             if (error.code === 'ETIMEDOUT' || error.code === 'ECONNABORTED') {
                 errorMsg += "*Reason:* Connection timeout\nThe API took too long to respond.";
             }
@@ -92,15 +92,19 @@ export default {
 };
 /*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
  *                                                                           *
  *****************************************************************************/
+
+
+
+

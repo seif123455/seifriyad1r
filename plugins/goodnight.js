@@ -1,9 +1,9 @@
-export default {
-    command: 'goodnight',
-    aliases: ['gn', 'night'],
-    category: 'quotes',
-    description: 'Send a random good night message',
-    usage: '.goodnight',
+﻿export default {
+    command: 'جوودنيجهت',
+    aliases: ['gn', 'night', 'goodnight'],
+    category: 'اقتباسات',
+    description: 'إرسال ا عشوائي جوود ليل رسالة',
+    usage: '.جوودنيجهت',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
@@ -18,7 +18,10 @@ export default {
         }
         catch (error) {
             console.error('Goodnight plugin error:', error);
-            await sock.sendMessage(chatId, { text: '❌ Failed to get goodnight message. Please try again later!' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ Failed to get goodnight message. Please try again later!' }, { quoted: message });
         }
     }
 };
+
+
+

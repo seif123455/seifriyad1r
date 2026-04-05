@@ -1,4 +1,4 @@
-import { setAntitag, getAntitag, removeAntitag } from '../lib/index.js';
+﻿import { setAntitag, getAntitag, removeAntitag } from '../lib/index.js';
 
 export async function handleTagDetection(sock, chatId, message, senderId) {
     try {
@@ -45,7 +45,7 @@ export async function handleTagDetection(sock, chatId, message, senderId) {
                         }
                     });
                     await sock.sendMessage(chatId, {
-                        text: `⚠️ *تم اكتشاف منشن للكل!*\n\n@${senderId.split('@')[0]}, منشن جميع الأعضاء غير مسموح به.`,
+                        text: `âš ï¸ *ØªÙ… Ø§ÙƒØªØ´Ø§Ù Ù…Ù†Ø´Ù† Ù„Ù„ÙƒÙ„!*\n\n@${senderId.split('@')[0]}, Ù…Ù†Ø´Ù† Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø£Ø¹Ø¶Ø§Ø¡ ØºÙŠØ± Ù…Ø³Ù…ÙˆØ­ Ø¨Ù‡.`,
                         mentions: [senderId]
                     });
                 } else if (action === 'kick') {
@@ -60,28 +60,28 @@ export async function handleTagDetection(sock, chatId, message, senderId) {
                     try {
                         await sock.groupParticipantsUpdate(chatId, [senderId], "remove");
                         await sock.sendMessage(chatId, {
-                            text: `🚫 *تم تطبيق منع المنشن!*\n\n@${senderId.split('@')[0]} تم طرده بسبب منشن جميع الأعضاء.`,
+                            text: `ðŸš« *ØªÙ… ØªØ·Ø¨ÙŠÙ‚ Ù…Ù†Ø¹ Ø§Ù„Ù…Ù†Ø´Ù†!*\n\n@${senderId.split('@')[0]} ØªÙ… Ø·Ø±Ø¯Ù‡ Ø¨Ø³Ø¨Ø¨ Ù…Ù†Ø´Ù† Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø£Ø¹Ø¶Ø§Ø¡.`,
                             mentions: [senderId]
                         });
                     } catch (error) {
                         await sock.sendMessage(chatId, {
-                            text: `⚠️ فشل طرد المستخدم. تأكد من أن البوت أدمن.`
+                            text: `âš ï¸ ÙØ´Ù„ Ø·Ø±Ø¯ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…. ØªØ£ÙƒØ¯ Ù…Ù† Ø£Ù† Ø§Ù„Ø¨ÙˆØª Ø£Ø¯Ù…Ù†.`
                         });
                     }
                 }
             }
         }
     } catch (error) {
-        console.error('خطأ في كشف المنشن:', error);
+        console.error('Ø®Ø·Ø£ ÙÙŠ ÙƒØ´Ù Ø§Ù„Ù…Ù†Ø´Ù†:', error);
     }
 }
 
 export default {
-    command: 'منشن',
-    aliases: ['antitag', 'at', 'tagblock', 'منع_المنشن'],
-    category: 'admin',
-    description: 'منع المستخدمين من منشن جميع الأعضاء',
-    usage: '!منشن <on|off|set>',
+    command: 'Ù…Ù†Ø´Ù†',
+    aliases: ['antitag', 'at', 'tagblock', 'Ù…Ù†Ø¹_Ø§Ù„Ù…Ù†Ø´Ù†'],
+    category: 'Ø§Ù„Ù…Ø´Ø±ÙÙˆÙ†',
+    description: 'Ù…Ù†Ø¹ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…ÙŠÙ† Ù…Ù† Ù…Ù†Ø´Ù† Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø£Ø¹Ø¶Ø§Ø¡',
+    usage: '!Ù…Ù†Ø´Ù† <ÙˆÙ†|ÙˆÙÙ|ØªØ¹ÙŠÙŠÙ†>',
     groupOnly: true,
     adminOnly: true,
     
@@ -92,17 +92,17 @@ export default {
         if (!action) {
             const config = await getAntitag(chatId, 'on');
             await sock.sendMessage(chatId, {
-                text: `*🏷️ إعدادات منع المنشن*\n\n` +
-                    `*الحالة:* ${config?.enabled ? '✅ مفعل' : '❌ معطل'}\n` +
-                    `*الإجراء:* ${config?.action || 'غير محدد'}\n\n` +
-                    `*الأوامر:*\n` +
-                    `• \`!منشن on\` - تفعيل\n` +
-                    `• \`!منشن off\` - تعطيل\n` +
-                    `• \`!منشن set delete\` - حذف رسائل منشن الكل\n` +
-                    `• \`!منشن set kick\` - طرد المستخدمين الذين يعملون منشن للكل\n\n` +
-                    `*الكشف:*\n` +
-                    `• يكشف منشن 50%+ من الأعضاء\n` +
-                    `• يحمي من التكرار والإزعاج`
+                text: `*ðŸ·ï¸ Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ù…Ù†Ø¹ Ø§Ù„Ù…Ù†Ø´Ù†*\n\n` +
+                    `*Ø§Ù„Ø­Ø§Ù„Ø©:* ${config?.enabled ? 'âœ… Ù…ÙØ¹Ù„' : 'âŒ Ù…Ø¹Ø·Ù„'}\n` +
+                    `*Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡:* ${config?.action || 'ØºÙŠØ± Ù…Ø­Ø¯Ø¯'}\n\n` +
+                    `*Ø§Ù„Ø£ÙˆØ§Ù…Ø±:*\n` +
+                    `â€¢ \`!Ù…Ù†Ø´Ù† on\` - ØªÙØ¹ÙŠÙ„\n` +
+                    `â€¢ \`!Ù…Ù†Ø´Ù† off\` - ØªØ¹Ø·ÙŠÙ„\n` +
+                    `â€¢ \`!Ù…Ù†Ø´Ù† set delete\` - Ø­Ø°Ù Ø±Ø³Ø§Ø¦Ù„ Ù…Ù†Ø´Ù† Ø§Ù„ÙƒÙ„\n` +
+                    `â€¢ \`!Ù…Ù†Ø´Ù† set kick\` - Ø·Ø±Ø¯ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…ÙŠÙ† Ø§Ù„Ø°ÙŠÙ† ÙŠØ¹Ù…Ù„ÙˆÙ† Ù…Ù†Ø´Ù† Ù„Ù„ÙƒÙ„\n\n` +
+                    `*Ø§Ù„ÙƒØ´Ù:*\n` +
+                    `â€¢ ÙŠÙƒØ´Ù Ù…Ù†Ø´Ù† 50%+ Ù…Ù† Ø§Ù„Ø£Ø¹Ø¶Ø§Ø¡\n` +
+                    `â€¢ ÙŠØ­Ù…ÙŠ Ù…Ù† Ø§Ù„ØªÙƒØ±Ø§Ø± ÙˆØ§Ù„Ø¥Ø²Ø¹Ø§Ø¬`
             }, { quoted: message });
             return;
         }
@@ -112,48 +112,48 @@ export default {
                 const existingConfig = await getAntitag(chatId, 'on');
                 if (existingConfig?.enabled) {
                     await sock.sendMessage(chatId, {
-                        text: '⚠️ *منع المنشن مفعل بالفعل*'
+                        text: 'âš ï¸ *Ù…Ù†Ø¹ Ø§Ù„Ù…Ù†Ø´Ù† Ù…ÙØ¹Ù„ Ø¨Ø§Ù„ÙØ¹Ù„*'
                     }, { quoted: message });
                     return;
                 }
                 const result = await setAntitag(chatId, 'on', 'delete');
                 await sock.sendMessage(chatId, {
                     text: result
-                        ? '✅ *تم تفعيل منع المنشن بنجاح!*\n\nالإجراء الافتراضي: حذف رسائل منشن الكل'
-                        : '❌ *فشل في تفعيل منع المنشن*'
+                        ? 'âœ… *ØªÙ… ØªÙØ¹ÙŠÙ„ Ù…Ù†Ø¹ Ø§Ù„Ù…Ù†Ø´Ù† Ø¨Ù†Ø¬Ø§Ø­!*\n\nØ§Ù„Ø¥Ø¬Ø±Ø§Ø¡ Ø§Ù„Ø§ÙØªØ±Ø§Ø¶ÙŠ: Ø­Ø°Ù Ø±Ø³Ø§Ø¦Ù„ Ù…Ù†Ø´Ù† Ø§Ù„ÙƒÙ„'
+                        : 'âŒ *ÙØ´Ù„ ÙÙŠ ØªÙØ¹ÙŠÙ„ Ù…Ù†Ø¹ Ø§Ù„Ù…Ù†Ø´Ù†*'
                 }, { quoted: message });
                 break;
                 
             case 'off':
                 await removeAntitag(chatId, 'on');
                 await sock.sendMessage(chatId, {
-                    text: '❌ *تم تعطيل منع المنشن*\n\nيمكن للمستخدمين الآن منشن جميع الأعضاء.'
+                    text: 'âŒ *ØªÙ… ØªØ¹Ø·ÙŠÙ„ Ù…Ù†Ø¹ Ø§Ù„Ù…Ù†Ø´Ù†*\n\nÙŠÙ…ÙƒÙ† Ù„Ù„Ù…Ø³ØªØ®Ø¯Ù…ÙŠÙ† Ø§Ù„Ø¢Ù† Ù…Ù†Ø´Ù† Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø£Ø¹Ø¶Ø§Ø¡.'
                 }, { quoted: message });
                 break;
                 
             case 'set':
                 if (args.length < 2) {
                     await sock.sendMessage(chatId, {
-                        text: '❌ *الرجاء تحديد الإجراء*\n\nالاستخدام: `!منشن set delete | kick`'
+                        text: 'âŒ *Ø§Ù„Ø±Ø¬Ø§Ø¡ ØªØ­Ø¯ÙŠØ¯ Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡*\n\nØ§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…: `!Ù…Ù†Ø´Ù† set delete | kick`'
                     }, { quoted: message });
                     return;
                 }
                 const setAction = args[1].toLowerCase();
                 if (!['delete', 'kick'].includes(setAction)) {
                     await sock.sendMessage(chatId, {
-                        text: '❌ *إجراء غير صحيح*\n\nاختر: delete أو kick'
+                        text: 'âŒ *Ø¥Ø¬Ø±Ø§Ø¡ ØºÙŠØ± ØµØ­ÙŠØ­*\n\nØ§Ø®ØªØ±: delete Ø£Ùˆ kick'
                     }, { quoted: message });
                     return;
                 }
                 const setResult = await setAntitag(chatId, 'on', setAction);
                 const actionDescriptions = {
-                    delete: 'حذف رسائل منشن الكل وتحذير المستخدمين',
-                    kick: 'حذف الرسائل وطرد المستخدمين من المجموعة'
+                    delete: 'Ø­Ø°Ù Ø±Ø³Ø§Ø¦Ù„ Ù…Ù†Ø´Ù† Ø§Ù„ÙƒÙ„ ÙˆØªØ­Ø°ÙŠØ± Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…ÙŠÙ†',
+                    kick: 'Ø­Ø°Ù Ø§Ù„Ø±Ø³Ø§Ø¦Ù„ ÙˆØ·Ø±Ø¯ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…ÙŠÙ† Ù…Ù† Ø§Ù„Ù…Ø¬Ù…ÙˆØ¹Ø©'
                 };
                 await sock.sendMessage(chatId, {
                     text: setResult
-                        ? `✅ *تم ضبط إجراء منع المنشن إلى: ${setAction === 'delete' ? 'حذف' : 'طرد'}*\n\n${actionDescriptions[setAction]}`
-                        : '❌ *فشل في ضبط إجراء منع المنشن*'
+                        ? `âœ… *ØªÙ… Ø¶Ø¨Ø· Ø¥Ø¬Ø±Ø§Ø¡ Ù…Ù†Ø¹ Ø§Ù„Ù…Ù†Ø´Ù† Ø¥Ù„Ù‰: ${setAction === 'delete' ? 'Ø­Ø°Ù' : 'Ø·Ø±Ø¯'}*\n\n${actionDescriptions[setAction]}`
+                        : 'âŒ *ÙØ´Ù„ ÙÙŠ Ø¶Ø¨Ø· Ø¥Ø¬Ø±Ø§Ø¡ Ù…Ù†Ø¹ Ø§Ù„Ù…Ù†Ø´Ù†*'
                 }, { quoted: message });
                 break;
                 
@@ -161,21 +161,22 @@ export default {
             case 'get':
                 const status = await getAntitag(chatId, 'on');
                 await sock.sendMessage(chatId, {
-                    text: `*🏷️ حالة منع المنشن*\n\n` +
-                        `*الحالة:* ${status?.enabled ? '✅ مفعل' : '❌ معطل'}\n` +
-                        `*الإجراء:* ${status?.action === 'delete' ? 'حذف' : status?.action === 'kick' ? 'طرد' : 'غير محدد'}\n\n` +
-                        `*ماذا يحدث عند اكتشاف منشن الكل:*\n` +
-                        `${status?.action === 'delete' ? '• يتم حذف الرسالة\n• يتم تحذير المستخدم' : ''}` +
-                        `${status?.action === 'kick' ? '• يتم حذف الرسالة\n• يتم طرد المستخدم من المجموعة' : ''}\n\n` +
-                        `*حد الكشف:* 50% من أعضاء المجموعة أو 10+ منشن`
+                    text: `*ðŸ·ï¸ Ø­Ø§Ù„Ø© Ù…Ù†Ø¹ Ø§Ù„Ù…Ù†Ø´Ù†*\n\n` +
+                        `*Ø§Ù„Ø­Ø§Ù„Ø©:* ${status?.enabled ? 'âœ… Ù…ÙØ¹Ù„' : 'âŒ Ù…Ø¹Ø·Ù„'}\n` +
+                        `*Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡:* ${status?.action === 'delete' ? 'Ø­Ø°Ù' : status?.action === 'kick' ? 'Ø·Ø±Ø¯' : 'ØºÙŠØ± Ù…Ø­Ø¯Ø¯'}\n\n` +
+                        `*Ù…Ø§Ø°Ø§ ÙŠØ­Ø¯Ø« Ø¹Ù†Ø¯ Ø§ÙƒØªØ´Ø§Ù Ù…Ù†Ø´Ù† Ø§Ù„ÙƒÙ„:*\n` +
+                        `${status?.action === 'delete' ? 'â€¢ ÙŠØªÙ… Ø­Ø°Ù Ø§Ù„Ø±Ø³Ø§Ù„Ø©\nâ€¢ ÙŠØªÙ… ØªØ­Ø°ÙŠØ± Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…' : ''}` +
+                        `${status?.action === 'kick' ? 'â€¢ ÙŠØªÙ… Ø­Ø°Ù Ø§Ù„Ø±Ø³Ø§Ù„Ø©\nâ€¢ ÙŠØªÙ… Ø·Ø±Ø¯ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… Ù…Ù† Ø§Ù„Ù…Ø¬Ù…ÙˆØ¹Ø©' : ''}\n\n` +
+                        `*Ø­Ø¯ Ø§Ù„ÙƒØ´Ù:* 50% Ù…Ù† Ø£Ø¹Ø¶Ø§Ø¡ Ø§Ù„Ù…Ø¬Ù…ÙˆØ¹Ø© Ø£Ùˆ 10+ Ù…Ù†Ø´Ù†`
                 }, { quoted: message });
                 break;
                 
             default:
                 await sock.sendMessage(chatId, {
-                    text: '❌ *أمر غير صحيح*\n\nاستخدم `!منشن` لرؤية الخيارات المتاحة.'
+                    text: 'âŒ *Ø£Ù…Ø± ØºÙŠØ± ØµØ­ÙŠØ­*\n\nØ§Ø³ØªØ®Ø¯Ù… `!Ù…Ù†Ø´Ù†` Ù„Ø±Ø¤ÙŠØ© Ø§Ù„Ø®ÙŠØ§Ø±Ø§Øª Ø§Ù„Ù…ØªØ§Ø­Ø©.'
                 }, { quoted: message });
         }
     },
     handleTagDetection
 };
+

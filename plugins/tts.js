@@ -1,12 +1,12 @@
-import { gSpeak } from 'gspeak';
+﻿import { gSpeak } from 'gspeak';
 import fs from 'fs';
 import path from 'path';
 export default {
-    command: 'tts',
-    aliases: ['texttospeech', 'speak'],
-    category: 'tools',
-    description: 'Convert text to speech and send as an audio message.',
-    usage: '.tts <text> [language code]',
+    command: 'تتس',
+    aliases: ['texttospeech', 'speak', 'tts'],
+    category: 'أدوات',
+    description: 'تحويل نص تو سبييكه اند إرسال اس ان صوت رسالة.',
+    usage: '.تتس <نص> [لانجواجي كود]',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         if (!args.length) {
@@ -39,7 +39,7 @@ export default {
         }
         catch (err) {
             console.error('TTS error:', err.message);
-            await sock.sendMessage(chatId, { text: `❌ Failed to generate TTS audio.\nReason: ${err.message}` }, { quoted: message });
+            await sock.sendMessage(chatId, { text: `âŒ Failed to generate TTS audio.\nReason: ${err.message}` }, { quoted: message });
         }
         finally {
             if (fs.existsSync(filePath))
@@ -47,3 +47,7 @@ export default {
         }
     }
 };
+
+
+
+

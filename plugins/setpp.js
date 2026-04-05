@@ -1,13 +1,13 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import { downloadContentFromMessage } from '@whiskeysockets/baileys';
 import isOwnerOrSudo from '../lib/isOwner.js';
 export default {
-    command: 'setpp',
-    aliases: ['setppic', 'setdp'],
-    category: 'owner',
-    description: 'Set or update the bot profile picture (owner only)',
-    usage: '.setpp (reply to an image)',
+    command: 'سيتبب',
+    aliases: ['setppic', 'setdp', 'setpp'],
+    category: 'المالك',
+    description: 'تعيين ور تحديث تهي بوت صورة شخصية صورة (المالك ونلي)',
+    usage: '.سيتبب (رد تو ان صورة)',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
@@ -22,7 +22,7 @@ export default {
             const quotedMessage = message.message?.extendedTextMessage?.contextInfo?.quotedMessage;
             if (!quotedMessage) {
                 await sock.sendMessage(chatId, {
-                    text: '⚠️ Please reply to an image with the .setpp command!'
+                    text: 'âš ï¸ Please reply to an image with the .setpp command!'
                 }, { quoted: message });
                 return;
             }
@@ -45,14 +45,18 @@ export default {
             await sock.updateProfilePicture(sock.user.id, { url: imagePath });
             fs.unlinkSync(imagePath);
             await sock.sendMessage(chatId, {
-                text: '✅ Successfully updated bot profile picture!'
+                text: 'âœ… Successfully updated bot profile picture!'
             }, { quoted: message });
         }
         catch (error) {
             console.error('SetPP Command Error:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to update profile picture!'
+                text: 'âŒ Failed to update profile picture!'
             }, { quoted: message });
         }
     }
 };
+
+
+
+

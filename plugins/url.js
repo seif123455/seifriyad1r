@@ -1,4 +1,4 @@
-import { downloadMediaMessage } from '@whiskeysockets/baileys';
+﻿import { downloadMediaMessage } from '@whiskeysockets/baileys';
 import fs from 'fs';
 import path from 'path';
 import { UploadFileUgu, TelegraPh } from '../lib/uploader.js';
@@ -37,11 +37,11 @@ function getExtFromMessage(msg) {
 }
 
 export default {
-    command: 'رابط_وسائط',
-    aliases: ['url', 'geturl', 'mediaurl', 'رابط_صورة', 'رابط_فيديو'],
-    category: 'tools',
-    description: 'الحصول على رابط للوسائط (صورة، فيديو، صوت، ملصق، ملف)',
-    usage: '!رابط_وسائط (أرسل أو رد على وسائط)',
+    command: 'Ø±Ø§Ø¨Ø·_ÙˆØ³Ø§Ø¦Ø·',
+    aliases: ['url', 'geturl', 'mediaurl', 'Ø±Ø§Ø¨Ø·_ØµÙˆØ±Ø©', 'Ø±Ø§Ø¨Ø·_ÙÙŠØ¯ÙŠÙˆ'],
+    category: 'Ø£Ø¯ÙˆØ§Øª',
+    description: 'Ø§Ù„Ø­ØµÙˆÙ„ Ø¹Ù„Ù‰ Ø±Ø§Ø¨Ø· Ù„Ù„ÙˆØ³Ø§Ø¦Ø· (ØµÙˆØ±Ø©ØŒ ÙÙŠØ¯ÙŠÙˆØŒ ØµÙˆØªØŒ Ù…Ù„ØµÙ‚ØŒ Ù…Ù„Ù)',
+    usage: '!Ø±Ø§Ø¨Ø·_ÙˆØ³Ø§Ø¦Ø· (Ø£Ø±Ø³Ù„ Ø£Ùˆ Ø±Ø¯ Ø¹Ù„Ù‰ ÙˆØ³Ø§Ø¦Ø·)',
     
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -64,17 +64,17 @@ export default {
             
             if (!targetMsg) {
                 return sock.sendMessage(chatId, { 
-                    text: '📎 *تحويل الوسائط إلى رابط*\n\n' +
-                        '*الاستخدام:* أرسل أو رد على وسائط (صورة، فيديو، صوت، ملصق، ملف) بـ `!رابط_وسائط`\n\n' +
-                        '*مثال:* قم بالرد على صورة واكتب `!رابط_وسائط`' 
+                    text: 'ðŸ“Ž *ØªØ­ÙˆÙŠÙ„ Ø§Ù„ÙˆØ³Ø§Ø¦Ø· Ø¥Ù„Ù‰ Ø±Ø§Ø¨Ø·*\n\n' +
+                        '*Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…:* Ø£Ø±Ø³Ù„ Ø£Ùˆ Ø±Ø¯ Ø¹Ù„Ù‰ ÙˆØ³Ø§Ø¦Ø· (ØµÙˆØ±Ø©ØŒ ÙÙŠØ¯ÙŠÙˆØŒ ØµÙˆØªØŒ Ù…Ù„ØµÙ‚ØŒ Ù…Ù„Ù) Ø¨Ù€ `!Ø±Ø§Ø¨Ø·_ÙˆØ³Ø§Ø¦Ø·`\n\n' +
+                        '*Ù…Ø«Ø§Ù„:* Ù‚Ù… Ø¨Ø§Ù„Ø±Ø¯ Ø¹Ù„Ù‰ ØµÙˆØ±Ø© ÙˆØ§ÙƒØªØ¨ `!Ø±Ø§Ø¨Ø·_ÙˆØ³Ø§Ø¦Ø·`' 
                 }, { quoted: message });
             }
             
             const ext = getExtFromMessage(targetMsg);
-            if (!ext) throw new Error('نوع الوسائط غير مدعوم');
+            if (!ext) throw new Error('Ù†ÙˆØ¹ Ø§Ù„ÙˆØ³Ø§Ø¦Ø· ØºÙŠØ± Ù…Ø¯Ø¹ÙˆÙ…');
             
             const buffer = await getMediaBuffer(targetMsg, sock);
-            if (!buffer) throw new Error('فشل في تحميل الوسائط');
+            if (!buffer) throw new Error('ÙØ´Ù„ ÙÙŠ ØªØ­Ù…ÙŠÙ„ Ø§Ù„ÙˆØ³Ø§Ø¦Ø·');
             
             const tempDir = path.join(process.cwd(), 'tmp');
             if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
@@ -104,30 +104,31 @@ export default {
             
             if (!url) {
                 return sock.sendMessage(chatId, { 
-                    text: '❌ فشل في رفع الوسائط.' 
+                    text: 'âŒ ÙØ´Ù„ ÙÙŠ Ø±ÙØ¹ Ø§Ù„ÙˆØ³Ø§Ø¦Ø·.' 
                 }, { quoted: message });
             }
             
-            // تحديد نوع الوسائط للرسالة
-            let mediaType = 'وسائط';
-            if (ext === '.jpg') mediaType = 'صورة';
-            else if (ext === '.mp4') mediaType = 'فيديو';
-            else if (ext === '.mp3') mediaType = 'صوت';
-            else if (ext === '.webp') mediaType = 'ملصق';
-            else if (ext === '.bin') mediaType = 'ملف';
+            // ØªØ­Ø¯ÙŠØ¯ Ù†ÙˆØ¹ Ø§Ù„ÙˆØ³Ø§Ø¦Ø· Ù„Ù„Ø±Ø³Ø§Ù„Ø©
+            let mediaType = 'ÙˆØ³Ø§Ø¦Ø·';
+            if (ext === '.jpg') mediaType = 'ØµÙˆØ±Ø©';
+            else if (ext === '.mp4') mediaType = 'ÙÙŠØ¯ÙŠÙˆ';
+            else if (ext === '.mp3') mediaType = 'ØµÙˆØª';
+            else if (ext === '.webp') mediaType = 'Ù…Ù„ØµÙ‚';
+            else if (ext === '.bin') mediaType = 'Ù…Ù„Ù';
             
             await sock.sendMessage(chatId, { 
-                text: `🔗 *رابط ${mediaType}*\n\n` +
-                    `📎 *الرابط:* ${url}\n\n` +
-                    `⏱️ *تاريخ الانتهاء:* لا ينتهي (رابط دائم)\n\n` +
-                    `🔥 *CRAZY-SEIF BOT* | 📞 201144534147` 
+                text: `ðŸ”— *Ø±Ø§Ø¨Ø· ${mediaType}*\n\n` +
+                    `ðŸ“Ž *Ø§Ù„Ø±Ø§Ø¨Ø·:* ${url}\n\n` +
+                    `â±ï¸ *ØªØ§Ø±ÙŠØ® Ø§Ù„Ø§Ù†ØªÙ‡Ø§Ø¡:* Ù„Ø§ ÙŠÙ†ØªÙ‡ÙŠ (Ø±Ø§Ø¨Ø· Ø¯Ø§Ø¦Ù…)\n\n` +
+                    `ðŸ”¥ *Crazy Seif BOT* | ðŸ“ž 01144534147` 
             }, { quoted: message });
             
         } catch (error) {
-            console.error('[رابط_وسائط] خطأ:', error);
+            console.error('[Ø±Ø§Ø¨Ø·_ÙˆØ³Ø§Ø¦Ø·] Ø®Ø·Ø£:', error);
             await sock.sendMessage(chatId, { 
-                text: '❌ فشل في تحويل الوسائط إلى رابط.' 
+                text: 'âŒ ÙØ´Ù„ ÙÙŠ ØªØ­ÙˆÙŠÙ„ Ø§Ù„ÙˆØ³Ø§Ø¦Ø· Ø¥Ù„Ù‰ Ø±Ø§Ø¨Ø·.' 
             }, { quoted: message });
         }
     }
 };
+

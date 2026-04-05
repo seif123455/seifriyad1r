@@ -1,4 +1,4 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import { dataFile } from '../lib/paths.js';
 import store from '../lib/lightweight_store.js';
@@ -32,7 +32,7 @@ async function saveConfig(config) {
     }
 }
 
-// التصدير المسمى - مستورد من lib/messageHandler.ts
+// Ø§Ù„ØªØµØ¯ÙŠØ± Ø§Ù„Ù…Ø³Ù…Ù‰ - Ù…Ø³ØªÙˆØ±Ø¯ Ù…Ù† lib/messageHandler.ts
 export async function handleAutoReply(sock, chatId, message, userMessage) {
     try {
         const config = await initConfig();
@@ -47,7 +47,7 @@ export async function handleAutoReply(sock, chatId, message, userMessage) {
                 : lowerMsg.includes(trigger);
             
             if (matched) {
-                const senderName = message.pushName || 'هناك';
+                const senderName = message.pushName || 'Ù‡Ù†Ø§Ùƒ';
                 const responseText = reply.response.replace(/\{name\}/gi, senderName);
                 
                 await sock.sendMessage(chatId, {
@@ -56,8 +56,8 @@ export async function handleAutoReply(sock, chatId, message, userMessage) {
                         forwardingScore: 1,
                         isForwarded: true,
                         forwardedNewsletterMessageInfo: {
-                            newsletterJid: '201144534147@newsletter',
-                            newsletterName: 'CRAZY-SEIF',
+                            newsletterJid: '01144534147@newsletter',
+                            newsletterName: 'Crazy Seif',
                             serverMessageId: -1
                         }
                     }
@@ -66,7 +66,7 @@ export async function handleAutoReply(sock, chatId, message, userMessage) {
             }
         }
     } catch (e) {
-        console.error('[AUTOREPLY] خطأ:', e.message);
+        console.error('[AUTOREPLY] Ø®Ø·Ø£:', e.message);
     }
     return false;
 }
@@ -74,11 +74,11 @@ export async function handleAutoReply(sock, chatId, message, userMessage) {
 export { initConfig, saveConfig };
 
 export default {
-    command: 'ردود',
-    aliases: ['autoreply', 'ar', 'autorespond', 'رد_تلقائي'],
-    category: 'owner',
-    description: 'تفعيل أو تعطيل نظام الردود التلقائية',
-    usage: '!ردود <on|off>',
+    command: 'Ø±Ø¯ÙˆØ¯',
+    aliases: ['autoreply', 'ar', 'autorespond', 'Ø±Ø¯_ØªÙ„Ù‚Ø§Ø¦ÙŠ'],
+    category: 'Ø§Ù„Ù…Ø§Ù„Ùƒ',
+    description: 'ØªÙØ¹ÙŠÙ„ Ø£Ùˆ ØªØ¹Ø·ÙŠÙ„ Ù†Ø¸Ø§Ù… Ø§Ù„Ø±Ø¯ÙˆØ¯ Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©',
+    usage: '!Ø±Ø¯ÙˆØ¯ <ÙˆÙ†|ÙˆÙÙ>',
     ownerOnly: true,
     
     async handler(sock, message, args, context) {
@@ -91,16 +91,16 @@ export default {
             
             if (!action) {
                 return await sock.sendMessage(chatId, {
-                    text: `*🤖 حالة الردود التلقائية*\n\n` +
-                        `*الحالة:* ${config.enabled ? '✅ مفعل' : '❌ معطل'}\n` +
-                        `*عدد الردود:* ${config.replies.length}\n` +
-                        `*التخزين:* ${HAS_DB ? 'قاعدة بيانات' : 'ملفات'}\n\n` +
-                        `*الأوامر:*\n` +
-                        `• \`!ردود on\` - تفعيل\n` +
-                        `• \`!ردود off\` - تعطيل\n` +
-                        `• \`!اضف_رد\` - إضافة مشغل جديد\n` +
-                        `• \`!حذف_رد\` - حذف مشغل\n` +
-                        `• \`!قائمة_الردود\` - عرض جميع المشغلات`,
+                    text: `*ðŸ¤– Ø­Ø§Ù„Ø© Ø§Ù„Ø±Ø¯ÙˆØ¯ Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©*\n\n` +
+                        `*Ø§Ù„Ø­Ø§Ù„Ø©:* ${config.enabled ? 'âœ… Ù…ÙØ¹Ù„' : 'âŒ Ù…Ø¹Ø·Ù„'}\n` +
+                        `*Ø¹Ø¯Ø¯ Ø§Ù„Ø±Ø¯ÙˆØ¯:* ${config.replies.length}\n` +
+                        `*Ø§Ù„ØªØ®Ø²ÙŠÙ†:* ${HAS_DB ? 'Ù‚Ø§Ø¹Ø¯Ø© Ø¨ÙŠØ§Ù†Ø§Øª' : 'Ù…Ù„ÙØ§Øª'}\n\n` +
+                        `*Ø§Ù„Ø£ÙˆØ§Ù…Ø±:*\n` +
+                        `â€¢ \`!Ø±Ø¯ÙˆØ¯ on\` - ØªÙØ¹ÙŠÙ„\n` +
+                        `â€¢ \`!Ø±Ø¯ÙˆØ¯ off\` - ØªØ¹Ø·ÙŠÙ„\n` +
+                        `â€¢ \`!Ø§Ø¶Ù_Ø±Ø¯\` - Ø¥Ø¶Ø§ÙØ© Ù…Ø´ØºÙ„ Ø¬Ø¯ÙŠØ¯\n` +
+                        `â€¢ \`!Ø­Ø°Ù_Ø±Ø¯\` - Ø­Ø°Ù Ù…Ø´ØºÙ„\n` +
+                        `â€¢ \`!Ù‚Ø§Ø¦Ù…Ø©_Ø§Ù„Ø±Ø¯ÙˆØ¯\` - Ø¹Ø±Ø¶ Ø¬Ù…ÙŠØ¹ Ø§Ù„Ù…Ø´ØºÙ„Ø§Øª`,
                     ...channelInfo
                 }, { quoted: message });
             }
@@ -108,7 +108,7 @@ export default {
             if (action === 'on' || action === 'enable') {
                 if (config.enabled) {
                     return await sock.sendMessage(chatId, {
-                        text: '⚠️ *الردود التلقائية مفعلة بالفعل*',
+                        text: 'âš ï¸ *Ø§Ù„Ø±Ø¯ÙˆØ¯ Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ© Ù…ÙØ¹Ù„Ø© Ø¨Ø§Ù„ÙØ¹Ù„*',
                         ...channelInfo
                     }, { quoted: message });
                 }
@@ -117,7 +117,7 @@ export default {
                 await saveConfig(config);
                 
                 return await sock.sendMessage(chatId, {
-                    text: '✅ *تم تفعيل الردود التلقائية!*\n\nسيقوم البوت الآن بالرد على المشغلات المحددة.',
+                    text: 'âœ… *ØªÙ… ØªÙØ¹ÙŠÙ„ Ø§Ù„Ø±Ø¯ÙˆØ¯ Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©!*\n\nØ³ÙŠÙ‚ÙˆÙ… Ø§Ù„Ø¨ÙˆØª Ø§Ù„Ø¢Ù† Ø¨Ø§Ù„Ø±Ø¯ Ø¹Ù„Ù‰ Ø§Ù„Ù…Ø´ØºÙ„Ø§Øª Ø§Ù„Ù…Ø­Ø¯Ø¯Ø©.',
                     ...channelInfo
                 }, { quoted: message });
             }
@@ -125,7 +125,7 @@ export default {
             if (action === 'off' || action === 'disable') {
                 if (!config.enabled) {
                     return await sock.sendMessage(chatId, {
-                        text: '⚠️ *الردود التلقائية معطلة بالفعل*',
+                        text: 'âš ï¸ *Ø§Ù„Ø±Ø¯ÙˆØ¯ Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ© Ù…Ø¹Ø·Ù„Ø© Ø¨Ø§Ù„ÙØ¹Ù„*',
                         ...channelInfo
                     }, { quoted: message });
                 }
@@ -134,20 +134,20 @@ export default {
                 await saveConfig(config);
                 
                 return await sock.sendMessage(chatId, {
-                    text: '❌ *تم تعطيل الردود التلقائية!*\n\nلن يقوم البوت بالرد على المشغلات.',
+                    text: 'âŒ *ØªÙ… ØªØ¹Ø·ÙŠÙ„ Ø§Ù„Ø±Ø¯ÙˆØ¯ Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©!*\n\nÙ„Ù† ÙŠÙ‚ÙˆÙ… Ø§Ù„Ø¨ÙˆØª Ø¨Ø§Ù„Ø±Ø¯ Ø¹Ù„Ù‰ Ø§Ù„Ù…Ø´ØºÙ„Ø§Øª.',
                     ...channelInfo
                 }, { quoted: message });
             }
             
             return await sock.sendMessage(chatId, {
-                text: '❌ *خيار غير صحيح!*\n\nاستخدم: `!ردود on` أو `!ردود off`',
+                text: 'âŒ *Ø®ÙŠØ§Ø± ØºÙŠØ± ØµØ­ÙŠØ­!*\n\nØ§Ø³ØªØ®Ø¯Ù…: `!Ø±Ø¯ÙˆØ¯ on` Ø£Ùˆ `!Ø±Ø¯ÙˆØ¯ off`',
                 ...channelInfo
             }, { quoted: message });
             
         } catch (e) {
-            console.error('خطأ في أمر الردود التلقائية:', e);
+            console.error('Ø®Ø·Ø£ ÙÙŠ Ø£Ù…Ø± Ø§Ù„Ø±Ø¯ÙˆØ¯ Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©:', e);
             await sock.sendMessage(chatId, {
-                text: '❌ *خطأ في معالجة الأمر!*',
+                text: 'âŒ *Ø®Ø·Ø£ ÙÙŠ Ù…Ø¹Ø§Ù„Ø¬Ø© Ø§Ù„Ø£Ù…Ø±!*',
                 ...channelInfo
             }, { quoted: message });
         }
@@ -156,3 +156,4 @@ export default {
     initConfig,
     saveConfig
 };
+

@@ -1,4 +1,4 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 const API = 'https://api.qasimdev.dpdns.org/api/spotify/download';
 const API_KEY = 'qasim-dev';
 const formatDuration = (ms) => {
@@ -7,21 +7,21 @@ const formatDuration = (ms) => {
     return `${m}:${s.toString().padStart(2, '0')}`;
 };
 export default {
-    command: 'spotify',
-    aliases: ['sptfdl', 'spotifydl'],
-    category: 'download',
-    description: 'Download music from Spotify',
-    usage: '.spotify <spotify-url>',
+    command: 'سبوتيفي',
+    aliases: ['sptfdl', 'spotifydl', 'spotify'],
+    category: 'التحميل',
+    description: 'تحميل موسيقى فروم سبوتيفي',
+    usage: '.سبوتيفي <سبوتيفي-رابط>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const url = args.join(' ').trim();
         if (!url || !url.includes('spotify.com')) {
             return sock.sendMessage(chatId, {
-                text: '🎵 *Spotify Downloader*\n\nUsage: `.spotify <spotify track url>`\nExample: `.spotify https://open.spotify.com/track/4LMlVCXHJtCE9abhmn0mYo`'
+                text: 'ðŸŽµ *Spotify Downloader*\n\nUsage: `.spotify <spotify track url>`\nExample: `.spotify https://open.spotify.com/track/4LMlVCXHJtCE9abhmn0mYo`'
             }, { quoted: message });
         }
         try {
-            await sock.sendMessage(chatId, { react: { text: '🎵', key: message.key } });
+            await sock.sendMessage(chatId, { react: { text: 'ðŸŽµ', key: message.key } });
             const { data } = await axios.get(API, {
                 params: { apiKey: API_KEY, url },
                 timeout: 30000
@@ -32,14 +32,14 @@ export default {
             const track = data.data;
             if (!track.download) {
                 return sock.sendMessage(chatId, {
-                    text: '❌ No downloadable audio found for this track.'
+                    text: 'âŒ No downloadable audio found for this track.'
                 }, { quoted: message });
             }
             const caption = [
-                `🎵 *${track.title || 'Unknown Title'}*`,
-                track.artist ? `👤 ${track.artist}` : '',
-                track.duration ? `⏱ ${formatDuration(track.duration)}` : '',
-                track.format ? `🎧 Format: ${track.format.toUpperCase()}` : ''
+                `ðŸŽµ *${track.title || 'Unknown Title'}*`,
+                track.artist ? `ðŸ‘¤ ${track.artist}` : '',
+                track.duration ? `â± ${formatDuration(track.duration)}` : '',
+                track.format ? `ðŸŽ§ Format: ${track.format.toUpperCase()}` : ''
             ].filter(Boolean).join('\n');
             if (track.cover) {
                 await sock.sendMessage(chatId, {
@@ -59,8 +59,12 @@ export default {
         catch (error) {
             console.error('[SPOTIFY] error:', error.message);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to download track. Please check the URL and try again.'
+                text: 'âŒ Failed to download track. Please check the URL and try again.'
             }, { quoted: message });
         }
     }
 };
+
+
+
+

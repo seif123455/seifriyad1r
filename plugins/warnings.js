@@ -1,4 +1,4 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import { dataFile } from '../lib/paths.js';
 import store from '../lib/lightweight_store.js';
 
@@ -23,11 +23,11 @@ async function loadWarnings() {
 }
 
 export default {
-    command: 'تحذيرات',
-    aliases: ['warnings', 'checkwarn', 'warncount', 'عدد_التحذيرات', 'تحذير'],
-    category: 'group',
-    description: 'التحقق من عدد تحذيرات المستخدم',
-    usage: '!تحذيرات @المستخدم',
+    command: 'ØªØ­Ø°ÙŠØ±Ø§Øª',
+    aliases: ['warnings', 'checkwarn', 'warncount', 'Ø¹Ø¯Ø¯_Ø§Ù„ØªØ­Ø°ÙŠØ±Ø§Øª', 'ØªØ­Ø°ÙŠØ±'],
+    category: 'Ø§Ù„Ù…Ø¬Ù…ÙˆØ¹Ø©',
+    description: 'Ø§Ù„ØªØ­Ù‚Ù‚ Ù…Ù† Ø¹Ø¯Ø¯ ØªØ­Ø°ÙŠØ±Ø§Øª Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…',
+    usage: '!ØªØ­Ø°ÙŠØ±Ø§Øª @Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…',
     groupOnly: true,
     
     async handler(sock, message, args, context) {
@@ -36,10 +36,10 @@ export default {
         
         if (mentionedJidList.length === 0) {
             await sock.sendMessage(chatId, {
-                text: '⚠️ *التحذيرات*\n\n' +
-                    '*الاستخدام:* `!تحذيرات @المستخدم`\n' +
-                    '*مثال:* `!تحذيرات @username`\n\n' +
-                    '*أو رد على رسالة الشخص ثم اكتب:* `!تحذيرات`',
+                text: 'âš ï¸ *Ø§Ù„ØªØ­Ø°ÙŠØ±Ø§Øª*\n\n' +
+                    '*Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…:* `!ØªØ­Ø°ÙŠØ±Ø§Øª @Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…`\n' +
+                    '*Ù…Ø«Ø§Ù„:* `!ØªØ­Ø°ÙŠØ±Ø§Øª @username`\n\n' +
+                    '*Ø£Ùˆ Ø±Ø¯ Ø¹Ù„Ù‰ Ø±Ø³Ø§Ù„Ø© Ø§Ù„Ø´Ø®Øµ Ø«Ù… Ø§ÙƒØªØ¨:* `!ØªØ­Ø°ÙŠØ±Ø§Øª`',
                 ...channelInfo
             }, { quoted: message });
             return;
@@ -55,28 +55,29 @@ export default {
         
         let statusText = '';
         if (warningCount === 0) {
-            statusText = '✅ ليس لديه أي تحذيرات';
+            statusText = 'âœ… Ù„ÙŠØ³ Ù„Ø¯ÙŠÙ‡ Ø£ÙŠ ØªØ­Ø°ÙŠØ±Ø§Øª';
         } else if (warningCount === 1) {
-            statusText = '⚠️ تحذير واحد';
+            statusText = 'âš ï¸ ØªØ­Ø°ÙŠØ± ÙˆØ§Ø­Ø¯';
         } else if (warningCount <= 3) {
-            statusText = '⚠️⚠️ تحذيرات قليلة';
+            statusText = 'âš ï¸âš ï¸ ØªØ­Ø°ÙŠØ±Ø§Øª Ù‚Ù„ÙŠÙ„Ø©';
         } else {
-            statusText = '🔴 تحذيرات كثيرة!';
+            statusText = 'ðŸ”´ ØªØ­Ø°ÙŠØ±Ø§Øª ÙƒØ«ÙŠØ±Ø©!';
         }
         
         await sock.sendMessage(chatId, {
-            text: `⚠️ *تحذيرات المستخدم*\n\n` +
-                `┏━━━━━━━━━━━━━━━━━━━━━━┓\n` +
-                `┃ 👤 *المستخدم:* ${userName}\n` +
-                `┃ 🆔 *الرقم:* @${userToCheck.split('@')[0]}\n` +
-                `┣━━━━━━━━━━━━━━━━━━━━━━┫\n` +
-                `┃ 📊 *عدد التحذيرات:* ${warningCount}\n` +
-                `┃ 📝 *الحالة:* ${statusText}\n` +
-                `┗━━━━━━━━━━━━━━━━━━━━━━┛\n\n` +
-                `💾 *التخزين:* ${HAS_DB ? 'قاعدة بيانات' : 'ملفات'}\n\n` +
-                `🔥 *CRAZY-SEIF BOT* | 📞 201144534147`,
+            text: `âš ï¸ *ØªØ­Ø°ÙŠØ±Ø§Øª Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…*\n\n` +
+                `â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“\n` +
+                `â”ƒ ðŸ‘¤ *Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…:* ${userName}\n` +
+                `â”ƒ ðŸ†” *Ø§Ù„Ø±Ù‚Ù…:* @${userToCheck.split('@')[0]}\n` +
+                `â”£â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”«\n` +
+                `â”ƒ ðŸ“Š *Ø¹Ø¯Ø¯ Ø§Ù„ØªØ­Ø°ÙŠØ±Ø§Øª:* ${warningCount}\n` +
+                `â”ƒ ðŸ“ *Ø§Ù„Ø­Ø§Ù„Ø©:* ${statusText}\n` +
+                `â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›\n\n` +
+                `ðŸ’¾ *Ø§Ù„ØªØ®Ø²ÙŠÙ†:* ${HAS_DB ? 'Ù‚Ø§Ø¹Ø¯Ø© Ø¨ÙŠØ§Ù†Ø§Øª' : 'Ù…Ù„ÙØ§Øª'}\n\n` +
+                `ðŸ”¥ *Crazy Seif BOT* | ðŸ“ž 01144534147`,
             mentions: [userToCheck],
             ...channelInfo
         }, { quoted: message });
     }
 };
+

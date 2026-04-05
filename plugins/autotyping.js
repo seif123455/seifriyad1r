@@ -1,4 +1,4 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import { dataFile } from '../lib/paths.js';
 import store from '../lib/lightweight_store.js';
@@ -125,11 +125,11 @@ export async function showTypingAfterCommand(sock, chatId) {
     return false;
 }
 export default {
-    command: 'autotyping',
-    aliases: ['typing', 'autotype'],
-    category: 'owner',
-    description: 'Toggle auto-typing indicator when bot is processing messages',
-    usage: '.autotyping <on|off>',
+    command: 'اوتوتيبينج',
+    aliases: ['typing', 'autotype', 'autotyping'],
+    category: 'المالك',
+    description: '',
+    usage: '.اوتوتيبينج <ون|وفف>',
     ownerOnly: true,
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -140,13 +140,13 @@ export default {
             if (!action) {
                 const ghostActive = await isGhostModeActive();
                 await sock.sendMessage(chatId, {
-                    text: `*⌨️ AUTOTYPING STATUS*\n\n` +
-                        `*Current Status:* ${config.enabled ? '✅ Enabled' : '❌ Disabled'}\n` +
-                        `*Ghost Mode:* ${ghostActive ? '👻 Active (blocks typing)' : '❌ Inactive'}\n` +
+                    text: `*âŒ¨ï¸ AUTOTYPING STATUS*\n\n` +
+                        `*Current Status:* ${config.enabled ? 'âœ… Enabled' : 'âŒ Disabled'}\n` +
+                        `*Ghost Mode:* ${ghostActive ? 'ðŸ‘» Active (blocks typing)' : 'âŒ Inactive'}\n` +
                         `*Storage:* ${HAS_DB ? 'Database' : 'File System'}\n\n` +
                         `*Commands:*\n` +
-                        `• \`.autotyping on\` - Enable auto-typing\n` +
-                        `• \`.autotyping off\` - Disable auto-typing\n\n` +
+                        `â€¢ \`.autotyping on\` - Enable auto-typing\n` +
+                        `â€¢ \`.autotyping off\` - Disable auto-typing\n\n` +
                         `*What it does:*\n` +
                         `When enabled, the bot will show "typing..." indicator while processing messages and commands.\n\n` +
                         `*Note:* Ghost mode overrides autotyping to maintain stealth.`,
@@ -157,7 +157,7 @@ export default {
             if (action === 'on' || action === 'enable') {
                 if (config.enabled) {
                     await sock.sendMessage(chatId, {
-                        text: '⚠️ *Autotyping is already enabled*',
+                        text: 'âš ï¸ *Autotyping is already enabled*',
                         ...channelInfo
                     }, { quoted: message });
                     return;
@@ -166,14 +166,14 @@ export default {
                 await saveConfig(config);
                 const ghostActive = await isGhostModeActive();
                 await sock.sendMessage(chatId, {
-                    text: `✅ *Auto-typing enabled!*\n\nThe bot will now show typing indicator while processing.${ghostActive ? '\n\n⚠️ *Ghost mode is active* - typing indicators are currently blocked.' : ''}`,
+                    text: `âœ… *Auto-typing enabled!*\n\nThe bot will now show typing indicator while processing.${ghostActive ? '\n\nâš ï¸ *Ghost mode is active* - typing indicators are currently blocked.' : ''}`,
                     ...channelInfo
                 }, { quoted: message });
             }
             else if (action === 'off' || action === 'disable') {
                 if (!config.enabled) {
                     await sock.sendMessage(chatId, {
-                        text: '⚠️ *Autotyping is already disabled*',
+                        text: 'âš ï¸ *Autotyping is already disabled*',
                         ...channelInfo
                     }, { quoted: message });
                     return;
@@ -181,13 +181,13 @@ export default {
                 config.enabled = false;
                 await saveConfig(config);
                 await sock.sendMessage(chatId, {
-                    text: '❌ *Auto-typing disabled!*\n\nThe bot will no longer show typing indicator.',
+                    text: 'âŒ *Auto-typing disabled!*\n\nThe bot will no longer show typing indicator.',
                     ...channelInfo
                 }, { quoted: message });
             }
             else {
                 await sock.sendMessage(chatId, {
-                    text: '❌ *Invalid option!*\n\nUse: `.autotyping on/off`',
+                    text: 'âŒ *Invalid option!*\n\nUse: `.autotyping on/off`',
                     ...channelInfo
                 }, { quoted: message });
             }
@@ -195,7 +195,7 @@ export default {
         catch (error) {
             console.error('Error in autotyping command:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ *Error processing command!*',
+                text: 'âŒ *Error processing command!*',
                 ...channelInfo
             }, { quoted: message });
         }
@@ -205,3 +205,6 @@ export default {
     handleAutotypingForCommand,
     showTypingAfterCommand
 };
+
+
+

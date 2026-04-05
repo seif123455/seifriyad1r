@@ -1,22 +1,22 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 import FormData from 'form-data';
 import fs from 'fs';
 import path from 'path';
 import { downloadContentFromMessage } from '@whiskeysockets/baileys';
 export default {
-    command: 'invert',
-    aliases: ['negative'],
-    category: 'tools',
-    description: 'Convert an image to negative',
-    usage: 'Reply to an image with .invert',
+    command: 'ينفيرت',
+    aliases: ['negative', 'invert'],
+    category: 'أدوات',
+    description: 'تحويل ان صورة تو نيجاتيفي',
+    usage: 'رد تو ان صورة ويته .ينفيرت',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
             const quoted = message.message?.extendedTextMessage?.contextInfo?.quotedMessage;
             if (!quoted?.imageMessage) {
-                return await sock.sendMessage(chatId, { text: '🤍 *Invert Image*\n\nReply to an image to convert it to negative\n\nUsage:\n.invert' }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: 'ðŸ¤ *Invert Image*\n\nReply to an image to convert it to negative\n\nUsage:\n.invert' }, { quoted: message });
             }
-            await sock.sendMessage(chatId, { react: { text: '🔄', key: message.key } });
+            await sock.sendMessage(chatId, { react: { text: 'ðŸ”„', key: message.key } });
             const stream = await downloadContentFromMessage(quoted.imageMessage, 'image');
             let buffer = Buffer.from([]);
             for await (const chunk of stream) {
@@ -35,13 +35,17 @@ export default {
             fs.writeFileSync(grayFile, res.data);
             await sock.sendMessage(chatId, {
                 image: { url: grayFile },
-                caption: `🤍 *Inverted Image*\n\nProcessed by: MEGA-MD`
+                caption: `ðŸ¤ *Inverted Image*\n\nProcessed by: MEGA-MD`
             }, { quoted: message });
             fs.unlinkSync(grayFile);
         }
         catch (err) {
             console.error('Invert Plugin Error:', err);
-            await sock.sendMessage(chatId, { text: '❌ Failed to convert image to sepia. Make sure the image is clear and try again.' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ Failed to convert image to sepia. Make sure the image is clear and try again.' }, { quoted: message });
         }
     }
 };
+
+
+
+

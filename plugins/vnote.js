@@ -1,10 +1,10 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  *                                                                           *
- *                     Developed By CRAZY-SEIF                               *
+ *                     Developed By Crazy Seif                               *
  *                                                                           *
- *  📞  WhatsApp : 201144534147                                              *
+ *  ðŸ“ž  WhatsApp : 01144534147                                              *
  *                                                                           *
- *    © 2026 CRAZY-SEIF. All rights reserved.                               *
+ *    Â© 2026 Crazy Seif. All rights reserved.                               *
  *                                                                           *
  *****************************************************************************/
 import { downloadContentFromMessage } from '@whiskeysockets/baileys';
@@ -16,11 +16,11 @@ import { promisify } from 'util';
 const execAsync = promisify(exec);
 
 export default {
-    command: 'بصمة',
-    aliases: ['vnote', 'voicenote', 'vn', 'صوت_ملاحظة'],
-    category: 'tools',
-    description: 'تحويل أي رسالة صوتية إلى ملاحظة صوتية (بصمة)',
-    usage: 'رد على ملف صوتي بـ !بصمة',
+    command: 'Ø¨ØµÙ…Ø©',
+    aliases: ['vnote', 'voicenote', 'vn', 'ØµÙˆØª_Ù…Ù„Ø§Ø­Ø¸Ø©'],
+    category: 'Ø£Ø¯ÙˆØ§Øª',
+    description: 'ØªØ­ÙˆÙŠÙ„ Ø£ÙŠ Ø±Ø³Ø§Ù„Ø© ØµÙˆØªÙŠØ© Ø¥Ù„Ù‰ Ù…Ù„Ø§Ø­Ø¸Ø© ØµÙˆØªÙŠØ© (Ø¨ØµÙ…Ø©)',
+    usage: 'Ø±Ø¯ Ø¹Ù„Ù‰ Ù…Ù„Ù ØµÙˆØªÙŠ Ø¨Ù€ !Ø¨ØµÙ…Ø©',
     
     async handler(sock, message, _args, _context) {
         const chatId = message.key.remoteJid;
@@ -28,9 +28,9 @@ export default {
         
         if (!quoted?.audioMessage) {
             return sock.sendMessage(chatId, {
-                text: '🎙️ *تحويل إلى بصمة صوتية*\n\n' +
-                    '*الاستخدام:* رد على ملف صوتي بـ `!بصمة`\n\n' +
-                    '*مثال:* قم بالرد على رسالة صوتية واكتب `!بصمة`'
+                text: 'ðŸŽ™ï¸ *ØªØ­ÙˆÙŠÙ„ Ø¥Ù„Ù‰ Ø¨ØµÙ…Ø© ØµÙˆØªÙŠØ©*\n\n' +
+                    '*Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…:* Ø±Ø¯ Ø¹Ù„Ù‰ Ù…Ù„Ù ØµÙˆØªÙŠ Ø¨Ù€ `!Ø¨ØµÙ…Ø©`\n\n' +
+                    '*Ù…Ø«Ø§Ù„:* Ù‚Ù… Ø¨Ø§Ù„Ø±Ø¯ Ø¹Ù„Ù‰ Ø±Ø³Ø§Ù„Ø© ØµÙˆØªÙŠØ© ÙˆØ§ÙƒØªØ¨ `!Ø¨ØµÙ…Ø©`'
             }, { quoted: message });
         }
         
@@ -45,13 +45,13 @@ export default {
             let buffer = Buffer.from([]);
             for await (const chunk of stream) buffer = Buffer.concat([buffer, chunk]);
             
-            console.log('[بصمة] الحجم الأصلي:', buffer.length, 'نوع الملف:', quoted.audioMessage.mimetype);
+            console.log('[Ø¨ØµÙ…Ø©] Ø§Ù„Ø­Ø¬Ù… Ø§Ù„Ø£ØµÙ„ÙŠ:', buffer.length, 'Ù†ÙˆØ¹ Ø§Ù„Ù…Ù„Ù:', quoted.audioMessage.mimetype);
             fs.writeFileSync(tmpIn, buffer);
             
             await execAsync(`ffmpeg -y -i "${tmpIn}" -c:a libopus -b:a 64k -ar 48000 -ac 1 "${tmpOut}"`);
             
             const opusBuffer = fs.readFileSync(tmpOut);
-            console.log('[بصمة] الحجم بعد التحويل:', opusBuffer.length);
+            console.log('[Ø¨ØµÙ…Ø©] Ø§Ù„Ø­Ø¬Ù… Ø¨Ø¹Ø¯ Ø§Ù„ØªØ­ÙˆÙŠÙ„:', opusBuffer.length);
             
             await sock.sendMessage(chatId, {
                 audio: opusBuffer,
@@ -60,9 +60,9 @@ export default {
             }, { quoted: message });
             
         } catch (error) {
-            console.error('[بصمة] خطأ:', error.message);
+            console.error('[Ø¨ØµÙ…Ø©] Ø®Ø·Ø£:', error.message);
             await sock.sendMessage(chatId, {
-                text: '❌ فشل في تحويل الصوت إلى بصمة صوتية. تأكد من تثبيت ffmpeg.'
+                text: 'âŒ ÙØ´Ù„ ÙÙŠ ØªØ­ÙˆÙŠÙ„ Ø§Ù„ØµÙˆØª Ø¥Ù„Ù‰ Ø¨ØµÙ…Ø© ØµÙˆØªÙŠØ©. ØªØ£ÙƒØ¯ Ù…Ù† ØªØ«Ø¨ÙŠØª ffmpeg.'
             }, { quoted: message });
         } finally {
             try { fs.unlinkSync(tmpIn); } catch { }
@@ -70,3 +70,4 @@ export default {
         }
     }
 };
+

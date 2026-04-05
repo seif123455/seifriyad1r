@@ -1,9 +1,9 @@
-export default {
-    command: 'brainfuck',
-    aliases: ['bfcode', 'obfuscate'],
-    category: 'tools',
-    description: 'Convert text into Brainfuck code',
-    usage: '.brainfuck <text> OR reply to a message',
+﻿export default {
+    command: 'براينفوكك',
+    aliases: ['bfcode', 'obfuscate', 'brainfuck'],
+    category: 'أدوات',
+    description: '',
+    usage: '.براينفوكك <نص> ور رد تو ا رسالة',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
@@ -34,12 +34,16 @@ export default {
                 bfCode += ".";
                 lastAscii = ascii;
             }
-            const response = `*❄️ Brainfuck Obfuscated Text:*\n\n${bfCode}`;
+            const response = `*â„ï¸ Brainfuck Obfuscated Text:*\n\n${bfCode}`;
             await sock.sendMessage(chatId, { text: response }, { quoted: message });
         }
         catch (err) {
             console.error('BF Encoding Error:', err);
-            await sock.sendMessage(chatId, { text: '❌ Error generating code.' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ Error generating code.' }, { quoted: message });
         }
     }
 };
+
+
+
+

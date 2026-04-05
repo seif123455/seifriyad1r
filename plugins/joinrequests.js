@@ -1,9 +1,9 @@
-export default {
-    command: 'joinrequests',
-    aliases: ['gcreqs', 'groupreqs', 'pendingjoins', 'approvejoin', 'rejectjoin'],
-    category: 'group',
-    description: 'View, approve or reject group join requests',
-    usage: '.joinrequests — list pending\n.approvejoin <number|all>\n.rejectjoin <number|all>',
+﻿export default {
+    command: 'جوينريقويستس',
+    aliases: ['gcreqs', 'groupreqs', 'pendingjoins', 'approvejoin', 'rejectjoin', 'joinrequests'],
+    category: 'المجموعة',
+    description: 'عرض, موافقة ور رفض مجموعة جوين ريقويستس',
+    usage: '.جوينريقويستس â€” عرض بيندينج\ن.اببروفيجوين <رقم|الل>\ن.ريجيكتجوين <رقم|الل>',
     groupOnly: true,
     adminOnly: true,
     async handler(sock, message, args, context) {
@@ -18,27 +18,27 @@ export default {
                 const requests = await sock.groupRequestParticipantsList(chatId);
                 if (!requests || requests.length === 0) {
                     return await sock.sendMessage(chatId, {
-                        text: `📋 *Join Requests*\n\n_No pending join requests._`,
+                        text: `ðŸ“‹ *Join Requests*\n\n_No pending join requests._`,
                         ...channelInfo
                     }, { quoted: message });
                 }
                 const list = requests.map((r, i) => `${i + 1}. +${r.jid.split('@')[0]}`).join('\n');
                 return await sock.sendMessage(chatId, {
-                    text: `╔═══════════════════════╗\n` +
-                        `║   📋 *JOIN REQUESTS*    ║\n` +
-                        `╚═══════════════════════╝\n\n` +
+                    text: `â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—\n` +
+                        `â•‘   ðŸ“‹ *JOIN REQUESTS*    â•‘\n` +
+                        `â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•\n\n` +
                         `${list}\n\n` +
-                        `──────────────────────────\n` +
+                        `â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€\n` +
                         `*Total:* ${requests.length} pending\n\n` +
-                        `• \`.approvejoin all\` — approve all\n` +
-                        `• \`.rejectjoin all\` — reject all\n` +
-                        `• \`.approvejoin 923001234567\` — approve one`,
+                        `â€¢ \`.approvejoin all\` â€” approve all\n` +
+                        `â€¢ \`.rejectjoin all\` â€” reject all\n` +
+                        `â€¢ \`.approvejoin 923001234567\` â€” approve one`,
                     ...channelInfo
                 }, { quoted: message });
             }
             catch (e) {
                 return await sock.sendMessage(chatId, {
-                    text: `❌ Failed to fetch requests: ${e.message}`,
+                    text: `âŒ Failed to fetch requests: ${e.message}`,
                     ...channelInfo
                 }, { quoted: message });
             }
@@ -52,7 +52,7 @@ export default {
                 const requests = await sock.groupRequestParticipantsList(chatId);
                 if (!requests || requests.length === 0) {
                     return await sock.sendMessage(chatId, {
-                        text: `⚠️ No pending join requests.`,
+                        text: `âš ï¸ No pending join requests.`,
                         ...channelInfo
                     }, { quoted: message });
                 }
@@ -64,12 +64,12 @@ export default {
             }
             else {
                 return await sock.sendMessage(chatId, {
-                    text: `❌ Provide a number or \`all\`.\n\nExample: \`.${isApprove ? 'approvejoin' : 'rejectjoin'} all\``,
+                    text: `âŒ Provide a number or \`all\`.\n\nExample: \`.${isApprove ? 'approvejoin' : 'rejectjoin'} all\``,
                     ...channelInfo
                 }, { quoted: message });
             }
             await sock.groupRequestParticipantsUpdate(chatId, targets, action);
-            const icon = isApprove ? '✅' : '❌';
+            const icon = isApprove ? 'âœ…' : 'âŒ';
             const verb = isApprove ? 'Approved' : 'Rejected';
             await sock.sendMessage(chatId, {
                 text: `${icon} *${verb}* ${targets.length === 1 ? `+${targets[0].split('@')[0]}` : `${targets.length} request(s)`}`,
@@ -79,9 +79,12 @@ export default {
         catch (e) {
             console.error('[JOINREQUESTS] Error:', e.message);
             await sock.sendMessage(chatId, {
-                text: `❌ Failed to ${action}: ${e.message}`,
+                text: `âŒ Failed to ${action}: ${e.message}`,
                 ...channelInfo
             }, { quoted: message });
         }
     }
 };
+
+
+

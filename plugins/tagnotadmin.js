@@ -1,9 +1,9 @@
-export default {
-    command: 'tagnotadmin',
-    aliases: ['tagmembers', 'tagnon'],
-    category: 'admin',
-    description: 'Tag all non-admin members in the group',
-    usage: '.tagnotadmin',
+﻿export default {
+    command: 'تاجنوتادمين',
+    aliases: ['tagmembers', 'tagnon', 'tagnotadmin'],
+    category: 'المشرفون',
+    description: 'تاج الل نون-مشرف عضوس ين تهي مجموعة',
+    usage: '.تاجنوتمشرف',
     groupOnly: true,
     adminOnly: true,
     async handler(sock, message, args, context) {
@@ -19,7 +19,7 @@ export default {
                 }, { quoted: message });
                 return;
             }
-            let text = '🔊 *Hello Everyone:*\n\n';
+            let text = 'ðŸ”Š *Hello Everyone:*\n\n';
             nonAdmins.forEach((jid) => {
                 text += `@${jid.split('@')[0]}\n`;
             });
@@ -38,3 +38,7 @@ export default {
         }
     }
 };
+
+
+
+

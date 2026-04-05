@@ -1,9 +1,9 @@
-export default {
-    command: 'imdb',
-    aliases: ['movie', 'film'],
-    category: 'info',
-    description: 'Get detailed information about a movie or series from IMDB',
-    usage: '.imdb <movie/series title>',
+﻿export default {
+    command: 'يمدب',
+    aliases: ['movie', 'film', 'imdb'],
+    category: 'معلومات',
+    description: 'جلب ديتايليد معلوماترماتيون ابووت ا موفيي ور سيرييس فروم يمدب',
+    usage: '.يمدب <موفيي/سيرييس تيتلي>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const text = args.join(' ').trim();
@@ -20,26 +20,26 @@ export default {
                 throw new Error(`API request failed with status ${res.status}`);
             const json = await res.json();
             const ratings = (json.ratings || [])
-                .map((r) => `⭐ *${r.source}:* ${r.value}`)
+                .map((r) => `â­ *${r.source}:* ${r.value}`)
                 .join('\n') || 'No ratings available';
             const movieInfo = `
-🎬 *${json.title || 'N/A'}* (${json.year || 'N/A'})
-🎭 *Genres:* ${json.genres || 'N/A'}
-📺 *Type:* ${json.type || 'N/A'}
-📝 *Plot:* ${json.plot || 'N/A'}
-⭐ *IMDB Rating:* ${json.rating || 'N/A'} (${json.votes || 'N/A'} votes)
-🏆 *Awards:* ${json.awards || 'N/A'}
-🎬 *Director:* ${json.director || 'N/A'}
-✍️ *Writer:* ${json.writer || 'N/A'}
-👨‍👩‍👧‍👦 *Actors:* ${json.actors || 'N/A'}
-⏱️ *Runtime:* ${json.runtime || 'N/A'}
-📅 *Released:* ${json.released || 'N/A'}
-🌐 *Country:* ${json.country || 'N/A'}
-🗣️ *Languages:* ${json.languages || 'N/A'}
-💰 *Box Office:* ${json.boxoffice || 'N/A'}
-💽 *DVD Release:* ${json.dvd || 'N/A'}
-🏢 *Production:* ${json.production || 'N/A'}
-🔗 *Website:* ${json.website || 'N/A'}
+ðŸŽ¬ *${json.title || 'N/A'}* (${json.year || 'N/A'})
+ðŸŽ­ *Genres:* ${json.genres || 'N/A'}
+ðŸ“º *Type:* ${json.type || 'N/A'}
+ðŸ“ *Plot:* ${json.plot || 'N/A'}
+â­ *IMDB Rating:* ${json.rating || 'N/A'} (${json.votes || 'N/A'} votes)
+ðŸ† *Awards:* ${json.awards || 'N/A'}
+ðŸŽ¬ *Director:* ${json.director || 'N/A'}
+âœï¸ *Writer:* ${json.writer || 'N/A'}
+ðŸ‘¨â€ðŸ‘©â€ðŸ‘§â€ðŸ‘¦ *Actors:* ${json.actors || 'N/A'}
+â±ï¸ *Runtime:* ${json.runtime || 'N/A'}
+ðŸ“… *Released:* ${json.released || 'N/A'}
+ðŸŒ *Country:* ${json.country || 'N/A'}
+ðŸ—£ï¸ *Languages:* ${json.languages || 'N/A'}
+ðŸ’° *Box Office:* ${json.boxoffice || 'N/A'}
+ðŸ’½ *DVD Release:* ${json.dvd || 'N/A'}
+ðŸ¢ *Production:* ${json.production || 'N/A'}
+ðŸ”— *Website:* ${json.website || 'N/A'}
 
 *Ratings:*
 ${ratings}
@@ -58,9 +58,12 @@ ${ratings}
         catch (error) {
             console.error('IMDB Command Error:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to fetch movie information. Please try again later.',
+                text: 'âŒ Failed to fetch movie information. Please try again later.',
                 quoted: message
             });
         }
     }
 };
+
+
+

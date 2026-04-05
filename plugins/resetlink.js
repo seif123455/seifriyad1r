@@ -1,9 +1,9 @@
-export default {
-    command: 'resetlink',
-    aliases: ['revoke', 'newlink'],
-    category: 'admin',
-    description: 'Reset group invite link',
-    usage: '.resetlink',
+﻿export default {
+    command: 'ريسيتلينك',
+    aliases: ['revoke', 'newlink', 'resetlink'],
+    category: 'المشرفون',
+    description: 'إعادة تعيين مجموعة ينفيتي رابط',
+    usage: '.إعادة تعيينرابط',
     groupOnly: true,
     adminOnly: true,
     async handler(sock, message, args, context) {
@@ -11,7 +11,7 @@ export default {
         try {
             const newCode = await sock.groupRevokeInvite(chatId);
             await sock.sendMessage(chatId, {
-                text: `✅ Group link has been successfully reset\n\n🔗 New link:\nhttps://chat.whatsapp.com/${newCode}`,
+                text: `âœ… Group link has been successfully reset\n\nðŸ”— New link:\nhttps://chat.whatsapp.com/${newCode}`,
                 ...channelInfo
             }, { quoted: message });
         }
@@ -24,3 +24,7 @@ export default {
         }
     }
 };
+
+
+
+

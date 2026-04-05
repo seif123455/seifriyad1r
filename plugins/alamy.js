@@ -1,20 +1,20 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  *                                                                           *
- *                     Developed By CRAZY-SEIF                               *
+ *                     Developed By Crazy Seif                               *
  *                                                                           *
- *  📞  WhatsApp : 201144534147                                              *
+ *  ðŸ“ž  WhatsApp : 01144534147                                              *
  *                                                                           *
- *    © 2026 CRAZY-SEIF. All rights reserved.                               *
+ *    Â© 2026 Crazy Seif. All rights reserved.                               *
  *                                                                           *
  *****************************************************************************/
 import axios from 'axios';
 
 export default {
-    command: 'تحميل',
-    aliases: ['alamy', 'alamydl', 'alamydownload', 'صور', 'فيديو'],
-    category: 'download',
-    description: 'تحميل صورة أو فيديو من Alamy',
-    usage: '!تحميل <رابط Alamy>',
+    command: 'ØªØ­Ù…ÙŠÙ„',
+    aliases: ['alamy', 'alamydl', 'alamydownload', 'ØµÙˆØ±', 'ÙÙŠØ¯ÙŠÙˆ'],
+    category: 'Ø§Ù„ØªØ­Ù…ÙŠÙ„',
+    description: 'ØªØ­Ù…ÙŠÙ„ ØµÙˆØ±Ø© Ø£Ùˆ ÙÙŠØ¯ÙŠÙˆ Ù…Ù† Ø§Ù„Ø§Ù…ÙŠ',
+    usage: '!ØªØ­Ù…ÙŠÙ„ <Ø±Ø§Ø¨Ø· Ø§Ù„Ø§Ù…ÙŠ>',
     
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -22,9 +22,9 @@ export default {
         
         if (!url) {
             return await sock.sendMessage(chatId, { 
-                text: '❌ *الرجاء إرسال رابط Alamy*\n\n' +
-                    '*مثال:*\n' +
-                    '`!تحميل https://www.alamy.com/video/beautiful-lake...`' 
+                text: 'âŒ *Ø§Ù„Ø±Ø¬Ø§Ø¡ Ø¥Ø±Ø³Ø§Ù„ Ø±Ø§Ø¨Ø· Alamy*\n\n' +
+                    '*Ù…Ø«Ø§Ù„:*\n' +
+                    '`!ØªØ­Ù…ÙŠÙ„ https://www.alamy.com/video/beautiful-lake...`' 
             }, { quoted: message });
         }
         
@@ -34,7 +34,7 @@ export default {
             
             if (!data?.status || !data.result?.length) {
                 return await sock.sendMessage(chatId, { 
-                    text: '❌ فشل في جلب الوسائط من الرابط المقدم.' 
+                    text: 'âŒ ÙØ´Ù„ ÙÙŠ Ø¬Ù„Ø¨ Ø§Ù„ÙˆØ³Ø§Ø¦Ø· Ù…Ù† Ø§Ù„Ø±Ø§Ø¨Ø· Ø§Ù„Ù…Ù‚Ø¯Ù….' 
                 }, { quoted: message });
             }
             
@@ -45,14 +45,14 @@ export default {
                 if (isValidUrl(item.video)) {
                     await sock.sendMessage(chatId, { 
                         video: { url: item.video }, 
-                        caption: '🎬 *فيديو Alamy*\n🔥 CRAZY-SEIF' 
+                        caption: 'ðŸŽ¬ *ÙÙŠØ¯ÙŠÙˆ Alamy*\nðŸ”¥ Crazy Seif' 
                     }, { quoted: message });
                     sent = true;
                 }
                 if (isValidUrl(item.image)) {
                     await sock.sendMessage(chatId, { 
                         image: { url: item.image }, 
-                        caption: '🖼️ *صورة Alamy*\n🔥 CRAZY-SEIF' 
+                        caption: 'ðŸ–¼ï¸ *ØµÙˆØ±Ø© Alamy*\nðŸ”¥ Crazy Seif' 
                     }, { quoted: message });
                     sent = true;
                 }
@@ -60,21 +60,22 @@ export default {
             
             if (!sent) {
                 await sock.sendMessage(chatId, { 
-                    text: '❌ لم يتم العثور على وسائط صالحة في الرابط.' 
+                    text: 'âŒ Ù„Ù… ÙŠØªÙ… Ø§Ù„Ø¹Ø«ÙˆØ± Ø¹Ù„Ù‰ ÙˆØ³Ø§Ø¦Ø· ØµØ§Ù„Ø­Ø© ÙÙŠ Ø§Ù„Ø±Ø§Ø¨Ø·.' 
                 }, { quoted: message });
             }
             
         } catch (error) {
-            console.error('خطأ في أمر التحميل:', error);
+            console.error('Ø®Ø·Ø£ ÙÙŠ Ø£Ù…Ø± Ø§Ù„ØªØ­Ù…ÙŠÙ„:', error);
             if (error.code === 'ECONNABORTED') {
                 await sock.sendMessage(chatId, { 
-                    text: '❌ انتهت مهلة الطلب. قد تكون واجهة البرمجة بطيئة أو لا يمكن الوصول إليها.' 
+                    text: 'âŒ Ø§Ù†ØªÙ‡Øª Ù…Ù‡Ù„Ø© Ø§Ù„Ø·Ù„Ø¨. Ù‚Ø¯ ØªÙƒÙˆÙ† ÙˆØ§Ø¬Ù‡Ø© Ø§Ù„Ø¨Ø±Ù…Ø¬Ø© Ø¨Ø·ÙŠØ¦Ø© Ø£Ùˆ Ù„Ø§ ÙŠÙ…ÙƒÙ† Ø§Ù„ÙˆØµÙˆÙ„ Ø¥Ù„ÙŠÙ‡Ø§.' 
                 }, { quoted: message });
             } else {
                 await sock.sendMessage(chatId, { 
-                    text: '❌ فشل تحميل الوسائط من رابط Alamy.' 
+                    text: 'âŒ ÙØ´Ù„ ØªØ­Ù…ÙŠÙ„ Ø§Ù„ÙˆØ³Ø§Ø¦Ø· Ù…Ù† Ø±Ø§Ø¨Ø· Alamy.' 
                 }, { quoted: message });
             }
         }
     }
 };
+

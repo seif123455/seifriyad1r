@@ -1,9 +1,9 @@
-export default {
-    command: 'itunes',
-    aliases: ['song', 'music', 'track'],
-    category: 'info',
-    description: 'Get detailed information about a song from iTunes',
-    usage: '.itunes <song name>',
+﻿export default {
+    command: 'يتونيس',
+    aliases: ['song', 'music', 'track', 'itunes'],
+    category: 'معلومات',
+    description: 'جلب ديتايليد معلوماترماتيون ابووت ا أغنية فروم يتونيس',
+    usage: '.يتونيس <أغنية نامي>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const text = args.join(' ').trim();
@@ -21,14 +21,14 @@ export default {
                 throw new Error(`API request failed with status ${res.status}`);
             const json = await res.json();
             const songInfo = `
-🎵 *${json.name || 'N/A'}*
-👤 *Artist:* ${json.artist || 'N/A'}
-💿 *Album:* ${json.album || 'N/A'}
-📅 *Release Date:* ${json.release_date || 'N/A'}
-💰 *Price:* ${json.price || 'N/A'}
-⏱️ *Length:* ${json.length || 'N/A'}
-🎼 *Genre:* ${json.genre || 'N/A'}
-🔗 *URL:* ${json.url || 'N/A'}
+ðŸŽµ *${json.name || 'N/A'}*
+ðŸ‘¤ *Artist:* ${json.artist || 'N/A'}
+ðŸ’¿ *Album:* ${json.album || 'N/A'}
+ðŸ“… *Release Date:* ${json.release_date || 'N/A'}
+ðŸ’° *Price:* ${json.price || 'N/A'}
+â±ï¸ *Length:* ${json.length || 'N/A'}
+ðŸŽ¼ *Genre:* ${json.genre || 'N/A'}
+ðŸ”— *URL:* ${json.url || 'N/A'}
       `.trim();
             if (json.thumbnail) {
                 await sock.sendMessage(chatId, {
@@ -44,9 +44,13 @@ export default {
         catch (error) {
             console.error('iTunes Command Error:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ An error occurred while fetching the song info. Please try again later.',
+                text: 'âŒ An error occurred while fetching the song info. Please try again later.',
                 quoted: message
             });
         }
     }
 };
+
+
+
+

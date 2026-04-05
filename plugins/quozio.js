@@ -1,9 +1,9 @@
-export default {
-    command: 'qmaker',
-    aliases: ['qmkr', 'quozio'],
-    category: 'tools',
-    description: 'Create a quote image from text or replied message',
-    usage: '.qmaker <text> or reply to a message',
+﻿export default {
+    command: 'قماكير',
+    aliases: ['qmkr', 'quozio', 'qmaker'],
+    category: 'أدوات',
+    description: 'إنشاء ا اقتباس صورة فروم نص ور ريبلييد رسالة',
+    usage: '.قماكير <نص> ور رد تو ا رسالة',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         let text = args?.join(' ')?.trim();
@@ -38,11 +38,15 @@ export default {
             const imageData = await imageRes.json();
             if (!imageData?.medium)
                 throw new Error('Image generation failed');
-            await sock.sendMessage(chatId, { image: { url: imageData.medium }, caption: `📝 Quote Created\n\nAuthor: ${author}\n\n${text}` }, { quoted: message });
+            await sock.sendMessage(chatId, { image: { url: imageData.medium }, caption: `ðŸ“ Quote Created\n\nAuthor: ${author}\n\n${text}` }, { quoted: message });
         }
         catch (error) {
             console.error('Quote plugin error:', error);
-            await sock.sendMessage(chatId, { text: '❌ Failed to create quote. Try again later.' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ Failed to create quote. Try again later.' }, { quoted: message });
         }
     }
 };
+
+
+
+

@@ -1,20 +1,20 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  *                                                                           *
- *                     Developed By CRAZY-SEIF                               *
+ *                     Developed By Crazy Seif                               *
  *                                                                           *
- *  📞  WhatsApp : 201144534147                                              *
+ *  ðŸ“ž  WhatsApp : 01144534147                                              *
  *                                                                           *
- *    © 2026 CRAZY-SEIF. All rights reserved.                               *
+ *    Â© 2026 Crazy Seif. All rights reserved.                               *
  *                                                                           *
  *****************************************************************************/
 import yts from 'yt-search';
 
 export default {
-    command: 'يوتيوب',
-    aliases: ['ytsearch', 'yts', 'playlist', 'playlista', 'بحث_يوتيوب', 'يوت'],
-    category: 'download',
-    description: 'البحث عن فيديوهات في يوتيوب',
-    usage: '!يوتيوب <نص البحث>',
+    command: 'ÙŠÙˆØªÙŠÙˆØ¨',
+    aliases: ['ytsearch', 'yts', 'playlist', 'playlista', 'Ø¨Ø­Ø«_ÙŠÙˆØªÙŠÙˆØ¨', 'ÙŠÙˆØª'],
+    category: 'Ø§Ù„ØªØ­Ù…ÙŠÙ„',
+    description: 'Ø§Ù„Ø¨Ø­Ø« Ø¹Ù† ÙÙŠØ¯ÙŠÙˆÙ‡Ø§Øª ÙÙŠ ÙŠÙˆØªÙŠÙˆØ¨',
+    usage: '!ÙŠÙˆØªÙŠÙˆØ¨ <Ù†Øµ Ø§Ù„Ø¨Ø­Ø«>',
     
     async handler(sock, message, args, context) {
         const { chatId, config } = context;
@@ -23,35 +23,35 @@ export default {
         
         if (!query) {
             return sock.sendMessage(chatId, {
-                text: `🔍 *البحث في يوتيوب*\n\n` +
-                    `*الاستخدام:* \`${prefix}يوتيوب <نص البحث>\`\n` +
-                    `*مثال:* \`${prefix}يوتيوب محمد منير\``
+                text: `ðŸ” *Ø§Ù„Ø¨Ø­Ø« ÙÙŠ ÙŠÙˆØªÙŠÙˆØ¨*\n\n` +
+                    `*Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…:* \`${prefix}ÙŠÙˆØªÙŠÙˆØ¨ <Ù†Øµ Ø§Ù„Ø¨Ø­Ø«>\`\n` +
+                    `*Ù…Ø«Ø§Ù„:* \`${prefix}ÙŠÙˆØªÙŠÙˆØ¨ Ù…Ø­Ù…Ø¯ Ù…Ù†ÙŠØ±\``
             }, { quoted: message });
         }
         
         try {
-            await sock.sendMessage(chatId, { react: { text: '🔍', key: message.key } });
+            await sock.sendMessage(chatId, { react: { text: 'ðŸ”', key: message.key } });
             
             const result = await yts(query);
             const videos = result.videos.slice(0, 10);
             
             if (videos.length === 0) {
                 return sock.sendMessage(chatId, { 
-                    text: '❌ لا توجد نتائج للبحث.' 
+                    text: 'âŒ Ù„Ø§ ØªÙˆØ¬Ø¯ Ù†ØªØ§Ø¦Ø¬ Ù„Ù„Ø¨Ø­Ø«.' 
                 });
             }
             
-            let searchText = `✨ *نتائج البحث عن:* ${query} ✨\n\n`;
+            let searchText = `âœ¨ *Ù†ØªØ§Ø¦Ø¬ Ø§Ù„Ø¨Ø­Ø« Ø¹Ù†:* ${query} âœ¨\n\n`;
             
             videos.forEach((v, index) => {
-                searchText += `*${index + 1}. 🎧 ${v.title}*\n`;
-                searchText += `*⌚ المدة:* ${v.timestamp}\n`;
-                searchText += `*👀 المشاهدات:* ${v.views.toLocaleString()}\n`;
-                searchText += `*🔗 الرابط:* ${v.url}\n`;
-                searchText += `──────────────────\n`;
+                searchText += `*${index + 1}. ðŸŽ§ ${v.title}*\n`;
+                searchText += `*âŒš Ø§Ù„Ù…Ø¯Ø©:* ${v.timestamp}\n`;
+                searchText += `*ðŸ‘€ Ø§Ù„Ù…Ø´Ø§Ù‡Ø¯Ø§Øª:* ${v.views.toLocaleString()}\n`;
+                searchText += `*ðŸ”— Ø§Ù„Ø±Ø§Ø¨Ø·:* ${v.url}\n`;
+                searchText += `â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€\n`;
             });
             
-            searchText += `\n🔥 *CRAZY-SEIF BOT* | 📞 201144534147`;
+            searchText += `\nðŸ”¥ *Crazy Seif BOT* | ðŸ“ž 01144534147`;
             
             await sock.sendMessage(chatId, {
                 image: { url: videos[0].image },
@@ -59,9 +59,9 @@ export default {
             }, { quoted: message });
             
         } catch (error) {
-            console.error('خطأ في البحث في يوتيوب:', error);
+            console.error('Ø®Ø·Ø£ ÙÙŠ Ø§Ù„Ø¨Ø­Ø« ÙÙŠ ÙŠÙˆØªÙŠÙˆØ¨:', error);
             await sock.sendMessage(chatId, { 
-                text: '❌ حدث خطأ أثناء البحث في يوتيوب.' 
+                text: 'âŒ Ø­Ø¯Ø« Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ø§Ù„Ø¨Ø­Ø« ÙÙŠ ÙŠÙˆØªÙŠÙˆØ¨.' 
             });
         }
     }
@@ -69,10 +69,11 @@ export default {
 
 /*****************************************************************************
  *                                                                           *
- *                     Developed By CRAZY-SEIF                               *
+ *                     Developed By Crazy Seif                               *
  *                                                                           *
- *  📞  WhatsApp : 201144534147                                              *
+ *  ðŸ“ž  WhatsApp : 01144534147                                              *
  *                                                                           *
- *    © 2026 CRAZY-SEIF. All rights reserved.                               *
+ *    Â© 2026 Crazy Seif. All rights reserved.                               *
  *                                                                           *
  *****************************************************************************/
+

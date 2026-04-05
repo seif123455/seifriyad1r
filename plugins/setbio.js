@@ -1,9 +1,9 @@
-import store from '../lib/lightweight_store.js';
+﻿import store from '../lib/lightweight_store.js';
 import axios from 'axios';
 const QUOTE_URLS = [
-    'https://raw.githubusercontent.com/GlobalTechInfo/Islamic-Database/main/text/random_quotes.txt',
-    'https://raw.githubusercontent.com/GlobalTechInfo/Islamic-Database/main/text/motivational_quotes.txt',
-    'https://raw.githubusercontent.com/GlobalTechInfo/Islamic-Database/main/text/pickup_quotes.txt'
+    'https://raw.githubusercontent.com/CrazySeif/Islamic-Database/main/text/random_quotes.txt',
+    'https://raw.githubusercontent.com/CrazySeif/Islamic-Database/main/text/motivational_quotes.txt',
+    'https://raw.githubusercontent.com/CrazySeif/Islamic-Database/main/text/pickup_quotes.txt'
 ];
 let cachedQuotes = [];
 let lastFetchTime = 0;
@@ -29,14 +29,14 @@ async function fetchQuotes() {
         if (allQuotes.length === 0) {
             // Fallback quotes if fetch fails
             return [
-                '💎 By MEGA-MD - Your WhatsApp Bot',
-                '🌟 Stay positive, work hard, make it happen.',
-                '✨ Believe in yourself and all that you are.',
-                '🚀 The future belongs to those who believe in the beauty of their dreams.',
-                '💪 Success is not final, failure is not fatal.',
-                '🎯 Dream big, work hard, stay focused.',
-                '⭐ Every day is a new beginning.',
-                '🌈 Be the reason someone smiles today.'
+                'ðŸ’Ž By MEGA-MD - Your WhatsApp Bot',
+                'ðŸŒŸ Stay positive, work hard, make it happen.',
+                'âœ¨ Believe in yourself and all that you are.',
+                'ðŸš€ The future belongs to those who believe in the beauty of their dreams.',
+                'ðŸ’ª Success is not final, failure is not fatal.',
+                'ðŸŽ¯ Dream big, work hard, stay focused.',
+                'â­ Every day is a new beginning.',
+                'ðŸŒˆ Be the reason someone smiles today.'
             ];
         }
         cachedQuotes = allQuotes;
@@ -44,12 +44,12 @@ async function fetchQuotes() {
         return allQuotes;
     }
     catch (error) {
-        return cachedQuotes.length > 0 ? cachedQuotes : ['💎 By MEGA-MD - Your WhatsApp Bot'];
+        return cachedQuotes.length > 0 ? cachedQuotes : ['ðŸ’Ž By MEGA-MD - Your WhatsApp Bot'];
     }
 }
 function getRandomQuote(quotes) {
     if (!quotes || quotes.length === 0)
-        return '💎 By MEGA-MD';
+        return 'ðŸ’Ž By MEGA-MD';
     return quotes[Math.floor(Math.random() * quotes.length)];
 }
 async function updateAutoBio(sock) {
@@ -64,7 +64,7 @@ async function updateAutoBio(sock) {
             bio = autoBioSettings.customBio.replace('{quote}', randomQuote);
         }
         else {
-            bio = `${randomQuote}\n\n💎 MEGA-MD`;
+            bio = `${randomQuote}\n\nðŸ’Ž MEGA-MD`;
         }
         if (bio.length > 139) {
             bio = `${bio.substring(0, 136) }...`;
@@ -92,11 +92,11 @@ function stopAutoBio() {
     }
 }
 export default {
-    command: 'setbio',
-    aliases: ['autobio', 'bio'],
-    category: 'owner',
-    description: 'Set custom WhatsApp bio with random quotes',
-    usage: '.setbio <on|off|set|reset>',
+    command: 'سيتبيو',
+    aliases: ['autobio', 'bio', 'setbio'],
+    category: 'المالك',
+    description: 'تعيين كوستوم وهاتسابب سيرة ويته عشوائي اقتباسس',
+    usage: '.سيتبيو <ون|وفف|تعيين|إعادة تعيين>',
     ownerOnly: true,
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -106,54 +106,54 @@ export default {
             if (!action) {
                 const quotes = await fetchQuotes();
                 return await sock.sendMessage(chatId, {
-                    text: `*📝 AUTO BIO SETTINGS*\n\n` +
-                        `*Status:* ${autoBioSettings.enabled ? '✅ Enabled' : '❌ Disabled'}\n` +
+                    text: `*ðŸ“ AUTO BIO SETTINGS*\n\n` +
+                        `*Status:* ${autoBioSettings.enabled ? 'âœ… Enabled' : 'âŒ Disabled'}\n` +
                         `*Custom Bio:* ${autoBioSettings.customBio ? 'Set' : 'Default'}\n` +
                         `*Quotes Loaded:* ${quotes.length}\n` +
                         `*Update Interval:* Every 10 minute\n\n` +
                         `*Commands:*\n` +
-                        `• \`.setbio on\` - Enable auto bio\n` +
-                        `• \`.setbio off\` - Disable auto bio\n` +
-                        `• \`.setbio set <text>\` - Set custom bio\n` +
-                        `• \`.setbio reset\` - Reset to default bio\n` +
-                        `• \`.setbio preview\` - Preview random quote\n\n` +
-                        `*Default Bio:*\n{quote}\n💎 MEGA-MD\n\n` +
+                        `â€¢ \`.setbio on\` - Enable auto bio\n` +
+                        `â€¢ \`.setbio off\` - Disable auto bio\n` +
+                        `â€¢ \`.setbio set <text>\` - Set custom bio\n` +
+                        `â€¢ \`.setbio reset\` - Reset to default bio\n` +
+                        `â€¢ \`.setbio preview\` - Preview random quote\n\n` +
+                        `*Default Bio:*\n{quote}\nðŸ’Ž MEGA-MD\n\n` +
                         `*Custom Bio:*\n${autoBioSettings.customBio || 'Not set'}\n\n` +
                         `*Note:* Use \`{quote}\` in custom bio to insert random quotes.\n\n` +
-                        `*Sources:*\n• Famous Quotes\n• Motivational Quotes\n• Pickup Lines`
+                        `*Sources:*\nâ€¢ Famous Quotes\nâ€¢ Motivational Quotes\nâ€¢ Pickup Lines`
                 }, { quoted: message });
             }
             if (action === 'preview') {
                 const quotes = await fetchQuotes();
                 const randomQuote = getRandomQuote(quotes);
                 return await sock.sendMessage(chatId, {
-                    text: `*📝 Preview Quote*\n\n${randomQuote}\n\n💎 MEGA-MD\n\n_This is how your bio will look with random quotes_`
+                    text: `*ðŸ“ Preview Quote*\n\n${randomQuote}\n\nðŸ’Ž MEGA-MD\n\n_This is how your bio will look with random quotes_`
                 }, { quoted: message });
             }
             if (action === 'on') {
                 if (autoBioSettings.enabled) {
                     return await sock.sendMessage(chatId, {
-                        text: '⚠️ *Auto bio is already enabled*'
+                        text: 'âš ï¸ *Auto bio is already enabled*'
                     }, { quoted: message });
                 }
                 autoBioSettings.enabled = true;
                 await store.saveSetting('global', 'autoBio', autoBioSettings);
                 startAutoBio(sock);
                 return await sock.sendMessage(chatId, {
-                    text: '✅ *Auto bio enabled!*\n\nYour bio will now update every 1 minute with random quotes from:\n• Islamic Quotes\n• Motivational Quotes\n• Pickup Lines'
+                    text: 'âœ… *Auto bio enabled!*\n\nYour bio will now update every 1 minute with random quotes from:\nâ€¢ Islamic Quotes\nâ€¢ Motivational Quotes\nâ€¢ Pickup Lines'
                 }, { quoted: message });
             }
             if (action === 'off') {
                 if (!autoBioSettings.enabled) {
                     return await sock.sendMessage(chatId, {
-                        text: '⚠️ *Auto bio is already disabled*'
+                        text: 'âš ï¸ *Auto bio is already disabled*'
                     }, { quoted: message });
                 }
                 autoBioSettings.enabled = false;
                 await store.saveSetting('global', 'autoBio', autoBioSettings);
                 stopAutoBio();
                 return await sock.sendMessage(chatId, {
-                    text: '❌ *Auto bio disabled!*\n\nYour bio will no longer auto-update.'
+                    text: 'âŒ *Auto bio disabled!*\n\nYour bio will no longer auto-update.'
                 }, { quoted: message });
             }
             if (action === 'set') {
@@ -169,7 +169,7 @@ export default {
                 }
                 if (!customBio) {
                     return await sock.sendMessage(chatId, {
-                        text: '❌ *Please provide bio text!*\n\n*Usage:*\n• `.setbio set Your bio here`\n• Reply to a message with `.setbio set`\n\n*Tip:* Use `{quote}` to insert random quotes in your bio.'
+                        text: 'âŒ *Please provide bio text!*\n\n*Usage:*\nâ€¢ `.setbio set Your bio here`\nâ€¢ Reply to a message with `.setbio set`\n\n*Tip:* Use `{quote}` to insert random quotes in your bio.'
                     }, { quoted: message });
                 }
                 autoBioSettings.customBio = customBio;
@@ -178,7 +178,7 @@ export default {
                     await updateAutoBio(sock);
                 }
                 return await sock.sendMessage(chatId, {
-                    text: `✅ *Custom bio set!*\n\n*Your bio:*\n${customBio}\n\n${autoBioSettings.enabled ? '✅ Auto bio is enabled - Bio updated!' : '⚠️ Auto bio is disabled - Use `.setbio on` to enable'}`
+                    text: `âœ… *Custom bio set!*\n\n*Your bio:*\n${customBio}\n\n${autoBioSettings.enabled ? 'âœ… Auto bio is enabled - Bio updated!' : 'âš ï¸ Auto bio is disabled - Use `.setbio on` to enable'}`
                 }, { quoted: message });
             }
             if (action === 'reset') {
@@ -188,17 +188,17 @@ export default {
                     await updateAutoBio(sock);
                 }
                 return await sock.sendMessage(chatId, {
-                    text: '✅ *Bio reset to default!*\n\n*Default bio:*\n{quote}\n💎 MEGA-MD'
+                    text: 'âœ… *Bio reset to default!*\n\n*Default bio:*\n{quote}\nðŸ’Ž MEGA-MD'
                 }, { quoted: message });
             }
             return await sock.sendMessage(chatId, {
-                text: '❌ *Invalid command!*\n\nUse `.setbio` to see available options.'
+                text: 'âŒ *Invalid command!*\n\nUse `.setbio` to see available options.'
             }, { quoted: message });
         }
         catch (error) {
             console.error('SetBio Error:', error);
             await sock.sendMessage(chatId, {
-                text: `❌ *Error:* ${error.message}`
+                text: `âŒ *Error:* ${error.message}`
             }, { quoted: message });
         }
     },
@@ -206,3 +206,6 @@ export default {
     stopAutoBio,
     updateAutoBio
 };
+
+
+

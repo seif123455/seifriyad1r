@@ -1,11 +1,11 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 const triviaGames = {};
 export default {
-    command: 'trivia',
-    aliases: ['quiz'],
-    category: 'games',
-    description: 'Start a trivia game or answer the question',
-    usage: '.trivia [answer]',
+    command: 'مسابقة',
+    aliases: ['quiz', 'trivia'],
+    category: 'ألعاب',
+    description: 'بدء ا مسابقة لعبة ور انسوير تهي قويستيون',
+    usage: '.مسابقة [انسوير]',
     async handler(sock, message, args, context) {
         const { chatId, channelInfo } = context;
         if (args.length === 0) {
@@ -25,7 +25,7 @@ export default {
                     options: [...questionData.incorrect_answers, questionData.correct_answer].sort(),
                 };
                 await sock.sendMessage(chatId, {
-                    text: `🎯 *Trivia Time!*\n\n*Question:* ${triviaGames[chatId].question}\n\n*Options:*\n${triviaGames[chatId].options.join('\n')}\n\nUse .trivia <answer> to answer!`,
+                    text: `ðŸŽ¯ *Trivia Time!*\n\n*Question:* ${triviaGames[chatId].question}\n\n*Options:*\n${triviaGames[chatId].options.join('\n')}\n\nUse .trivia <answer> to answer!`,
                     ...channelInfo
                 }, { quoted: message });
             }
@@ -48,13 +48,13 @@ export default {
             const answer = args.join(' ');
             if (answer.toLowerCase() === game.correctAnswer.toLowerCase()) {
                 await sock.sendMessage(chatId, {
-                    text: `✅ Correct! The answer is *${game.correctAnswer}*`,
+                    text: `âœ… Correct! The answer is *${game.correctAnswer}*`,
                     ...channelInfo
                 }, { quoted: message });
             }
             else {
                 await sock.sendMessage(chatId, {
-                    text: `❌ Wrong! The correct answer was *${game.correctAnswer}*`,
+                    text: `âŒ Wrong! The correct answer was *${game.correctAnswer}*`,
                     ...channelInfo
                 }, { quoted: message });
             }
@@ -62,3 +62,6 @@ export default {
         }
     }
 };
+
+
+

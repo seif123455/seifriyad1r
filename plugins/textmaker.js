@@ -1,40 +1,40 @@
-import mumaker from 'mumaker';
+﻿import mumaker from 'mumaker';
 const allTypes = [
     'metallic', 'ice', 'snow', 'impressive', 'matrix', 'light', 'neon', 'devil',
     'purple', 'thunder', 'leaves', '1917', 'arena', 'hacker', 'sand',
     'blackpink', 'glitch', 'fire'
 ];
 export default {
-    command: 'ephoto',
-    aliases: ['tmaker', 'textmaker'],
-    category: 'menu',
-    description: 'Generate styled text with various effects',
-    usage: '.ephoto <type> <text>',
+    command: 'يبهوتو',
+    aliases: ['tmaker', 'textmaker', 'ephoto'],
+    category: 'قوائم',
+    description: 'توليد ستيليد نص ويته فاريووس يففيكتس',
+    usage: '.يصورة <تيبي> <نص>',
     async handler(sock, message, args) {
         const chatId = message.key.remoteJid;
         const type = args[0]?.toLowerCase();
         const text = args.slice(1).join(' ');
         if (!type || !allTypes.includes(type) || !text) {
-            let menuText = `✨🎨 *EPHOTO TEXT MAKER* 🎨✨
-━━━━━━━━━━━━━━━━━━━
-🖌️ *Create stunning text styles*
-⚡ Fast • Stylish • HD Effects
+            let menuText = `âœ¨ðŸŽ¨ *EPHOTO TEXT MAKER* ðŸŽ¨âœ¨
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
+ðŸ–Œï¸ *Create stunning text styles*
+âš¡ Fast â€¢ Stylish â€¢ HD Effects
 
-📌 *Usage*
-👉 *.ephoto <type> <text>*
-📖 Example:
-👉 *.ephoto metallic Hello*
+ðŸ“Œ *Usage*
+ðŸ‘‰ *.eصورة <type> <نص>*
+ðŸ“– Example:
+ðŸ‘‰ *.ephoto metallic Hello*
 
-━━━━━━━━━━━━━━━━━━━
-🎭 *AVAILABLE STYLES*
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
+ðŸŽ­ *AVAILABLE STYLES*
 `;
             allTypes.forEach((t, i) => {
-                menuText += `🔹 *${i + 1}.* ${t}\n`;
+                menuText += `ðŸ”¹ *${i + 1}.* ${t}\n`;
             });
             menuText +=
-                `━━━━━━━━━━━━━━━━━━━
-💡 *Tip:* Use short & clear text for best results
-🤖 Powered by *MEGA-MD*`;
+                `â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
+ðŸ’¡ *Tip:* Use short & clear text for best results
+ðŸ¤– Powered by *MEGA-MD*`;
             return await sock.sendMessage(chatId, { text: menuText }, { quoted: message });
         }
         try {
@@ -101,12 +101,16 @@ export default {
             }
             await sock.sendMessage(chatId, {
                 image: { url: result.image },
-                caption: `🔥 *GENERATED SUCCESSFULLY* 🔥\n✨ Powered by *MEGA-MD*`
+                caption: `ðŸ”¥ *GENERATED SUCCESSFULLY* ðŸ”¥\nâœ¨ Powered by *MEGA-MD*`
             }, { quoted: message });
         }
         catch (error) {
             console.error('Error generating styled text:', error);
-            await sock.sendMessage(chatId, { text: `❌ *Generation Failed*\nReason: ${error.message}` }, { quoted: message });
+            await sock.sendMessage(chatId, { text: `âŒ *Generation Failed*\nReason: ${error.message}` }, { quoted: message });
         }
     }
 };
+
+
+
+

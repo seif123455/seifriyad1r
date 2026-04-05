@@ -1,4 +1,4 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 const AXIOS_DEFAULTS = {
     timeout: 60000,
     headers: {
@@ -7,11 +7,11 @@ const AXIOS_DEFAULTS = {
     }
 };
 export default {
-    command: 'facebook',
-    aliases: ['fb', 'fbdl'],
-    category: 'download',
-    description: 'Download Facebook videos',
-    usage: '.fb <facebook video link>',
+    command: 'فاكيبووك',
+    aliases: ['fb', 'fbdl', 'facebook'],
+    category: 'التحميل',
+    description: '',
+    usage: '.فب <فاكيبووك فيديو رابط>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const url = args.join(' ') ||
@@ -19,13 +19,13 @@ export default {
             message.message?.extendedTextMessage?.text;
         try {
             if (!url) {
-                return await sock.sendMessage(chatId, { text: '📘 *Facebook Downloader*\n\nUsage:\n.fb <facebook video link>' }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: 'ðŸ“˜ *Facebook Downloader*\n\nUsage:\n.fb <facebook فيديو رابط>' }, { quoted: message });
             }
             if (!/facebook\.com|fb\.watch/i.test(url)) {
-                return await sock.sendMessage(chatId, { text: '❌ Invalid Facebook link.\nPlease send a valid Facebook video URL.' }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: 'âŒ Invalid Facebook link.\nPlease send a valid Facebook video URL.' }, { quoted: message });
             }
             await sock.sendMessage(chatId, {
-                react: { text: '🔄', key: message.key }
+                react: { text: 'ðŸ”„', key: message.key }
             });
             const apiUrl = `https://gtech-api-xtp1.onrender.com/api/download/fb?url=${encodeURIComponent(url)}&apikey=APIKEY`;
             const res = await axios.get(apiUrl, AXIOS_DEFAULTS);
@@ -42,15 +42,19 @@ export default {
             const videoUrl = selected.url.startsWith('http')
                 ? selected.url
                 : `https://gtech-api-xtp1.onrender.com${selected.url}`;
-            const caption = `📘 *Facebook Downloader*
-🎞 Quality: *${selected.resolution || 'Unknown'}*
+            const caption = `ðŸ“˜ *Facebook Downloader*
+ðŸŽž Quality: *${selected.resolution || 'Unknown'}*
 
 > *_Downloaded by MEGA-MD_*`;
             await sock.sendMessage(chatId, { video: { url: videoUrl }, mimetype: 'video/mp4', caption }, { quoted: message });
         }
         catch (err) {
             console.error('Facebook downloader error:', err);
-            await sock.sendMessage(chatId, { text: '❌ Failed to download Facebook video. Please try again later.' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ Failed to download Facebook video. Please try again later.' }, { quoted: message });
         }
     }
 };
+
+
+
+

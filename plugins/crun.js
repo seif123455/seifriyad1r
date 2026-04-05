@@ -1,15 +1,15 @@
-import { exec } from 'child_process';
+﻿import { exec } from 'child_process';
 import { promisify } from 'util';
 import fs from 'fs';
 import path from 'path';
 import { TEMP_DIR } from '../lib/paths.js';
 const execAsync = promisify(exec);
 export default {
-    command: 'crun',
-    aliases: ['cpp', 'runcpp', 'c++'],
-    category: 'utility',
-    description: 'Compile and run C++ code',
-    usage: '.crun <c++ code>',
+    command: 'كرون',
+    aliases: ['cpp', 'runcpp', 'c++', 'crun'],
+    category: 'مرافق',
+    description: '',
+    usage: '.كرون <ك++ كود>',
     ownerOnly: true,
     async handler(sock, message, args, context) {
         const { chatId, channelInfo } = context;
@@ -37,13 +37,13 @@ export default {
         code = code.trim();
         if (!code) {
             return await sock.sendMessage(chatId, {
-                text: `⚡ *C++ Runner*\n\n` +
+                text: `âš¡ *C++ Runner*\n\n` +
                     `*Usage:* \`.crun <code>\`\n\n` +
                     `*Example:*\n` +
                     `\`.crun #include<iostream>\nusing namespace std;\nint main(){cout<<"Hello World!"<<endl;return 0;}\`\n\n` +
-                    `• Max execution time: 10 seconds\n` +
-                    `• No file/network access\n` +
-                    `• Auto-wraps in main() if not present`,
+                    `â€¢ Max execution time: 10 seconds\n` +
+                    `â€¢ No file/network access\n` +
+                    `â€¢ Auto-wraps in main() if not present`,
                 ...channelInfo
             }, { quoted: message });
         }
@@ -58,7 +58,7 @@ export default {
             fs.mkdirSync(TEMP_DIR, { recursive: true });
             fs.writeFileSync(srcFile, code);
             await sock.sendMessage(chatId, {
-                text: '⚙️ *Compiling...*',
+                text: 'âš™ï¸ *Compiling...*',
                 ...channelInfo
             }, { quoted: message });
             // Compile
@@ -67,7 +67,7 @@ export default {
             }
             catch (compileErr) {
                 return await sock.sendMessage(chatId, {
-                    text: `❌ *Compilation Error:*\n\n\`\`\`\n${compileErr.stderr || compileErr.message}\n\`\`\``,
+                    text: `âŒ *Compilation Error:*\n\n\`\`\`\n${compileErr.stderr || compileErr.message}\n\`\`\``,
                     ...channelInfo
                 }, { quoted: message });
             }
@@ -85,7 +85,7 @@ export default {
             if (output.length > 3000)
                 output = `${output.substring(0, 3000) }\n...(truncated)`;
             await sock.sendMessage(chatId, {
-                text: `⚡ *C++ Output:*\n\n\`\`\`\n${output}\n\`\`\``,
+                text: `âš¡ *C++ Output:*\n\n\`\`\`\n${output}\n\`\`\``,
                 ...channelInfo
             }, { quoted: message });
         }
@@ -102,3 +102,7 @@ export default {
         }
     }
 };
+
+
+
+

@@ -1,9 +1,9 @@
-export default {
-    command: 'kick',
-    aliases: ['remove', 'fire'],
-    category: 'admin',
-    description: 'Remove user(s) from the group',
-    usage: '.kick @user or reply to message',
+﻿export default {
+    command: 'طرد',
+    aliases: ['remove', 'fire', 'kick'],
+    category: 'المشرفون',
+    description: 'حذف مستخدم(س) فروم تهي مجموعة',
+    usage: '.طرد @مستخدم ور رد تو رسالة',
     groupOnly: true,
     adminOnly: true,
     async handler(sock, message, args, context) {
@@ -11,7 +11,7 @@ export default {
         const isBotAdmin = context.isBotAdmin;
         if (!isBotAdmin) {
             await sock.sendMessage(chatId, {
-                text: '❌ *Please make the bot an admin first*'
+                text: 'âŒ *Please make the bot an admin first*'
             }, { quoted: message });
             return;
         }
@@ -25,7 +25,7 @@ export default {
         }
         if (usersToKick.length === 0) {
             await sock.sendMessage(chatId, {
-                text: '❌ *Please mention a user or reply to their message*\n\nUsage: `.kick @user` or reply with `.kick`'
+                text: 'âŒ *Please mention a user or reply to their message*\n\nUsage: `.kick @user` or reply with `.kick`'
             }, { quoted: message });
             return;
         }
@@ -77,7 +77,7 @@ export default {
         });
         if (isTryingToKickBot) {
             await sock.sendMessage(chatId, {
-                text: "❌ *I can't kick myself* 🤖"
+                text: "âŒ *I can't kick myself* ðŸ¤–"
             }, { quoted: message });
             return;
         }
@@ -87,15 +87,19 @@ export default {
                 return `@${jid.split('@')[0]}`;
             }));
             await sock.sendMessage(chatId, {
-                text: `🚫 *User${usersToKick.length > 1 ? 's' : ''} Removed*\n\n${usernames.join(', ')} has been kicked from the group!`,
+                text: `ðŸš« *User${usersToKick.length > 1 ? 's' : ''} Removed*\n\n${usernames.join(', ')} has been kicked from the group!`,
                 mentions: usersToKick
             }, { quoted: message });
         }
         catch (error) {
             console.error('Error in kick command:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ *Failed to kick user(s)*\n\nMake sure the bot has sufficient permissions.'
+                text: 'âŒ *Failed to kick user(s)*\n\nMake sure the bot has sufficient permissions.'
             }, { quoted: message });
         }
     }
 };
+
+
+
+

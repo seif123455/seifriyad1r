@@ -1,11 +1,11 @@
-import { downloadMediaMessage } from '@whiskeysockets/baileys';
+﻿import { downloadMediaMessage } from '@whiskeysockets/baileys';
 import sharp from 'sharp';
 export default {
-    command: 'blur',
-    aliases: ['blurimg', 'blurpic'],
-    category: 'tools',
-    description: 'Apply a blur effect to an image',
-    usage: '.blur (reply to an image or send image with caption)',
+    command: 'بلور',
+    aliases: ['blurimg', 'blurpic', 'blur'],
+    category: 'أدوات',
+    description: 'اببلي ا بلور يففيكت تو ان صورة',
+    usage: '.بلور (رد تو ان صورة ور إرسال صورة ويته كابتيون)',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const quotedMessage = message.message?.extendedTextMessage?.contextInfo?.quotedMessage;
@@ -36,7 +36,7 @@ export default {
                 .toBuffer();
             await sock.sendMessage(chatId, {
                 image: blurredImage,
-                caption: '✨ *Image Blurred Successfully!*',
+                caption: 'âœ¨ *Image Blurred Successfully!*',
                 contextInfo: {
                     forwardingScore: 1,
                     isForwarded: true,
@@ -51,8 +51,12 @@ export default {
         catch (error) {
             console.error('Error in blur command:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to blur image. Please try again later.'
+                text: 'âŒ Failed to blur image. Please try again later.'
             }, { quoted: message });
         }
     }
 };
+
+
+
+

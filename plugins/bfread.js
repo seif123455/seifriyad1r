@@ -1,9 +1,9 @@
-export default {
-    command: 'bfdecode',
-    aliases: ['brun', 'bfread'],
-    category: 'tools',
-    description: 'Decode/Run Brainfuck code',
-    usage: 'Reply to BF code with .bfdecode',
+﻿export default {
+    command: 'بفديكودي',
+    aliases: ['brun', 'bfread', 'bfdecode'],
+    category: 'أدوات',
+    description: '',
+    usage: 'رد تو بف كود ويته .بفديكود',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
@@ -63,11 +63,15 @@ export default {
                 pc++;
                 steps++;
             }
-            await sock.sendMessage(chatId, { text: `*🔓 Decoded Result:* \n\n${output || "_No output generated_"}` }, { quoted: message });
+            await sock.sendMessage(chatId, { text: `*ðŸ”“ Decoded Result:* \n\n${output || "_No output generated_"}` }, { quoted: message });
         }
         catch (err) {
             console.error('BF Error:', err);
-            await sock.sendMessage(chatId, { text: '❌ Error reading quoted message.' });
+            await sock.sendMessage(chatId, { text: 'âŒ Error reading quoted message.' });
         }
     }
 };
+
+
+
+

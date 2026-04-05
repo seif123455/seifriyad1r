@@ -1,10 +1,10 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 export default {
-    command: 'news',
-    aliases: ['headlines', 'latestnews'],
-    category: 'info',
-    description: 'Get the latest top 5 news headlines from the US',
-    usage: '.news',
+    command: 'أخبار',
+    aliases: ['headlines', 'latestnews', 'news'],
+    category: 'معلومات',
+    description: 'جلب تهي لااختبار أعلى 5 أخبار هيادلينيس فروم تهي وس',
+    usage: '.أخبار',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
@@ -15,12 +15,12 @@ export default {
             const articles = response.data.articles.slice(0, 5);
             if (articles.length === 0) {
                 await sock.sendMessage(chatId, {
-                    text: '❌ No news found at the moment. Please try again later.',
+                    text: 'âŒ No news found at the moment. Please try again later.',
                     quoted: message
                 });
                 return;
             }
-            let newsMessage = '📰 *Latest News*:\n\n';
+            let newsMessage = 'ðŸ“° *Latest News*:\n\n';
             articles.forEach((article, index) => {
                 newsMessage += `${index + 1}. *${article.title}*\n${article.description || 'No description'}\n\n`;
             });
@@ -32,9 +32,13 @@ export default {
         catch (error) {
             console.error('News Command Error:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Sorry, I could not fetch news right now. Please try again later.',
+                text: 'âŒ Sorry, I could not fetch news right now. Please try again later.',
                 quoted: message
             });
         }
     }
 };
+
+
+
+

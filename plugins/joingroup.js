@@ -1,9 +1,9 @@
-export default {
-    command: 'joingroup',
-    aliases: ['join', 'gcjoin', 'groupinfo'],
-    category: 'owner',
-    description: 'Join a group via invite link or get group info from link',
-    usage: '.joingroup <link or code>\n.groupinfo <link or code>',
+﻿export default {
+    command: 'جوينجرووب',
+    aliases: ['join', 'gcjoin', 'groupinfo', 'joingroup'],
+    category: 'المالك',
+    description: 'جوين ا مجموعة فيا ينفيتي رابط ور جلب مجموعة معلومات فروم رابط',
+    usage: '.جوينمجموعة <رابط ور كود>\ن.مجموعةمعلومات <رابط ور كود>',
     ownerOnly: true,
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -13,11 +13,11 @@ export default {
         const input = args[0];
         if (!input) {
             return await sock.sendMessage(chatId, {
-                text: `*${isInfo ? '🔍 GROUP INFO' : '🚪 JOIN GROUP'}*\n\n` +
+                text: `*${isInfo ? 'ðŸ” GROUP INFO' : 'ðŸšª JOIN GROUP'}*\n\n` +
                     `*Usage:*\n` +
-                    `• \`.joingroup https://chat.whatsapp.com/XXXX\`\n` +
-                    `• \`.joingroup XXXX\` (code only)\n` +
-                    `• \`.groupinfo https://chat.whatsapp.com/XXXX\` — get info without joining`,
+                    `â€¢ \`.joingroup https://chat.whatsapp.com/XXXX\`\n` +
+                    `â€¢ \`.joingroup XXXX\` (code only)\n` +
+                    `â€¢ \`.groupinfo https://chat.whatsapp.com/XXXX\` â€” get info without joining`,
                 ...channelInfo
             }, { quoted: message });
         }
@@ -28,9 +28,9 @@ export default {
                 const info = await sock.groupGetInviteInfo(code);
                 const members = info.participants?.length || 0;
                 return await sock.sendMessage(chatId, {
-                    text: `╔═══════════════════════╗\n` +
-                        `║    🔍 *GROUP INFO*       ║\n` +
-                        `╚═══════════════════════╝\n\n` +
+                    text: `â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—\n` +
+                        `â•‘    ðŸ” *GROUP INFO*       â•‘\n` +
+                        `â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•\n\n` +
                         `*Name:* ${info.subject || 'Unknown'}\n` +
                         `*Description:* ${info.desc || 'None'}\n` +
                         `*Members:* ${members}\n` +
@@ -42,7 +42,7 @@ export default {
             else {
                 const response = await sock.groupAcceptInvite(code);
                 return await sock.sendMessage(chatId, {
-                    text: `✅ *Joined group successfully!*\n\nJID: \`${response}\``,
+                    text: `âœ… *Joined group successfully!*\n\nJID: \`${response}\``,
                     ...channelInfo
                 }, { quoted: message });
             }
@@ -50,9 +50,13 @@ export default {
         catch (e) {
             console.error('[JOINGROUP] Error:', e.message);
             await sock.sendMessage(chatId, {
-                text: `❌ Failed: ${e.message}`,
+                text: `âŒ Failed: ${e.message}`,
                 ...channelInfo
             }, { quoted: message });
         }
     }
 };
+
+
+
+

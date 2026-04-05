@@ -1,13 +1,13 @@
-import { spawn } from 'child_process';
+﻿import { spawn } from 'child_process';
 import fs from 'fs';
 import { writeExifVid } from '../lib/exif.js';
 
 export default {
-    command: 'نص',
-    aliases: ['attp', 'texts', 'textsticker', 'نص_ملصق', 'ملصق_نصي'],
-    category: 'stickers',
-    description: 'تحويل النص إلى ملصق متحرك',
-    usage: '!نص <النص>',
+    command: 'Ù†Øµ',
+    aliases: ['attp', 'texts', 'textsticker', 'Ù†Øµ_Ù…Ù„ØµÙ‚', 'Ù…Ù„ØµÙ‚_Ù†ØµÙŠ'],
+    category: 'Ù…Ù„ØµÙ‚Ø§Øª',
+    description: 'ØªØ­ÙˆÙŠÙ„ Ø§Ù„Ù†Øµ Ø¥Ù„Ù‰ Ù…Ù„ØµÙ‚ Ù…ØªØ­Ø±Ùƒ',
+    usage: '!Ù†Øµ <Ø§Ù„Ù†Øµ>',
     
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -15,17 +15,17 @@ export default {
         
         if (!text) {
             return await sock.sendMessage(chatId, { 
-                text: '✏️ *تحويل النص إلى ملصق*\n\n' +
-                    '*الاستخدام:* `!نص <النص>`\n' +
-                    '*مثال:* `!نص مرحبا`'
+                text: 'âœï¸ *ØªØ­ÙˆÙŠÙ„ Ø§Ù„Ù†Øµ Ø¥Ù„Ù‰ Ù…Ù„ØµÙ‚*\n\n' +
+                    '*Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…:* `!Ù†Øµ <Ø§Ù„Ù†Øµ>`\n' +
+                    '*Ù…Ø«Ø§Ù„:* `!Ù†Øµ Ù…Ø±Ø­Ø¨Ø§`'
             }, { quoted: message });
         }
         
         try {
             const mp4Buffer = await renderBlinkingVideoWithFfmpeg(text);
             const webpPath = await writeExifVid(mp4Buffer, { 
-                packname: 'CRAZY-SEIF', 
-                author: 'CRAZY-SEIF' 
+                packname: 'Crazy Seif', 
+                author: 'Crazy Seif' 
             });
             const webpBuffer = fs.readFileSync(webpPath);
             try { fs.unlinkSync(webpPath); } catch { }
@@ -33,7 +33,7 @@ export default {
             await sock.sendMessage(chatId, { sticker: webpBuffer }, { quoted: message });
         } catch {
             await sock.sendMessage(chatId, { 
-                text: '❌ فشل في إنشاء الملصق. تأكد من تثبيت ffmpeg.' 
+                text: 'âŒ ÙØ´Ù„ ÙÙŠ Ø¥Ù†Ø´Ø§Ø¡ Ø§Ù„Ù…Ù„ØµÙ‚. ØªØ£ÙƒØ¯ Ù…Ù† ØªØ«Ø¨ÙŠØª ffmpeg.' 
             }, { quoted: message });
         }
     }
@@ -135,3 +135,4 @@ function renderBlinkingVideoWithFfmpeg(text) {
         });
     });
 }
+

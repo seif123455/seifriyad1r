@@ -1,29 +1,29 @@
-import { getBin } from '../lib/compile.js';
+﻿import { getBin } from '../lib/compile.js';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 const execAsync = promisify(exec);
 export default {
-    command: 'cipher',
-    aliases: ['encrypt', 'decrypt', 'encode', 'crypt'],
-    category: 'utility',
-    description: 'Encrypt or decrypt text using Caesar, Vigenere, or XOR cipher',
-    usage: '.cipher <type> <encode|decode> <key> <text>',
+    command: 'كيبهير',
+    aliases: ['encrypt', 'decrypt', 'encode', 'crypt', 'cipher'],
+    category: 'مرافق',
+    description: '',
+    usage: '.كيبهير <تيبي> <ينكود|ديكود> <كيي> <نص>',
     async handler(sock, message, args, context) {
         const { chatId, channelInfo } = context;
         if (args.length < 4) {
             return await sock.sendMessage(chatId, {
-                text: `🔐 *Text Cipher*\n\n` +
-                    `*Usage:* \`.cipher <type> <encode|decode> <key> <text>\`\n\n` +
+                text: `ðŸ” *Text Cipher*\n\n` +
+                    `*Usage:* \`.cipher <type> <enكود|deكود> <key> <نص>\`\n\n` +
                     `*Cipher types:*\n\n` +
-                    `*caesar* — shift letters by a number (key = number)\n` +
-                    `• \`.cipher caesar encode 13 Hello World\`\n` +
-                    `• \`.cipher caesar decode 13 Uryyb Jbeyq\`\n\n` +
-                    `*vigenere* — polyalphabetic cipher (key = word)\n` +
-                    `• \`.cipher vigenere encode SECRET Hello World\`\n` +
-                    `• \`.cipher vigenere decode SECRET Zincs Pgvnu\`\n\n` +
-                    `*xor* — XOR byte cipher, output is hex (key = any text)\n` +
-                    `• \`.cipher xor encode mykey Hello\`\n` +
-                    `• \`.cipher xor decode mykey 25090a0e06\``,
+                    `*caesar* â€” shift letters by a number (key = number)\n` +
+                    `â€¢ \`.cipher caesar encode 13 Hello World\`\n` +
+                    `â€¢ \`.cipher caesar decode 13 Uryyb Jbeyq\`\n\n` +
+                    `*vigenere* â€” polyalphabetic cipher (key = word)\n` +
+                    `â€¢ \`.cipher vigenere encode SECRET Hello World\`\n` +
+                    `â€¢ \`.cipher vigenere decode SECRET Zincs Pgvnu\`\n\n` +
+                    `*xor* â€” XOR byte cipher, output is hex (key = any text)\n` +
+                    `â€¢ \`.cipher xor encode mykey Hello\`\n` +
+                    `â€¢ \`.cipher xor decode mykey 25090a0e06\``,
                 ...channelInfo
             }, { quoted: message });
         }
@@ -33,25 +33,25 @@ export default {
         const text = args.slice(3).join(' ').trim();
         if (!['caesar', 'vigenere', 'xor'].includes(cipherType)) {
             return await sock.sendMessage(chatId, {
-                text: `❌ Unknown cipher: *${cipherType}*\nUse: \`caesar\`, \`vigenere\`, or \`xor\``,
+                text: `âŒ Unknown cipher: *${cipherType}*\nUse: \`caesar\`, \`vigenere\`, or \`xor\``,
                 ...channelInfo
             }, { quoted: message });
         }
         if (!['encode', 'decode', 'encrypt', 'decrypt'].includes(mode)) {
             return await sock.sendMessage(chatId, {
-                text: `❌ Unknown mode: *${mode}*\nUse: \`encode\` or \`decode\``,
+                text: `âŒ Unknown mode: *${mode}*\nUse: \`encode\` or \`decode\``,
                 ...channelInfo
             }, { quoted: message });
         }
         if (!text) {
             return await sock.sendMessage(chatId, {
-                text: `❌ No text provided.`,
+                text: `âŒ No text provided.`,
                 ...channelInfo
             }, { quoted: message });
         }
         if (cipherType === 'caesar' && isNaN(parseInt(key, 10))) {
             return await sock.sendMessage(chatId, {
-                text: `❌ Caesar cipher key must be a number (e.g. 13)`,
+                text: `âŒ Caesar cipher key must be a number (e.g. 13)`,
                 ...channelInfo
             }, { quoted: message });
         }
@@ -62,28 +62,32 @@ export default {
             const { stdout, stderr } = await execAsync(`"${bin}" ${cipherType} ${mode} "${safeKey}" "${safeText}"`, { timeout: 10000 });
             if (stderr && !stdout) {
                 return await sock.sendMessage(chatId, {
-                    text: `❌ ${stderr.trim()}`,
+                    text: `âŒ ${stderr.trim()}`,
                     ...channelInfo
                 }, { quoted: message });
             }
             const result = stdout.trim();
             const cipherNames = {
-                caesar: 'Caesar', vigenere: 'Vigenère', xor: 'XOR'
+                caesar: 'Caesar', vigenere: 'VigenÃ¨re', xor: 'XOR'
             };
-            const modeLabel = (mode === 'encode' || mode === 'encrypt') ? '🔒 Encrypted' : '🔓 Decrypted';
+            const modeLabel = (mode === 'encode' || mode === 'encrypt') ? 'ðŸ”’ Encrypted' : 'ðŸ”“ Decrypted';
             await sock.sendMessage(chatId, {
-                text: `🔐 *${cipherNames[cipherType]} Cipher*\n\n` +
-                    `📥 *Input:* \`${text}\`\n` +
-                    `🔑 *Key:* \`${key}\`\n` +
+                text: `ðŸ” *${cipherNames[cipherType]} Cipher*\n\n` +
+                    `ðŸ“¥ *Input:* \`${text}\`\n` +
+                    `ðŸ”‘ *Key:* \`${key}\`\n` +
                     `${modeLabel}: \`${result}\``,
                 ...channelInfo
             }, { quoted: message });
         }
         catch (error) {
             await sock.sendMessage(chatId, {
-                text: `❌ Failed: ${error.message}`,
+                text: `âŒ Failed: ${error.message}`,
                 ...channelInfo
             }, { quoted: message });
         }
     }
 };
+
+
+
+

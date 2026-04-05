@@ -1,4 +1,4 @@
-import { downloadContentFromMessage } from '@whiskeysockets/baileys';
+﻿import { downloadContentFromMessage } from '@whiskeysockets/baileys';
 import fs from 'fs';
 import path from 'path';
 async function downloadMediaMessage(message, mediaType) {
@@ -12,11 +12,11 @@ async function downloadMediaMessage(message, mediaType) {
     return filePath;
 }
 export default {
-    command: 'tag',
-    aliases: ['tagall', 'hidetag'],
-    category: 'admin',
-    description: 'Tag all group members',
-    usage: '.tag [message] or reply to a message',
+    command: 'تاج',
+    aliases: ['tagall', 'hidetag', 'tag'],
+    category: 'المشرفون',
+    description: 'تاج الل مجموعة عضوس',
+    usage: '.تاج [رسالة] ور رد تو ا رسالة',
     groupOnly: true,
     adminOnly: true,
     async handler(sock, message, args, context) {
@@ -76,3 +76,7 @@ export default {
         }
     }
 };
+
+
+
+

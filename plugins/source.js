@@ -1,12 +1,12 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
@@ -14,11 +14,11 @@
  *****************************************************************************/
 import axios from 'axios';
 export default {
-    command: 'getpage',
-    aliases: ['source', 'viewsource'],
-    category: 'tools',
-    description: 'Get the raw HTML source of a website',
-    usage: '.getpage <url>',
+    command: 'جيتباجي',
+    aliases: ['source', 'viewsource', 'getpage'],
+    category: 'أدوات',
+    description: 'جلب تهي راو هتمل سووركي وف ا موقع',
+    usage: '.جلبباجي <رابط>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const url = args[0];
@@ -26,7 +26,7 @@ export default {
             return await sock.sendMessage(chatId, { text: 'Provide a valid URL (include http/https).' }, { quoted: message });
         }
         try {
-            await sock.sendMessage(chatId, { text: '🌐 *Fetching source code...*' });
+            await sock.sendMessage(chatId, { text: 'ðŸŒ *Fetching source code...*' });
             const res = await axios.get(url);
             const html = res.data;
             const buffer = Buffer.from(html, 'utf-8');
@@ -38,21 +38,25 @@ export default {
             }, { quoted: message });
         }
         catch (err) {
-            await sock.sendMessage(chatId, { text: '❌ Failed to fetch source. The site might be protected.' });
+            await sock.sendMessage(chatId, { text: 'âŒ Failed to fetch source. The site might be protected.' });
         }
     }
 };
 /*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
  *                                                                           *
  *****************************************************************************/
+
+
+
+

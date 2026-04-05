@@ -1,4 +1,4 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import { dataFile } from '../lib/paths.js';
 import { downloadContentFromMessage } from '@whiskeysockets/baileys';
@@ -171,11 +171,11 @@ export async function handleMentionDetection(sock, chatId, message) {
 }
 async function setMentionCommand(sock, chatId, message, isOwner) {
     if (!isOwner)
-        return sock.sendMessage(chatId, { text: '❌ *Only Owner or Sudo can use this command*' }, { quoted: message });
+        return sock.sendMessage(chatId, { text: 'âŒ *Only Owner or Sudo can use this command*' }, { quoted: message });
     const ctx = message.message?.extendedTextMessage?.contextInfo;
     const qMsg = ctx?.quotedMessage;
     if (!qMsg)
-        return sock.sendMessage(chatId, { text: '❌ *Reply to a message or media*\n\nSupported: text, sticker, image, video, audio' }, { quoted: message });
+        return sock.sendMessage(chatId, { text: 'âŒ *Reply to a message or media*\n\nSupported: text, sticker, image, video, audio' }, { quoted: message });
     let type = 'sticker', buf, dataType;
     if (qMsg.stickerMessage) {
         dataType = 'stickerMessage';
@@ -201,11 +201,11 @@ async function setMentionCommand(sock, chatId, message, isOwner) {
         type = 'text';
     }
     else
-        return sock.sendMessage(chatId, { text: '❌ *Unsupported media type*\n\nReply to: text, sticker, image, video, or audio' }, { quoted: message });
+        return sock.sendMessage(chatId, { text: 'âŒ *Unsupported media type*\n\nReply to: text, sticker, image, video, or audio' }, { quoted: message });
     if (type === 'text') {
         buf = Buffer.from(qMsg.conversation || qMsg.extendedTextMessage?.text || '', 'utf8');
         if (!buf.length)
-            return sock.sendMessage(chatId, { text: '❌ *Empty text*' }, { quoted: message });
+            return sock.sendMessage(chatId, { text: 'âŒ *Empty text*' }, { quoted: message });
     }
     else {
         try {
@@ -221,11 +221,11 @@ async function setMentionCommand(sock, chatId, message, isOwner) {
         }
         catch (e) {
             console.error('download error', e);
-            return sock.sendMessage(chatId, { text: '❌ *Failed to download media*' }, { quoted: message });
+            return sock.sendMessage(chatId, { text: 'âŒ *Failed to download media*' }, { quoted: message });
         }
     }
     if (buf.length > 1024 * 1024) {
-        return sock.sendMessage(chatId, { text: '❌ *File too large*\n\nMaximum size: 1 MB' }, { quoted: message });
+        return sock.sendMessage(chatId, { text: 'âŒ *File too large*\n\nMaximum size: 1 MB' }, { quoted: message });
     }
     let mimetype = (dataType ? qMsg[dataType]?.mimetype : undefined) || '';
     const ptt = !!qMsg.audioMessage?.ptt;
@@ -304,7 +304,7 @@ async function setMentionCommand(sock, chatId, message, isOwner) {
     }
     catch (e) {
         console.error('write error', e);
-        return sock.sendMessage(chatId, { text: '❌ *Failed to save file*' }, { quoted: message });
+        return sock.sendMessage(chatId, { text: 'âŒ *Failed to save file*' }, { quoted: message });
     }
     const state = await loadState();
     state.assetPath = path.join('assets', outName);
@@ -317,31 +317,35 @@ async function setMentionCommand(sock, chatId, message, isOwner) {
         state.gifPlayback = gifPlayback;
     await saveState(state);
     return sock.sendMessage(chatId, {
-        text: `✅ *Mention reply updated!*\n\nType: ${type}\nStorage: ${HAS_DB ? 'Database' : 'File System'}`
+        text: `âœ… *Mention reply updated!*\n\nType: ${type}\nStorage: ${HAS_DB ? 'Database' : 'File System'}`
     }, { quoted: message });
 }
 export default {
-    command: 'mention',
-    aliases: ['setmention', 'mentionreply'],
-    category: 'owner',
-    description: 'Toggle or set custom mention reply',
-    usage: '.mention <on|off> or .setmention (reply to media)',
+    command: 'مينتيون',
+    aliases: ['setmention', 'mentionreply', 'mention'],
+    category: 'المالك',
+    description: 'تبديل ور تعيين كوستوم مينتيون رد',
+    usage: '.مينتيون <ون|وفف> ور .سيتمينتيون (رد تو وسائط)',
     ownerOnly: true,
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const onoff = args[0]?.toLowerCase();
         if (!onoff || !['on', 'off'].includes(onoff)) {
             return sock.sendMessage(chatId, {
-                text: '❌ *Invalid usage*\n\nUsage: `.mention on|off`'
+                text: 'âŒ *Invalid usage*\n\nUsage: `.mention on|off`'
             }, { quoted: message });
         }
         const state = await loadState();
         state.enabled = onoff === 'on';
         await saveState(state);
         return sock.sendMessage(chatId, {
-            text: `✅ *Mention reply ${state.enabled ? 'enabled' : 'disabled'}*\n\nStorage: ${HAS_DB ? 'Database' : 'File System'}`
+            text: `âœ… *Mention reply ${state.enabled ? 'enabled' : 'disabled'}*\n\nStorage: ${HAS_DB ? 'Database' : 'File System'}`
         }, { quoted: message });
     },
     handleMentionDetection,
     setMentionCommand
 };
+
+
+
+

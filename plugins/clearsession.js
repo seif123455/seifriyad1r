@@ -1,13 +1,13 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import isOwnerOrSudo from '../lib/isOwner.js';
 import { channelInfo } from '../lib/messageConfig.js';
 export default {
-    command: 'clearsession',
-    aliases: ['clearses', 'csession'],
-    category: 'owner',
-    description: 'Clear session files',
-    usage: '.clearsession',
+    command: 'كليارسيسسيون',
+    aliases: ['clearses', 'csession', 'clearsession'],
+    category: 'المالك',
+    description: '',
+    usage: '.كليارسيسسيون',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
@@ -23,7 +23,7 @@ export default {
             let filesCleared = 0;
             let errors = 0;
             const errorDetails = [];
-            await sock.sendMessage(chatId, { text: '🔍 Optimizing session files for better performance...', ...channelInfo });
+            await sock.sendMessage(chatId, { text: 'ðŸ” Optimizing session files for better performance...', ...channelInfo });
             const files = fs.readdirSync(sessionDir);
             let appStateSyncCount = 0;
             let preKeyCount = 0;
@@ -47,16 +47,19 @@ export default {
                     errorDetails.push(`Failed to delete ${file}: ${err.message}`);
                 }
             }
-            const msgText = `✅ Session files cleared successfully!\n\n` +
-                `📊 Statistics:\n` +
-                `• Total files cleared: ${filesCleared}\n` +
-                `• App state sync files: ${appStateSyncCount}\n` +
-                `• Pre-key files: ${preKeyCount}\n${ 
-                errors > 0 ? `\n⚠️ Errors encountered: ${errors}\n${errorDetails.join('\n')}` : ''}`;
+            const msgText = `âœ… Session files cleared successfully!\n\n` +
+                `ðŸ“Š Statistics:\n` +
+                `â€¢ Total files cleared: ${filesCleared}\n` +
+                `â€¢ App state sync files: ${appStateSyncCount}\n` +
+                `â€¢ Pre-key files: ${preKeyCount}\n${ 
+                errors > 0 ? `\nâš ï¸ Errors encountered: ${errors}\n${errorDetails.join('\n')}` : ''}`;
             await sock.sendMessage(chatId, { text: msgText, ...channelInfo });
         }
         catch {
-            await sock.sendMessage(chatId, { text: '❌ Failed to clear session files!', ...channelInfo });
+            await sock.sendMessage(chatId, { text: 'âŒ Failed to clear session files!', ...channelInfo });
         }
     }
 };
+
+
+

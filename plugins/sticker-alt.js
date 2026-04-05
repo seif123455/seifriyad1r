@@ -1,24 +1,24 @@
-import { downloadContentFromMessage } from '@whiskeysockets/baileys';
+﻿import { downloadContentFromMessage } from '@whiskeysockets/baileys';
 import { exec } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 export default {
-    command: 'sticker',
-    aliases: ['stik', 's'],
-    category: 'stickers',
-    description: 'Convert an image or video into a sticker',
-    usage: '.sticker (reply to image/video)',
+    command: 'ملصق',
+    aliases: ['stik', 's', 'sticker'],
+    category: 'ملصقات',
+    description: 'تحويل ان صورة ور فيديو ينتو ا ملصق',
+    usage: '.ملصق (رد تو صورة/فيديو)',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
             const quotedMsg = message.message?.extendedTextMessage?.contextInfo?.quotedMessage;
             if (!quotedMsg) {
-                await sock.sendMessage(chatId, { text: '⚠️ Please reply to an image or video!' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'âš ï¸ Please reply to an image or video!' }, { quoted: message });
                 return;
             }
             const type = Object.keys(quotedMsg)[0];
             if (!['imageMessage', 'videoMessage'].includes(type)) {
-                await sock.sendMessage(chatId, { text: '⚠️ Please reply to an image or video!' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'âš ï¸ Please reply to an image or video!' }, { quoted: message });
                 return;
             }
             const stream = await downloadContentFromMessage(quotedMsg[type], type.split('Message')[0]);
@@ -48,7 +48,11 @@ export default {
         }
         catch (error) {
             console.error('Sticker Command Error:', error);
-            await sock.sendMessage(chatId, { text: '❌ Failed to create sticker!' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ Failed to create sticker!' }, { quoted: message });
         }
     }
 };
+
+
+
+

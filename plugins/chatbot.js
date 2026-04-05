@@ -1,4 +1,4 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import { dataFile } from '../lib/paths.js';
 import store from '../lib/lightweight_store.js';
@@ -160,7 +160,7 @@ export async function handleChatbotResponse(sock, chatId, message, userMessage, 
         });
         if (!response) {
             await sock.sendMessage(chatId, {
-                text: "Hmm, let me think about that... 🤔\nI'm having trouble processing your request right now.",
+                text: "Hmm, let me think about that... ðŸ¤”\nI'm having trouble processing your request right now.",
                 quoted: message
             });
             return;
@@ -176,7 +176,7 @@ export async function handleChatbotResponse(sock, chatId, message, userMessage, 
         }
         try {
             await sock.sendMessage(chatId, {
-                text: "Oops! 😅 I got a bit confused there. Could you try asking that again?",
+                text: "Oops! ðŸ˜… I got a bit confused there. Could you try asking that again?",
                 quoted: message
             });
         }
@@ -190,8 +190,8 @@ async function getAIResponse(userMessage, userContext) {
 You are a casual, friendly human chatting on WhatsApp. Always reply in English only.
 
 RULES:
-1. Always respond in English only — no Hindi, Urdu, or any other language
-2. Keep responses short — 1-2 lines max
+1. Always respond in English only â€” no Hindi, Urdu, or any other language
+2. Keep responses short â€” 1-2 lines max
 3. Be casual and natural, not robotic
 4. Use emojis naturally
 5. Never reveal you are an AI or bot
@@ -235,25 +235,25 @@ You:
                 console.log(`${api.name} returned no result`);
                 continue;
             }
-            console.log(`✅ ${api.name} success`);
+            console.log(`âœ… ${api.name} success`);
             const cleanedResponse = result.trim()
-                .replace(/winks/g, '😉')
-                .replace(/eye roll/g, '🙄')
-                .replace(/shrug/g, '🤷‍♂️')
-                .replace(/raises eyebrow/g, '🤨')
-                .replace(/smiles/g, '😊')
-                .replace(/laughs/g, '😂')
-                .replace(/cries/g, '😢')
-                .replace(/thinks/g, '🤔')
-                .replace(/sleeps/g, '😴')
+                .replace(/winks/g, 'ðŸ˜‰')
+                .replace(/eye roll/g, 'ðŸ™„')
+                .replace(/shrug/g, 'ðŸ¤·â€â™‚ï¸')
+                .replace(/raises eyebrow/g, 'ðŸ¤¨')
+                .replace(/smiles/g, 'ðŸ˜Š')
+                .replace(/laughs/g, 'ðŸ˜‚')
+                .replace(/cries/g, 'ðŸ˜¢')
+                .replace(/thinks/g, 'ðŸ¤”')
+                .replace(/sleeps/g, 'ðŸ˜´')
                 .replace(/google/gi, 'MEGA Bot')
                 .replace(/a large language model/gi, 'just a person')
                 .replace(/Remember:.*$/g, '')
                 .replace(/IMPORTANT:.*$/g, '')
                 .replace(/^[A-Z\s]+:.*$/gm, '')
-                .replace(/^[•-]\s.*$/gm, '')
-                .replace(/^✅.*$/gm, '')
-                .replace(/^❌.*$/gm, '')
+                .replace(/^[â€¢-]\s.*$/gm, '')
+                .replace(/^âœ….*$/gm, '')
+                .replace(/^âŒ.*$/gm, '')
                 .replace(/\n\s*\n/g, '\n')
                 .trim();
             return cleanedResponse;
@@ -267,11 +267,11 @@ You:
     return null;
 }
 export default {
-    command: 'chatbot',
-    aliases: ['bot', 'ai', 'achat'],
-    category: 'admin',
-    description: 'Enable or disable AI chatbot for the group',
-    usage: '.chatbot <on|off>',
+    command: 'كهاتبوت',
+    aliases: ['bot', 'ai', 'achat', 'chatbot'],
+    category: 'المشرفون',
+    description: '',
+    usage: '.كهاتبوت <ون|وفف>',
     groupOnly: true,
     adminOnly: true,
     async handler(sock, message, args, context) {
@@ -280,19 +280,19 @@ export default {
         if (!match) {
             await showTyping(sock, chatId);
             return sock.sendMessage(chatId, {
-                text: `*🤖 CHATBOT SETUP*\n\n` +
+                text: `*ðŸ¤– CHATBOT SETUP*\n\n` +
                     `*Storage:* ${HAS_DB ? 'Database' : 'File System'}\n` +
                     `*APIs:* ${API_ENDPOINTS.length} endpoints with fallback\n\n` +
                     `*Commands:*\n` +
-                    `• \`.chatbot on\` - Enable chatbot\n` +
-                    `• \`.chatbot off\` - Disable chatbot\n\n` +
+                    `â€¢ \`.chatbot on\` - Enable chatbot\n` +
+                    `â€¢ \`.chatbot off\` - Disable chatbot\n\n` +
                     `*How it works:*\n` +
                     `When enabled, bot responds when mentioned or replied to.\n\n` +
                     `*Features:*\n` +
-                    `• Natural English conversations\n` +
-                    `• Remembers context\n` +
-                    `• Personality-based replies\n` +
-                    `• Auto fallback if API fails`,
+                    `â€¢ Natural English conversations\n` +
+                    `â€¢ Remembers context\n` +
+                    `â€¢ Personality-based replies\n` +
+                    `â€¢ Auto fallback if API fails`,
                 quoted: message
             });
         }
@@ -301,14 +301,14 @@ export default {
             await showTyping(sock, chatId);
             if (data.chatbot[chatId]) {
                 return sock.sendMessage(chatId, {
-                    text: '⚠️ *Chatbot is already enabled for this group*',
+                    text: 'âš ï¸ *Chatbot is already enabled for this group*',
                     quoted: message
                 });
             }
             data.chatbot[chatId] = true;
             await saveUserGroupData(data);
             return sock.sendMessage(chatId, {
-                text: '✅ *Chatbot enabled!*\n\nMention me or reply to my messages to chat.',
+                text: 'âœ… *Chatbot enabled!*\n\nMention me or reply to my messages to chat.',
                 quoted: message
             });
         }
@@ -316,20 +316,20 @@ export default {
             await showTyping(sock, chatId);
             if (!data.chatbot[chatId]) {
                 return sock.sendMessage(chatId, {
-                    text: '⚠️ *Chatbot is already disabled for this group*',
+                    text: 'âš ï¸ *Chatbot is already disabled for this group*',
                     quoted: message
                 });
             }
             delete data.chatbot[chatId];
             await saveUserGroupData(data);
             return sock.sendMessage(chatId, {
-                text: '❌ *Chatbot disabled!*\n\nI will no longer respond to mentions.',
+                text: 'âŒ *Chatbot disabled!*\n\nI will no longer respond to mentions.',
                 quoted: message
             });
         }
         await showTyping(sock, chatId);
         return sock.sendMessage(chatId, {
-            text: '❌ *Invalid command*\n\nUse: `.chatbot on/off`',
+            text: 'âŒ *Invalid command*\n\nUse: `.chatbot on/off`',
             quoted: message
         });
     },
@@ -337,3 +337,6 @@ export default {
     loadUserGroupData,
     saveUserGroupData
 };
+
+
+

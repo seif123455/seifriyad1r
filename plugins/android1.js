@@ -1,13 +1,13 @@
-import pkg from 'api-qasim';
+﻿import pkg from 'api-qasim';
 const QasimAny = pkg;
 import axios from 'axios';
 
 export default {
-    command: 'تطبيق',
-    aliases: ['apkdl', 'apk', 'an1apk', 'appdl', 'app', 'تحميل_تطبيق'],
-    category: 'download',
-    description: 'البحث عن تطبيقات APK وتحميلها',
-    usage: '!تطبيق <اسم_التطبيق>',
+    command: 'ØªØ·Ø¨ÙŠÙ‚',
+    aliases: ['apkdl', 'apk', 'an1apk', 'appdl', 'app', 'ØªØ­Ù…ÙŠÙ„_ØªØ·Ø¨ÙŠÙ‚'],
+    category: 'Ø§Ù„ØªØ­Ù…ÙŠÙ„',
+    description: 'Ø§Ù„Ø¨Ø­Ø« Ø¹Ù† ØªØ·Ø¨ÙŠÙ‚Ø§Øª Ø§Ø¨Ùƒ ÙˆØªØ­Ù…ÙŠÙ„Ù‡Ø§',
+    usage: '!ØªØ·Ø¨ÙŠÙ‚ <Ø§Ø³Ù…_Ø§Ù„ØªØ·Ø¨ÙŠÙ‚>',
     
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -16,34 +16,34 @@ export default {
         try {
             if (!query) {
                 return await sock.sendMessage(chatId, { 
-                    text: '📱 *تحميل التطبيقات*\n\n' +
-                        '*الاستخدام:* `!تطبيق <اسم التطبيق>`\n' +
-                        '*مثال:* `!تطبيق واتساب`' 
+                    text: 'ðŸ“± *ØªØ­Ù…ÙŠÙ„ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª*\n\n' +
+                        '*Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…:* `!ØªØ·Ø¨ÙŠÙ‚ <Ø§Ø³Ù… Ø§Ù„ØªØ·Ø¨ÙŠÙ‚>`\n' +
+                        '*Ù…Ø«Ø§Ù„:* `!ØªØ·Ø¨ÙŠÙ‚ ÙˆØ§ØªØ³Ø§Ø¨`' 
                 }, { quoted: message });
             }
             
-            await sock.sendMessage(chatId, { text: '🔎 جاري البحث عن التطبيقات...' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'ðŸ”Ž Ø¬Ø§Ø±ÙŠ Ø§Ù„Ø¨Ø­Ø« Ø¹Ù† Ø§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª...' }, { quoted: message });
             
             const res = await QasimAny.apksearch(query);
             
             if (!res?.data || !Array.isArray(res.data) || res.data.length === 0) {
                 return await sock.sendMessage(chatId, { 
-                    text: '❌ لا توجد تطبيقات مطابقة للبحث.' 
+                    text: 'âŒ Ù„Ø§ ØªÙˆØ¬Ø¯ ØªØ·Ø¨ÙŠÙ‚Ø§Øª Ù…Ø·Ø§Ø¨Ù‚Ø© Ù„Ù„Ø¨Ø­Ø«.' 
                 }, { quoted: message });
             }
             
             const results = res.data;
             const first = results[0];
             
-            let caption = `📱 *نتائج البحث عن:* *${query}*\n\n`;
-            caption += `↩️ *رد برقم التطبيق الذي تريد تحميله*\n\n`;
+            let caption = `ðŸ“± *Ù†ØªØ§Ø¦Ø¬ Ø§Ù„Ø¨Ø­Ø« Ø¹Ù†:* *${query}*\n\n`;
+            caption += `â†©ï¸ *Ø±Ø¯ Ø¨Ø±Ù‚Ù… Ø§Ù„ØªØ·Ø¨ÙŠÙ‚ Ø§Ù„Ø°ÙŠ ØªØ±ÙŠØ¯ ØªØ­Ù…ÙŠÙ„Ù‡*\n\n`;
             
             results.forEach((item, i) => {
                 caption +=
                     `*${i + 1}.* ${item.judul}\n` +
-                    `👨‍💻 المطور: ${item.dev}\n` +
-                    `⭐ التقييم: ${item.rating}\n` +
-                    `🔗 الرابط: ${item.link}\n\n`;
+                    `ðŸ‘¨â€ðŸ’» Ø§Ù„Ù…Ø·ÙˆØ±: ${item.dev}\n` +
+                    `â­ Ø§Ù„ØªÙ‚ÙŠÙŠÙ…: ${item.rating}\n` +
+                    `ðŸ”— Ø§Ù„Ø±Ø§Ø¨Ø·: ${item.link}\n\n`;
             });
             
             const sentMsg = await sock.sendMessage(chatId, { 
@@ -54,7 +54,7 @@ export default {
             const timeout = setTimeout(async () => {
                 sock.ev.off('messages.upsert', listener);
                 await sock.sendMessage(chatId, { 
-                    text: '⏱ انتهى وقت اختيار التطبيق. يرجى البحث مرة أخرى.' 
+                    text: 'â± Ø§Ù†ØªÙ‡Ù‰ ÙˆÙ‚Øª Ø§Ø®ØªÙŠØ§Ø± Ø§Ù„ØªØ·Ø¨ÙŠÙ‚. ÙŠØ±Ø¬Ù‰ Ø§Ù„Ø¨Ø­Ø« Ù…Ø±Ø© Ø£Ø®Ø±Ù‰.' 
                 }, { quoted: sentMsg });
             }, 5 * 60 * 1000);
             
@@ -72,7 +72,7 @@ export default {
                 
                 if (isNaN(choice) || choice < 1 || choice > results.length) {
                     return await sock.sendMessage(chatId, { 
-                        text: `❌ اختيار غير صحيح. اختر رقم من 1 إلى ${results.length}.` 
+                        text: `âŒ Ø§Ø®ØªÙŠØ§Ø± ØºÙŠØ± ØµØ­ÙŠØ­. Ø§Ø®ØªØ± Ø±Ù‚Ù… Ù…Ù† 1 Ø¥Ù„Ù‰ ${results.length}.` 
                     }, { quoted: m });
                 }
                 
@@ -82,7 +82,7 @@ export default {
                 const selected = results[choice - 1];
                 
                 await sock.sendMessage(chatId, { 
-                    text: `⬇️ جاري تحميل *${selected.judul}*...\n⏱ يرجى الانتظار...` 
+                    text: `â¬‡ï¸ Ø¬Ø§Ø±ÙŠ ØªØ­Ù…ÙŠÙ„ *${selected.judul}*...\nâ± ÙŠØ±Ø¬Ù‰ Ø§Ù„Ø§Ù†ØªØ¸Ø§Ø±...` 
                 }, { quoted: m });
                 
                 const apiUrl = `https://discardapi.dpdns.org/api/apk/dl/android1?apikey=guru&url=${encodeURIComponent(selected.link)}`;
@@ -91,19 +91,19 @@ export default {
                 
                 if (!apk?.url) {
                     return await sock.sendMessage(chatId, { 
-                        text: '❌ فشل الحصول على رابط تحميل التطبيق.' 
+                        text: 'âŒ ÙØ´Ù„ Ø§Ù„Ø­ØµÙˆÙ„ Ø¹Ù„Ù‰ Ø±Ø§Ø¨Ø· ØªØ­Ù…ÙŠÙ„ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚.' 
                     }, { quoted: m });
                 }
                 
                 const safeName = apk.name.replace(/[^\w.-]/g, '_');
-                const apkCaption = `📦 *تم تحميل التطبيق*\n\n` +
-                    `📛 الاسم: ${apk.name}\n` +
-                    `⭐ التقييم: ${apk.rating}\n` +
-                    `📦 الحجم: ${apk.size}\n` +
-                    `📱 الأندرويد: ${apk.requirement}\n` +
-                    `🧒 الفئة العمرية: ${apk.rated}\n` +
-                    `📅 تاريخ النشر: ${apk.published}\n\n` +
-                    `📝 الوصف:\n${apk.description}`;
+                const apkCaption = `ðŸ“¦ *ØªÙ… ØªØ­Ù…ÙŠÙ„ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚*\n\n` +
+                    `ðŸ“› Ø§Ù„Ø§Ø³Ù…: ${apk.name}\n` +
+                    `â­ Ø§Ù„ØªÙ‚ÙŠÙŠÙ…: ${apk.rating}\n` +
+                    `ðŸ“¦ Ø§Ù„Ø­Ø¬Ù…: ${apk.size}\n` +
+                    `ðŸ“± Ø§Ù„Ø£Ù†Ø¯Ø±ÙˆÙŠØ¯: ${apk.requirement}\n` +
+                    `ðŸ§’ Ø§Ù„ÙØ¦Ø© Ø§Ù„Ø¹Ù…Ø±ÙŠØ©: ${apk.rated}\n` +
+                    `ðŸ“… ØªØ§Ø±ÙŠØ® Ø§Ù„Ù†Ø´Ø±: ${apk.published}\n\n` +
+                    `ðŸ“ Ø§Ù„ÙˆØµÙ:\n${apk.description}`;
                 
                 await sock.sendMessage(chatId, { 
                     document: { url: apk.url }, 
@@ -116,10 +116,11 @@ export default {
             sock.ev.on('messages.upsert', listener);
             
         } catch (err) {
-            console.error('❌ خطأ في أمر تحميل التطبيقات:', err);
+            console.error('âŒ Ø®Ø·Ø£ ÙÙŠ Ø£Ù…Ø± ØªØ­Ù…ÙŠÙ„ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª:', err);
             await sock.sendMessage(chatId, { 
-                text: '❌ فشل في معالجة طلب تحميل التطبيق.' 
+                text: 'âŒ ÙØ´Ù„ ÙÙŠ Ù…Ø¹Ø§Ù„Ø¬Ø© Ø·Ù„Ø¨ ØªØ­Ù…ÙŠÙ„ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚.' 
             }, { quoted: message });
         }
     }
 };
+

@@ -1,12 +1,12 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
@@ -15,11 +15,11 @@
 import CommandHandler from '../lib/commandHandler.js';
 let activeMaintenanceTimer = null;
 export default {
-    command: 'maintenance',
-    aliases: ['mtnc', 'lockdown'],
-    category: 'owner',
-    description: 'Disable non-owner commands for a duration or stop it early',
-    usage: '.maintenance [minutes / stop]',
+    command: 'ماينتينانكي',
+    aliases: ['mtnc', 'lockdown', 'maintenance'],
+    category: 'المالك',
+    description: 'تعطيل نون-المالك كومماندس فور ا دوراتيون ور إيقاف يت يارلي',
+    usage: '.ماينتينانكي [مينوتيس / إيقاف]',
     ownerOnly: true,
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -35,11 +35,11 @@ export default {
                     CommandHandler.disabledCommands.delete(cmd.command.toLowerCase());
                 }
             });
-            return await sock.sendMessage(chatId, { text: '✅ *MAINTENANCE ENDED EARLY*\nAll commands are now active.' }, { quoted: message });
+            return await sock.sendMessage(chatId, { text: 'âœ… *MAINTENANCE ENDED EARLY*\nAll commands are now active.' }, { quoted: message });
         }
         const minutes = parseInt(input, 10);
         if (isNaN(minutes) || minutes <= 0) {
-            return await sock.sendMessage(chatId, { text: '❌ Usage: .maintenance [minutes] OR .maintenance stop' }, { quoted: message });
+            return await sock.sendMessage(chatId, { text: 'âŒ Usage: .maintenance [minutes] OR .maintenance stop' }, { quoted: message });
         }
         try {
             if (activeMaintenanceTimer)
@@ -56,7 +56,7 @@ export default {
                 }
             });
             await sock.sendMessage(chatId, {
-                text: `⚠️ *MAINTENANCE MODE STARTING*\n\n` +
+                text: `âš ï¸ *MAINTENANCE MODE STARTING*\n\n` +
                     `Locked: ${affectedCount} commands\n` +
                     `Duration: ${minutes}m\n\n` +
                     `_Type ".maintenance stop" to enable commands early._`
@@ -68,26 +68,29 @@ export default {
                     }
                 });
                 activeMaintenanceTimer = null;
-                await sock.sendMessage(chatId, { text: '✅ *MAINTENANCE FINISHED*\nCommands re-enabled automatically.' });
+                await sock.sendMessage(chatId, { text: 'âœ… *MAINTENANCE FINISHED*\nCommands re-enabled automatically.' });
             }, minutes * 60000);
         }
         catch (error) {
             console.error('Maintenance Error:', error);
-            await sock.sendMessage(chatId, { text: '❌ Action failed.' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ Action failed.' }, { quoted: message });
         }
     }
 };
 /*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
  *                                                                           *
  *****************************************************************************/
+
+
+

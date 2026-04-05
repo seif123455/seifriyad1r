@@ -1,14 +1,14 @@
-import { downloadContentFromMessage } from '@whiskeysockets/baileys';
+﻿import { downloadContentFromMessage } from '@whiskeysockets/baileys';
 import fs from 'fs';
 import path from 'path';
 import { uploadToTmpfiles } from '../lib/uploaders.js';
 
 export default {
-    command: 'رفع_مؤقت2',
-    aliases: ['tmpfiles', 'tmpf', 'tfiles', 'رفع_وقتي2', 'تخزين_مؤقت2'],
+    command: 'Ø±ÙØ¹_Ù…Ø¤Ù‚Øª2',
+    aliases: ['tmpfiles', 'tmpf', 'tfiles', 'Ø±ÙØ¹_ÙˆÙ‚ØªÙŠ2', 'ØªØ®Ø²ÙŠÙ†_Ù…Ø¤Ù‚Øª2'],
     category: 'upload',
-    description: 'رفع الملفات إلى Tmpfiles.org (تخزين مؤقت)',
-    usage: '!رفع_مؤقت2 (رد على وسائط)',
+    description: 'Ø±ÙØ¹ Ø§Ù„Ù…Ù„ÙØ§Øª Ø¥Ù„Ù‰ ØªÙ…Ø¨ÙÙŠÙ„ÙŠØ³.ÙˆØ±Ø¬ (ØªØ®Ø²ÙŠÙ† Ù…Ø¤Ù‚Øª)',
+    usage: '!Ø±ÙØ¹_Ù…Ø¤Ù‚Øª2 (Ø±Ø¯ Ø¹Ù„Ù‰ ÙˆØ³Ø§Ø¦Ø·)',
     
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -23,11 +23,11 @@ export default {
             
             if (!hasMedia && !quotedMsg) {
                 await sock.sendMessage(chatId, { 
-                    text: '📤 *رفع الملفات إلى Tmpfiles.org (تخزين مؤقت)*\n\n' +
-                        '*الاستخدام:* `!رفع_مؤقت2` مع رد على ملف أو إرسال ملف مع الأمر\n\n' +
-                        '*يدعم:* صور، فيديوهات، ملصقات، مستندات\n\n' +
-                        '*مثال:* قم بالرد على صورة واكتب `!رفع_مؤقت2`\n\n' +
-                        '⚠️ *ملاحظة:* الروابط مؤقتة وليست دائمة.'
+                    text: 'ðŸ“¤ *Ø±ÙØ¹ Ø§Ù„Ù…Ù„ÙØ§Øª Ø¥Ù„Ù‰ Tmpfiles.org (ØªØ®Ø²ÙŠÙ† Ù…Ø¤Ù‚Øª)*\n\n' +
+                        '*Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…:* `!Ø±ÙØ¹_Ù…Ø¤Ù‚Øª2` Ù…Ø¹ Ø±Ø¯ Ø¹Ù„Ù‰ Ù…Ù„Ù Ø£Ùˆ Ø¥Ø±Ø³Ø§Ù„ Ù…Ù„Ù Ù…Ø¹ Ø§Ù„Ø£Ù…Ø±\n\n' +
+                        '*ÙŠØ¯Ø¹Ù…:* ØµÙˆØ±ØŒ ÙÙŠØ¯ÙŠÙˆÙ‡Ø§ØªØŒ Ù…Ù„ØµÙ‚Ø§ØªØŒ Ù…Ø³ØªÙ†Ø¯Ø§Øª\n\n' +
+                        '*Ù…Ø«Ø§Ù„:* Ù‚Ù… Ø¨Ø§Ù„Ø±Ø¯ Ø¹Ù„Ù‰ ØµÙˆØ±Ø© ÙˆØ§ÙƒØªØ¨ `!Ø±ÙØ¹_Ù…Ø¤Ù‚Øª2`\n\n' +
+                        'âš ï¸ *Ù…Ù„Ø§Ø­Ø¸Ø©:* Ø§Ù„Ø±ÙˆØ§Ø¨Ø· Ù…Ø¤Ù‚ØªØ© ÙˆÙ„ÙŠØ³Øª Ø¯Ø§Ø¦Ù…Ø©.'
                 }, { quoted: message });
                 return;
             }
@@ -39,13 +39,13 @@ export default {
             
             if (!type) {
                 await sock.sendMessage(chatId, { 
-                    text: '⚠️ نوع الملف غير مدعوم!' 
+                    text: 'âš ï¸ Ù†ÙˆØ¹ Ø§Ù„Ù…Ù„Ù ØºÙŠØ± Ù…Ø¯Ø¹ÙˆÙ…!' 
                 }, { quoted: message });
                 return;
             }
             
             await sock.sendMessage(chatId, { 
-                text: '📤 جاري رفع الملف إلى Tmpfiles.org...' 
+                text: 'ðŸ“¤ Ø¬Ø§Ø±ÙŠ Ø±ÙØ¹ Ø§Ù„Ù…Ù„Ù Ø¥Ù„Ù‰ Tmpfiles.org...' 
             }, { quoted: message });
             
             const mediaType = type === 'stickerMessage' ? 'sticker' : type.replace('Message', '');
@@ -56,20 +56,20 @@ export default {
             }
             
             let ext = 'bin';
-            let fileType = 'ملف';
+            let fileType = 'Ù…Ù„Ù';
             
             if (type === 'imageMessage') {
                 ext = 'jpg';
-                fileType = 'صورة';
+                fileType = 'ØµÙˆØ±Ø©';
             } else if (type === 'videoMessage') {
                 ext = 'mp4';
-                fileType = 'فيديو';
+                fileType = 'ÙÙŠØ¯ÙŠÙˆ';
             } else if (type === 'stickerMessage') {
                 ext = 'webp';
-                fileType = 'ملصق';
+                fileType = 'Ù…Ù„ØµÙ‚';
             } else if (mediaSource[type].fileName) {
                 ext = mediaSource[type].fileName.split('.').pop() || 'bin';
-                fileType = 'مستند';
+                fileType = 'Ù…Ø³ØªÙ†Ø¯';
             }
             
             const tempDir = path.join('./temp');
@@ -83,24 +83,25 @@ export default {
             const sizeKB = (buffer.length / 1024).toFixed(2);
             
             await sock.sendMessage(chatId, {
-                text: `✅ *تم رفع ${fileType} إلى Tmpfiles.org بنجاح!*\n\n` +
-                    `┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n` +
-                    `┃ 📁 *النوع:* ${fileType}\n` +
-                    `┃ 📦 *الحجم:* ${sizeKB} كيلوبايت\n` +
-                    `┃ 🔗 *الرابط المباشر:* ${result.url}\n` +
-                    `┃ 📄 *صفحة الملف:* ${result.page_url}\n` +
-                    `┃ ⏱️ *المدة:* رابط مؤقت\n` +
-                    `┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n\n` +
-                    `🔥 *CRAZY-SEIF BOT* | 📞 201144534147`
+                text: `âœ… *ØªÙ… Ø±ÙØ¹ ${fileType} Ø¥Ù„Ù‰ Tmpfiles.org Ø¨Ù†Ø¬Ø§Ø­!*\n\n` +
+                    `â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“\n` +
+                    `â”ƒ ðŸ“ *Ø§Ù„Ù†ÙˆØ¹:* ${fileType}\n` +
+                    `â”ƒ ðŸ“¦ *Ø§Ù„Ø­Ø¬Ù…:* ${sizeKB} ÙƒÙŠÙ„ÙˆØ¨Ø§ÙŠØª\n` +
+                    `â”ƒ ðŸ”— *Ø§Ù„Ø±Ø§Ø¨Ø· Ø§Ù„Ù…Ø¨Ø§Ø´Ø±:* ${result.url}\n` +
+                    `â”ƒ ðŸ“„ *ØµÙØ­Ø© Ø§Ù„Ù…Ù„Ù:* ${result.page_url}\n` +
+                    `â”ƒ â±ï¸ *Ø§Ù„Ù…Ø¯Ø©:* Ø±Ø§Ø¨Ø· Ù…Ø¤Ù‚Øª\n` +
+                    `â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”›\n\n` +
+                    `ðŸ”¥ *Crazy Seif BOT* | ðŸ“ž 01144534147`
             }, { quoted: message });
             
             fs.unlinkSync(tempPath);
             
         } catch (error) {
-            console.error('خطأ في رفع Tmpfiles:', error);
+            console.error('Ø®Ø·Ø£ ÙÙŠ Ø±ÙØ¹ Tmpfiles:', error);
             await sock.sendMessage(chatId, { 
-                text: `❌ فشل الرفع: ${error.message}` 
+                text: `âŒ ÙØ´Ù„ Ø§Ù„Ø±ÙØ¹: ${error.message}` 
             }, { quoted: message });
         }
     }
 };
+

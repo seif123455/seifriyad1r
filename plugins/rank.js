@@ -1,4 +1,4 @@
-import store from '../lib/lightweight_store.js';
+﻿import store from '../lib/lightweight_store.js';
 /**
  * Increment message count for a user in a chat
  * Now uses the unified store system (backward compatible)
@@ -33,11 +33,11 @@ function saveMessageCounts(_messageCounts) {
     console.log('[RANK] saveMessageCounts called (no-op - auto-saved by store)');
 }
 export default {
-    command: 'rank',
-    aliases: ['top', 'topusers', 'leaderboard', 'ranks'],
-    category: 'group',
-    description: 'Show top 5 most active members based on message count',
-    usage: '.rank',
+    command: 'رانك',
+    aliases: ['top', 'topusers', 'leaderboard', 'ranks', 'rank'],
+    category: 'المجموعة',
+    description: 'عرض أعلى 5 موست اكتيفي عضوس باسيد ون رسالة كوونت',
+    usage: '.رانك',
     groupOnly: true,
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -68,12 +68,12 @@ export default {
                 .slice(0, 5);
             if (sortedMembers.length === 0) {
                 await sock.sendMessage(chatId, {
-                    text: '📊 *No message activity recorded yet*\n\nStart chatting to appear on the leaderboard!'
+                    text: 'ðŸ“Š *No message activity recorded yet*\n\nStart chatting to appear on the leaderboard!'
                 }, { quoted: message });
                 return;
             }
-            const medals = ['🥇', '🥈', '🥉', '4️⃣', '5️⃣'];
-            let messageText = '🏆 *TOP MEMBERS LEADERBOARD*\n\n';
+            const medals = ['ðŸ¥‡', 'ðŸ¥ˆ', 'ðŸ¥‰', '4ï¸âƒ£', '5ï¸âƒ£'];
+            let messageText = 'ðŸ† *TOP MEMBERS LEADERBOARD*\n\n';
             for (let index = 0; index < sortedMembers.length; index++) {
                 const [userId, count] = sortedMembers[index];
                 // Try all sources for name
@@ -83,7 +83,7 @@ export default {
                     || participant?.notify || participant?.name
                     || await sock.getName(userId)
                     || (userId.includes('@s.whatsapp.net') ? `+${ userId.replace('@s.whatsapp.net', '')}` : 'Unknown');
-                messageText += `${medals[index]} @${username}\n💬 ${count} messages\n\n`;
+                messageText += `${medals[index]} @${username}\nðŸ’¬ ${count} messages\n\n`;
             }
             messageText += '_Keep chatting to climb the ranks!_';
             await sock.sendMessage(chatId, {
@@ -94,7 +94,7 @@ export default {
         catch (error) {
             console.error('Rank Command Error:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to load leaderboard. Please try again later.'
+                text: 'âŒ Failed to load leaderboard. Please try again later.'
             }, { quoted: message });
         }
     },
@@ -141,8 +141,8 @@ export default {
     command: 'rank',
     aliases: ['top', 'topusers', 'leaderboard', 'ranks'],
     category: 'group',
-    description: 'Show top 5 most active members based on message count',
-    usage: '.rank',
+    description: 'عرض أعلى 5 موست اكتيفي عضوس باسيد ون رسالة كوونت',
+    usage: '.رانك',
     groupOnly: true,
 
     async handler(sock, message, args, context: BotContext) {
@@ -157,13 +157,13 @@ export default {
 
         if (sortedMembers.length === 0) {
             await sock.sendMessage(chatId, {
-                text: '📊 *No message activity recorded yet*\n\nStart chatting to appear on the leaderboard!'
+                text: 'ðŸ“Š *No message activity recorded yet*\n\nStart chatting to appear on the leaderboard!'
             }, { quoted: message });
             return;
         }
 
-        const medals = ['🥇', '🥈', '🥉', '4️⃣', '5️⃣'];
-        let messageText = '🏆 *TOP MEMBERS LEADERBOARD*\n\n';
+        const medals = ['ðŸ¥‡', 'ðŸ¥ˆ', 'ðŸ¥‰', '4ï¸âƒ£', '5ï¸âƒ£'];
+        let messageText = 'ðŸ† *TOP MEMBERS LEADERBOARD*\n\n';
 
         for (let index = 0; index < sortedMembers.length; index++) {
             const [userId, count] = sortedMembers[index];
@@ -175,7 +175,7 @@ export default {
                 username = await sock.getName(userId) || '+' + userId.replace('@s.whatsapp.net', '');
             }
             messageText += `${medals[index]} @${username}
-💬 ${count} messages
+ðŸ’¬ ${count} messages
 
 `;
         }
@@ -193,3 +193,6 @@ export default {
     saveMessageCounts
 };
 */
+
+
+

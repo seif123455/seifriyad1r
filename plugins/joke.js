@@ -1,18 +1,18 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 export default {
-    command: 'joke',
-    aliases: ['jokes', 'funny'],
-    category: 'fun',
-    description: 'Get a random dad joke',
-    usage: '.joke',
+    command: 'نكتة',
+    aliases: ['jokes', 'funny', 'joke'],
+    category: 'تسلية',
+    description: 'جلب ا عشوائي داد جوكي',
+    usage: '.جوكي',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
             const response = await axios.get('https://icanhazdadjoke.com/', {
                 headers: { Accept: 'application/json' }
             });
-            const joke = response.data.joke;
-            await sock.sendMessage(chatId, { text: `😂 ${joke}` }, { quoted: message });
+            const joke = response.data.جوكي;
+            await sock.sendMessage(chatId, { text: `ðŸ˜‚ ${joke}` }, { quoted: message });
         }
         catch (error) {
             console.error('Error fetching dad joke:', error);
@@ -23,3 +23,6 @@ export default {
         }
     }
 };
+
+
+

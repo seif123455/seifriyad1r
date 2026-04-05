@@ -1,4 +1,4 @@
-const BASE = 'https://shizoapi.onrender.com/api/pies';
+﻿const BASE = 'https://shizoapi.onrender.com/api/pies';
 const VALID_COUNTRIES = ['china', 'indonesia', 'japan', 'korea', 'hijab'];
 async function fetchPiesImageBuffer(country) {
     const url = `${BASE}/${country}?apikey=shizo`;
@@ -11,10 +11,10 @@ async function fetchPiesImageBuffer(country) {
     return res.arrayBuffer().then(b => Buffer.from(b));
 }
 export default {
-    command: 'pies',
-    aliases: ['pie'],
+    command: 'بييس',
+    aliases: ['pie', 'pies'],
     category: 'images',
-    description: 'Get a pies image from a specific country',
+    description: 'جلب ا بييس صورة فروم ا سبيكيفيك كوونتري',
     usage: `.pies <country>\nAvailable countries: ${VALID_COUNTRIES.join(', ')}`,
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -35,14 +35,17 @@ export default {
             const imageBuffer = await fetchPiesImageBuffer(sub);
             await sock.sendMessage(chatId, {
                 image: imageBuffer,
-                caption: `🍰 pies: ${sub}`
+                caption: `ðŸ° pies: ${sub}`
             }, { quoted: message });
         }
         catch (err) {
             console.error('Pies Command Error:', err);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to fetch image. Please try again.'
+                text: 'âŒ Failed to fetch image. Please try again.'
             }, { quoted: message });
         }
     }
 };
+
+
+

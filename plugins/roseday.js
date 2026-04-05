@@ -1,9 +1,9 @@
-export default {
-    command: 'roseday',
-    aliases: ['rose', 'rosequote'],
-    category: 'quotes',
-    description: 'Get a random Rose Day message/quote',
-    usage: '.roseday',
+﻿export default {
+    command: 'روسيداي',
+    aliases: ['rose', 'rosequote', 'roseday'],
+    category: 'اقتباسات',
+    description: 'جلب ا عشوائي روسي داي رسالة/اقتباس',
+    usage: '.روسيداي',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
@@ -17,7 +17,10 @@ export default {
         }
         catch (error) {
             console.error('RoseDay Command Error:', error);
-            await sock.sendMessage(chatId, { text: '❌ Failed to get Rose Day quote. Please try again later!' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ Failed to get Rose Day quote. Please try again later!' }, { quoted: message });
         }
     }
 };
+
+
+

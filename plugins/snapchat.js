@@ -1,10 +1,10 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 export default {
-    command: 'snapchat',
-    aliases: ['scspot', 'snapdl'],
-    category: 'download',
-    description: 'Download media (video or image) from Snapchat Spotlight URL',
-    usage: '.snapchat <Snapchat URL>',
+    command: 'سنابكهات',
+    aliases: ['scspot', 'snapdl', 'snapchat'],
+    category: 'التحميل',
+    description: 'تحميل وسائط (فيديو ور صورة) فروم سنابكهات سبوتليجهت رابط',
+    usage: '.سنابكهات <سنابكهات رابط>',
     async handler(sock, message, args, context) {
         const { chatId, channelInfo, rawText } = context;
         const prefix = context.rawText.match(/^[.!#]/)?.[0] || '.';
@@ -19,7 +19,7 @@ export default {
         }
         try {
             await sock.sendMessage(chatId, {
-                text: '⏳ Fetching Snapchat media...',
+                text: 'â³ Fetching Snapchat media...',
                 ...channelInfo
             }, { quoted: message });
             const apiUrl = `https://discardapi.dpdns.org/api/dl/snapchat?apikey=guru&url=${encodeURIComponent(url)}`;
@@ -34,7 +34,7 @@ export default {
             console.log('Snapchat API Response:', JSON.stringify(data, null, 2));
             if (!data || data.status !== true || !data.result || !Array.isArray(data.result) || data.result.length === 0) {
                 return await sock.sendMessage(chatId, {
-                    text: '❌ No media found for this Snapchat Spotlight URL.',
+                    text: 'âŒ No media found for this Snapchat Spotlight URL.',
                     ...channelInfo
                 }, { quoted: message });
             }
@@ -42,14 +42,14 @@ export default {
                 if (mediaItem.video) {
                     await sock.sendMessage(chatId, {
                         video: { url: mediaItem.video },
-                        caption: '📹 Snapchat Spotlight Video',
+                        caption: 'ðŸ“¹ Snapchat Spotlight Video',
                         ...channelInfo
                     }, { quoted: message });
                 }
                 if (mediaItem.image) {
                     await sock.sendMessage(chatId, {
                         image: { url: mediaItem.image },
-                        caption: '🖼 Snapchat Spotlight Image',
+                        caption: 'ðŸ–¼ Snapchat Spotlight Image',
                         ...channelInfo
                     }, { quoted: message });
                 }
@@ -58,9 +58,13 @@ export default {
         catch (error) {
             console.error('Snapchat plugin error:', error.message);
             await sock.sendMessage(chatId, {
-                text: `❌ Failed to fetch Snapchat media.\nError: ${error.message}`,
+                text: `âŒ Failed to fetch Snapchat media.\nError: ${error.message}`,
                 ...channelInfo
             }, { quoted: message });
         }
     }
 };
+
+
+
+

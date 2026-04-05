@@ -1,4 +1,4 @@
-import { handleGoodbye } from '../lib/welcome.js';
+﻿import { handleGoodbye } from '../lib/welcome.js';
 import { isGoodByeOn, getGoodbye } from '../lib/index.js';
 async function handleLeaveEvent(sock, id, participants) {
     const isGoodbyeEnabled = await isGoodByeOn(id);
@@ -79,7 +79,7 @@ async function handleLeaveEvent(sock, id, participants) {
                     .replace(/{group}/g, groupName);
             }
             else {
-                fallbackMessage = `Goodbye @${user}! 👋`;
+                fallbackMessage = `Goodbye @${user}! ðŸ‘‹`;
             }
             await sock.sendMessage(id, {
                 text: fallbackMessage,
@@ -89,11 +89,11 @@ async function handleLeaveEvent(sock, id, participants) {
     }
 }
 export default {
-    command: 'goodbye',
-    aliases: ['bye', 'leave'],
-    category: 'admin',
-    description: 'Configure goodbye messages for leaving members',
-    usage: '.goodbye <on|off|set message>',
+    command: 'وداع',
+    aliases: ['bye', 'leave', 'goodbye'],
+    category: 'المشرفون',
+    description: 'كونفيجوري جوودبيي رسالةس فور ليافينج عضوس',
+    usage: '.جوودبيي <ون|وفف|تعيين رسالة>',
     groupOnly: true,
     adminOnly: true,
     async handler(sock, message, args, context) {
@@ -103,3 +103,7 @@ export default {
     },
     handleLeaveEvent
 };
+
+
+
+

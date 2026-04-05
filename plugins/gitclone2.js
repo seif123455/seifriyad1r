@@ -1,10 +1,10 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 export default {
-    command: 'gitclone2',
-    aliases: ['githubdl2', 'clone2'],
-    category: 'download',
-    description: 'Download a GitHub repository as a ZIP file',
-    usage: '.gitclone2 <github-link>',
+    command: 'جيتكلوني2',
+    aliases: ['githubdl2', 'clone2', 'gitclone2'],
+    category: 'التحميل',
+    description: 'تحميل ا جيتهوب ريبوسيتوري اس ا زيب ملف',
+    usage: '.جيتكلوني2 <جيتهوب-رابط>',
     async handler(sock, message, args, context) {
         const { chatId } = context;
         const regex = new RegExp('(?:https|git)(?://|@)github.com[/:]([^/:]+)/(.+)', 'i');
@@ -12,11 +12,11 @@ export default {
             const link = args[0];
             if (!link) {
                 return await sock.sendMessage(chatId, {
-                    text: `❌ *Missing Link!*\n\nExample: .gitclone2 https://github.com/GlobalTechInfo/MEGA-MD`
+                    text: `âŒ *Missing Link!*\n\nExample: .gitclone2 https://github.com/CrazySeif/MEGA-MD`
                 }, { quoted: message });
             }
             if (!regex.test(link)) {
-                return await sock.sendMessage(chatId, { text: '⚠️ *Invalid GitHub link!*' }, { quoted: message });
+                return await sock.sendMessage(chatId, { text: 'âš ï¸ *Invalid GitHub link!*' }, { quoted: message });
             }
             // eslint-disable-next-line prefer-const
             let [_, user, repo] = link.match(regex) || [];
@@ -32,17 +32,21 @@ export default {
                 if (match)
                     filename = match[1];
             }
-            await sock.sendMessage(chatId, { text: `✳️ *Wait, sending repository...*` }, { quoted: message });
+            await sock.sendMessage(chatId, { text: `âœ³ï¸ *Wait, sending repository...*` }, { quoted: message });
             await sock.sendMessage(chatId, {
                 document: { url },
                 fileName: filename,
                 mimetype: 'application/zip',
-                caption: `📦 *Repository:* ${user}/${repo}\n✨ *Cloned by MEGA-MD*`
+                caption: `ðŸ“¦ *Repository:* ${user}/${repo}\nâœ¨ *Cloned by MEGA-MD*`
             }, { quoted: message });
         }
         catch (err) {
             console.error('Gitclone Error:', err);
-            await sock.sendMessage(chatId, { text: '❌ *Failed to download the repository.* Make sure it is public.' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ *Failed to download the repository.* Make sure it is public.' }, { quoted: message });
         }
     }
 };
+
+
+
+

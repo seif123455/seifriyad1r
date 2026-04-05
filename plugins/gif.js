@@ -1,10 +1,10 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 export default {
-    command: 'gif',
-    aliases: ['giphy', 'searchgif'],
-    category: 'stickers',
-    description: 'Get a GIF based on a search term',
-    usage: '.gif <search term>',
+    command: 'جيف',
+    aliases: ['giphy', 'searchgif', 'gif'],
+    category: 'ملصقات',
+    description: 'جلب ا صورة متحركة باسيد ون ا بحث تيرم',
+    usage: '.صورة متحركة <بحث تيرم>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const config = context.config;
@@ -38,7 +38,11 @@ export default {
         }
         catch (error) {
             console.error('Error in gif command:', error);
-            await sock.sendMessage(chatId, { text: '❌ Failed to fetch GIF. Please try again later.' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ Failed to fetch GIF. Please try again later.' }, { quoted: message });
         }
     }
 };
+
+
+
+

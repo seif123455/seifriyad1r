@@ -1,4 +1,4 @@
-import { addSudo, removeSudo, getSudoList } from '../lib/index.js';
+﻿import { addSudo, removeSudo, getSudoList } from '../lib/index.js';
 import isOwnerOrSudo, { cleanJid } from '../lib/isOwner.js';
 function extractTargetJid(message, args) {
     if (message.message?.extendedTextMessage?.contextInfo?.mentionedJid?.[0]) {
@@ -14,11 +14,11 @@ function extractTargetJid(message, args) {
     return null;
 }
 export default {
-    command: 'sudo',
-    aliases: [],
-    category: 'owner',
-    description: 'Add or remove sudo users or list them',
-    usage: '.sudo add|del|list <@user|number>',
+    command: 'سودو',
+    aliases: ['sudo'],
+    category: 'المالك',
+    description: 'إضافة ور حذف سودو مستخدمس ور قائمة تهيم',
+    usage: '.سودو إضافة|ديل|قائمة <@مستخدم|رقم>',
     strictOwnerOnly: true,
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -29,30 +29,30 @@ export default {
         const sub = (args[0] || '').toLowerCase();
         if (!sub || !['add', 'del', 'remove', 'list'].includes(sub)) {
             await sock.sendMessage(chatId, {
-                text: '╭━━━〔 *SUDO MANAGER* 〕━━━┈\n┃\n┃ 📝 *Usage:*\n┃ ▢ .sudo add <@tag/reply/num>\n┃ ▢ .sudo del <@tag/reply/num>\n┃ ▢ .sudo list\n┃\n╰━━━━━━━━━━━━━━━━━━┈'
+                text: 'â•­â”â”â”ã€” *SUDO MANAGER* ã€•â”â”â”â”ˆ\nâ”ƒ\nâ”ƒ ðŸ“ *Usage:*\nâ”ƒ â–¢ .sudo add <@tag/reply/num>\nâ”ƒ â–¢ .sudo del <@tag/reply/num>\nâ”ƒ â–¢ .sudo list\nâ”ƒ\nâ•°â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”ˆ'
             }, { quoted: message });
             return;
         }
         if (sub === 'list') {
             const list = await getSudoList();
             if (list.length === 0) {
-                await sock.sendMessage(chatId, { text: '❌ No sudo users found.' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'âŒ No sudo users found.' }, { quoted: message });
                 return;
             }
-            const textList = list.map((j, i) => `┃ ${i + 1}. @${cleanJid(j)}`).join('\n');
+            const textList = list.map((j, i) => `â”ƒ ${i + 1}. @${cleanJid(j)}`).join('\n');
             await sock.sendMessage(chatId, {
-                text: `╭━━〔 *SUDO USERS* 〕━━┈\n┃\n${textList}\n┃\n╰━━━━━━━━━━━━━━━┈`,
+                text: `â•­â”â”ã€” *SUDO USERS* ã€•â”â”â”ˆ\nâ”ƒ\n${textList}\nâ”ƒ\nâ•°â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”ˆ`,
                 mentions: list
             }, { quoted: message });
             return;
         }
         if (!isOwner) {
-            await sock.sendMessage(chatId, { text: '❌ *Access Denied:* Only the Main Owner can manage Sudo privileges.' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ *Access Denied:* Only the Main Owner can manage Sudo privileges.' }, { quoted: message });
             return;
         }
         const targetJid = extractTargetJid(message, args.slice(1));
         if (!targetJid) {
-            await sock.sendMessage(chatId, { text: '❌ Please mention a user, reply to a message, or provide a number.' }, { quoted: message });
+            await sock.sendMessage(chatId, { text: 'âŒ Please mention a user, reply to a message, or provide a number.' }, { quoted: message });
             return;
         }
         let displayId = cleanJid(targetJid);
@@ -69,7 +69,7 @@ export default {
         if (sub === 'add') {
             const ok = await addSudo(targetJid);
             await sock.sendMessage(chatId, {
-                text: ok ? `✅ *Success:* @${displayId} has been granted Sudo privileges.` : `❌ *Error:* Failed to add sudo.`,
+                text: ok ? `âœ… *Success:* @${displayId} has been granted Sudo privileges.` : `âŒ *Error:* Failed to add sudo.`,
                 mentions: [targetJid]
             }, { quoted: message });
             return;
@@ -77,14 +77,18 @@ export default {
         if (sub === 'del' || sub === 'remove') {
             const ownerNumberClean = cleanJid(config.ownerNumber);
             if (displayId === ownerNumberClean) {
-                await sock.sendMessage(chatId, { text: '❌ *Action Denied:* Cannot remove the Main Owner.' }, { quoted: message });
+                await sock.sendMessage(chatId, { text: 'âŒ *Action Denied:* Cannot remove the Main Owner.' }, { quoted: message });
                 return;
             }
             const ok = await removeSudo(targetJid);
             await sock.sendMessage(chatId, {
-                text: ok ? `✅ *Success:* Sudo privileges revoked from @${displayId}.` : `❌ *Error:* Failed to remove sudo.`,
+                text: ok ? `âœ… *Success:* Sudo privileges revoked from @${displayId}.` : `âŒ *Error:* Failed to remove sudo.`,
                 mentions: [targetJid]
             }, { quoted: message });
         }
     }
 };
+
+
+
+

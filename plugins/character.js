@@ -1,4 +1,4 @@
-import { channelInfo } from '../lib/messageConfig.js';
+﻿import { channelInfo } from '../lib/messageConfig.js';
 const extractPhoneNumber = (jid) => {
     if (!jid)
         return null;
@@ -38,11 +38,11 @@ const TRAITS = [
     'Sincere', 'Thoughtful', 'Understanding', 'Versatile', 'Wise'
 ];
 export default {
-    command: 'character',
-    aliases: ['personality', 'traits'],
-    category: 'group',
-    description: "Analyze someone's character traits",
-    usage: '.character @user',
+    command: 'كهاراكتير',
+    aliases: ['personality', 'traits', 'character'],
+    category: 'المجموعة',
+    description: "",
+    usage: '.كهاراكتير @مستخدم',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const ctx = message.message?.extendedTextMessage?.contextInfo;
@@ -51,7 +51,7 @@ export default {
             message.key.participant;
         if (!userJid) {
             return sock.sendMessage(chatId, {
-                text: '❌ Please mention someone or reply to their message to analyze their character!',
+                text: 'âŒ Please mention someone or reply to their message to analyze their character!',
                 ...channelInfo
             }, { quoted: message });
         }
@@ -85,11 +85,11 @@ export default {
                 if (!selected.includes(t))
                     selected.push(t);
             }
-            const traitLines = selected.map(t => `• ${t}: ${Math.floor(Math.random() * 41) + 60}%`);
-            const analysis = `🔮 *Character Analysis* 🔮\n\n` +
-                `👤 *User:* ${displayName}\n\n` +
-                `✨ *Key Traits:*\n${traitLines.join('\n')}\n\n` +
-                `🎯 *Overall Rating:* ${Math.floor(Math.random() * 21) + 80}%\n\n` +
+            const traitLines = selected.map(t => `â€¢ ${t}: ${Math.floor(Math.random() * 41) + 60}%`);
+            const analysis = `ðŸ”® *Character Analysis* ðŸ”®\n\n` +
+                `ðŸ‘¤ *User:* ${displayName}\n\n` +
+                `âœ¨ *Key Traits:*\n${traitLines.join('\n')}\n\n` +
+                `ðŸŽ¯ *Overall Rating:* ${Math.floor(Math.random() * 21) + 80}%\n\n` +
                 `_Note: This is a fun analysis, don't take it seriously!_`;
             await sock.sendMessage(chatId, {
                 image: { url: profilePic },
@@ -100,9 +100,13 @@ export default {
         }
         catch {
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to analyze character! Try again later.',
+                text: 'âŒ Failed to analyze character! Try again later.',
                 ...channelInfo
             }, { quoted: message });
         }
     }
 };
+
+
+
+

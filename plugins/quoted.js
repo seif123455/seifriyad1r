@@ -1,11 +1,11 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 import { Sticker, StickerTypes } from 'stickers-formatter';
 export default {
-    command: 'quoted',
-    aliases: ['q', 'fakereply'],
-    category: 'stickers',
-    description: 'Generate a quote sticker from text',
-    usage: '.quote <text> or reply to a message',
+    command: 'قووتيد',
+    aliases: ['q', 'fakereply', 'quoted'],
+    category: 'ملصقات',
+    description: 'توليد ا اقتباس ملصق فروم نص',
+    usage: '.اقتباس <نص> ور رد تو ا رسالة',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         const ctx = message.message?.extendedTextMessage?.contextInfo;
@@ -13,7 +13,7 @@ export default {
         if (!text) {
             const q = ctx?.quotedMessage;
             if (!q)
-                return sock.sendMessage(chatId, { text: '📝 Please provide text or reply to a message.\n\nUsage: .quote <text>' }, { quoted: message });
+                return sock.sendMessage(chatId, { text: 'ðŸ“ Please provide text or reply to a message.\n\nUsage: .quote <text>' }, { quoted: message });
             text = q.conversation
                 || q.extendedTextMessage?.text
                 || q.imageMessage?.caption
@@ -65,14 +65,14 @@ export default {
                     pack: 'MEGA-MD',
                     author: userName,
                     type: StickerTypes.FULL,
-                    categories: ['🤩', '🎉'],
+                    categories: ['ðŸ¤©', 'ðŸŽ‰'],
                     quality: 100,
                     background: '#00000000'
                 }).toBuffer();
                 await sock.sendMessage(chatId, { sticker: stickerBuffer }, { quoted: message });
             }
             catch {
-                await sock.sendMessage(chatId, { image: bufferImage, caption: '📝 Quote image (sticker conversion failed)' }, { quoted: message });
+                await sock.sendMessage(chatId, { image: bufferImage, caption: 'ðŸ“ Quote image (sticker conversion failed)' }, { quoted: message });
             }
         }
         catch (err) {
@@ -82,7 +82,11 @@ export default {
                 : err.message.includes('Invalid API')
                     ? 'API returned invalid data.'
                     : 'Please try again later.';
-            await sock.sendMessage(chatId, { text: `❌ Failed to generate quote. ${msg}` }, { quoted: message });
+            await sock.sendMessage(chatId, { text: `âŒ Failed to generate quote. ${msg}` }, { quoted: message });
         }
     }
 };
+
+
+
+

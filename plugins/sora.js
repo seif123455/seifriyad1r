@@ -1,10 +1,10 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 export default {
-    command: 'sora',
-    aliases: ['txt2video', 'aiVideo'],
-    category: 'ai',
-    description: 'Generate AI video from text prompt',
-    usage: '.sora <prompt>',
+    command: 'سورا',
+    aliases: ['txt2video', 'aiVideo', 'sora'],
+    category: 'الذكاء الاصطناعي',
+    description: 'توليد اي فيديو فروم نص وصف',
+    usage: '.سورا <وصف>',
     async handler(sock, message, args, context) {
         const { chatId, channelInfo } = context;
         try {
@@ -40,3 +40,7 @@ export default {
         }
     }
 };
+
+
+
+

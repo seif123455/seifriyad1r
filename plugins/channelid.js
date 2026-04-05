@@ -1,9 +1,9 @@
-export default {
-    command: 'channelid',
-    aliases: ['newsletterid'],
-    category: 'general',
-    description: 'Get the internal JID of a WhatsApp Channel',
-    usage: '.channelid <url>',
+﻿export default {
+    command: 'كهاننيليد',
+    aliases: ['newsletterid', 'channelid'],
+    category: 'عام',
+    description: '',
+    usage: '.كهاننيليد <رابط>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         let url = args[0] || "";
@@ -20,15 +20,19 @@ export default {
         try {
             const metadata = await sock.newsletterMetadata("invite", code);
             const response = `
-🆔 *JID:* ${metadata.id}
+ðŸ†” *JID:* ${metadata.id}
       `.trim();
             await sock.sendMessage(chatId, { text: response }, { quoted: message });
         }
         catch (err) {
             console.error('Channel ID Error:', err);
             await sock.sendMessage(chatId, {
-                text: '❌ *Failed to resolve:* This channel might be private, deleted, or the link is invalid.'
+                text: 'âŒ *Failed to resolve:* This channel might be private, deleted, or the link is invalid.'
             }, { quoted: message });
         }
     }
 };
+
+
+
+

@@ -1,12 +1,12 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
@@ -39,18 +39,18 @@ async function getStickerCommands() {
     }
 }
 export default {
-    command: 'listcmd',
-    aliases: ['cmdlist'],
-    category: 'owner',
-    description: 'List all sticker commands',
-    usage: '.listcmd',
+    command: 'ليستكمد',
+    aliases: ['cmdlist', 'listcmd'],
+    category: 'المالك',
+    description: 'قائمة الل ملصق كومماندس',
+    usage: '.قائمةكمد',
     async handler(sock, message, args, context) {
         const { chatId } = context;
         const stickers = await getStickerCommands();
         const entries = Object.entries(stickers);
         if (entries.length === 0) {
             return await sock.sendMessage(chatId, {
-                text: '✳️ No sticker commands found'
+                text: 'âœ³ï¸ No sticker commands found'
             }, { quoted: message });
         }
         const stickerList = entries
@@ -61,22 +61,26 @@ export default {
             .flat()
             .filter(Boolean);
         await sock.sendMessage(chatId, {
-            text: `*CUSTOM STICKER COMMANDS*\n\n▢ *Info:* Custom commands set via .setcmd\n\n──────────────────\n${stickerList}`,
+            text: `*CUSTOM STICKER COMMANDS*\n\nâ–¢ *Info:* Custom commands set via .setcmd\n\nâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€\n${stickerList}`,
             mentions
         }, { quoted: message });
     }
 };
 /*****************************************************************************
  *                                                                           *
- *                     Developed By Qasim Ali                                *
+ *                     Developed By Crazy Seif                                *
  *                                                                           *
- *  🌐  GitHub   : https://github.com/GlobalTechInfo                         *
- *  ▶️  YouTube  : https://youtube.com/@GlobalTechInfo                       *
- *  💬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
+ *  ðŸŒ  GitHub   : https://github.com/CrazySeif                         *
+ *  â–¶ï¸  YouTube  : https://youtube.com/@CrazySeif                       *
+ *  ðŸ’¬  WhatsApp : https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07     *
  *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
+ *    Â© 2026 CrazySeif. All rights reserved.                            *
  *                                                                           *
  *    Description: This file is part of the MEGA-MD Project.                 *
  *                 Unauthorized copying or distribution is prohibited.       *
  *                                                                           *
  *****************************************************************************/
+
+
+
+

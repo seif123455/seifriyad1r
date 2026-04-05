@@ -1,11 +1,11 @@
-import pkg from 'api-qasim';
+﻿import pkg from 'api-qasim';
 const QasimAny = pkg;
 export default {
-    command: 'trends',
-    aliases: ['trend', 'trending'],
-    category: 'info',
-    description: 'Get trending topics from a country.',
-    usage: '.trends <country-name>',
+    command: 'تريندس',
+    aliases: ['trend', 'trending', 'trends'],
+    category: 'معلومات',
+    description: 'جلب تريندينج توبيكس فروم ا كوونتري.',
+    usage: '.تريندس <كوونتري-نامي>',
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
         try {
@@ -41,8 +41,11 @@ export default {
         catch (error) {
             console.error('Error in trendsCommand:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ Failed to fetch trending topics. Please try again later.'
+                text: 'âŒ Failed to fetch trending topics. Please try again later.'
             }, { quoted: message });
         }
     }
 };
+
+
+

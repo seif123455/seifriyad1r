@@ -1,12 +1,12 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 import { channelInfo } from '../lib/messageConfig.js';
 
 export default {
-    command: 'هلاك',
-    aliases: ['wasted', 'waste', 'موت', 'تحطيم'],
-    category: 'fun',
-    description: 'عمل تأثير "هلاك" على صورة الشخص',
-    usage: '!هلاك @المستخدم',
+    command: 'Ù‡Ù„Ø§Ùƒ',
+    aliases: ['wasted', 'waste', 'Ù…ÙˆØª', 'ØªØ­Ø·ÙŠÙ…'],
+    category: 'ØªØ³Ù„ÙŠØ©',
+    description: 'Ø¹Ù…Ù„ ØªØ£Ø«ÙŠØ± "Ù‡Ù„Ø§Ùƒ" Ø¹Ù„Ù‰ ØµÙˆØ±Ø© Ø§Ù„Ø´Ø®Øµ',
+    usage: '!Ù‡Ù„Ø§Ùƒ @Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…',
     
     async handler(sock, message, args, context) {
         const chatId = context.chatId || message.key.remoteJid;
@@ -20,10 +20,10 @@ export default {
         
         if (!userToWaste) {
             return await sock.sendMessage(chatId, {
-                text: '💀 *تأثير الهلاك*\n\n' +
-                    '*الاستخدام:* `!هلاك @المستخدم`\n' +
-                    '*مثال:* `!هلاك @username`\n\n' +
-                    '*أو رد على رسالة الشخص ثم اكتب:* `!هلاك`',
+                text: 'ðŸ’€ *ØªØ£Ø«ÙŠØ± Ø§Ù„Ù‡Ù„Ø§Ùƒ*\n\n' +
+                    '*Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…:* `!Ù‡Ù„Ø§Ùƒ @Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…`\n' +
+                    '*Ù…Ø«Ø§Ù„:* `!Ù‡Ù„Ø§Ùƒ @username`\n\n' +
+                    '*Ø£Ùˆ Ø±Ø¯ Ø¹Ù„Ù‰ Ø±Ø³Ø§Ù„Ø© Ø§Ù„Ø´Ø®Øµ Ø«Ù… Ø§ÙƒØªØ¨:* `!Ù‡Ù„Ø§Ùƒ`',
                 ...channelInfo
             }, { quoted: message });
         }
@@ -40,24 +40,25 @@ export default {
             
             const userName = sock.store?.contacts?.[userToWaste]?.name || 
                            sock.store?.contacts?.[userToWaste]?.notify || 
-                           (userToWaste.includes('@s.whatsapp.net') ? userToWaste.replace('@s.whatsapp.net', '') : 'المستخدم');
+                           (userToWaste.includes('@s.whatsapp.net') ? userToWaste.replace('@s.whatsapp.net', '') : 'Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…');
             
             await sock.sendMessage(chatId, {
                 image: Buffer.from(wastedResponse.data),
-                caption: `⚰️ *هلاك* : ${userName} 💀\n\n` +
-                    `⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯\n` +
-                    `💀 *تحطم إلى أجزاء!*\n` +
-                    `🔥 *CRAZY-SEIF BOT* | 📞 201144534147`,
+                caption: `âš°ï¸ *Ù‡Ù„Ø§Ùƒ* : ${userName} ðŸ’€\n\n` +
+                    `âŽ¯âŽ¯âŽ¯âŽ¯âŽ¯âŽ¯âŽ¯âŽ¯âŽ¯âŽ¯âŽ¯âŽ¯âŽ¯\n` +
+                    `ðŸ’€ *ØªØ­Ø·Ù… Ø¥Ù„Ù‰ Ø£Ø¬Ø²Ø§Ø¡!*\n` +
+                    `ðŸ”¥ *Crazy Seif BOT* | ðŸ“ž 01144534147`,
                 mentions: [userToWaste],
                 ...channelInfo
             }, { quoted: message });
             
         } catch (error) {
-            console.error('خطأ في أمر الهلاك:', error);
+            console.error('Ø®Ø·Ø£ ÙÙŠ Ø£Ù…Ø± Ø§Ù„Ù‡Ù„Ø§Ùƒ:', error);
             await sock.sendMessage(chatId, {
-                text: '❌ فشل في إنشاء صورة الهلاك! حاول مرة أخرى لاحقاً.',
+                text: 'âŒ ÙØ´Ù„ ÙÙŠ Ø¥Ù†Ø´Ø§Ø¡ ØµÙˆØ±Ø© Ø§Ù„Ù‡Ù„Ø§Ùƒ! Ø­Ø§ÙˆÙ„ Ù…Ø±Ø© Ø£Ø®Ø±Ù‰ Ù„Ø§Ø­Ù‚Ø§Ù‹.',
                 ...channelInfo
             }, { quoted: message });
         }
     }
 };
+

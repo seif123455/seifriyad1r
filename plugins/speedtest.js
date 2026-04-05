@@ -1,17 +1,17 @@
-import { exec } from 'child_process';
+﻿import { exec } from 'child_process';
 import { promisify } from 'util';
 const execAsync = promisify(exec);
 export default {
-    command: 'speedtest',
-    aliases: ['speed', 'netspeed'],
-    category: 'utility',
-    description: 'Test internet speed of the server',
-    usage: '.speedtest',
+    command: 'سبييدتيست',
+    aliases: ['speed', 'netspeed', 'speedtest'],
+    category: 'مرافق',
+    description: 'اختبار ينتيرنيت سرعة وف تهي خادم',
+    usage: '.سرعةاختبار',
     ownerOnly: true,
     async handler(sock, message, args, context) {
         const { chatId, channelInfo } = context;
         await sock.sendMessage(chatId, {
-            text: '🔄 *Testing internet speed...*\n\nPlease wait, this may take a moment.',
+            text: 'ðŸ”„ *Testing internet speed...*\n\nPlease wait, this may take a moment.',
             ...channelInfo
         }, { quoted: message });
         try {
@@ -19,7 +19,7 @@ export default {
             const result = (stdout || stderr || '').trim();
             if (!result) {
                 return await sock.sendMessage(chatId, {
-                    text: '❌ No output from speed test.',
+                    text: 'âŒ No output from speed test.',
                     ...channelInfo
                 }, { quoted: message });
             }
@@ -30,9 +30,13 @@ export default {
         }
         catch (error) {
             await sock.sendMessage(chatId, {
-                text: `❌ Speed test failed: ${error.message}`,
+                text: `âŒ Speed test failed: ${error.message}`,
                 ...channelInfo
             }, { quoted: message });
         }
     }
 };
+
+
+
+
